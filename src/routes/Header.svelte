@@ -1,11 +1,7 @@
-<script lang="ts">
-	import { Cloudy } from 'lucide-svelte'
-</script>
-
-<header class="container mx-auto pt-2 pb-4">
-	<a href="/">
-		<h1 class="font-zenkaku text-2xl font-bold px-3">
-			my-svelte-template <Cloudy class="inline" />
-		</h1>
-	</a>
+<header class="text-blackgray">
+	<div class="container mx-auto">
+		<a href="/" class="inline-block p-3">
+			<h1 class="font-bold font-zenmaru text-xl">aaa</h1>
+		</a>
+	</div>
 </header>

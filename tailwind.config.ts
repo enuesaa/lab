@@ -4,13 +4,17 @@ export default {
 	content: ['src/**/*.svelte', 'src/app.html'],
 	theme: {
 		colors: {
-			white: '#fafafa',
 			black: '#1a1a1a',
+			blackgray: '#2a2a2a',
 			gray: '#cccccc',
-			grayer: '#dddddd',
+			graywhite: '#dadada',
+			grayblacker: '#bfbfbf',
+			grayblack: '#b3b3b3',
+			white: '#fafafa',
 		},
 		fontFamily: {
-			zenkaku: ['Zen Kaku Gothic New', 'sans-serif'],
+			zenmaru: ['Zen Maru Gothic', 'serif'],
+			ibmplex: ['"IBM Plex Sans JP"', 'sans-serif'],
 		},
 	},
 	darkMode: 'class',

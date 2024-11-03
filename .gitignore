@@ -1,11 +1,13 @@
 # misc
 .DS_Store
+
+# editor
 .vscode
 
-# nodejs
+# node
 node_modules
 
-# app
+# sveltekit
 dist
 .svelte-kit
-.env.local
+vite.config.ts.timestamp-*

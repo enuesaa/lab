@@ -8,5 +8,5 @@ export default defineConfig({
 		alias: {
 			$lib: path.join(__dirname, './src/lib'),
 		},
-	}
+	},
 })
