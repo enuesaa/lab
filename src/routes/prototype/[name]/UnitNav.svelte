@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { type VariantWithTreeData } from '$lib/types/tree'
+	import { type UnitWithTreeData } from '$lib/types/tree'
 
-	export let variant: VariantWithTreeData
+	export let unit: UnitWithTreeData
 	export let showing: boolean
 
 	function handleClick() {
@@ -11,7 +11,7 @@
 
 <nav class="m-0 pl-3">
 	<button class='bg-graywhite' on:click|preventDefault={handleClick}>
-		{variant.title}
+		{unit.title}
 	</button>
 </nav>
 

@@ -12,7 +12,7 @@ ignore:
   - tsconfig.json
   - .trailer.yml
 
-variants:
+units:
   - name: with-file-types
     title: ソースコード
     open: main.ts

@@ -10,7 +10,7 @@ ignore:
   - go.sum
   - .trailer.yml
 
-variants:
+units:
   - name: configured
     title: ソースコード
     open: main.go

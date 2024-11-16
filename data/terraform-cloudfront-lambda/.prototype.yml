@@ -6,12 +6,12 @@ description: |
   ・CloudFront
   ・CloudFront OAC
   ・Lambda (Function URL)
-published: '2024-05-26'
+published: '2024-10-26'
 
 ignore:
   - .trailer.yml
 
-variants:
+units:
   - name: terraform
     title: Terraform
     open: main.tf

@@ -1,4 +1,4 @@
-import type { Variant } from './config'
+import type { Unit } from './config'
 
 export type TreeData = {
 	id: string
@@ -8,4 +8,4 @@ export type TreeData = {
 	language: string
 }
 
-export type VariantWithTreeData = Variant & { files: TreeData[] }
+export type UnitWithTreeData = Unit & { files: TreeData[] }

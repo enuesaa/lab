@@ -3,7 +3,7 @@
 	import PageTitle from './PageTitle.svelte'
 	import Description from './Description.svelte'
 	import PagePublishedBar from './PagePublishedBar.svelte'
-	import Variant from './Variant.svelte'
+	import Unit from './Unit.svelte'
 
 	export let data: PageData
 </script>
@@ -16,6 +16,6 @@
 <PagePublishedBar published={data.published} />
 <Description content={data.description} />
 
-{#each data.variants as variant}
-	<Variant {variant} />
+{#each data.units as unit}
+	<Unit {unit} />
 {/each}

@@ -3,10 +3,10 @@ export type Config = {
 	description: string
 	published: string
 	ignore: string[]
-	variants: Variant[]
+	units: Unit[]
 }
 
-export type Variant = {
+export type Unit = {
 	name: string
 	title: string
 	open: string

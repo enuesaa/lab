@@ -1,4 +1,4 @@
-import type { VariantWithTreeData } from '$lib/types/tree'
+import type { UnitWithTreeData } from '$lib/types/tree'
 import type { PageServerLoad } from './$types'
 import { readConfig } from '$lib/server/trailer/config'
 import { extractVariantFiles } from '$lib/server/trailer/variant'
@@ -9,7 +9,7 @@ type Data = {
 	title: string
 	description: string
 	published: string
-	variants: VariantWithTreeData[]
+	units: UnitWithTreeData[]
 }
 export const load: PageServerLoad<Data> = async ({ params: { name } }) => {
 	const config = await readConfig(name)
@@ -18,12 +18,12 @@ export const load: PageServerLoad<Data> = async ({ params: { name } }) => {
 		title: config.title,
 		description: config.description,
 		published: config.published,
-		variants: [],
+		units: [],
 	}
-	for (const variant of config.variants) {
-		data.variants.push({
-			...variant,
-			files: await extractVariantFiles(name, variant.name),
+	for (const unit of config.units) {
+		data.units.push({
+			...unit,
+			files: await extractVariantFiles(name, unit.name),
 		})
 	}
 	return data
