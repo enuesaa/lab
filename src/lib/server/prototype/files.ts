@@ -1,9 +1,9 @@
-import type { TreeData } from '$lib/types/tree'
+import type { TreeData } from '$lib/tree'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { readConfig } from './config'
 
-export const extractVariantFiles = async (name: string, variant: string): Promise<TreeData[]> => {
+export const extractFiles = async (name: string): Promise<TreeData[]> => {
 	const config = await readConfig(name)
 	const ignore = config.ignore
 

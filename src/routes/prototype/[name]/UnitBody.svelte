@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { UnitWithTreeData } from '$lib/types/tree'
+	import type { UnitWithTreeData } from '$lib/tree'
 	import CodeViewer from './CodeViewer.svelte'
 	import UnitProvider from './UnitProvider.svelte'
 

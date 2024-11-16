@@ -20,3 +20,10 @@ export type UnitFiletree = {
 	open: string
 	ignore: string[]
 }
+
+export type PrototypeProject = {
+	name: string
+	title: string
+	description: string
+	published: string
+}

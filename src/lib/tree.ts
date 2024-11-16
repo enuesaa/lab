@@ -1,7 +1,16 @@
 import { createTreeView } from '@melt-ui/svelte'
 import { writable, type Writable } from 'svelte/store'
 import { setContext, getContext } from 'svelte'
-import type { TreeData } from '$lib/types/tree'
+import type { Unit } from './server/prototype/types'
+
+export type TreeData = {
+	id: string
+	title: string
+	children: TreeData[]
+	code: string
+	language: string
+}
+export type UnitWithTreeData = Unit & { files: TreeData[] }
 
 export const createTreeViewCtl = () => {
 	setContext('treeView', createTreeView())

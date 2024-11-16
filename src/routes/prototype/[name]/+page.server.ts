@@ -1,29 +1,23 @@
-import type { UnitWithTreeData } from '$lib/types/tree'
 import type { PageServerLoad } from './$types'
-import { readConfig } from '$lib/server/trailer/config'
-import { extractVariantFiles } from '$lib/server/trailer/variant'
-import { listTrailers } from '$lib/server/trailer/list'
+import { getProject } from '$lib/server/prototype/config'
+import { extractFiles } from '$lib/server/prototype/files'
+import { listPrototypeNames } from '$lib/server/prototype/list'
+import type { PrototypeProject } from '$lib/server/prototype/types'
+import type { UnitWithTreeData } from '$lib/tree'
 
-type Data = {
-	name: string
-	title: string
-	description: string
-	published: string
+type Data = PrototypeProject & {
 	units: UnitWithTreeData[]
 }
 export const load: PageServerLoad<Data> = async ({ params: { name } }) => {
-	const config = await readConfig(name)
+	const project = await getProject(name)
 	const data: Data = {
-		name,
-		title: config.title,
-		description: config.description,
-		published: config.published,
+		...project,
 		units: [],
 	}
-	for (const unit of config.units) {
+	for (const unit of data.units) {
 		data.units.push({
 			...unit,
-			files: await extractVariantFiles(name, unit.name),
+			files: await extractFiles(name),
 		})
 	}
 	return data
@@ -33,6 +27,8 @@ type Entry = {
 	name: string
 }
 export async function entries(): Promise<Entry[]> {
-	const list = await listTrailers()
-	return list.map((v) => ({ name: v }))
+	const names = await listPrototypeNames()
+	const list = names.map(name => ({ name }))
+
+	return list
 }
