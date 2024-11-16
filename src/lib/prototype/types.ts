@@ -10,14 +10,11 @@ export type Unit = {
 	title: string
 	description: string
 	image: string
-	open: string // deprecated
-	filetree: UnitFiletree
+	filetree: {
+		open: string
+		ignore: string[]
+	}
 	output: string
-}
-
-export type UnitFiletree = {
-	open: string
-	ignore: string[]
 }
 
 export type Project = Config & {

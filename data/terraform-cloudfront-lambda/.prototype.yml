@@ -11,14 +11,13 @@ published: '2024-10-26'
 units:
   - name: terraform
     title: Terraform
-    open: main.tf
     # description: 
     # image: arcitecture.png
-    # filetree:
-    #   open: main.tf
-    #   ignore:
-    #    - .prototype.yml
-    #    - arcitecture.png
+    filetree:
+      open: main.tf
+      ignore:
+       - .prototype.yml
+       - arcitecture.png
     # output:
   - name: architecture
     title: AWS構成図

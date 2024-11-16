@@ -13,7 +13,7 @@
 
 <section class={showing ? '' : 'max-h-20'}>
 	<!-- <UnitTitle title={unit.title} /> -->
-	<CodeViewer treeData={unit.files} firstOpen={unit.open} />
+	<CodeViewer treeData={unit.files} firstOpen={unit?.filetree?.open ?? ''} />
 	<!-- <UnitOutput output={unit.output} /> -->
 
 	{#if !showing}

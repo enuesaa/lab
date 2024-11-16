@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types'
-import { listProjects } from '$lib/prototype/server/project'
+import { listProjects } from '$lib/prototype/server/export'
 import type { Project } from '$lib/prototype/types'
 
 type Data = {

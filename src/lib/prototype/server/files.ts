@@ -2,8 +2,8 @@ import type { TreeData } from '$lib/prototype/types'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
-export const extractFiles = async (name: string): Promise<TreeData[]> => {
-	return extract(`./data/${name}`, '', [])
+export const extractFiles = async (name: string, ignore: string[]): Promise<TreeData[]> => {
+	return extract(`./data/${name}`, '', ignore)
 }
 
 const extract = async (dir: string, baseDir: string = '', ignore: string[]): Promise<TreeData[]> => {
