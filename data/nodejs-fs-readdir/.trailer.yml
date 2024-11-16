@@ -10,17 +10,11 @@ published: '2024-05-26'
 ignore:
   - pnpm-lock.yaml
   - tsconfig.json
+  - .trailer.yml
 
 variants:
-  - name: normal
-    title: デフォルト
-    open: main.ts
-    output: |
-      $ pnpm tsx main.ts
-      [ 'a.txt', 'b.txt' ]
-
   - name: with-file-types
-    title: 'withFileTypes: true を指定'
+    title: ソースコード
     open: main.ts
     output: |
       $ pnpm tsx main.ts

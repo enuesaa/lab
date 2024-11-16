@@ -7,7 +7,7 @@ export const extractVariantFiles = async (name: string, variant: string): Promis
 	const config = await readConfig(name)
 	const ignore = config.ignore
 
-	return extract(`./data/${name}/${variant}`, '', ignore)
+	return extract(`./data/${name}`, '', ignore)
 }
 
 const extract = async (dir: string, baseDir: string = '', ignore: string[]): Promise<TreeData[]> => {

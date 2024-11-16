@@ -8,22 +8,11 @@ published: '2024-05-26'
 
 ignore:
   - go.sum
+  - .trailer.yml
 
 variants:
-  - name: normal
-    title: デフォルト
-    open: main.go
-    output: |
-      $ go run . --help
-      Usage:
-        sample [flags]
-
-      Flags:
-        -h, --help      help for sample
-        -v, --version   version for sample
-
   - name: configured
-    title: 変更後
+    title: ソースコード
     open: main.go
     output: |
       $ go run . --help
