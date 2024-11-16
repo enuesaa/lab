@@ -17,7 +17,7 @@
 		word-break: normal;
 		line-break: strict;
 		white-space: pre-wrap;
-  		font-feature-settings: "palt";
+		font-feature-settings: 'palt';
 		@apply font-ibmplex;
 	}
 </style>

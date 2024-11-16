@@ -8,9 +8,6 @@ description: |
   ・Lambda (Function URL)
 published: '2024-10-26'
 
-ignore:
-  - .trailer.yml
-
 units:
   - name: terraform
     title: Terraform
@@ -20,8 +17,9 @@ units:
     # filetree:
     #   open: main.tf
     #   ignore:
-    #    - .trailer.yml
+    #    - .prototype.yml
+    #    - arcitecture.png
     # output:
   - name: architecture
     title: AWS構成図
-    open: main.tf
+    image: arcitecture.png

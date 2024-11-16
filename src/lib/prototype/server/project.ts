@@ -9,7 +9,7 @@ export const getProject = async (name: string): Promise<Project> => {
 		title: config.title,
 		description: config.description,
 		published: config.published,
-    units: config.units,
+		units: config.units,
 	}
 
 	return project
@@ -24,7 +24,7 @@ export const listProjects = async (): Promise<Project[]> => {
 	}
 
 	// sort by published desc
-	list.sort((a, b) => a.published > b.published ? -1 : 1)
+	list.sort((a, b) => (a.published > b.published ? -1 : 1))
 
 	return list
 }

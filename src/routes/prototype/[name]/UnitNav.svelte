@@ -10,7 +10,7 @@
 </script>
 
 <nav class="m-0 pl-3">
-	<button class='bg-graywhite' on:click|preventDefault={handleClick}>
+	<button class="bg-graywhite" on:click|preventDefault={handleClick}>
 		{unit.title}
 	</button>
 </nav>

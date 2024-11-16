@@ -8,5 +8,5 @@
 	let showing: boolean = true
 </script>
 
-<UnitNav {unit} bind:showing={showing} />
-<UnitBody {unit} bind:showing={showing} />
+<UnitNav {unit} bind:showing />
+<UnitBody {unit} bind:showing />

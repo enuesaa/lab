@@ -11,7 +11,7 @@
 	{#each links as link}
 		<li>
 			{#if link.key !== null}
-				{link.key}:  
+				{link.key}:
 			{/if}
 			<a href={link.href} target="_blank">{link.text}</a>
 		</li>
@@ -30,7 +30,7 @@
 		word-break: normal;
 		line-break: strict;
 		white-space: pre-wrap;
-  		font-feature-settings: "palt";
+		font-feature-settings: 'palt';
 		@apply font-zenmaru text-lg font-normal;
 	}
 	a {

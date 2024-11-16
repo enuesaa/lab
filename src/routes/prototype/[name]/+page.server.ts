@@ -27,7 +27,7 @@ type Entry = {
 }
 export async function entries(): Promise<Entry[]> {
 	const names = await listPrototypeNames()
-	const list = names.map(name => ({ name }))
+	const list = names.map((name) => ({ name }))
 
 	return list
 }
