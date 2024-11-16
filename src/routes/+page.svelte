@@ -10,5 +10,5 @@
 </svelte:head>
 
 {#each data.projects as project}
-	<ProjectLink href={`/projects/${project.name}`} title={project.title} />
+	<ProjectLink href={`/prototype/${project.name}`} title={project.title} />
 {/each}

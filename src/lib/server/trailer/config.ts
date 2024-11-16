@@ -3,7 +3,7 @@ import fs from 'node:fs/promises'
 import YAML from 'yaml'
 
 export const getConfigPath = (name: string): string => {
-	return `./data/${name}/.trailer.yml`
+	return `./data/${name}/.prototype.yml`
 }
 
 export const readConfig = async (name: string): Promise<Config> => {
