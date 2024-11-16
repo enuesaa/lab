@@ -1,5 +1,5 @@
 {
-	"name": "@enuesaa/my-svelte-template",
+	"name": "@enuesaa/lab",
 	"type": "module",
 	"private": true,
 	"license": "MIT",
@@ -29,7 +29,6 @@
 	"dependencies": {
 		"@tanstack/svelte-query": "^5.59.0",
 		"lucide-svelte": "^0.447.0",
-		"svelte-feather-icons": "^4.2.0",
 		"yaml": "^2.6.0"
 	},
 	"prettier": {
