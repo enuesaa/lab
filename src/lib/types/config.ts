@@ -9,6 +9,14 @@ export type Config = {
 export type Unit = {
 	name: string
 	title: string
-	open: string
+	description: string
+	image: string
+	open: string // deprecated
+	filetree: UnitFiletree
 	output: string
+}
+
+export type UnitFiletree = {
+	open: string
+	ignore: string[]
 }

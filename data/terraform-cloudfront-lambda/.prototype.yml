@@ -15,8 +15,13 @@ units:
   - name: terraform
     title: Terraform
     open: main.tf
-    output: ''
+    # description: 
+    # image: arcitecture.png
+    # filetree:
+    #   open: main.tf
+    #   ignore:
+    #    - .trailer.yml
+    # output:
   - name: architecture
     title: AWS構成図
     open: main.tf
-    output: ''
