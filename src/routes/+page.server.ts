@@ -9,17 +9,17 @@ type Data = {
 	}[]
 }
 export const load: PageServerLoad<Data> = async () => {
-	// const list = await listTrailers()
-	// const projects = []
-	// for (const name of list) {
-	// 	const config = await readConfig(name)
-	// 	projects.push({
-	// 		name,
-	// 		title: config.title,
-	// 	})
-	// }
+	const list = await listTrailers()
+	const projects = []
+	for (const name of list) {
+		const config = await readConfig(name)
+		projects.push({
+			name,
+			title: config.title,
+		})
+	}
 
 	return {
-		projects: [],
+		projects,
 	}
 }

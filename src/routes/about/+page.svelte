@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Description from '../[name]/Description.svelte'
-	import PageTitle from '../[name]/PageTitle.svelte'
-	import Links from '../[name]/Links.svelte'
+	import Description from '../projects/[name]/Description.svelte'
+	import PageTitle from '../projects/[name]/PageTitle.svelte'
+	import Links from '../projects/[name]/Links.svelte'
 
 	let about = 'このサイトは個人のメモ帳です。\n'
 	about += 'ちょっと調べて気づいたことをメモしてます。\n\n'

@@ -1,16 +1,14 @@
 <script lang="ts">
-	import TrailerLink from './TrailerLink.svelte'
+	import ProjectLink from './ProjectLink.svelte'
 	import type { PageData } from './$types'
 
 	export let data: PageData
 </script>
 
 <svelte:head>
-	<title>雑コード置き場</title>
+	<title>雑コード置き場 | lab.enuesaa.dev</title>
 </svelte:head>
 
-<div class="text-center">
-	{#each data.projects as project}
-		<TrailerLink href={`/${project.name}`} title={project.title} />
-	{/each}
-</div>
+{#each data.projects as project}
+	<ProjectLink href={`/projects/${project.name}`} title={project.title} />
+{/each}
