@@ -18,7 +18,7 @@
 		border-bottom: 0px;
 		overflow: hidden;
 		flex: 0 0 auto;
-		@apply mt-3 mx-1 px-4 py-3 rounded-t-lg border-grayblack;
-		@apply text-base font-semibold;
+		@apply mt-3 mx-1 px-8 py-2 rounded-t-lg border-grayblack;
+		@apply font-bold font-zenmaru text-2xl;
 	}
 </style>

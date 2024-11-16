@@ -18,10 +18,7 @@
 <PagePublishedBar published={data.published} />
 <Description content={data.description} />
 
-<VariantNav variants={data.variants} bind:showing={showingVariantName} />
-
 {#each data.variants as variant}
-	{#if variant.name === showingVariantName}
-		<VariantBody {variant} />
-	{/if}
+	<VariantNav variants={data.variants} bind:showing={variant.name} />
+	<VariantBody {variant} />
 {/each}

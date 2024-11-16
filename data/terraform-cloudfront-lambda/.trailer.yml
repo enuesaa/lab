@@ -1,0 +1,22 @@
+title: '[Terraform] CloudFront のオリジンとして Lambda Function URL を設定する'
+description: |
+  Lambda 関数を作成し、その Function URL を CloudFront のオリジンにセットしてみる
+
+  スタック:
+  ・CloudFront
+  ・CloudFront OAC
+  ・Lambda (Function URL)
+published: '2024-05-26'
+
+ignore:
+  - .trailer.yml
+
+variants:
+  - name: terraform
+    title: Terraform
+    open: main.tf
+    output: ''
+  - name: architecture
+    title: AWS構成図
+    open: main.tf
+    output: ''
