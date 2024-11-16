@@ -2,12 +2,10 @@
 	import type { PageData } from './$types'
 	import PageTitle from './PageTitle.svelte'
 	import Description from './Description.svelte'
-	import VariantNav from './VariantNav.svelte'
-	import VariantBody from './VariantBody.svelte'
 	import PagePublishedBar from './PagePublishedBar.svelte'
+	import Variant from './Variant.svelte'
 
 	export let data: PageData
-	let showingVariantName = data.variants[0].name
 </script>
 
 <svelte:head>
@@ -19,6 +17,5 @@
 <Description content={data.description} />
 
 {#each data.variants as variant}
-	<VariantNav variants={data.variants} bind:showing={variant.name} />
-	<VariantBody {variant} />
+	<Variant {variant} />
 {/each}

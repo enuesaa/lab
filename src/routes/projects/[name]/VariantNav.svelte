@@ -1,22 +1,31 @@
 <script lang="ts">
-	import VariantNavButton from './VariantNavButton.svelte'
 	import { type VariantWithTreeData } from '$lib/types/tree'
 
-	export let variants: VariantWithTreeData[]
-	export let showing: string
+	export let variant: VariantWithTreeData
+	export let showing: boolean
+
+	function handleClick() {
+		showing = !showing
+	}
 </script>
 
 <nav class="m-0 pl-3">
-	{#each variants as variant}
-		{#if variant.name == showing}
-			<VariantNavButton bind:showing name={variant.name} title={variant.title} />
-		{/if}
-	{/each}
+	<button class='bg-graywhite' on:click|preventDefault={handleClick}>
+		{variant.title}
+	</button>
 </nav>
 
 <style lang="postcss">
 	nav {
 		@apply flex;
 		overflow: scroll;
+	}
+	button {
+		border: solid 2px;
+		border-bottom: 0px;
+		overflow: hidden;
+		flex: 0 0 auto;
+		@apply mt-3 mx-1 px-8 py-2 rounded-t-lg border-grayblack;
+		@apply font-bold font-zenmaru text-2xl;
 	}
 </style>
