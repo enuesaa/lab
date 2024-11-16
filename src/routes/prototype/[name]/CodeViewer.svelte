@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { getTreeViewCtl, getViewing } from '$lib/tree'
-	import type { TreeData } from '$lib/types/tree'
+	import { getTreeViewCtl, getViewing } from '$lib/prototype/tree'
+	import type { TreeData } from '$lib/prototype/types'
 	import { onMount } from 'svelte'
 	import Code from './Code.svelte'
 	import CodeTree from './CodeTree.svelte'

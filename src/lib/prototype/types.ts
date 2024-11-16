@@ -2,7 +2,6 @@ export type Config = {
 	title: string
 	description: string
 	published: string
-	ignore: string[]
 	units: Unit[]
 }
 
@@ -21,9 +20,15 @@ export type UnitFiletree = {
 	ignore: string[]
 }
 
-export type PrototypeProject = {
+export type Project = Config & {
 	name: string
-	title: string
-	description: string
-	published: string
 }
+
+export type TreeData = {
+	id: string
+	title: string
+	children: TreeData[]
+	code: string
+	language: string
+}
+export type UnitWithTreeData = Unit & { files: TreeData[] }

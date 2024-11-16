@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { UnitWithTreeData } from '$lib/tree'
+	import type { UnitWithTreeData } from '$lib/prototype/types'
 
 	export let unit: UnitWithTreeData
 	export let showing: boolean

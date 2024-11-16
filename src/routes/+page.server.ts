@@ -1,12 +1,12 @@
 import type { PageServerLoad } from './$types'
-import { listPrototypeProjects } from '$lib/server/prototype/list'
-import type { PrototypeProject } from '$lib/server/prototype/types'
+import { listProjects } from '$lib/prototype/server/project'
+import type { Project } from '$lib/prototype/types'
 
 type Data = {
-	projects: PrototypeProject[]
+	projects: Project[]
 }
 export const load: PageServerLoad<Data> = async () => {
-	const projects = await listPrototypeProjects()
+	const projects = await listProjects()
 
 	return { projects }
 }

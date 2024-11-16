@@ -1,11 +1,10 @@
 import type { PageServerLoad } from './$types'
-import { getProject } from '$lib/server/prototype/config'
-import { extractFiles } from '$lib/server/prototype/files'
-import { listPrototypeNames } from '$lib/server/prototype/list'
-import type { PrototypeProject } from '$lib/server/prototype/types'
-import type { UnitWithTreeData } from '$lib/tree'
+import { getProject } from '$lib/prototype/server/project'
+import { extractFiles } from '$lib/prototype/server/files'
+import { listPrototypeNames } from '$lib/prototype/server/list'
+import type { Project, UnitWithTreeData } from '$lib/prototype/types'
 
-type Data = PrototypeProject & {
+type Data = Project & {
 	units: UnitWithTreeData[]
 }
 export const load: PageServerLoad<Data> = async ({ params: { name } }) => {
@@ -14,7 +13,7 @@ export const load: PageServerLoad<Data> = async ({ params: { name } }) => {
 		...project,
 		units: [],
 	}
-	for (const unit of data.units) {
+	for (const unit of project.units) {
 		data.units.push({
 			...unit,
 			files: await extractFiles(name),

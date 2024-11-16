@@ -1,7 +1,7 @@
 <script lang="ts">
 	import UnitNav from './UnitNav.svelte'
 	import UnitBody from './UnitBody.svelte'
-	import type { UnitWithTreeData } from '$lib/tree'
+	import type { UnitWithTreeData } from '$lib/prototype/types'
 
 	export let unit: UnitWithTreeData
 
