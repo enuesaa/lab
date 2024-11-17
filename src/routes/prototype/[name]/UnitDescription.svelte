@@ -1,9 +1,9 @@
 <script lang="ts">
-	export let title: string
+	export let description: string
 </script>
 
 <div class="mx-2 py-1">
-	<h3>{title}</h3>
+	{description}
 </div>
 
 <style lang="postcss">

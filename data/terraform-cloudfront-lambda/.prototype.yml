@@ -22,3 +22,4 @@ units:
   - name: architecture
     title: AWS構成図
     image: arcitecture.png
+    description: aa

@@ -3,6 +3,7 @@
 	import { createTreeViewCtl, createViewing } from '$lib/prototype/tree'
 	import CodeViewer from './CodeViewer.svelte'
 	import UnitHider from './UnitHider.svelte'
+	import UnitDescription from './UnitDescription.svelte'
 
 	createTreeViewCtl()
 	createViewing()
@@ -12,8 +13,14 @@
 </script>
 
 <section class={showing ? '' : 'max-h-20'}>
-	<!-- <UnitTitle title={unit.title} /> -->
+	{#if unit.description !== undefined}
+	<UnitDescription description={unit.description} />
+	{/if}
+
+	{#if unit.filetree !== undefined}
 	<CodeViewer treeData={unit.files} firstOpen={unit?.filetree?.open ?? ''} />
+	{/if}
+
 	<!-- <UnitOutput output={unit.output} /> -->
 
 	{#if !showing}
