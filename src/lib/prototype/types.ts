@@ -1,3 +1,5 @@
+import type { TreeData } from './tree'
+
 export type Config = {
 	title: string
 	description: string
@@ -24,11 +26,4 @@ export type Project = Config & {
 	name: string
 }
 
-export type TreeData = {
-	id: string
-	title: string
-	children: TreeData[]
-	code: string
-	language: string
-}
-export type UnitWithTreeData = Unit & { files: TreeData[] }
+export type UnitFiles = Record<string, TreeData[]> // per unit

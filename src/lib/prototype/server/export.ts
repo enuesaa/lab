@@ -1,4 +1,4 @@
-import type { Project, UnitWithTreeData } from '../types'
+import type { Project, UnitFiles } from '../types'
 import { readConfig } from './config'
 import { extractFiles } from './files'
 import { listNames } from './list'
@@ -30,17 +30,15 @@ export const getProject = async (name: string): Promise<Project> => {
 	return project
 }
 
-export const getProjectWithFiles = async (name: string): Promise<Project & {units: UnitWithTreeData[]}> => {
-	const project = await getProject(name)
-	const data: Project & {units: UnitWithTreeData[]} = {
-		...project,
-		units: [],
-	}
+export const getUnitFiles = async (project: Project): Promise<UnitFiles> => {
+	const unitfiles: UnitFiles = {}
+
 	for (const unit of project.units) {
-		data.units.push({
-			...unit,
-			files: await extractFiles(name, unit?.filetree?.ignore ?? []),
-		})
+		if (unit.filetree === undefined) {
+			continue
+		}
+		unitfiles[unit.name] = await extractFiles(project.name, unit?.filetree?.ignore ?? [])
 	}
-	return data
+
+	return unitfiles
 }

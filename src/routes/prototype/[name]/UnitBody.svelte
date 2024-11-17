@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { UnitWithTreeData } from '$lib/prototype/types'
-	import { createTreeViewCtl, createViewing } from '$lib/prototype/tree'
+	import type { Unit } from '$lib/prototype/types'
+	import { createTreeViewCtl, createViewing, type TreeData } from '$lib/prototype/tree'
 	import CodeViewer from './CodeViewer.svelte'
 	import UnitHider from './UnitHider.svelte'
 	import UnitDescription from './UnitDescription.svelte'
@@ -9,7 +9,8 @@
 	createTreeViewCtl()
 	createViewing()
 
-	export let unit: UnitWithTreeData
+	export let unit: Unit
+	export let files: TreeData[]
 	export let showing: boolean
 </script>
 
@@ -19,7 +20,7 @@
 	{/if}
 
 	{#if unit.filetree !== undefined}
-	<CodeViewer treeData={unit.files} firstOpen={unit?.filetree?.open ?? ''} />
+	<CodeViewer treeData={files} firstOpen={unit?.filetree?.open ?? ''} />
 	{/if}
 
 	{#if unit.terminal !== undefined}

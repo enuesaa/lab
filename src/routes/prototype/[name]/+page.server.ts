@@ -1,13 +1,17 @@
 import type { PageServerLoad } from './$types'
-import { getProjectWithFiles } from '$lib/prototype/server/export'
+import { getProject, getUnitFiles } from '$lib/prototype/server/export'
 import { listNames } from '$lib/prototype/server/list'
-import type { Project, UnitWithTreeData } from '$lib/prototype/types'
+import type { Project, UnitFiles } from '$lib/prototype/types'
 
-type Data = Project & {
-	units: UnitWithTreeData[]
+type Data = {
+	project: Project
+	unitfiles: UnitFiles
 }
 export const load: PageServerLoad<Data> = async ({ params: { name } }) => {
-	return await getProjectWithFiles(name)
+	const project = await getProject(name)
+	const unitfiles = await getUnitFiles(project)
+
+	return {project, unitfiles}
 }
 
 type Entry = {

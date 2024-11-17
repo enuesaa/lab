@@ -9,13 +9,13 @@
 </script>
 
 <svelte:head>
-	<title>{data.title}</title>
+	<title>{data.project.title}</title>
 </svelte:head>
 
-<PageTitle title={data.title} />
-<PagePublishedBar published={data.published} />
-<Description content={data.description} />
+<PageTitle title={data.project.title} />
+<PagePublishedBar published={data.project.published} />
+<Description content={data.project.description} />
 
-{#each data.units as unit}
-	<Unit {unit} />
+{#each data.project.units as unit}
+	<Unit {unit} files={data.unitfiles[unit.name]} />
 {/each}
