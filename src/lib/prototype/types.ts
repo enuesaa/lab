@@ -14,7 +14,10 @@ export type Unit = {
 		open: string
 		ignore: string[]
 	}
-	output?: string
+	terminal?: {
+		description: string
+		console: string
+	}
 }
 
 export type Project = Config & {

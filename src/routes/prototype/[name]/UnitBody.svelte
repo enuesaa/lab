@@ -4,6 +4,7 @@
 	import CodeViewer from './CodeViewer.svelte'
 	import UnitHider from './UnitHider.svelte'
 	import UnitDescription from './UnitDescription.svelte'
+	import UnitTerminal from './UnitTerminal.svelte'
 
 	createTreeViewCtl()
 	createViewing()
@@ -21,7 +22,9 @@
 	<CodeViewer treeData={unit.files} firstOpen={unit?.filetree?.open ?? ''} />
 	{/if}
 
-	<!-- <UnitOutput output={unit.output} /> -->
+	{#if unit.terminal !== undefined}
+		<UnitTerminal terminal={unit.terminal} />
+	{/if}
 
 	{#if !showing}
 		<UnitHider bind:showing />

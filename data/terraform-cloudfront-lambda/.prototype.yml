@@ -18,7 +18,11 @@ units:
       ignore:
        - .prototype.yml
        - arcitecture.png
-    # output:
+    terminal:
+      description: 実行します
+      console: |
+        terraform init
+        terraform apply
   - name: architecture
     title: AWS構成図
     image: arcitecture.png
