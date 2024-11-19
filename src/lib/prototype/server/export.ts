@@ -4,12 +4,15 @@ import { extractFiles } from './files'
 import { listNames } from './list'
 
 export const listProjects = async (): Promise<Project[]> => {
-	const list = []
+	let list = []
 
 	for (const name of await listNames()) {
 		const project = await getProject(name)
 		list.push(project)
 	}
+
+	// ignore if published is null
+	list = list.filter(a => a.published !== undefined && a.published !== null)
 
 	// sort by published desc
 	list.sort((a, b) => (a.published > b.published ? -1 : 1))
@@ -33,12 +36,11 @@ export const getProject = async (name: string): Promise<Project> => {
 export const getUnitFiles = async (project: Project): Promise<UnitFiles> => {
 	const unitfiles: UnitFiles = {}
 
-	for (let i = 0; i < project.units.length; i++) {
-		const unit = project.units[i]
+	for (const unit of project.units) {
 		if (unit.open === undefined) {
 			continue
 		}
-		unitfiles[i] = await extractFiles(project.name, unit?.ignore ?? [])
+		unitfiles[unit.title] = await extractFiles(project.name, unit?.ignore ?? [])
 	}
 
 	return unitfiles

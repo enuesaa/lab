@@ -6,23 +6,18 @@ description: |
   ・CloudFront
   ・CloudFront OAC
   ・Lambda (Function URL)
-published: '2024-10-26'
+published: null
 
 units:
-  - name: terraform
-    title: Terraform
+  - title: Terraform
     # description: 
     # image: arcitecture.png
-    filetree:
-      open: main.tf
-      ignore:
-        - arcitecture.png
-    terminal:
-      description: 実行します
-      console: |
-        terraform init
-        terraform apply
-  - name: architecture
-    title: AWS構成図
+    open: main.tf
+    ignore:
+      - arcitecture.png
+    console: |
+      terraform init
+      terraform apply
+  - title: AWS構成図
     image: arcitecture.png
     description: aa

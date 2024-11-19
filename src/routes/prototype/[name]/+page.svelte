@@ -16,6 +16,6 @@
 <PagePublishedBar published={data.project.published} />
 <Description content={data.project.description} />
 
-{#each data.project.units as unit, i}
-	<Unit {unit} files={data.unitfiles[i]} />
+{#each data.project.units as unit}
+	<Unit {unit} files={data.unitfiles[unit.title]} />
 {/each}

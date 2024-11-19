@@ -7,10 +7,11 @@ description: |
 published: '2024-05-26'
 
 units:
-  - title: 変更後
+  - title: コード全体
     open: main.go
     ignore:
       - go.sum
+      - go.mod
   - title: 実行結果
     console: |
       $ go run . --help
