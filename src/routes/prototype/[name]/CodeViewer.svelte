@@ -21,7 +21,7 @@
 </script>
 
 <section>
-	<ul class="w-28 flex-none" style="border-right: solid 1.5px rgba(255,255,255,0.3);" {...$tree}>
+	<ul class="flex-none pr-2 pt-2 pb-2 border-r-editorsep border-r" {...$tree}>
 		<CodeTree {treeData} />
 	</ul>
 	<div class="flex-auto">
@@ -35,9 +35,7 @@
 
 <style lang="postcss">
 	section {
-		border: solid 2px rgba(0, 0, 0, 0.2);
-		box-shadow: 0 1px 2px rgba(255, 255, 255, 0.2);
-		background: #22272e;
-		@apply flex my-5 text-grayblack overflow-y-scroll min-h-12;
+		@apply bg-editorbg text-editortext text-base;
+		@apply flex overflow-y-scroll min-h-12;
 	}
 </style>

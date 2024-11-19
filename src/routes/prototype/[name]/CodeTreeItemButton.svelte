@@ -23,14 +23,15 @@
 		hasChildren,
 	})}
 	on:click|preventDefault={hanldeClick}
-	class={$viewing?.id === data.id ? 'underline' : ''}
+	disabled={hasChildren}
+	class={$viewing?.id === data.id ? 'bg-editorsep/50 border-editortext/50 border-[0.5px]' : ''}
 >
 	{data.title}
 </button>
 
 <style lang="postcss">
 	button {
-		@apply inline-block my-1;
-		@apply rounded-sm pt-1 select-none;
+		@apply inline-block py-[1px] mt-[1px] px-2 text-left;
+		@apply rounded-sm select-none;
 	}
 </style>

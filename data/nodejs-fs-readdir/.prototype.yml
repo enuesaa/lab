@@ -9,11 +9,12 @@ description: |
 published: '2024-05-26'
 
 units:
-  - title: 'withFileTypes: true を指定すると'
+  - title: 'withFileTypes: true を指定'
     open: main.ts
     ignore:
       - pnpm-lock.yaml
       - tsconfig.json
+  - title: 実行結果
     console: |
       $ pnpm tsx main.ts
       [

@@ -11,6 +11,9 @@ export default {
 			grayblacker: '#bfbfbf',
 			grayblack: '#b3b3b3',
 			white: '#fafafa',
+			editorbg: '#22272e',
+			editortext: '#adbac7',
+			editorsep: '#4a5666',
 		},
 		fontFamily: {
 			zenmaru: ['Zen Maru Gothic', 'serif'],

@@ -5,6 +5,8 @@
 	import UnitHider from './UnitHider.svelte'
 	import UnitDescription from './UnitDescription.svelte'
 	import UnitTerminal from './UnitTerminal.svelte'
+	import UnitSep from './UnitSep.svelte'
+	import Description from './Description.svelte'
 
 	createTreeViewCtl()
 	createViewing()
@@ -14,16 +16,18 @@
 	export let showing: boolean
 </script>
 
-<section class={showing ? '' : 'max-h-20'}>
-	{#if unit.description !== undefined}
+{#if unit.description !== undefined}
 	<UnitDescription description={unit.description} />
-	{/if}
+{/if}
 
+<section class={showing ? '' : 'max-h-20'}>
 	{#if unit.open !== undefined}
-	<CodeViewer treeData={files} firstOpen={unit.open} />
+		<UnitSep text="エディタ" />
+		<CodeViewer treeData={files} firstOpen={unit.open} />
 	{/if}
 
 	{#if unit.console !== undefined}
+		<UnitSep text="ターミナル" />
 		<UnitTerminal content={unit.console} />
 	{/if}
 
@@ -34,8 +38,7 @@
 
 <style lang="postcss">
 	section {
-		box-shadow: 0 -0.5px 1px 1px rgba(0, 0, 0, 0.2);
-		@apply px-2 md:px-7 py-1 rounded-lg bg-graywhite w-full;
-		@apply relative overflow-hidden;
+		@apply rounded-lg bg-graywhite w-full;
+		@apply relative overflow-hidden mt-1;
 	}
 </style>

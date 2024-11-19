@@ -2,6 +2,22 @@
 	export let description: string
 </script>
 
-<div class="mx-2 py-1">
-	{description}
-</div>
+<section>
+	<pre>{description}</pre>
+</section>
+
+<style lang="postcss">
+	section {
+		@apply my-1 px-5 font-zenmaru text-base w-full;
+	}
+	section pre {
+		letter-spacing: 0.1px;
+		line-height: 1.8;
+		overflow-wrap: anywhere;
+		word-break: normal;
+		line-break: strict;
+		white-space: pre-wrap;
+		font-feature-settings: 'palt';
+		@apply font-ibmplex;
+	}
+</style>

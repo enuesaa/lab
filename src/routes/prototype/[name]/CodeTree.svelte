@@ -12,7 +12,7 @@
 {#each treeData as data}
 	<li class="block pl-2">
 		{#if isChild}
-			<span class="inline-block opacity-50">|</span>
+			<span class="inline-block opacity-50">└</span>
 		{/if}
 		<CodeTreeItemButton {data} />
 

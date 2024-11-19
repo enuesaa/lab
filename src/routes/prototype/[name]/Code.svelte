@@ -11,7 +11,7 @@
 		: highlightjs.highlightAuto(code)
 </script>
 
-<pre><code class="hljs">{@html hl.value}</code></pre>
+<pre><code class="hljs" style="padding: 7px 12px 12px 12px;">{@html hl.value}</code></pre>
 
 <style lang="postcss">
 	pre {

@@ -4,6 +4,4 @@
 	export let content: string
 </script>
 
-<section class="mb-5">
-	<Code language="console" code={content} />
-</section>
+<Code language="console" code={content} />
