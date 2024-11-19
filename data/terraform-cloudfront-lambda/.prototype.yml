@@ -16,8 +16,8 @@ units:
     filetree:
       open: main.tf
       ignore:
-       - .prototype.yml
-       - arcitecture.png
+        - .prototype.yml
+        - arcitecture.png
     terminal:
       description: 実行します
       console: |
