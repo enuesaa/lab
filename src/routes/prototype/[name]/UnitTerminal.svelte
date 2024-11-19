@@ -1,11 +1,9 @@
 <script lang="ts">
 	import Code from './Code.svelte'
-	import type { Unit } from '$lib/prototype/types'
 
-	export let terminal: Unit['terminal']
+	export let content: string
 </script>
 
 <section class="mb-5">
-	{terminal?.description}
-	<Code language="console" code={terminal?.console ?? ''} />
+	<Code language="console" code={content} />
 </section>

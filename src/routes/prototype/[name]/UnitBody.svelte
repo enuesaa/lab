@@ -19,12 +19,12 @@
 	<UnitDescription description={unit.description} />
 	{/if}
 
-	{#if unit.filetree !== undefined}
-	<CodeViewer treeData={files} firstOpen={unit?.filetree?.open ?? ''} />
+	{#if unit.open !== undefined}
+	<CodeViewer treeData={files} firstOpen={unit.open} />
 	{/if}
 
-	{#if unit.terminal !== undefined}
-		<UnitTerminal terminal={unit.terminal} />
+	{#if unit.console !== undefined}
+		<UnitTerminal content={unit.console} />
 	{/if}
 
 	{#if !showing}

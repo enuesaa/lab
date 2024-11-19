@@ -8,18 +8,12 @@ export type Config = {
 }
 
 export type Unit = {
-	name: string
 	title: string
 	description?: string
 	image?: string
-	filetree?: {
-		open: string
-		ignore: string[]
-	}
-	terminal?: {
-		description: string
-		console: string
-	}
+	open?: string
+	ignore?: string[]
+	console?: string
 }
 
 export type Project = Config & {

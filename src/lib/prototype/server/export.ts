@@ -33,11 +33,12 @@ export const getProject = async (name: string): Promise<Project> => {
 export const getUnitFiles = async (project: Project): Promise<UnitFiles> => {
 	const unitfiles: UnitFiles = {}
 
-	for (const unit of project.units) {
-		if (unit.filetree === undefined) {
+	for (let i = 0; i < project.units.length; i++) {
+		const unit = project.units[i]
+		if (unit.open === undefined) {
 			continue
 		}
-		unitfiles[unit.name] = await extractFiles(project.name, unit?.filetree?.ignore ?? [])
+		unitfiles[i] = await extractFiles(project.name, unit?.ignore ?? [])
 	}
 
 	return unitfiles
