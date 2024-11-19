@@ -1,6 +1,6 @@
-title: Cobra で help フラグの説明文を変える方法
+title: Cobra で --help の説明文を変える方法
 description: |
-  help フラグの説明文はデフォルトで `help for コマンド名` だが、この文章を変えるには。
+  --help の説明文はデフォルトで `help for コマンド名` だが、この文章を変えるには。
 
   ・単に help フラグを定義してあげればいい
   ・他にも方法はあると思う
@@ -13,8 +13,10 @@ units:
       open: main.go
       ignore:
         - go.sum
+  - name: terminal
+    title: 実行結果
     terminal:
-      description: 実行します
+      description:
       console: |
         $ go run . --help
         Usage:

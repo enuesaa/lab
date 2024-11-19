@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { UnitWithTreeData } from '$lib/prototype/types'
+	import type { Unit } from '$lib/prototype/types'
 
-	export let unit: UnitWithTreeData
+	export let unit: Unit
 	export let showing: boolean
 
 	function handleClick() {

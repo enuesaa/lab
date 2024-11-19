@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getTreeViewCtl } from '$lib/prototype/tree'
-	import type { TreeData } from '$lib/prototype/types'
+	import type { TreeData } from '$lib/prototype/tree'
 	import { melt } from '@melt-ui/svelte'
 	import CodeTreeItemButton from './CodeTreeItemButton.svelte'
 

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Code from './Code.svelte'
-	import type { UnitWithTreeData } from '$lib/prototype/types'
+	import type { Unit } from '$lib/prototype/types'
 
-	export let terminal: UnitWithTreeData['terminal']
+	export let terminal: Unit['terminal']
 </script>
 
 <section class="mb-5">

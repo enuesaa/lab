@@ -1,8 +1,11 @@
-import type { TreeData } from '$lib/prototype/types'
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import type { TreeData } from '../tree'
 
 export const extractFiles = async (name: string, ignore: string[]): Promise<TreeData[]> => {
+	// default
+	ignore.push('.prototype.yml')
+	
 	return extract(`./data/${name}`, '', ignore)
 }
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { melt } from '@melt-ui/svelte'
 	import { getTreeViewCtl, getViewing } from '$lib/prototype/tree'
-	import type { TreeData } from '$lib/prototype/types'
+	import type { TreeData } from '$lib/prototype/tree'
 
 	export let data: TreeData
 	const hasChildren = data.children.length > 0
