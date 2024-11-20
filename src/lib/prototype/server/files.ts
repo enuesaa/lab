@@ -2,26 +2,23 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import type { TreeData } from '../tree'
 
-export const extractFiles = async (name: string, ignore: string[]): Promise<TreeData[]> => {
-	// default
-	ignore.push('.prototype.yml')
-	
-	return extract(`./data/${name}`, '', ignore)
+export const extractFiles = async (name: string, include: string[]): Promise<TreeData[]> => {
+	return extract(`./data/${name}`, '', include)
 }
 
-const extract = async (dir: string, baseDir: string = '', ignore: string[]): Promise<TreeData[]> => {
+const extract = async (dir: string, baseDir: string = '', include: string[]): Promise<TreeData[]> => {
 	const data: TreeData[] = []
 	const files = await fs.readdir(dir, { withFileTypes: true })
 
 	for (const file of files) {
-		if (ignore.includes(file.name)) {
+		if (!include.includes(file.name)) {
 			continue
 		}
 		const filepath = path.join(dir, file.name)
 		const relpath = path.join(baseDir, file.name)
 
 		if (file.isDirectory()) {
-			const children = await extract(filepath, relpath, ignore)
+			const children = await extract(filepath, relpath, include)
 			data.push({
 				id: relpath,
 				title: file.name,

@@ -12,7 +12,7 @@ export type Unit = {
 	description?: string
 	image?: string
 	open?: string
-	ignore?: string[]
+	include?: string[]
 	console?: string
 }
 

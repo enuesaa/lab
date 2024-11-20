@@ -40,7 +40,9 @@ export const getUnitFiles = async (project: Project): Promise<UnitFiles> => {
 		if (unit.open === undefined) {
 			continue
 		}
-		unitfiles[unit.title] = await extractFiles(project.name, unit?.ignore ?? [])
+		const include = unit.include ?? []
+		include.push(unit.open) // by default
+		unitfiles[unit.title] = await extractFiles(project.name, include)
 	}
 
 	return unitfiles

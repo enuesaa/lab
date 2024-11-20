@@ -13,8 +13,6 @@ units:
     # description: 
     # image: arcitecture.png
     open: main.tf
-    ignore:
-      - arcitecture.png
     console: |
       terraform init
       terraform apply
