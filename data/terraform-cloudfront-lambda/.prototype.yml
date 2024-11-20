@@ -1,4 +1,4 @@
-title: '[Terraform] CloudFront のオリジンとして Lambda Function URL を設定する'
+title: '[Terraform] CloudFront のオリジンに Lambda Function URL をセットする'
 description: |
   Lambda 関数を作成し、その Function URL を CloudFront のオリジンにセットしてみる
 
@@ -10,11 +10,13 @@ published: null
 
 units:
   - title: Terraform
-    # description: 
     open: main.tf
-    console: |
-      terraform init
-      terraform apply
+    include:
+      - lambda.tf
+      - cloudfront_distribution.tf
+      - lambda_role.tf
+      - variables.tf
+      - cloudfront_origin_access_control.tf
+      - lambda_url.tf
   - title: AWS構成図
-    description: aa
-    # image: architecture.png
+    image: architecture.png

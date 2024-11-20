@@ -7,7 +7,7 @@ export const copyUnitImage = async (project: Project) => {
 
   try {
     // remove old assets
-    await fs.rmdir(publishdir, { recursive: true })
+    await fs.rm(publishdir, { recursive: true })
   } catch(e) {}
 
 	for (const unit of project.units) {
