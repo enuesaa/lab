@@ -8,22 +8,22 @@ description: |
   スタック:
   ・CloudFront
   ・CloudFront OAC
-  ・Lambda (Function URL)
+  ・Lambda (Web Adapter & Function URL)
   ・アプリケーション (Go)
 published: '2024-11-21'
 
 units:
-  - title: Docker or Zip
+  - title: Lambda Web Adapter
     description: |
-      Lambda Web Adapter を実現する際は、Docker で関数を作るのがメジャーだと思う。
+      アプリケーションは Go で作り Lambda Web Adapter を被せた。
 
+      ちなみに Lambda Web Adapter を使う際は、Docker で関数を作るのがメジャーだと思う。
       だが、AWS は Lambda Web Adapter 用の Lambda Layer を公開しており、それをアタッチしたところ Zip 形式でも動いた。
     links:
       - title: https://github.com/awslabs/aws-lambda-web-adapter?tab=readme-ov-file#aws-commercial-regions
         url: https://github.com/awslabs/aws-lambda-web-adapter?tab=readme-ov-file#aws-commercial-regions
 
   - title: AWS構成図
-    description: Lambda Function URL を叩く際は CloudFront OAC (Lambda) を使用する
     image: architecture.svg
 
   - title: Terraform
