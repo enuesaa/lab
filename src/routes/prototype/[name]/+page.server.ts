@@ -20,5 +20,9 @@ type Entry = {
 export async function entries(): Promise<Entry[]> {
 	const projects = await listProjects()
 	const list = projects.map((p) => ({ name: p.name }))
+	// todo remove
+	for (const project of projects) {
+		await copyUnitImage(project)
+	}
 	return list
 }
