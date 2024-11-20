@@ -23,7 +23,7 @@
 
 <style lang="postcss">
 	button {
-		@apply font-semibold text-2xl mt-4 mb-2 pl-2 font-zenmaru;
+		@apply font-semibold text-2xl mt-6 mb-2 pl-2 font-zenmaru;
 	}
 </style>
 

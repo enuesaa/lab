@@ -12,6 +12,10 @@ resource "aws_lambda_function" "main" {
   timeout       = 10
 
   layers = [
-    // aws managed lambda layer for lambda web adapter here
+    // TODO:
+    // AWS は Lambda Web Adapter 用の Lambda Layer を公開しているので、Arn をコピペする
+    // see https://github.com/awslabs/aws-lambda-web-adapter?tab=readme-ov-file#aws-commercial-regions
+    
+    // "arn:aws:lambda:ap-northeast-1:xxx:layer:LambdaAdapterLayerArm64:23"
   ]
 }

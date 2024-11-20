@@ -17,5 +17,5 @@
 <Description content={data.project.description} />
 
 {#each data.project.units as unit}
-	<Unit {unit} files={data.unitfiles[unit.title]} />
+	<Unit project={data.project} {unit} files={data.unitfiles[unit.title]} />
 {/each}

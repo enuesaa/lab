@@ -1,4 +1,7 @@
-title: '[Terraform] CloudFront のオリジンに Lambda Function URL をセットする'
+title: |
+  [Terraform]
+  CloudFront のオリジンに Lambda Function URL をセットする
+
 description: |
   Lambda 関数を作成し、その Function URL を CloudFront のオリジンにセットしてみる
 
@@ -6,17 +9,41 @@ description: |
   ・CloudFront
   ・CloudFront OAC
   ・Lambda (Function URL)
-published: null
+  ・アプリケーション (Go)
+published: '2024-11-21'
 
 units:
+  - title: Docker or Zip
+    description: |
+      Lambda Web Adapter を実現する際は、Docker で関数を作るのがメジャーだと思う。
+
+      だが、AWS は Lambda Web Adapter 用の Lambda Layer を公開しており、それをアタッチしたところ Zip 形式でも動いた。
+    links:
+      - title: https://github.com/awslabs/aws-lambda-web-adapter?tab=readme-ov-file#aws-commercial-regions
+        url: https://github.com/awslabs/aws-lambda-web-adapter?tab=readme-ov-file#aws-commercial-regions
+
+  - title: AWS構成図
+    description: Lambda Function URL を叩く際は CloudFront OAC (Lambda) を使用する
+    image: architecture.svg
+
   - title: Terraform
-    open: main.tf
+    open: lambda.tf
     include:
+      - main.tf
       - lambda.tf
       - cloudfront_distribution.tf
       - lambda_role.tf
       - variables.tf
       - cloudfront_origin_access_control.tf
       - lambda_url.tf
-  - title: AWS構成図
-    image: architecture.png
+  
+  - title: POST or PUT はできない
+    description: |
+      CloudFront OAC がリクエストボディのハッシュ計算に対応していない様子。
+      POST or PUT を叩くとエラーが返ってくる。
+
+      ワークアラウンドはいくつかある。プロダクションでの使用は要検討。
+
+    links:
+      - title: https://dev.classmethod.jp/articles/cloudfront-lambda-url-sigv4-signer/
+        url: https://dev.classmethod.jp/articles/cloudfront-lambda-url-sigv4-signer/

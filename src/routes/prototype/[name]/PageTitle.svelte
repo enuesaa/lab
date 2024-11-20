@@ -13,5 +13,6 @@
 	h2 {
 		@apply font-bold font-zenmaru text-3xl sm:text-4xl px-2;
 		line-height: 1.5;
+		white-space: pre;
 	}
 </style>
