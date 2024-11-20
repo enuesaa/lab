@@ -11,11 +11,10 @@ published: null
 units:
   - title: Terraform
     # description: 
-    # image: arcitecture.png
     open: main.tf
     console: |
       terraform init
       terraform apply
   - title: AWS構成図
-    image: arcitecture.png
     description: aa
+    # image: architecture.png
