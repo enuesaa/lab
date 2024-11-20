@@ -18,15 +18,15 @@
 	export let showing: boolean
 </script>
 
-{#if unit.description !== undefined}
-	<UnitDescription description={unit.description} />
-{/if}
-
-{#if unit.links !== undefined}
-	<UnitLinks links={unit.links} />
-{/if}
-
 <section class={showing ? '' : 'max-h-20'}>
+	{#if unit.description !== undefined}
+		<UnitDescription description={unit.description} />
+	{/if}
+
+	{#if unit.links !== undefined}
+		<UnitLinks links={unit.links} />
+	{/if}
+
 	{#if unit.image !== undefined}
 		<UnitImage {project} image={unit.image} />
 	{/if}
@@ -48,7 +48,7 @@
 
 <style lang="postcss">
 	section {
-		@apply rounded-lg bg-graywhite w-full;
+		@apply rounded-lg w-full;
 		@apply relative overflow-hidden mt-1;
 	}
 </style>

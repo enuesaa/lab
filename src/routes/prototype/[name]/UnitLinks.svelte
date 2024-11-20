@@ -4,6 +4,6 @@
 
 <div class="pl-10">
 	{#each links as link}
-		<a href={link.url} class="underline list-item">{link.title}</a>
+		<a href={link.url} class="underline list-item" target="_blank">{link.title}</a>
 	{/each}
 </div>
