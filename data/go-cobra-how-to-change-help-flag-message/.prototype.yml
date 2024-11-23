@@ -1,4 +1,5 @@
-title: Cobra で --help の説明文を変える方法
+title: |
+  Cobra で --help の説明文を変える方法
 description: |
   --help の説明文はデフォルトで `help for コマンド名` だが、この文章を変えるには。
 

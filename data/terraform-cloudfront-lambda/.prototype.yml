@@ -4,26 +4,27 @@ title: |
 description: |
   Lambda 関数を作成し、その Function URL を CloudFront のオリジンにセットしてみる
 
-  スタック:
-  ・CloudFront
-  ・CloudFront OAC
-  ・Lambda (Web Adapter & Function URL)
-  ・アプリケーション (Go)
 published: '2024-11-21'
 
 units:
-  - title: Lambda Web Adapter
+  - title: 構成
     description: |
-      アプリケーションは Go で作り Lambda Web Adapter を被せた。
+      ・CloudFront
+      ・CloudFront OAC
+      ・Lambda (Web Adapter)
+      ・アプリケーション (Go)
+    image: architecture.svg
+
+  - title: アプリケーション
+    description: |
+      アプリケーションは Go で作り Lambda Web Adapter を被せる
 
       ちなみに Lambda Web Adapter を使う際は、Docker で関数を作るのがメジャーだと思う。
       だが、AWS は Lambda Web Adapter 用の Lambda Layer を公開しており、それをアタッチしたところ Zip 形式でも動いた。
     links:
       - title: https://github.com/awslabs/aws-lambda-web-adapter?tab=readme-ov-file#aws-commercial-regions
         url: https://github.com/awslabs/aws-lambda-web-adapter?tab=readme-ov-file#aws-commercial-regions
-
-  - title: AWS構成図
-    image: architecture.svg
+    open: main.go
 
   - title: Terraform
     open: lambda.tf
@@ -36,7 +37,7 @@ units:
       - cloudfront_origin_access_control.tf
       - lambda_url.tf
   
-  - title: POST or PUT はできない
+  - title: '[注意] POST or PUT はできない'
     description: |
       CloudFront OAC がリクエストボディのハッシュ計算に対応していない様子。
       POST or PUT を叩くとエラーが返ってくる。

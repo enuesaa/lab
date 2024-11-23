@@ -31,9 +31,9 @@
 		<UnitImage {project} image={unit.image} />
 	{/if}
 
-	<div class="rounded-lg overflow-hidden">
+	<div class="rounded-lg overflow-hidden mt-1">
 		{#if unit.open !== undefined}
-			<UnitSep text="エディタ" />
+			<UnitSep text="</>" />
 			<CodeViewer treeData={files} firstOpen={unit.open} />
 		{/if}
 
@@ -50,6 +50,6 @@
 
 <style lang="postcss">
 	section {
-		@apply w-full relative mt-1;
+		@apply w-full relative mt-1 overflow-hidden;
 	}
 </style>
