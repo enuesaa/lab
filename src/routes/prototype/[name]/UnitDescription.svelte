@@ -8,7 +8,7 @@
 
 <style lang="postcss">
 	section {
-		@apply my-1 px-5 font-zenmaru text-base w-full;
+		@apply my-1 px-2 font-zenmaru text-base w-full;
 	}
 	section pre {
 		letter-spacing: 0.1px;
