@@ -9,6 +9,6 @@
 
 <style lang="postcss">
 	img {
-		@apply block mx-auto max-w-[1000px] mb-3;
+		@apply block mx-auto max-w-[min(100%,1000px)] mb-3;
 	}
 </style>
