@@ -9,6 +9,6 @@
 <style lang="postcss">
 	div {
 		letter-spacing: 1px;
-		@apply mx-2 px-10 text-right text-base font-semibold font-zenmaru;
+		@apply mx-1 px-2 text-right text-base font-semibold font-zenmaru;
 	}
 </style>

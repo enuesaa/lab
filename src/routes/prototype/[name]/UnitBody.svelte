@@ -31,15 +31,17 @@
 		<UnitImage {project} image={unit.image} />
 	{/if}
 
-	{#if unit.open !== undefined}
-		<UnitSep text="エディタ" />
-		<CodeViewer treeData={files} firstOpen={unit.open} />
-	{/if}
+	<div class="rounded-lg overflow-hidden">
+		{#if unit.open !== undefined}
+			<UnitSep text="エディタ" />
+			<CodeViewer treeData={files} firstOpen={unit.open} />
+		{/if}
 
-	{#if unit.console !== undefined}
-		<UnitSep text="ターミナル" />
-		<UnitTerminal content={unit.console} />
-	{/if}
+		{#if unit.console !== undefined}
+			<UnitSep text="ターミナル" />
+			<UnitTerminal content={unit.console} />
+		{/if}
+	</div>
 
 	{#if !showing}
 		<UnitHider bind:showing />
@@ -48,7 +50,6 @@
 
 <style lang="postcss">
 	section {
-		@apply rounded-lg w-full;
-		@apply relative overflow-hidden mt-1;
+		@apply w-full relative mt-1;
 	}
 </style>
