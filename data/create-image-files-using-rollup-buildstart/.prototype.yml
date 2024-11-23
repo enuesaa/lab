@@ -27,9 +27,21 @@ units:
     open: vite.config.ts
     include:
       - data
-      - data/something-file-name.png
+      - data/something-image-file.png
       - package.json
       - src
       - static
       - static/robots.txt
       - .gitignore
+
+  - title: 実行結果
+    description: |
+      ビルドすると file copied! という文字列が出力される。
+      うまく呼ばれてそう。
+    console: |
+      $ pnpm build
+      > vite build
+
+      vite v5.4.11 building SSR bundle for production...
+      file copied!
+      ✓ 1918 modules transformed.

@@ -23,7 +23,7 @@
 		hasChildren,
 	})}
 	on:click|preventDefault={hanldeClick}
-	disabled={hasChildren}
+	disabled={data.isDir}
 	class={$viewing?.id === data.id ? 'bg-editorsep/50 border-editortext/50 border-[0.5px]' : ''}
 >
 	{data.title}

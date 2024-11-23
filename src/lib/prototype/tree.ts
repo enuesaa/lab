@@ -5,6 +5,7 @@ import { setContext, getContext } from 'svelte'
 export type TreeData = {
 	id: string
 	title: string
+	isDir: boolean
 	children: TreeData[]
 	code: string
 	language: string

@@ -15,8 +15,6 @@ export const getUnitFiles = async (project: Project): Promise<UnitFiles> => {
 		unitfiles[unit.title] = await extract(`./data/${project.name}`, '', include)
 	}
 
-	console.log(unitfiles)
-
 	return unitfiles
 }
 
@@ -37,6 +35,7 @@ const extract = async (dir: string, baseDir: string = '', include: string[]): Pr
 			data.push({
 				id: relpath,
 				title: file.name,
+				isDir: true,
 				children,
 				code: '',
 				language: '',
@@ -47,6 +46,7 @@ const extract = async (dir: string, baseDir: string = '', include: string[]): Pr
 			data.push({
 				id: relpath,
 				title: file.name,
+				isDir: false,
 				children: [],
 				code,
 				language,

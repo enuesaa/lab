@@ -23,9 +23,11 @@ export default defineConfig({
 				} catch(e) {}
 
 				// 画像ファイルを配置
-				const src = path.join('./data', 'something-file-name.png')
-				const dest = path.join('./static/images', 'something-file-name.png')
+				const src = path.join('./data', 'something-image-file.png')
+				const dest = path.join('./static/images', 'something-image-file.png')
 				await fs.copyFile(src, dest)
+
+				console.log('file copied!')
 			},
 		},
 	],
