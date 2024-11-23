@@ -15,6 +15,8 @@ export const getUnitFiles = async (project: Project): Promise<UnitFiles> => {
 		unitfiles[unit.title] = await extract(`./data/${project.name}`, '', include)
 	}
 
+	console.log(unitfiles)
+
 	return unitfiles
 }
 
@@ -23,11 +25,12 @@ const extract = async (dir: string, baseDir: string = '', include: string[]): Pr
 	const files = await fs.readdir(dir, { withFileTypes: true })
 
 	for (const file of files) {
-		if (!include.includes(file.name)) {
-			continue
-		}
 		const filepath = path.join(dir, file.name)
 		const relpath = path.join(baseDir, file.name)
+
+		if (!include.includes(relpath)) {
+			continue
+		}
 
 		if (file.isDirectory()) {
 			const children = await extract(filepath, relpath, include)

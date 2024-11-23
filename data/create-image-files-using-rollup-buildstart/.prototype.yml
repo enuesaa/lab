@@ -1,0 +1,35 @@
+title: |
+  [Rollup]
+  buildStart() フックにて画像ファイルを配置した
+
+description: |
+  SvelteKit で SSG するサイトを作成している
+  コンテンツは +page.server.ts の load() で返せばいいが、画像ファイルはどうしようかと悩んだ
+published: '2024-11-23'
+
+units:
+  - title: 結論
+    description: |
+      Rollup の buildStart() フックにて、画像ファイルを /static へ配置する
+  - title: Rollup の buildStart() フック
+    description: |
+      Rollup にはフックがいくつかあるらしい
+      ・buildStart
+      ・buildEnd
+      ・options
+
+      buildStart() はその名の通り、ビルド開始時に呼ばれる様子。ドキュメントのフロー図が分かりやすかった
+    links:
+      - title: ドキュメント
+        url: https://rollupjs.org/plugin-development/#build-hooks
+
+  - title: コード全体
+    open: vite.config.ts
+    include:
+      - data
+      - data/something-file-name.png
+      - package.json
+      - src
+      - static
+      - static/robots.txt
+      - .gitignore

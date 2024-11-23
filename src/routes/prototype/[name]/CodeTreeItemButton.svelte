@@ -31,7 +31,7 @@
 
 <style lang="postcss">
 	button {
-		@apply inline-block py-[1px] mt-[1px] px-2 text-left;
+		@apply inline-block py-[1px] mt-[1px] px-1 text-left;
 		@apply rounded-sm select-none;
 	}
 </style>

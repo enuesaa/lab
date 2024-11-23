@@ -9,7 +9,7 @@ export default defineConfig({
 		sveltekit(),
 		{
 			name: 'file-copy',
-			async generateBundle() {
+			async buildStart() {
 				const projects = await listProjects()
 				for (const project of projects) {
 					await copyUnitImage(project)
