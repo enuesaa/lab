@@ -1,7 +1,6 @@
 title: |
   [Node.js]
   fs.readdir() で withFileTypes: true を指定する
-
 description: |
   `fs.readdir()` のオプションで `withFileTypes: true` を指定すると返り値の型が変わる
 

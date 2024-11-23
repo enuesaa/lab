@@ -1,7 +1,6 @@
 title: |
   [Terraform]
   CloudFront のオリジンに Lambda Function URL をセットする
-
 description: |
   Lambda 関数を作成し、その Function URL を CloudFront のオリジンにセットしてみる
 

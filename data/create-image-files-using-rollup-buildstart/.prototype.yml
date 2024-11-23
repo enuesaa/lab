@@ -1,7 +1,6 @@
 title: |
   [Rollup]
   buildStart() フックにて画像ファイルを配置した
-
 description: |
   SvelteKit で SSG するサイトを作成している
   コンテンツは +page.server.ts の load() で返せばいいが、画像ファイルはどうしようかと悩んだ
