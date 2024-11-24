@@ -12,9 +12,12 @@ export type TreeData = {
 }
 
 export const createTreeViewCtl = () => {
-	setContext('treeView', createTreeView({
-		forceVisible: true,
-	}))
+	setContext(
+		'treeView',
+		createTreeView({
+			forceVisible: true,
+		})
+	)
 }
 export const getTreeViewCtl = () => {
 	const treeView = getContext<ReturnType<typeof createTreeView>>('treeView')

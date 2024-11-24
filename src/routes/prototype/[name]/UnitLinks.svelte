@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let links: {title: string; url:string}[]
+	export let links: { title: string; url: string }[]
 </script>
 
 <div class="pl-10 mb-3">

@@ -21,12 +21,6 @@
 	{unit.title}
 </button>
 
-<style lang="postcss">
-	button {
-		@apply font-semibold text-2xl mt-6 mb-2 pl-2 font-zenmaru;
-	}
-</style>
-
 <!-- 
 <nav class="m-0 pl-3">
 	<button class="bg-graywhite" on:click|preventDefault={handleClick}>
@@ -47,3 +41,9 @@
 		@apply bg-white/30 text-editorbg/80;
 	}
 </style> -->
+
+<style lang="postcss">
+	button {
+		@apply font-semibold text-2xl mt-6 mb-2 pl-2 font-zenmaru;
+	}
+</style>

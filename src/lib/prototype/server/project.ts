@@ -11,10 +11,10 @@ export const listProjects = async (): Promise<Project[]> => {
 	let list = []
 
 	for (const name of await listNames()) {
-    try {
-      const project = await getProject(name)
-      list.push(project)
-    } catch (e) {}
+		try {
+			const project = await getProject(name)
+			list.push(project)
+		} catch (e) {}
 	}
 
 	// sort by published desc
@@ -24,7 +24,7 @@ export const listProjects = async (): Promise<Project[]> => {
 }
 
 /**
- * @throws if project is in private. 
+ * @throws if project is in private.
  */
 export const getProject = async (name: string): Promise<Project> => {
 	const config = await readConfig(name)
@@ -37,9 +37,9 @@ export const getProject = async (name: string): Promise<Project> => {
 	}
 
 	// ignore if published is null
-  if (project.published === undefined || project.published === null) {
-    throw new Error('Not Found')
-  }
+	if (project.published === undefined || project.published === null) {
+		throw new Error('Not Found')
+	}
 
 	return project
 }

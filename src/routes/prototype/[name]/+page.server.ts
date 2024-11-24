@@ -11,7 +11,7 @@ export const load: PageServerLoad<Data> = async ({ params: { name } }) => {
 	const unitfiles = await getUnitFiles(project)
 	await copyUnitImage(project)
 
-	return {project, unitfiles}
+	return { project, unitfiles }
 }
 
 type Entry = {
