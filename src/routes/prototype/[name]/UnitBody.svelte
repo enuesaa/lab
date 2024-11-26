@@ -8,6 +8,7 @@
 	import UnitImage from './UnitImage.svelte'
 	import UnitTerminal from './UnitTerminal.svelte'
 	import UnitSep from './UnitSep.svelte'
+	import CodeDownloader from './UnitSepDownloader.svelte'
 
 	createTreeViewCtl()
 	createViewing()
@@ -33,7 +34,7 @@
 
 	<div class="rounded-lg overflow-hidden mt-1">
 		{#if unit.open !== undefined}
-			<UnitSep text="</>" />
+			<UnitSep text="</>" treeData={files} enableDownloader />
 			<CodeViewer treeData={files} firstOpen={unit.open} />
 		{/if}
 
