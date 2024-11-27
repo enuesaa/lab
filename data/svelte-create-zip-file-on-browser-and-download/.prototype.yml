@@ -1,0 +1,18 @@
+title: |
+  [Svelte]
+  ブラウザで ZIP ファイルを作成しダウンロードする
+description: |
+  jszip を使えばめちゃくちゃ簡単だった 
+published: '2024-11-27'
+
+units:
+  - title: jszip
+    description: |
+      ブラウザでも Node.js でも動くらしい
+    links:
+      - title: github.com/Stuk/jszip
+        url: https://github.com/Stuk/jszip
+    console: |
+      $ pnpm add jszip
+  - title: コード
+    open: DownloadButton.svelte
