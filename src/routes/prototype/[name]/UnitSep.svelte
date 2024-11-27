@@ -11,7 +11,7 @@
 	{text}
 
 	{#if enableDownloader}
-		<UnitSepDownloader treeData={treeData} />
+		<UnitSepDownloader {treeData} />
 	{/if}
 </div>
 

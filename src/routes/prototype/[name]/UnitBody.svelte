@@ -8,7 +8,6 @@
 	import UnitImage from './UnitImage.svelte'
 	import UnitTerminal from './UnitTerminal.svelte'
 	import UnitSep from './UnitSep.svelte'
-	import CodeDownloader from './UnitSepDownloader.svelte'
 
 	createTreeViewCtl()
 	createViewing()

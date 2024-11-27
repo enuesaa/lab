@@ -6,8 +6,8 @@
 
 <svelte:head>
 	<title>雑コード置き場</title>
-	<meta name='Hatena::Bookmark' content='nocomment' />
-	<link rel='icon' href='/favicon.ico' />
+	<meta name="Hatena::Bookmark" content="nocomment" />
+	<link rel="icon" href="/favicon.ico" />
 </svelte:head>
 
 <Header />

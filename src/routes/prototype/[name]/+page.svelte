@@ -10,7 +10,7 @@
 
 <svelte:head>
 	<title>{data.project.title}</title>
-	<meta name='description' content={`${data.project.title} | lab.enuesaa.dev`} />
+	<meta name="description" content={`${data.project.title} | lab.enuesaa.dev`} />
 </svelte:head>
 
 <PageTitle title={data.project.title} />

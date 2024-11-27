@@ -19,7 +19,7 @@
 			}
 			// create .gitkeep if dir is empty
 			if (data.isDir && data.children.length === 0) {
-				zip.file(`${filepath}/.gitkeep`, '')	
+				zip.file(`${filepath}/.gitkeep`, '')
 			}
 		}
 		for (const d of treeData) {
@@ -54,4 +54,3 @@
 		@apply hover:bg-blackgray;
 	}
 </style>
-
