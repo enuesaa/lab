@@ -18,13 +18,15 @@ units:
   - title: アプリケーション
     description: |
       アプリケーションは Go で作り Lambda Web Adapter を被せる
+    open: main.go
 
-      ちなみに Lambda Web Adapter を使う際は、Docker で関数を作るのがメジャーだと思う。
+  - title: Lambda Web Adapter
+    description: |
+      Lambda Web Adapter を使う際は、Docker で関数を作るのがメジャーだと思う。
       だが、AWS は Lambda Web Adapter 用の Lambda Layer を公開しており、それをアタッチしたところ Zip 形式でも動いた。
     links:
       - title: https://github.com/awslabs/aws-lambda-web-adapter?tab=readme-ov-file#aws-commercial-regions
         url: https://github.com/awslabs/aws-lambda-web-adapter?tab=readme-ov-file#aws-commercial-regions
-    open: main.go
 
   - title: Terraform
     open: lambda.tf
