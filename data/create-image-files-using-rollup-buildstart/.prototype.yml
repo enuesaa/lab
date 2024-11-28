@@ -2,7 +2,7 @@ title: |
   [Rollup]
   buildStart() フックにて、アセットを配置する
 description: |
-  SvelteKit でサイトを作成しており、
+  SvelteKit でサイトを作成している。
   コンテンツを /data というディレクトリに置き、ビルド時に SSG する構成にした。
 published: '2024-11-23'
 
