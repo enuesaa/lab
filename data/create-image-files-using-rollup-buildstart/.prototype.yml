@@ -1,15 +1,23 @@
 title: |
   [Rollup]
-  buildStart() フックにて画像ファイルを配置した
+  buildStart() フックにて、アセットを配置する
 description: |
-  SvelteKit で SSG するサイトを作成している
-  コンテンツは +page.server.ts の load() で返せばいいが、画像ファイルはどうしようかと悩んだ
+  SvelteKit でサイトを作成しており、
+  コンテンツを /data というディレクトリに置き、ビルド時に SSG する構成にした。
 published: '2024-11-23'
 
 units:
+  - title: 悩み
+    description: |
+      記事データは +page.server.ts の load() で読み込めば良いが、アセットはどうしようか。
+    console: |
+      /data
+        ├── article.md // 記事データ
+        └── image.png  // アセット (主に画像ファイル)
+
   - title: 結論
     description: |
-      Rollup の buildStart() フックにて、画像ファイルを /static へ配置する
+      Rollup の buildStart() フックにて、アセットを /static へ配置する
   - title: Rollup の buildStart() フック
     description: |
       Rollup にはフックがいくつかあるらしい
