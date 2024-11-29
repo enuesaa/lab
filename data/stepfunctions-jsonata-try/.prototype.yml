@@ -8,7 +8,7 @@ published: '2024-11-30'
 units:
   - title: テキストを大文字へ変換する
     description: |
-      {% %} の内側が JSONata の構文。
+      {% %} の内側に JSONata の構文を書く。
       $states.input に入力値がセットされており $uppercase() という関数で加工している。
     links:
       - title: https://docs.jsonata.org/string-functions#uppercase
