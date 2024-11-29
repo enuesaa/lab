@@ -1,0 +1,16 @@
+QueryLanguage: JSONata
+Comment: 配列のアイテムを集計・操作する
+StartAt: Pass
+States:
+  Pass:
+    Type: Pass
+    End: true
+    Output:
+      min: '{% $states.input.items ~> $min %}'
+      max: '{% $states.input.items ~> $max %}'
+      sum: '{% $states.input.items ~> $sum %}'
+      average: '{% $states.input.items ~> $average %}'
+      count: '{% $states.input.items ~> $count %}'
+      sort: '{% $states.input.items ~> $sort(?, function($a, $b) { $a < $b }) %}'
+      distinct: '{% $states.input.items ~> $distinct %}'
+      shuffle: '{% $states.input.items ~> $shuffle %}'

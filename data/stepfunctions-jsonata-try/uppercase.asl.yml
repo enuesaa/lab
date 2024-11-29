@@ -1,0 +1,9 @@
+QueryLanguage: JSONata
+Comment: uppercase
+StartAt: Pass
+States:
+  Pass:
+    Type: Pass
+    End: true
+    Output:
+      title: '{% $states.input.title ~> $uppercase %}'
