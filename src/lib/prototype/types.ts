@@ -9,6 +9,7 @@ export type Config = {
 
 export type Unit = {
 	title: string
+	titleStyle?: string
 	description?: string
 	links?: { title: string; url: string }[]
 	image?: string
