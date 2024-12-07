@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "rm -rf .svelte-kit && svelte-kit sync && vite dev --port 3000",
 		"build": "vite build",
-		"postbuild": "svelte-sitemap --domain https://lab.enuesaa.dev --out-dir dist",
+		"postbuild": "svelte-sitemap --domain https://lab.enuesaa.dev --out-dir dist --change-freq yearly",
 		"preview": "vite preview",
 		"format": "prettier --write src"
 	},
