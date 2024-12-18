@@ -44,7 +44,8 @@ units:
 
   - title: cmdfx.ICmd が clientfx.IClient へ依存
     description: |
-      cmdfx.New() の第一引数として clientfx.IClient を指定。
-      そして fx.Provide() へこの cmdfx.New() を渡している。
+      cmdfx.New() を見ると分かる通り、cmdfx.ICmd は clientfx.IClient へ依存している。
+      この依存の注入を fx がしてくれる。
 
-      こういうふうに New() を用意して fx へ渡すことで fx が依存を解決してくれる。
+      cmdfx と clientfx は interface を介してやり取りしているのがポイント。
+      これにより例えば mock へ差し替えできる。
