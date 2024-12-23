@@ -1,5 +1,5 @@
 title: |
-  [Go] uber-go/fx で curl ライクなCLIを作ってみる
+  [Go] uber-go/fx で curl もどきを作ってみる
 description: |
   uber-go/fx は Go の DI ライブラリ。
 
