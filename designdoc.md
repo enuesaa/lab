@@ -8,4 +8,4 @@
   - GitHub の README チックだけど、なんか virtual に存在する感じがいいかな？
   - 懸念として、markdown 形式では表現力に上限が出てくるというのがある
   - また、単に .prototype.yml という存在を維持したい
-
+  - うーんやっぱ modal とかかなあ
