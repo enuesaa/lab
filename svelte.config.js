@@ -10,5 +10,8 @@ export default {
 			pages: 'dist',
 			fallback: '404.html',
 		}),
+		prerender: {
+			handleHttpError: 'ignore',
+		},
 	},
 }
