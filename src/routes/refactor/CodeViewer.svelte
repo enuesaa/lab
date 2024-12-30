@@ -20,11 +20,11 @@
 	})
 </script>
 
-<section class="h-[700px]">
+<section>
 	<ul class="flex-none pr-2 pt-2 pb-2 border-r-editorsep border-r" {...$tree}>
 		<CodeTree {treeData} />
 	</ul>
-	<div class="flex-auto overflow-y-scroll max-h-[700px]">
+	<div class="flex-auto min-h-[700px]">
 		{#key $viewing}
 			{#if $viewing !== undefined}
 				<Code language={$viewing.language} code={$viewing.code} />

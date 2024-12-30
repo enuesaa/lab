@@ -30,12 +30,10 @@
 <PagePublishedBar published={data.project.published} />
 <Description content={data.project.description} />
 
+<UnitNav title='コード全体' />
+<UnitNav title='期待動作' />
+
 <section class="w-[95vw] ml-[-5vw] rounded-lg overflow-hidden">
 	<UnitSep text="</>" treeData={data.files} enableDownloader />
 	<CodeViewer treeData={data.files} firstOpen={'main.go'} />
 </section>
-
-<div class="mt-[100px]">
-	<UnitNav title='期待動作' />
-	<Description content='aaa' />
-</div>
