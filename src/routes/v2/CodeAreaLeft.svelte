@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { CodeFiles, ProjectV2, UnitV2 } from '$lib/prototype/types'
+	import type { CodeFiles, ProjectV2 } from '$lib/prototype/types'
 	import UnitSep from '../prototype/[name]/UnitSep.svelte'
 	import CodeViewer from './CodeViewer.svelte'
 

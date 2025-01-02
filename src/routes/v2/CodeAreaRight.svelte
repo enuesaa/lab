@@ -11,7 +11,7 @@
 <HideButton bind:show={show} />
 
 {#if show}
-	<div class="w-5/12 max-md:absolute max-md:w-[90vw] max-md:right-1 px-1 relative bg-gray shadow-lg rounded-lg">
+	<div class="w-5/12 max-md:absolute max-md:w-[90vw] max-md:right-1 px-1 relative mt-[-15px]">
 		{#each units as unit}
 			<Unit {unit} />
 		{/each}
