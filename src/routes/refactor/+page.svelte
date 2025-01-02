@@ -18,13 +18,6 @@
 
 	export let data: PageData
 
-	// 期待動作
-		// ソースコードのしたかな？
-	// ソースコードに対するコメント
-		// これは highlight チックがベスト
-		// GitHub みたいに1行単位かな
-	// 目次も欲しいかも
-
 	const description = `curl ライクな CLI を作ってみる。
 
 とは言っても GET しかできない。
