@@ -1,18 +1,18 @@
 <script lang="ts">
-	import { SquareChevronDown } from 'lucide-svelte'
+	import { Square } from 'lucide-svelte'
 
 	export let title: string
 </script>
 
 <div>
-	<span class="text-2xl leading-[0.8] w-7">
-		<SquareChevronDown class="inline align-middle" />
+	<span class="leading-[0.8]">
+		<Square class="inline-block w-3 align-text-bottom font-bold" style="fill: #222;" />
 	</span>
 	<span class="break-all inline-block">{title}</span>
 </div>
 
 <style lang="postcss">
 	div {
-		@apply font-semibold text-2xl mt-2 mb-1 pl-2 font-zenmaru gap-[3px] text-left inline-block;
+		@apply font-semibold text-xl mt-2 mb-1 pl-2 font-zenmaru gap-[3px] text-left inline-block;
 	}
 </style>
