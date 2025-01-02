@@ -1,14 +1,17 @@
 import type { TreeData } from './tree'
 
-// deprecated
+/**
+ * @deprecated
+ */
 export type Config = {
 	title: string
 	description: string
 	published: string
 	units: Unit[]
 }
-
-// deprecated
+/**
+ * @deprecated
+ */
 export type Unit = {
 	title: string
 	titleStyle?: string
@@ -19,27 +22,35 @@ export type Unit = {
 	include?: string[]
 	console?: string
 }
-
-// deprecated
+/**
+ * @deprecated
+ */
 export type Project = Config & {
 	name: string
 }
-
-// deprecated
+/**
+ * @deprecated
+ */
 export type UnitFiles = Record<string, TreeData[]> // per unit
 
 
-export type Article = Omit<Config, 'units'> & {
-	units?: ArticleUnit[]
+export type ProjectV2 = {
+	name: string
+	title: string
+	description: string
+	published: string
+	units?: UnitV2[]
 	code?: {
 		open: string
 		include: string[]
+		units?: UnitV2[]
 	}
 }
-export type ArticleUnit = {
+export type UnitV2 = {
 	title: string
 	description?: string
 	links?: { title: string; url: string }[]
 	image?: string
 	terminal?: string
 }
+export type CodeFiles = TreeData[]

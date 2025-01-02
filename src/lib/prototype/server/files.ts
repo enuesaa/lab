@@ -1,8 +1,25 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import type { TreeData } from '../tree'
-import type { Project, UnitFiles } from '../types'
+import type { Project, ProjectV2, UnitFiles, CodeFiles } from '$lib/prototype/types'
 
+export const getCodeFiles = async (project: ProjectV2): Promise<CodeFiles> => {
+	let data: CodeFiles = []
+
+	if (project.code?.open === undefined) {
+		return data
+	}
+
+	const include = project.code?.include ?? []
+	include.push(project.code?.open) // by default
+	data = await extract(`./data/${project.name}`, '', include)
+
+	return data
+}
+
+/**
+ * @deprecated
+ */
 export const getUnitFiles = async (project: Project): Promise<UnitFiles> => {
 	const unitfiles: UnitFiles = {}
 
