@@ -9,6 +9,7 @@
 	import UnitNav from './UnitNav.svelte'
 	import UnitDescription from '../prototype/[name]/UnitDescription.svelte'
 	import UnitTerminal from '../prototype/[name]/UnitTerminal.svelte'
+	import Card from './Card.svelte'
 
 	createTreeViewCtl()
 	createViewing()
@@ -48,33 +49,37 @@ cmdfx と clientfx は interface を介してやり取りしているのがポ�
 	<meta name="description" content={`${data.project.title} | lab.enuesaa.dev`} />
 </svelte:head>
 
-<PageTitle title={data.project.title} />
-<PagePublishedBar published={data.project.published} />
-<Description content={data.project.description} />
+<main class="sm:mx-3 sm:w-[calc(100%_-_24px)] sm:shadow-sm">
+	<div class="container mx-auto px-1 py-8">
+		<PageTitle title={data.project.title} />
+		<PagePublishedBar published={data.project.published} />
+		<Description content={data.project.description} />	
+	</div>
+</main>
 
-<section class="w-[98vw] ml-[-7vw] flex gap-1 rounded-lg overflow-hidden max-md:ml-[-4vw]">
-	<div class="w-7/12">
+<section class="w-[98vw] m-auto flex gap-2">
+	<div class="w-7/12 rounded-lg overflow-hidden">
 		<UnitSep text="</>" treeData={data.files} enableDownloader />
 		<CodeViewer treeData={data.files} firstOpen={'main.go'} />
 	</div>
-	<div class="w-5/12 bg-gray max-md:absolute max-md:w-[90vw] max-md:right-1">
-		<div class="border">
+	<div class="w-5/12 max-md:absolute max-md:w-[90vw] max-md:right-1">
+		<Card>
 			<UnitNav title='期待動作' />
 			<UnitDescription description={description} />
 			<UnitSep text="ターミナル" />
 			<div class="h-[210px]">
 				<UnitTerminal content={terminal} />
 			</div>
-		</div>
+		</Card>
 
-		<div class="border">
+		<Card>
 			<UnitNav title='Module' />
 			<UnitDescription description={'cmdfx.Module と clientfx.Module があり、両者を fx.New() でロードしている。'} />
-		</div>
+		</Card>
 
-		<div class="border">
+		<Card>
 			<UnitNav title='cmdfx.ICmd が clientfx.IClient へ依存' />
 			<UnitDescription description={description2} />
-		</div>
+		</Card>
 	</div>
 </section>
