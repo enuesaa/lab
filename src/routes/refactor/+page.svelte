@@ -7,10 +7,11 @@
 	import { createTreeViewCtl, createViewing } from '$lib/prototype/tree'
 	import UnitSep from '../prototype/[name]/UnitSep.svelte'
 	import UnitNav from './UnitNav.svelte'
+	import BigUnitNav from './BigUnitNav.svelte'
 	import UnitDescription from '../prototype/[name]/UnitDescription.svelte'
 	import UnitTerminal from '../prototype/[name]/UnitTerminal.svelte'
 	import Card from './Card.svelte'
-	import Tag from './Tag.svelte'
+	import HideButton from './HideButton.svelte'
 
 	createTreeViewCtl()
 	createViewing()
@@ -50,25 +51,23 @@ cmdfx と clientfx は interface を介してやり取りしているのがポ�
 	<meta name="description" content={`${data.project.title} | lab.enuesaa.dev`} />
 </svelte:head>
 
-<main class="sm:mx-3 sm:w-[calc(100%_-_24px)]">
-	<div class="container mx-auto px-1 py-8">
-		<PageTitle title={data.project.title} />
-		<PagePublishedBar published={data.project.published} />
-		<Description content={data.project.description} />	
-	</div>
-</main>
+<div class="container mx-auto px-1 py-8">
+	<PageTitle title={data.project.title} />
+	<PagePublishedBar published={data.project.published} />
+	<Description content={data.project.description} />	
+</div>
 
-<div class="w-full">
+<main class="bg-[#bababa]">
+	<BigUnitNav title='コード' />
 	<section class="w-[98vw] m-auto flex gap-2">
 		<div class="w-7/12">
-			<Tag title='コード' />
 			<div class="rounded-lg overflow-hidden">
 				<UnitSep text="</>" treeData={data.files} enableDownloader />
 				<CodeViewer treeData={data.files} firstOpen={'main.go'} />
 			</div>
 		</div>
-		<div class="w-5/12 max-md:absolute max-md:w-[90vw] max-md:right-1">
-			<Tag title='メモ' right />
+		<div class="w-5/12 max-md:absolute max-md:w-[90vw] max-md:right-1 px-1 relative bg-[#bababa]">
+			<HideButton />
 			<Card>
 				<UnitNav title='期待動作' />
 				<UnitDescription description={description} />
@@ -77,16 +76,16 @@ cmdfx と clientfx は interface を介してやり取りしているのがポ�
 					<UnitTerminal content={terminal} />
 				</div>
 			</Card>
-	
+
 			<Card>
 				<UnitNav title='Module' />
 				<UnitDescription description={'cmdfx.Module と clientfx.Module があり、両者を fx.New() でロードしている。'} />
 			</Card>
-	
+
 			<Card>
 				<UnitNav title='cmdfx.ICmd が clientfx.IClient へ依存' />
 				<UnitDescription description={description2} />
 			</Card>
 		</div>
 	</section>
-</div>
+</main>
