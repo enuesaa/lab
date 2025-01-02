@@ -24,7 +24,7 @@
 	<ul class="flex-none pr-2 pt-2 pb-2 border-r-editorsep border-r" {...$tree}>
 		<CodeTree {treeData} />
 	</ul>
-	<div class="flex-auto min-h-[700px]">
+	<div class="flex-auto">
 		{#key $viewing}
 			{#if $viewing !== undefined}
 				<Code language={$viewing.language} code={$viewing.code} />
@@ -36,6 +36,6 @@
 <style lang="postcss">
 	section {
 		@apply bg-editorbg text-editortext text-base;
-		@apply flex overflow-y-scroll min-h-12;
+		@apply flex overflow-y-scroll;
 	}
 </style>

@@ -35,6 +35,12 @@ curl とは似ても似つかないが、まあサンプルなので良いと思
     
 // 省略
 // example.com へ HTTP GET リクエストをして、レスポンスボディを標準出力する`
+
+	const description2 = `cmdfx.New() を見ると分かる通り、cmdfx.ICmd は clientfx.IClient へ依存している。
+この依存の注入を fx がしてくれる。
+
+cmdfx と clientfx は interface を介してやり取りしているのがポイント。
+これにより例えば mock へ差し替えできる。`
 </script>
 
 <svelte:head>
@@ -46,18 +52,29 @@ curl とは似ても似つかないが、まあサンプルなので良いと思
 <PagePublishedBar published={data.project.published} />
 <Description content={data.project.description} />
 
-<UnitNav title='コード全体' />
-<UnitNav title='期待動作' />
-
-<section class="w-[96vw] ml-[-5vw] flex gap-1 rounded-lg overflow-hidden">
+<section class="w-[98vw] ml-[-7vw] flex gap-1 rounded-lg overflow-hidden max-md:ml-[-4vw]">
 	<div class="w-7/12">
 		<UnitSep text="</>" treeData={data.files} enableDownloader />
 		<CodeViewer treeData={data.files} firstOpen={'main.go'} />
 	</div>
-	<div class="w-5/12 border bg-white/60">
-		<UnitNav title='期待動作' />
-		<UnitDescription description={description} />
-		<UnitSep text="ターミナル" />
-		<UnitTerminal content={terminal} />
+	<div class="w-5/12 bg-gray max-md:absolute max-md:w-[90vw] max-md:right-1">
+		<div class="border">
+			<UnitNav title='期待動作' />
+			<UnitDescription description={description} />
+			<UnitSep text="ターミナル" />
+			<div class="h-[210px]">
+				<UnitTerminal content={terminal} />
+			</div>
+		</div>
+
+		<div class="border">
+			<UnitNav title='Module' />
+			<UnitDescription description={'cmdfx.Module と clientfx.Module があり、両者を fx.New() でロードしている。'} />
+		</div>
+
+		<div class="border">
+			<UnitNav title='cmdfx.ICmd が clientfx.IClient へ依存' />
+			<UnitDescription description={description2} />
+		</div>
 	</div>
 </section>
