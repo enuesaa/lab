@@ -8,7 +8,7 @@
 	export let unit: UnitV2
 </script>
 
-<div class="bg-gray shadow-lg rounded-lg mb-2">
+<div class="mb-2">
 	{#if unit.title !== undefined}
 		<UnitNav title={unit.title} />
 	{/if}

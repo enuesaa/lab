@@ -1,16 +1,20 @@
 <script lang="ts">
 	import { PanelRightClose } from 'lucide-svelte'
+
+	export let show: boolean
+
+	function handleClick() {
+		show = !show
+	}
 </script>
 
-<div class="absolute right-[10px] top-[-45px] rounded-lg py-[1px] px-2 hover:bg-gray">
-	<span class="text-xl leading-1 w-6">
-		<PanelRightClose class="inline-block align-bottom" />
-	</span>
-	<span>hide</span>
-</div>
+<button on:click|preventDefault={handleClick}>
+	<PanelRightClose class="inline align-bottom stroke-2" /> hide
+</button>
 
 <style lang="postcss">
-	div {
-		@apply font-semibold text-lg my-2 pl-1 font-zenmaru flex gap-[5px];
+	button {
+		@apply inline-block font-semibold text-lg my-2 font-zenmaru;
+		@apply absolute right-[10px] top-[-42px] rounded-md px-2 py-[1px] bg-gray;
 	}
 </style>

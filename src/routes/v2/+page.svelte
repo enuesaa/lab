@@ -3,12 +3,10 @@
 	import PageTitle from '../prototype/[name]/PageTitle.svelte'
 	import Description from '../prototype/[name]/Description.svelte'
 	import PagePublishedBar from '../prototype/[name]/PagePublishedBar.svelte'
-	import CodeViewer from './CodeViewer.svelte'
 	import { createTreeViewCtl, createViewing } from '$lib/prototype/tree'
-	import UnitSep from '../prototype/[name]/UnitSep.svelte'
-	import BigUnitNav from './BigUnitNav.svelte'
-	import Unit from './Unit.svelte'
-	import HideButton from './HideButton.svelte'
+	import CodeAreaTitle from './CodeAreaTitle.svelte'
+	import CodeAreaRight from './CodeAreaRight.svelte'
+	import CodeAreaLeft from './CodeAreaLeft.svelte'
 
 	createTreeViewCtl()
 	createViewing()
@@ -27,20 +25,10 @@
 	<Description content={data.project.description} />	
 </div>
 
-<main class="bg-[#bababa]">
-	<BigUnitNav title='コード' />
-	<section class="w-[98vw] m-auto flex gap-2">
-		<div class="w-7/12">
-			<div class="rounded-lg overflow-hidden">
-				<UnitSep text="</>" treeData={data.codeFiles} enableDownloader />
-				<CodeViewer treeData={data.codeFiles} firstOpen={data.project.code?.open ?? ''} />
-			</div>
-		</div>
-		<div class="w-5/12 max-md:absolute max-md:w-[90vw] max-md:right-1 px-1 relative bg-[#bababa]">
-			<HideButton />
-			{#each data.project?.code?.units ?? [] as unit}
-				<Unit {unit} />
-			{/each}
-		</div>
+<main class="bg-[#b5b5b5]">
+	<CodeAreaTitle />
+	<section class="w-[98vw] m-auto flex gap-2 relative">
+		<CodeAreaLeft project={data.project} codeFiles={data.codeFiles} />
+		<CodeAreaRight units={data.project?.code?.units ?? []} />
 	</section>
 </main>
