@@ -8,6 +8,7 @@
 
 <style lang="postcss">
 	div {
-		@apply inline-block font-semibold text-3xl mt-3 mb-4 pl-12 font-zenmaru;
+		@apply inline-block font-semibold text-3xl font-zenmaru mb-[-30px] mt-5;
+		@apply bg-[#b5b5b5] py-3 px-5 rounded-xl;
 	}
 </style>

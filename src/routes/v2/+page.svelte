@@ -19,14 +19,14 @@
 	<meta name="description" content={`${data.project.title} | lab.enuesaa.dev`} />
 </svelte:head>
 
-<div class="container mx-auto px-1 py-8">
+<div class="container mx-auto px-1 pt-8">
 	<PageTitle title={data.project.title} />
 	<PagePublishedBar published={data.project.published} />
 	<Description content={data.project.description} />	
+	<CodeAreaTitle />
 </div>
 
-<main class="bg-[#b5b5b5]">
-	<CodeAreaTitle />
+<main class="bg-[#b5b5b5] py-10">
 	<section class="w-[98vw] m-auto flex gap-2 relative">
 		<CodeAreaLeft project={data.project} codeFiles={data.codeFiles} />
 		<CodeAreaRight units={data.project?.code?.units ?? []} />
