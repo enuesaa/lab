@@ -24,6 +24,7 @@ export default {
 			fontFamily: {
 				zenmaru: ['Zen Maru Gothic', 'serif'],
 				ibmplex: ['"IBM Plex Sans JP"', 'sans-serif'],
+				murecho: ['"Murecho"', 'serif'],
 			},
 			boxShadow: {
 				/** 2xl uppper */

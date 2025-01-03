@@ -48,6 +48,5 @@ units:
             cmdfx.ICmd は clientfx.IClient へ依存。
             fx が依存を注入してくれる。
 
-            cmdfx と clientfx は interface を介してやり取りしているのがポイント。
-            これにより例えば mock へ差し替えできる。
+            cmdfx と clientfx は interface を介してやり取りしているのがポイント。これにより mock へ差し替えできる。
           filename: cmdfx/cmd.go

@@ -13,6 +13,6 @@
 
 <style lang="postcss">
 	div {
-		@apply font-semibold text-xl mt-2 mb-1 pl-2 font-zenmaru gap-[3px] text-left inline-block;
+		@apply font-semibold text-xl mt-3 mb-1 pl-2 font-zenmaru gap-[3px] text-left inline-block;
 	}
 </style>

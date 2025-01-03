@@ -9,7 +9,7 @@
 	export let unit: CodeUnit
 </script>
 
-<div class="mb-3 bg-gray rounded-lg overflow-hidden shadow-2xlu border-[0.2px] border-gray-700 px-1 py-[2px]">
+<div class="mb-3 bg-gray rounded-xl overflow-hidden shadow-2xlu border-[0.2px] border-gray-700 text-gray-900 px-1 py-[2px]">
 	{#if unit.title !== undefined}
 		<CodeAreaUnitTitle title={unit.title} />
 	{/if}

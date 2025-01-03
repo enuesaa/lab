@@ -8,16 +8,16 @@
 
 <style lang="postcss">
 	section {
-		@apply mt-1 mb-2 px-2 font-zenmaru text-base w-full;
+		@apply mt-1 mb-2 px-2 font-zenmaru text-[17px] w-full;
 	}
 	section pre {
-		letter-spacing: 0.1px;
+		letter-spacing: 0.2px;
 		line-height: 1.8;
 		overflow-wrap: anywhere;
 		word-break: normal;
 		line-break: strict;
 		white-space: pre-wrap;
 		font-feature-settings: 'palt';
-		@apply font-ibmplex;
+		@apply font-murecho;
 	}
 </style>
