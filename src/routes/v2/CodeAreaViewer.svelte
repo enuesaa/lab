@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { getTreeViewCtl, getViewing } from '$lib/prototype/tree'
 	import { onMount } from 'svelte'
-	import Code from '../prototype/[name]/Code.svelte'
-	import CodeTree from '../prototype/[name]/CodeTree.svelte'
+	import Code from '$lib/prototype/Code.svelte'
+	import CodeTree from '$lib/prototype/CodeTree.svelte'
 	import UnitSep from './UnitSep.svelte'
 	import type { CodeFiles } from '$lib/prototype/types'
 
@@ -28,7 +28,7 @@
 		<ul class="flex-none pr-2 pt-2 pb-2 border-r-editorsep border-r" {...$tree}>
 			<CodeTree treeData={codeFiles} />
 		</ul>
-		<div class="flex-auto">
+		<div class="flex-auto overflow-scroll">
 			{#key $viewing}
 				{#if $viewing !== undefined}
 					<Code language={$viewing.language} code={$viewing.code} />

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import PageTitle from '../prototype/[name]/PageTitle.svelte'
-	import Description from '../prototype/[name]/Description.svelte'
-	import PagePublishedBar from '../prototype/[name]/PagePublishedBar.svelte'
+	import PageTitle from './PageTitle.svelte'
+	import Description from './Description.svelte'
+	import PagePublishedBar from './PagePublishedBar.svelte'
 	import type { ProjectV2 } from '$lib/prototype/types'
 
 	export let project: ProjectV2

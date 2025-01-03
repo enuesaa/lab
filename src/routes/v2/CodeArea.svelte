@@ -21,12 +21,12 @@
 	<CodeAreaHead bind:showCodeUnits={showCodeUnits} {codeFiles} />
 
 	<div class="w-[98vw] m-auto flex gap-2">
-		<div class={showCodeUnits ? 'w-7/12 max-md:w-full' : 'w-full'}>
+		<div class={showCodeUnits ? 'flex-none w-7/12 max-md:w-full' : 'w-full'}>
 			<CodeAreaViewer {codeFiles} firstOpen={project.code?.open ?? ''} />
 		</div>
 
 		{#if showCodeUnits}
-			<div class="w-5/12 max-md:absolute max-md:w-[90vw] max-md:right-1 px-1 relative mt-[-15px] z-10">
+			<div class="flex-auto max-md:absolute max-md:w-[90vw] max-md:right-1 px-1 relative mt-[-15px] z-10">
 				{#each units as unit}
 					<CodeAreaUnit {unit} />
 				{/each}
