@@ -6,14 +6,10 @@
 </script>
 
 <section class="relative">
-	<div>
-		<Diamond class="inline align-baseline w-[20px] fill-[#000000]" /> コード
+	<div class="container mx-auto font-semibold text-3xl font-zenmaru">
+		<span class="inline-block bg-gray-700 px-5 py-3">
+			<Diamond class="inline align-baseline w-[20px] fill-black stroke-black" /> コード
+		</span>
 	</div>
 	<CodeAreaHeadUnitHideButton bind:showCodeUnits={showCodeUnits} />
 </section>
-
-<style lang="postcss">
-	div {
-		@apply container mx-auto py-3 px-5 font-semibold text-3xl font-zenmaru;
-	}
-</style>

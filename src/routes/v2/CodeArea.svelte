@@ -14,25 +14,34 @@
 	$: units = project?.code?.units ?? []
 </script>
 
-<CodeAreaHead bind:showCodeUnits={showCodeUnits} />
+<section class="bg-gray-700 pb-3 relative">
+	<CodeAreaHead bind:showCodeUnits={showCodeUnits} />
 
-<section class="w-[98vw] m-auto flex gap-2">
-	<div class={showCodeUnits ? 'w-7/12 max-md:w-full' : 'w-full'}>
-		<div class="rounded-lg overflow-hidden">
-			<UnitSep text="</>" treeData={codeFiles} enableDownloader />
-			<CodeViewer treeData={codeFiles} firstOpen={project.code?.open ?? ''} />
+	<div class="w-[98vw] m-auto flex gap-2">
+		<div class={showCodeUnits ? 'w-7/12 max-md:w-full' : 'w-full'}>
+			<div class="rounded-lg overflow-hidden">
+				<UnitSep text="</>" treeData={codeFiles} enableDownloader />
+				<CodeViewer treeData={codeFiles} firstOpen={project.code?.open ?? ''} />
+			</div>
 		</div>
+
+		{#if showCodeUnits}
+			<div class="w-5/12 max-md:absolute max-md:w-[90vw] max-md:right-1 px-1 relative mt-[-15px] z-10">
+				{#each units as unit}
+					<CodeAreaUnit {unit} />
+				{/each}
+			</div>
+		{/if}
 	</div>
 
 	{#if showCodeUnits}
-		<div class="w-5/12 max-md:absolute max-md:w-[90vw] max-md:right-1 px-1 relative mt-[-15px] z-10">
-			{#each units as unit}
-				<CodeAreaUnit {unit} />
-			{/each}
-		</div>
+		<CodeAreaOverlay bind:showCodeUnits={showCodeUnits} />
 	{/if}
 </section>
 
-{#if showCodeUnits}
-	<CodeAreaOverlay bind:showCodeUnits={showCodeUnits} />
-{/if}
+<style lang="postcss">
+	section {
+		background-image: radial-gradient(#a5a5a5 2px, transparent 2px);
+		background-size: 20px 20px;
+	}
+</style>
