@@ -22,5 +22,6 @@
 	button {
 		@apply inline-block font-semibold text-lg my-2 font-zenmaru;
 		@apply absolute right-9 top-[1px] rounded-xl px-[10px] pt-[1px] pb-[2px] bg-gray shadow-2xl;
+		@apply z-10;
 	}
 </style>

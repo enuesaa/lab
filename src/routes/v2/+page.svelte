@@ -17,6 +17,6 @@
 
 <PageMain project={data.project} />
 
-<main class="bg-[#b5b5b5] pb-3">
+<main class="bg-[#b5b5b5] pb-3 relative">
 	<CodeArea project={data.project} codeFiles={data.codeFiles} />
 </main>

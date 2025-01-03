@@ -4,6 +4,7 @@
 	import CodeViewer from './CodeViewer.svelte'
 	import CodeAreaUnit from './CodeAreaUnit.svelte'
 	import CodeAreaHead from './CodeAreaHead.svelte'
+	import CodeAreaOverlay from './CodeAreaOverlay.svelte'
 
 	export let project: ProjectV2
 	export let codeFiles: CodeFiles
@@ -24,10 +25,14 @@
 	</div>
 
 	{#if showCodeUnits}
-		<div class="w-5/12 max-md:absolute max-md:w-[90vw] max-md:right-1 px-1 relative mt-[-15px]">
+		<div class="w-5/12 max-md:absolute max-md:w-[90vw] max-md:right-1 px-1 relative mt-[-15px] z-10">
 			{#each units as unit}
 				<CodeAreaUnit {unit} />
 			{/each}
 		</div>
 	{/if}
 </section>
+
+{#if showCodeUnits}
+	<CodeAreaOverlay bind:showCodeUnits={showCodeUnits} />
+{/if}
