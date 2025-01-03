@@ -10,7 +10,7 @@
 
 <section class="relative">
 	<div class="container mx-auto font-semibold text-3xl font-zenmaru">
-		<span class="inline-block bg-gray-600 pl-5 pr-8 py-3">
+		<span class="inline-block bg-gray-600 px-5 py-3">
 			<Diamond class="inline align-baseline w-[20px] fill-black stroke-black" /> コード
 		</span>
 		<CodeAreaDownloadButton {codeFiles} />

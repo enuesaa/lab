@@ -51,7 +51,8 @@
 
 <style lang="postcss">
 	button {
-		@apply inline-block text-base px-2 rounded-2xl;
-		@apply bg-gray-600 text-gray-900 hover:bg-gray-700/30 max-md:hidden;
+		@apply inline-block text-base pl-2 pr-1 rounded-2xl;
+		@apply bg-gray-600 text-gray-800 hover:bg-gray-700/20 max-md:hidden;
+		@apply hover:border-[0.2px] hover:border-gray-700;
 	}
 </style>

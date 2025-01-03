@@ -1,10 +1,13 @@
 <script lang="ts">
 	import type { CodeFiles, ProjectV2, UnitV2 } from '$lib/prototype/types'
-	import UnitSep from './UnitSep.svelte'
-	import CodeViewer from './CodeViewer.svelte'
+	import { createTreeViewCtl, createViewing } from '$lib/prototype/tree'
+	import CodeAreaViewer from './CodeAreaViewer.svelte'
 	import CodeAreaUnit from './CodeAreaUnit.svelte'
 	import CodeAreaHead from './CodeAreaHead.svelte'
 	import CodeAreaOverlay from './CodeAreaOverlay.svelte'
+
+	createTreeViewCtl()
+	createViewing()
 
 	export let project: ProjectV2
 	export let codeFiles: CodeFiles
@@ -19,10 +22,7 @@
 
 	<div class="w-[98vw] m-auto flex gap-2">
 		<div class={showCodeUnits ? 'w-7/12 max-md:w-full' : 'w-full'}>
-			<div class="rounded-lg overflow-hidden">
-				<UnitSep text="</>" />
-				<CodeViewer treeData={codeFiles} firstOpen={project.code?.open ?? ''} />
-			</div>
+			<CodeAreaViewer {codeFiles} firstOpen={project.code?.open ?? ''} />
 		</div>
 
 		{#if showCodeUnits}
