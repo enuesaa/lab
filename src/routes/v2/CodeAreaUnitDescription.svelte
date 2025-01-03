@@ -8,7 +8,7 @@
 
 <style lang="postcss">
 	section {
-		@apply mt-1 mb-2 px-3 w-full;
+		@apply my-2 px-3 w-full;
 	}
 	section pre {
 		letter-spacing: 0.2px;

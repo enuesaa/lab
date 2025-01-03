@@ -20,7 +20,7 @@
 	<CodeAreaHead bind:showCodeUnits={showCodeUnits} {codeFiles} />
 
 	<div class="w-[98vw] m-auto flex gap-2">
-		<div class={showCodeUnits ? 'flex-none w-8/12 max-md:w-full' : 'w-full'}>
+		<div class={showCodeUnits ? 'flex-none w-[70%] max-md:w-full' : 'w-full'}>
 			<CodeAreaViewer {codeFiles} firstOpen={unit.code?.open ?? ''} />
 		</div>
 
