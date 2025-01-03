@@ -50,8 +50,15 @@ export type UnitV2 = {
 	code?: {
 		open: string
 		include: string[]
-		units?: Omit<UnitV2, 'code'>[]
+		units?: CodeUnit[]
 		files?: CodeFiles
 	}
 }
+export type CodeUnit = {
+	title?: string
+	description?: string
+	terminal?: string
+	filename?: string
+}
+
 export type CodeFiles = TreeData[]

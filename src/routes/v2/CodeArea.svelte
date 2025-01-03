@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { CodeFiles, UnitV2 } from '$lib/prototype/types'
+	import type { CodeUnit, UnitV2 } from '$lib/prototype/types'
 	import { createTreeViewCtl, createViewing } from '$lib/prototype/tree'
 	import CodeAreaViewer from './CodeAreaViewer.svelte'
 	import CodeAreaUnit from './CodeAreaUnit.svelte'
@@ -13,7 +13,7 @@
 	let codeFiles = unit.code?.files ?? []
 	let showCodeUnits = true
 
-	let codeUnits: UnitV2[] = unit?.code?.units ?? []
+	let codeUnits: CodeUnit[] = unit?.code?.units ?? []
 </script>
 
 <section>
@@ -27,7 +27,7 @@
 		{#if showCodeUnits}
 			<div class="overflow-hidden max-md:absolute max-md:w-[80vw] max-md:right-1 px-1 relative mt-[-15px] z-10">
 				{#each codeUnits as codeUnit}
-					<CodeAreaUnit unit={codeUnit} />
+					<CodeAreaUnit unit={codeUnit} {codeFiles} />
 				{/each}
 			</div>
 		{/if}

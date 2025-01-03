@@ -41,6 +41,7 @@ units:
         - title: Module
           description: |
             cmdfx.Module と clientfx.Module があり、両者を fx.New() でロードしている。
+          filename: main.go
 
         - title: cmdfx.ICmd が clientfx.IClient へ依存
           description: |
@@ -49,3 +50,4 @@ units:
 
             cmdfx と clientfx は interface を介してやり取りしているのがポイント。
             これにより例えば mock へ差し替えできる。
+          filename: cmdfx/cmd.go

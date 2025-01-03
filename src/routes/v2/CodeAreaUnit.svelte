@@ -1,10 +1,12 @@
 <script lang="ts">
-	import type { UnitV2 } from '$lib/prototype/types'
+	import type { CodeFiles, CodeUnit } from '$lib/prototype/types'
 	import CodeAreaUnitTitle from './CodeAreaUnitTitle.svelte'
 	import CodeAreaUnitDescription from './CodeAreaUnitDescription.svelte'
 	import UnitTerminal from './UnitTerminal.svelte'
+	import CodeAreaUnitOpenFileButton from './CodeAreaUnitOpenFileButton.svelte'
 
-	export let unit: UnitV2
+	export let codeFiles: CodeFiles
+	export let unit: CodeUnit
 </script>
 
 <div class="mb-3 bg-gray rounded-lg overflow-hidden shadow-2xlu border-[0.2px] border-gray-700 px-1 py-[2px]">
@@ -16,5 +18,8 @@
 	{/if}
 	{#if unit.terminal !== undefined}
 		<UnitTerminal content={unit.terminal} />
+	{/if}
+	{#if unit.filename !== undefined}
+		<CodeAreaUnitOpenFileButton filename={unit.filename} codeFiles={codeFiles} />
 	{/if}
 </div>
