@@ -26,7 +26,7 @@
 		</div>
 
 		{#if showCodeUnits}
-			<div class="flex-auto max-md:absolute max-md:w-[90vw] max-md:right-1 px-1 relative mt-[-15px] z-10">
+			<div class="overflow-hidden max-md:absolute max-md:w-[90vw] max-md:right-1 px-1 relative mt-[-15px] z-10">
 				{#each units as unit}
 					<CodeAreaUnit {unit} />
 				{/each}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Code from '../prototype/[name]/Code.svelte'
+	import Code from '$lib/prototype/Code.svelte'
 	import UnitSep from './UnitSep.svelte'
 
 	export let content: string
