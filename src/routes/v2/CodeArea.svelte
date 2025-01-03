@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { CodeFiles, ProjectV2, UnitV2 } from '$lib/prototype/types'
-	import UnitSep from '../prototype/[name]/UnitSep.svelte'
+	import UnitSep from './UnitSep.svelte'
 	import CodeViewer from './CodeViewer.svelte'
 	import CodeAreaUnit from './CodeAreaUnit.svelte'
 	import CodeAreaHead from './CodeAreaHead.svelte'
@@ -14,13 +14,13 @@
 	$: units = project?.code?.units ?? []
 </script>
 
-<section class="bg-gray-700 pb-3 relative">
-	<CodeAreaHead bind:showCodeUnits={showCodeUnits} />
+<section class="bg-gray-600 pb-3 relative">
+	<CodeAreaHead bind:showCodeUnits={showCodeUnits} {codeFiles} />
 
 	<div class="w-[98vw] m-auto flex gap-2">
 		<div class={showCodeUnits ? 'w-7/12 max-md:w-full' : 'w-full'}>
 			<div class="rounded-lg overflow-hidden">
-				<UnitSep text="</>" treeData={codeFiles} enableDownloader />
+				<UnitSep text="</>" />
 				<CodeViewer treeData={codeFiles} firstOpen={project.code?.open ?? ''} />
 			</div>
 		</div>
