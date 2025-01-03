@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Code } from 'lucide-svelte'
+	import { Diamond } from 'lucide-svelte'
 </script>
 
 <div>
-	<Code class="inline align-baseline stroke-[3px]" /> コード
+	<Diamond class="inline align-baseline w-[20px] fill-[#000000]" /> コード
 </div>
 
 <style lang="postcss">

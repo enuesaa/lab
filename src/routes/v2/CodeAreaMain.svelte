@@ -3,7 +3,7 @@
 	import UnitSep from '../prototype/[name]/UnitSep.svelte'
 	import CodeViewer from './CodeViewer.svelte'
 	import HideButton from './HideButton.svelte'
-	import Unit from './Unit.svelte'
+	import CodeAreaUnit from './CodeAreaUnit.svelte'
 
 	export let project: ProjectV2
 	export let codeFiles: CodeFiles
@@ -26,7 +26,7 @@
 	{#if show}
 		<div class="w-5/12 max-md:absolute max-md:w-[90vw] max-md:right-1 px-1 relative mt-[-15px]">
 			{#each units as unit}
-				<Unit {unit} />
+				<CodeAreaUnit {unit} />
 			{/each}
 		</div>
 	{/if}
