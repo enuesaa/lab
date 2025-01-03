@@ -25,28 +25,27 @@ units:
           
           // 省略
           // example.com へ HTTP GET リクエストをして、レスポンスボディを標準出力する
+  
+  - code:
+      open: main.go
+      include:
+        - clientfx
+        - clientfx/client.go
+        - clientfx/module.go
+        - cmdfx
+        - cmdfx/cmd.go
+        - cmdfx/module.go
+        - logger.go
+        - go.mod
+      units:
+        - title: Module
+          description: |
+            cmdfx.Module と clientfx.Module があり、両者を fx.New() でロードしている。
 
+        - title: cmdfx.ICmd が clientfx.IClient へ依存
+          description: |
+            cmdfx.ICmd は clientfx.IClient へ依存。
+            fx が依存を注入してくれる。
 
-code:
-  open: main.go
-  include:
-    - clientfx
-    - clientfx/client.go
-    - clientfx/module.go
-    - cmdfx
-    - cmdfx/cmd.go
-    - cmdfx/module.go
-    - logger.go
-    - go.mod
-  units:
-    - title: Module
-      description: |
-        cmdfx.Module と clientfx.Module があり、両者を fx.New() でロードしている。
-
-    - title: cmdfx.ICmd が clientfx.IClient へ依存
-      description: |
-        cmdfx.New() を見ると分かる通り、cmdfx.ICmd は clientfx.IClient へ依存している。
-        この依存の注入を fx がしてくれる。
-
-        cmdfx と clientfx は interface を介してやり取りしているのがポイント。
-        これにより例えば mock へ差し替えできる。
+            cmdfx と clientfx は interface を介してやり取りしているのがポイント。
+            これにより例えば mock へ差し替えできる。

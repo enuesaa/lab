@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { CodeFiles, ProjectV2, UnitV2 } from '$lib/prototype/types'
+	import type { CodeFiles, UnitV2 } from '$lib/prototype/types'
 	import { createTreeViewCtl, createViewing } from '$lib/prototype/tree'
 	import CodeAreaViewer from './CodeAreaViewer.svelte'
 	import CodeAreaUnit from './CodeAreaUnit.svelte'
@@ -9,26 +9,25 @@
 	createTreeViewCtl()
 	createViewing()
 
-	export let project: ProjectV2
-	export let codeFiles: CodeFiles
+	export let unit: UnitV2
+	let codeFiles = unit.code?.files ?? []
 	let showCodeUnits = true
 
-	let units: UnitV2[] = []
-	$: units = project?.code?.units ?? []
+	let codeUnits: UnitV2[] = unit?.code?.units ?? []
 </script>
 
-<section class="bg-gray-600 pb-3 relative">
+<section>
 	<CodeAreaHead bind:showCodeUnits={showCodeUnits} {codeFiles} />
 
 	<div class="w-[98vw] m-auto flex gap-2">
-		<div class={showCodeUnits ? 'flex-none w-7/12 max-md:w-full' : 'w-full'}>
-			<CodeAreaViewer {codeFiles} firstOpen={project.code?.open ?? ''} />
+		<div class={showCodeUnits ? 'flex-none w-8/12 max-md:w-full' : 'w-full'}>
+			<CodeAreaViewer {codeFiles} firstOpen={unit.code?.open ?? ''} />
 		</div>
 
 		{#if showCodeUnits}
-			<div class="overflow-hidden max-md:absolute max-md:w-[90vw] max-md:right-1 px-1 relative mt-[-15px] z-10">
-				{#each units as unit}
-					<CodeAreaUnit {unit} />
+			<div class="overflow-hidden max-md:absolute max-md:w-[80vw] max-md:right-1 px-1 relative mt-[-15px] z-10">
+				{#each codeUnits as codeUnit}
+					<CodeAreaUnit unit={codeUnit} />
 				{/each}
 			</div>
 		{/if}
@@ -43,5 +42,7 @@
 	section {
 		background-image: radial-gradient(#a5a5a5 2px, transparent 2px);
 		background-size: 20px 20px;
+		@apply bg-gray-600 pb-3 relative;
+		@apply mt-2 mb-7;
 	}
 </style>

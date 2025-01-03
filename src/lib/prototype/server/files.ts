@@ -1,20 +1,23 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import type { TreeData } from '../tree'
-import type { Project, ProjectV2, UnitFiles, CodeFiles } from '$lib/prototype/types'
+import type { TreeData } from '$lib/prototype/tree'
+import type { Project, UnitFiles, ProjectV2 } from '$lib/prototype/types'
 
-export const getCodeFiles = async (project: ProjectV2): Promise<CodeFiles> => {
-	let data: CodeFiles = []
+export const extractCodeFiles = async (project: ProjectV2): Promise<ProjectV2> => {
+	for (let i = 0; i < project.units.length; i++) {
+		const unit = project.units[i]
+		if (unit.code === undefined || unit.code.open === undefined) {
+			continue
+		}
 
-	if (project.code?.open === undefined) {
-		return data
+		const include = unit.code?.include ?? []
+		include.push(unit.code?.open) // by default
+		unit.code.files = await extract(`./data/${project.name}`, '', include)
+
+		project.units[i] = unit
 	}
 
-	const include = project.code?.include ?? []
-	include.push(project.code?.open) // by default
-	data = await extract(`./data/${project.name}`, '', include)
-
-	return data
+	return project
 }
 
 /**

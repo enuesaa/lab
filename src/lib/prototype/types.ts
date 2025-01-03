@@ -39,18 +39,19 @@ export type ProjectV2 = {
 	title: string
 	description: string
 	published: string
-	units?: UnitV2[]
-	code?: {
-		open: string
-		include: string[]
-		units?: UnitV2[]
-	}
+	units: UnitV2[]
 }
 export type UnitV2 = {
-	title: string
+	title?: string
 	description?: string
 	links?: { title: string; url: string }[]
 	image?: string
 	terminal?: string
+	code?: {
+		open: string
+		include: string[]
+		units?: Omit<UnitV2, 'code'>[]
+		files?: CodeFiles
+	}
 }
 export type CodeFiles = TreeData[]

@@ -3,7 +3,6 @@
 	import PageTitle from './PageTitle.svelte'
 	import Description from './Description.svelte'
 	import PagePublishedBar from './PagePublishedBar.svelte'
-	import CodeArea from './CodeArea.svelte'
 	import Unit from './Unit.svelte'
 
 	export let data: PageData
@@ -21,7 +20,5 @@
 </div>
 
 {#each data.project?.units ?? [] as unit}
-	<Unit projectName={data.project?.name} {unit} codeFiles={data.codeFiles} />
+	<Unit projectName={data.project?.name} {unit} />
 {/each}
-
-<CodeArea project={data.project} codeFiles={data.codeFiles} />
