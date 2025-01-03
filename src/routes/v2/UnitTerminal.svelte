@@ -6,6 +6,6 @@
 </script>
 
 <UnitSep />
-<div class="pt-2 bg-editorbg">
+<div class="py-2 bg-editorbg">
 	<Code language="console" code={content} />
 </div>
