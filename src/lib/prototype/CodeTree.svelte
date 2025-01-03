@@ -10,7 +10,7 @@
 </script>
 
 {#each treeData as data}
-	<li class="block pl-2">
+	<li class="block pl-2 text-editortext">
 		{#if isChild}
 			<span class="inline-block opacity-50">└</span>
 		{/if}

@@ -21,17 +21,17 @@
 	})
 </script>
 
-<section class="rounded-lg overflow-hidden">
+<section class="rounded-lg overflow-hidden bg-editorbg">
 	<UnitSep text="</>" />
 
-	<div class="bg-editorbg text-editortext text-base flex">
-		<ul class="flex-none pr-2 pt-2 pb-2 border-r-editorsep border-r" {...$tree}>
+	<div class="text-base flex">
+		<ul class="flex-none pr-2 pt-2 pb-2 border-r-editorsep border-r min-h-[800px]" {...$tree}>
 			<CodeTree treeData={codeFiles} />
 		</ul>
 		<div class="flex-auto overflow-scroll">
 			{#key $viewing}
 				{#if $viewing !== undefined}
-					<Code language={$viewing.language} code={$viewing.code} />
+					<Code language={$viewing.language} code={$viewing.code} showLineNumber={true} />
 				{/if}
 			{/key}
 		</div>

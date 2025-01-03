@@ -5,7 +5,7 @@
 	export let content: string
 </script>
 
-<div>
-	<UnitSep />
+<UnitSep />
+<div class="pt-2 bg-editorbg">
 	<Code language="console" code={content} />
 </div>
