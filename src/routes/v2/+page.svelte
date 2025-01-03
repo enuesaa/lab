@@ -2,8 +2,7 @@
 	import type { PageData } from './$types'
 	import { createTreeViewCtl, createViewing } from '$lib/prototype/tree'
 	import PageMain from './PageMain.svelte'
-	import CodeAreaMain from './CodeAreaMain.svelte'
-	import CodeAreaHead from './CodeAreaHead.svelte'
+	import CodeArea from './CodeArea.svelte'
 
 	createTreeViewCtl()
 	createViewing()
@@ -19,6 +18,5 @@
 <PageMain project={data.project} />
 
 <main class="bg-[#b5b5b5] pb-3">
-	<CodeAreaHead />
-	<CodeAreaMain project={data.project} codeFiles={data.codeFiles} />
+	<CodeArea project={data.project} codeFiles={data.codeFiles} />
 </main>

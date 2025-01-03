@@ -1,10 +1,16 @@
 <script lang="ts">
 	import { Diamond } from 'lucide-svelte'
+	import CodeAreaHeadUnitHideButton from './CodeAreaHeadUnitHideButton.svelte'
+
+	export let showCodeUnits: boolean
 </script>
 
-<div>
-	<Diamond class="inline align-baseline w-[20px] fill-[#000000]" /> コード
-</div>
+<section class="relative">
+	<div>
+		<Diamond class="inline align-baseline w-[20px] fill-[#000000]" /> コード
+	</div>
+	<CodeAreaHeadUnitHideButton bind:showCodeUnits={showCodeUnits} />
+</section>
 
 <style lang="postcss">
 	div {
