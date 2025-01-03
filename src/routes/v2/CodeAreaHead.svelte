@@ -8,6 +8,6 @@
 
 <style lang="postcss">
 	div {
-		@apply inline-block font-semibold text-3xl font-zenmaru my-1;
+		@apply container mx-auto py-3 px-5 font-semibold text-3xl font-zenmaru;
 	}
 </style>
