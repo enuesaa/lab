@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { getViewing } from '$lib/prototype/tree'
 	import type { TreeData } from '$lib/prototype/tree'
-	import { Check, ChevronDown, ChevronRight } from 'lucide-svelte'
+	import { ChevronDown, ChevronRight } from 'lucide-svelte'
 
-	export let data: TreeData
-	const hasChildren = data.children.length > 0
+	export let treeData: TreeData
+	const hasChildren = treeData.children.length > 0
 	let expanded = true
 
 	const viewing = getViewing()
@@ -14,7 +14,7 @@
 			expanded = !expanded
 			return
 		}
-		viewing.set(data)
+		viewing.set(treeData)
 	}
 </script>
 
@@ -23,30 +23,30 @@
 		{#if expanded}
 			<button on:click|preventDefault={hanldeClick}>
 				<ChevronDown class="absolute -left-[10px] w-[14px] stroke-[3px] align-baseline text-gray-500" />
-				{data.title}
+				{treeData.title}
 			</button>
 		{:else}
 			<button on:click|preventDefault={hanldeClick}>
 				<ChevronRight class="absolute -left-[10px] w-[14px] stroke-[3px] align-baseline text-gray-500" />
-				{data.title}
+				{treeData.title}
 			</button>
 		{/if}
 	{:else}
-		{#if $viewing?.id === data.id}
+		{#if $viewing?.id === treeData.id}
 			<button on:click|preventDefault={hanldeClick} class='selected-file'>
-				{data.title}
+				{treeData.title}
 			</button>
 		{:else}
 			<button on:click|preventDefault={hanldeClick} class='notselected-file'>
-				{data.title}
+				{treeData.title}
 			</button>
 		{/if}
 	{/if}
 
 	{#if hasChildren && expanded}
 		<ul class="border-l border-gray-700 ml-2 mb-1 pl-1">
-			{#each data.children as d}
-				<svelte:self data={d} />
+			{#each treeData.children as d}
+				<svelte:self treeData={d} />
 			{/each}
 		</ul>
 	{/if}

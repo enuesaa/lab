@@ -24,19 +24,25 @@
 	})
 </script>
 
-<section class="rounded-lg bg-editorbg relative">
+<section class="rounded-lg bg-editorbg relative text-base">
 	<CodeSep />
 
-	<PaneGroup direction="horizontal" class="text-base flex">
-		<Pane defaultSize={20} class="p-2 pl-3 min-h-[800px] min-w-32 max-w-96">
+	<!-- PanelGroup で overflow: hidden がデフォルトで付与されるので上書きしている -->
+	<PaneGroup direction="horizontal" style="overflow: visible">
+		<Pane defaultSize={15} class="p-2 pl-3 min-h-[800px] min-w-32 max-w-80">
 			{#each codeFiles as treeData}
-				<CodeTreeItemButton data={treeData} />
+				<CodeTreeItemButton {treeData} />
 			{/each}
 		</Pane>
 		<PaneResizer class="w-[1px] bg-gray-600/80 relative">
 			<Dot class="absolute top-1/3 left-[-10px] bg-editorbg text-editortext overflow-visible z-10 w-5" />
+			{#key $viewing}
+				{#if $viewing !== undefined}
+					<CodeAreaFileTag filename={$viewing.title} />
+				{/if}
+			{/key}
 		</PaneResizer>
-		<Pane class="relative" style="overflow-x: scroll;">
+		<Pane style="overflow: scroll">
 			{#key $viewing}
 				{#if $viewing !== undefined}
 					<Code language={$viewing.language} code={$viewing.code} showLineNumber={true} />
@@ -47,7 +53,6 @@
 
 	{#key $viewing}
 		{#if $viewing !== undefined}
-			<CodeAreaFileTag filename={$viewing.title} />
 			<CodeCopyButton text={$viewing.code} />
 		{/if}
 	{/key}
