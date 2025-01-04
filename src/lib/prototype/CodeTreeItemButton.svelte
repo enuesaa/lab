@@ -18,17 +18,17 @@
 	}
 </script>
 
-<li class="block text-editortext pl-1">
+<li class="block text-editortext">
 	{#if hasChildren}
 		{#if expanded}
 			<button on:click|preventDefault={hanldeClick}>
-				<ChevronDown class="absolute -left-[10px] w-[14px] stroke-[3px] align-baseline text-gray-500" />
-				{treeData.title}
+				<ChevronDown class="absolute left-[-7px] w-[14px] stroke-[3px] align-baseline text-gray-500" />
+				<span class="ml-[2px]">{treeData.title}</span>
 			</button>
 		{:else}
 			<button on:click|preventDefault={hanldeClick}>
-				<ChevronRight class="absolute -left-[10px] w-[14px] stroke-[3px] align-baseline text-gray-500" />
-				{treeData.title}
+				<ChevronRight class="absolute left-[-7px] w-[14px] stroke-[3px] align-baseline text-gray-500" />
+				<span class="ml-[2px]">{treeData.title}</span>
 			</button>
 		{/if}
 	{:else}
@@ -44,7 +44,7 @@
 	{/if}
 
 	{#if hasChildren && expanded}
-		<ul class="border-l border-gray-700 ml-2 mb-1 pl-1">
+		<ul class="border-l border-gray-700 ml-[6px] mb-1 pl-[6px]">
 			{#each treeData.children as d}
 				<svelte:self treeData={d} />
 			{/each}
