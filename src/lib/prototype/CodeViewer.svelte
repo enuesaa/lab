@@ -28,7 +28,7 @@
 	<CodeSep />
 
 	<PaneGroup direction="horizontal" class="text-base flex">
-		<Pane defaultSize={20} class="flex-none pr-2 pt-2 pb-2 pl-3 border-r-editorsep border-r min-h-[800px] min-w-32 max-w-96 overflow-scroll">
+		<Pane defaultSize={20} class="p-2 pl-3 min-h-[800px] min-w-32 max-w-96">
 			{#each codeFiles as treeData}
 				<CodeTreeItemButton data={treeData} />
 			{/each}
@@ -36,15 +36,19 @@
 		<PaneResizer class="w-[1px] bg-gray-600/80 relative">
 			<Dot class="absolute top-1/3 left-[-10px] bg-editorbg text-editortext overflow-visible z-10 w-5" />
 		</PaneResizer>
-		<Pane class="flex-auto relative overflow-scroll">
-			{#if $viewing !== undefined}
-				<Code language={$viewing.language} code={$viewing.code} showLineNumber={true} />
-			{/if}
+		<Pane class="relative" style="overflow-x: scroll;">
+			{#key $viewing}
+				{#if $viewing !== undefined}
+					<Code language={$viewing.language} code={$viewing.code} showLineNumber={true} />
+				{/if}
+			{/key}
 		</Pane>
 	</PaneGroup>
 
-	{#if $viewing !== undefined}
-		<CodeAreaFileTag filename={$viewing.title} />
-		<CodeCopyButton text={$viewing.code} />
-	{/if}
+	{#key $viewing}
+		{#if $viewing !== undefined}
+			<CodeAreaFileTag filename={$viewing.title} />
+			<CodeCopyButton text={$viewing.code} />
+		{/if}
+	{/key}
 </section>
