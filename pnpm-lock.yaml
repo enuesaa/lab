@@ -17,6 +17,9 @@ importers:
       lucide-svelte:
         specifier: ^0.447.0
         version: 0.447.0(svelte@5.16.1)
+      paneforge:
+        specifier: ^0.0.6
+        version: 0.0.6(svelte@5.16.1)
       yaml:
         specifier: ^2.6.1
         version: 2.6.1
@@ -812,6 +815,11 @@ packages:
 
   pako@1.0.11:
     resolution: {integrity: sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==}
+
+  paneforge@0.0.6:
+    resolution: {integrity: sha512-jYeN/wdREihja5c6nK3S5jritDQ+EbCqC5NrDo97qCZzZ9GkmEcN5C0ZCjF4nmhBwkDKr6tLIgz4QUKWxLXjAw==}
+    peerDependencies:
+      svelte: ^4.0.0 || ^5.0.0-next.1
 
   path-key@3.1.1:
     resolution: {integrity: sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==}
@@ -1730,6 +1738,11 @@ snapshots:
   package-json-from-dist@1.0.1: {}
 
   pako@1.0.11: {}
+
+  paneforge@0.0.6(svelte@5.16.1):
+    dependencies:
+      nanoid: 5.0.8
+      svelte: 5.16.1
 
   path-key@3.1.1: {}
 
