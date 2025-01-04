@@ -9,6 +9,7 @@
 <style lang="postcss">
 	section {
 		@apply my-2 px-3 w-full;
+		@apply max-md:my-1 max-md:px-1;
 	}
 	section pre {
 		letter-spacing: 0.2px;
@@ -18,6 +19,6 @@
 		line-break: strict;
 		white-space: pre-wrap;
 		font-feature-settings: 'palt';
-		@apply font-murecho text-gray-800;
+		@apply font-murecho text-gray-800 text-[15px];
 	}
 </style>

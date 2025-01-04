@@ -13,6 +13,7 @@
 
 <style lang="postcss">
 	div {
-		@apply font-semibold text-xl mt-3 mb-2 px-2 font-zenmaru gap-[3px] text-left flex;
+		@apply font-semibold text-lg mt-2 px-2 font-zenmaru gap-[3px] text-left flex;
+		@apply max-md:mt-1;
 	}
 </style>

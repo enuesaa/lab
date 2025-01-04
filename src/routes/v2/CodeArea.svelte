@@ -4,7 +4,6 @@
 	import CodeViewer from '$lib/prototype/CodeViewer.svelte'
 	import CodeAreaUnit from './CodeAreaUnit.svelte'
 	import CodeAreaHead from './CodeAreaHead.svelte'
-	import CodeAreaOverlay from './CodeAreaOverlay.svelte'
 
 	initCodeViewer()
 
@@ -16,25 +15,21 @@
 </script>
 
 <section>
-	<CodeAreaHead bind:showCodeUnits={showCodeUnits} {codeFiles} title={unit?.title} />
+	<CodeAreaHead bind:showCodeUnits {codeFiles} title={unit?.title} />
 
-	<div class="w-[98vw] m-auto flex gap-2">
-		<div class={showCodeUnits ? 'flex-none w-[70%] max-md:w-full' : 'w-full'}>
+	<div class="w-[99vw] m-auto flex gap-2 max-md:gap-1">
+		<div class={showCodeUnits ? 'flex-none w-[70%] max-md:w-[55%]' : 'w-full'}>
 			<CodeViewer {codeFiles} firstOpen={unit.code?.open ?? ''} />
 		</div>
 
 		{#if showCodeUnits}
-			<div class="overflow-hidden max-md:absolute max-md:w-[70vw] max-md:right-1 px-1 relative z-10">
+			<div class="overflow-hidden relative z-10">
 				{#each codeUnits as codeUnit}
 					<CodeAreaUnit unit={codeUnit} {codeFiles} />
 				{/each}
 			</div>
 		{/if}
 	</div>
-
-	{#if showCodeUnits}
-		<CodeAreaOverlay bind:showCodeUnits={showCodeUnits} />
-	{/if}
 </section>
 
 <style lang="postcss">
