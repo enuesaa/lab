@@ -35,7 +35,7 @@
 			{/each}
 		</Pane>
 		<PaneResizer class="w-[1px] bg-gray-600/80 relative">
-			<Dot class="absolute top-1/3 left-[-10px] bg-editorbg text-editortext overflow-visible z-10 w-5" />
+			<Dot class="absolute top-48 left-[-10px] bg-editorbg text-editortext overflow-visible z-10 w-5" />
 			{#key $viewing}
 				{#if $viewing !== undefined}
 					<CodeAreaFileTag filename={$viewing.title} />

@@ -10,7 +10,7 @@
 	export let projectName: string
 	export let unit: UnitV2
 
-	const isNormalContent = unit?.title !== undefined
+	const isNormalContent = unit?.code === undefined
 </script>
 
 {#if isNormalContent}

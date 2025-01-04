@@ -43,7 +43,7 @@
 {/if}
 
 {#if hasChildren && expanded}
-	<div class="border-l border-gray-700 ml-1 mt-[1px] mb-[6px] pl-3">
+	<div class="border-l border-gray-700 ml-2 mt-[1px] mb-[6px] pl-2">
 		{#each treeData.children as d}
 			<svelte:self treeData={d} />
 		{/each}
@@ -52,7 +52,7 @@
 
 <style lang="postcss">
 	button {
-		@apply block ml-1 px-1 mb-[1px] text-left text-editortext;
+		@apply block ml-1 px-1 my-[1px] text-left text-editortext;
 		@apply rounded-sm select-none relative;
 
 		&.selected-file {

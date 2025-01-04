@@ -26,7 +26,8 @@ units:
           // 省略
           // example.com へ HTTP GET リクエストをして、レスポンスボディを標準出力する
   
-  - code:
+  - title: サンプルアプリ
+    code:
       open: main.go
       include:
         - clientfx
