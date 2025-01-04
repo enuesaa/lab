@@ -19,7 +19,7 @@
 	{#if unit.terminal !== undefined}
 		<UnitTerminal content={unit.terminal} />
 	{/if}
-	{#if unit.filename !== undefined}
-		<CodeAreaUnitOpenFileButton filename={unit.filename} codeFiles={codeFiles} />
+	{#if unit.mark !== undefined}
+		<CodeAreaUnitOpenFileButton mark={unit.mark} codeFiles={codeFiles} />
 	{/if}
 </div>

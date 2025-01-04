@@ -1,11 +1,15 @@
 <script lang="ts">
-	import { getViewing, type TreeData } from '$lib/prototype/tree'
+	import { useCodeViewer, type TreeData } from '$lib/prototype/tree'
 	import type { CodeFiles } from '$lib/prototype/types'
 
 	export let codeFiles: CodeFiles
-	export let filename: string
+	export let mark: string
 
-	const viewing = getViewing()
+	const split = mark.split(':')
+	const filename = split.length === 2 ? split[0] : ''
+	const markLine = split.length === 2 ? parseInt(split[1], 10) : undefined
+
+	const viewing = useCodeViewer()
 
 	function searchFile(files: CodeFiles): TreeData|undefined {
 		for (const data of files) {
@@ -25,13 +29,13 @@
 	function handleClick() {
 		const data = searchFile(codeFiles)
 		if (data !== undefined) {
-			viewing.set(data)
+			viewing.set({...data, markLine})
 		}
 	}
 </script>
 
 <button on:click|preventDefault={handleClick}>
-	{filename}
+	{mark}
 </button>
 
 <style lang="postcss">

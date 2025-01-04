@@ -1,42 +1,42 @@
 <script lang="ts">
-	import { getViewing } from '$lib/prototype/tree'
+	import { useCodeViewer } from '$lib/prototype/tree'
 	import type { TreeData } from '$lib/prototype/tree'
 	import { ChevronDown, ChevronRight } from 'lucide-svelte'
 
 	export let treeData: TreeData
+
 	const hasChildren = treeData.children.length > 0
+	const viewing = useCodeViewer()
+
 	let expanded = true
 
-	const viewing = getViewing()
-
-	function hanldeClick() {
-		if (hasChildren) {
-			expanded = !expanded
-			return
-		}
+	function handleDirClick() {
+		expanded = !expanded
+	}
+	function handleFileClick() {
 		viewing.set(treeData)
 	}
 </script>
 
 {#if hasChildren}
 	{#if expanded}
-		<button on:click|preventDefault={hanldeClick}>
+		<button on:click|preventDefault={handleDirClick}>
 			<ChevronDown class="absolute left-[-6px] w-[14px] stroke-[3px] align-baseline text-editortext/80" />
 			<span class="ml-[5px]">{treeData.title}</span>
 		</button>
 	{:else}
-		<button on:click|preventDefault={hanldeClick} class="">
+		<button on:click|preventDefault={handleDirClick}>
 			<ChevronRight class="absolute left-[-5px] w-[14px] stroke-[3px] align-baseline text-editortext/80" />
 			<span class="ml-[5px]">{treeData.title}</span>
 		</button>
 	{/if}
 {:else}
 	{#if $viewing?.id === treeData.id}
-		<button on:click|preventDefault={hanldeClick} class='selected-file'>
+		<button on:click|preventDefault={handleFileClick} class='selected-file'>
 			{treeData.title}
 		</button>
 	{:else}
-		<button on:click|preventDefault={hanldeClick} class='notselected-file'>
+		<button on:click|preventDefault={handleFileClick} class='notselected-file'>
 			{treeData.title}
 		</button>
 	{/if}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getViewing } from '$lib/prototype/tree'
+	import { useCodeViewer } from '$lib/prototype/tree'
 	import { onMount } from 'svelte'
 	import Code from '$lib/prototype/Code.svelte'
 	import CodeSep from './CodeSep.svelte'
@@ -13,7 +13,7 @@
 	export let codeFiles: CodeFiles
 	export let firstOpen: string
 
-	const viewing = getViewing()
+	const viewing = useCodeViewer()
 	onMount(() => {
 		for (const data of codeFiles) {
 			if (data.id === firstOpen) {
@@ -42,10 +42,10 @@
 				{/if}
 			{/key}
 		</PaneResizer>
-		<Pane style="overflow: scroll">
+		<Pane class="w-full" style="overflow: scroll">
 			{#key $viewing}
 				{#if $viewing !== undefined}
-					<Code language={$viewing.language} code={$viewing.code} showLineNumber={true} />
+					<Code language={$viewing.language} code={$viewing.code} showLineNumber={true} markLine={$viewing.markLine} />
 				{/if}
 			{/key}
 		</Pane>

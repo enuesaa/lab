@@ -35,3 +35,21 @@ export const createViewing = () => {
 export const getViewing = () => {
 	return getContext<Writable<TreeData | undefined>>('viewing')
 }
+
+type CodeViewerState = TreeData & {
+	markLine?: number
+}
+export const initCodeViewer = () => {
+	const initial = {
+    id: '',
+    title: '',
+    isDir: false,
+    children: [],
+    code: '',
+    language: '',
+	}
+	setContext('codeViewer', writable<CodeViewerState>(initial))
+}
+export const useCodeViewer = () => {
+	return getContext<Writable<CodeViewerState>>('codeViewer')
+}

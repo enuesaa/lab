@@ -58,7 +58,7 @@ export type CodeUnit = {
 	title?: string
 	description?: string
 	terminal?: string
-	filename?: string
+	mark?: string
 }
 
 export type CodeFiles = TreeData[]

@@ -9,4 +9,4 @@
 	const hl = auto ? highlightjs.highlightAuto(code) : highlightjs.highlight(code, { language })
 </script>
 
-<pre><code class="hljs" style="padding: 0 10px;">{@html hl.value}</code></pre>
+<pre><code class="hljs" style="padding: 0 5px;">{@html hl.value}</code></pre>

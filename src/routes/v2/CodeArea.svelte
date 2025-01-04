@@ -1,12 +1,12 @@
 <script lang="ts">
 	import type { CodeUnit, UnitV2 } from '$lib/prototype/types'
-	import { createViewing } from '$lib/prototype/tree'
+	import { initCodeViewer } from '$lib/prototype/tree'
 	import CodeViewer from '$lib/prototype/CodeViewer.svelte'
 	import CodeAreaUnit from './CodeAreaUnit.svelte'
 	import CodeAreaHead from './CodeAreaHead.svelte'
 	import CodeAreaOverlay from './CodeAreaOverlay.svelte'
 
-	createViewing()
+	initCodeViewer()
 
 	export let unit: UnitV2
 	let codeFiles = unit.code?.files ?? []
