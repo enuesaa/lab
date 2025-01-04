@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { CodeUnit, UnitV2 } from '$lib/prototype/types'
 	import { createViewing } from '$lib/prototype/tree'
-	import CodeAreaViewer from './CodeAreaViewer.svelte'
+	import CodeViewer from '$lib/prototype/CodeViewer.svelte'
 	import CodeAreaUnit from './CodeAreaUnit.svelte'
 	import CodeAreaHead from './CodeAreaHead.svelte'
 	import CodeAreaOverlay from './CodeAreaOverlay.svelte'
@@ -20,7 +20,7 @@
 
 	<div class="w-[98vw] m-auto flex gap-2">
 		<div class={showCodeUnits ? 'flex-none w-[70%] max-md:w-full' : 'w-full'}>
-			<CodeAreaViewer {codeFiles} firstOpen={unit.code?.open ?? ''} />
+			<CodeViewer {codeFiles} firstOpen={unit.code?.open ?? ''} />
 		</div>
 
 		{#if showCodeUnits}
