@@ -24,7 +24,7 @@
 		</div>
 
 		{#if showCodeUnits}
-			<div class="overflow-hidden max-md:absolute max-md:w-[80vw] max-md:right-1 px-1 relative mt-[-15px] z-10">
+			<div class="overflow-hidden max-md:absolute max-md:w-[70vw] max-md:right-1 px-1 relative z-10">
 				{#each codeUnits as codeUnit}
 					<CodeAreaUnit unit={codeUnit} {codeFiles} />
 				{/each}
