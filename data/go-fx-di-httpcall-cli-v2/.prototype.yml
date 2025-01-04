@@ -41,14 +41,14 @@ units:
       units:
         - title: Module
           description: |
-            cmdfx.Module と clientfx.Module があり、両者を fx.New() でロードしている。
-          mark: main.go:3
+            cmdfx.Module と clientfx.Module があり、
+            両者を fx.New() に渡している。
+          mark: main.go:12
 
-        - title: fx が依存を注入
+        - title: cmdfx.ICmd は clientfx.IClient へ依存
           description: |
-            cmdfx.ICmd は clientfx.IClient へ依存。
-            fx が依存を注入してくれる。
-          mark: cmdfx/cmd.go:5
+            fx に New() を渡すとよしなに依存を解決してくれる。
+          mark: cmdfx/cmd.go:10
         
         - description: |
             cmdfx と clientfx は interface を介してやり取りしているのがポイント。これにより mock へ差し替えできる
