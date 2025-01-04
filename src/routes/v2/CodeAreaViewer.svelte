@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getTreeViewCtl, getViewing } from '$lib/prototype/tree'
+	import { getViewing } from '$lib/prototype/tree'
 	import { onMount } from 'svelte'
 	import Code from '$lib/prototype/Code.svelte'
 	import CodeTree from '$lib/prototype/CodeTree.svelte'
@@ -10,7 +10,6 @@
 	export let codeFiles: CodeFiles
 	export let firstOpen: string
 
-	const { tree } = getTreeViewCtl()
 	const viewing = getViewing()
 	onMount(() => {
 		for (const data of codeFiles) {
@@ -26,10 +25,10 @@
 	<UnitSep text="</>" />
 
 	<div class="text-base flex">
-		<ul class="flex-none pr-2 pt-2 pb-2 border-r-editorsep border-r min-h-[800px]" {...$tree}>
+		<ul class="flex-none pr-2 pt-2 pb-2 pl-3 border-r-editorsep border-r min-h-[800px] w-2/12 min-w-32 max-w-96 overflow-scroll">
 			<CodeTree treeData={codeFiles} />
 		</ul>
-		<div class="flex-auto overflow-scroll relative">
+		<div class="overflow-scroll relative">
 			{#key $viewing}
 				{#if $viewing !== undefined}
 					<Code language={$viewing.language} code={$viewing.code} showLineNumber={true} />

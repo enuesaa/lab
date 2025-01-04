@@ -19,9 +19,15 @@ export const createTreeViewCtl = () => {
 		})
 	)
 }
+/**
+ * @deprecated
+ */
 export const getTreeViewCtl = () => {
 	const treeView = getContext<ReturnType<typeof createTreeView>>('treeView')
 	return treeView.elements
+}
+export const getTreeCtl = () => {
+	return getContext<ReturnType<typeof createTreeView>>('treeView')
 }
 export const createViewing = () => {
 	setContext('viewing', writable<TreeData | undefined>(undefined))

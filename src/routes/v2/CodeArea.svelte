@@ -1,12 +1,11 @@
 <script lang="ts">
 	import type { CodeUnit, UnitV2 } from '$lib/prototype/types'
-	import { createTreeViewCtl, createViewing } from '$lib/prototype/tree'
+	import { createViewing } from '$lib/prototype/tree'
 	import CodeAreaViewer from './CodeAreaViewer.svelte'
 	import CodeAreaUnit from './CodeAreaUnit.svelte'
 	import CodeAreaHead from './CodeAreaHead.svelte'
 	import CodeAreaOverlay from './CodeAreaOverlay.svelte'
 
-	createTreeViewCtl()
 	createViewing()
 
 	export let unit: UnitV2
