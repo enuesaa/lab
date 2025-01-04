@@ -18,48 +18,46 @@
 	}
 </script>
 
-<li class="block text-editortext">
-	{#if hasChildren}
-		{#if expanded}
-			<button on:click|preventDefault={hanldeClick}>
-				<ChevronDown class="absolute left-[-7px] w-[14px] stroke-[3px] align-baseline text-gray-500" />
-				<span class="ml-[2px]">{treeData.title}</span>
-			</button>
-		{:else}
-			<button on:click|preventDefault={hanldeClick}>
-				<ChevronRight class="absolute left-[-7px] w-[14px] stroke-[3px] align-baseline text-gray-500" />
-				<span class="ml-[2px]">{treeData.title}</span>
-			</button>
-		{/if}
+{#if hasChildren}
+	{#if expanded}
+		<button on:click|preventDefault={hanldeClick}>
+			<ChevronDown class="absolute left-[-6px] w-[14px] stroke-[3px] align-baseline text-editortext/80" />
+			<span class="ml-[5px]">{treeData.title}</span>
+		</button>
 	{:else}
-		{#if $viewing?.id === treeData.id}
-			<button on:click|preventDefault={hanldeClick} class='selected-file'>
-				{treeData.title}
-			</button>
-		{:else}
-			<button on:click|preventDefault={hanldeClick} class='notselected-file'>
-				{treeData.title}
-			</button>
-		{/if}
+		<button on:click|preventDefault={hanldeClick} class="">
+			<ChevronRight class="absolute left-[-5px] w-[14px] stroke-[3px] align-baseline text-editortext/80" />
+			<span class="ml-[5px]">{treeData.title}</span>
+		</button>
 	{/if}
+{:else}
+	{#if $viewing?.id === treeData.id}
+		<button on:click|preventDefault={hanldeClick} class='selected-file'>
+			{treeData.title}
+		</button>
+	{:else}
+		<button on:click|preventDefault={hanldeClick} class='notselected-file'>
+			{treeData.title}
+		</button>
+	{/if}
+{/if}
 
-	{#if hasChildren && expanded}
-		<ul class="border-l border-gray-700 ml-[6px] mb-1 pl-[6px]">
-			{#each treeData.children as d}
-				<svelte:self treeData={d} />
-			{/each}
-		</ul>
-	{/if}
-</li>
+{#if hasChildren && expanded}
+	<div class="border-l border-gray-700 ml-1 mt-[1px] mb-[6px] pl-3">
+		{#each treeData.children as d}
+			<svelte:self treeData={d} />
+		{/each}
+	</div>
+{/if}
 
 <style lang="postcss">
 	button {
-		@apply inline-block py-[1px] mt-[1px] px-1 text-left;
+		@apply block ml-1 px-1 mb-[1px] text-left text-editortext;
 		@apply rounded-sm select-none relative;
 
 		&.selected-file {
 			@apply bg-editorsep/50 border-editortext/50 border-[0.5px];
-			@apply underline underline-offset-[6px] decoration-gray-700;
+			@apply underline underline-offset-[5px] decoration-gray-700;
 		}
 		&.notselected-file {
 			@apply border-[0.5px] border-transparent;
