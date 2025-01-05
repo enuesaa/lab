@@ -1,26 +1,38 @@
 title: |
   [Rollup]
   buildStart() フックにて、アセットを配置する
-description: |
-  SvelteKit でサイトを作成している。
-  コンテンツを /data というディレクトリに置き、ビルド時に SSG する構成にした。
+description: ''
 published: '2024-11-23'
 
 units:
+  - title: 構成
+    description: |
+      ・SvelteKit で SSG
+      ・コンテンツを /data というディレクトリに置いている
+    terminal: |
+      ├─ src
+      │   └─ routes
+      │       ├─ +page.server.ts
+      │       └─ +page.svelte
+      └─ data // コンテンツ
+
   - title: 悩み
     description: |
       記事データは +page.server.ts の load() で読み込めば良いが、アセットはどうしようか。
     terminal: |
-      /data
-        ├── article.md // 記事データ
-        └── image.png  // アセット (主に画像ファイル)
-
+      ├─ src
+      │   └─ routes
+      │       ├─ +page.server.ts // 記事データ読み込み
+      │       └─ +page.svelte
+      └─ data
+          ├─ article.md // 記事データ
+          └─ image.png  // アセット (主に画像ファイル) // どうしようか
   - title: 結論
     description: |
       Rollup の buildStart() フックにて、アセットを /static へ配置する
   - title: Rollup の buildStart() フック
     description: |
-      Rollup にはフックがいくつかあるらしい
+      Rollup にはフックがいくつかある
       ・buildStart
       ・buildEnd
       ・options
@@ -40,6 +52,10 @@ units:
         - static
         - static/robots.txt
         - .gitignore
+      units:
+        - links:
+            - title: ドキュメント
+              url: https://rollupjs.org/plugin-development/#buildstart
 
   - title: 実行結果
     description: |

@@ -6,7 +6,14 @@ description: |
 published: '2024-11-30'
 
 units:
-  - title: テキストを大文字へ変換する
+  - title: AWS公式ドキュメント
+  - links:
+      - title: https://docs.aws.amazon.com/step-functions/latest/dg/transforming-data.html
+        url: https://docs.aws.amazon.com/step-functions/latest/dg/transforming-data.html
+      - title: AWS News
+        url: https://aws.amazon.com/jp/about-aws/whats-new/2024/11/aws-step-functions-variables-jsonata-transformations/
+
+  - title: 大文字へ
     description: |
       {% %} の内側に JSONata の構文を書く。
       $states.input に入力値がセットされており $uppercase() という関数で加工している。
@@ -15,12 +22,12 @@ units:
         url: https://docs.jsonata.org/string-functions#uppercase
     image: uppercase.png
 
-  - title: 実行結果
+  - title: 大文字へ (実行結果) 
     description: |
       期待通り大文字になった
     image: uppercase-result.png
   
-  - title: 配列のアイテムを集計・操作する
+  - title: 配列を集計・操作
     description: |
       入力として次のJSONを渡す。
 
@@ -37,7 +44,7 @@ units:
         url: https://docs.jsonata.org/array-functions
     image: items.png
   
-  - title: 実行結果
+  - title: 配列を集計・操作 (実行結果)
     description: 期待通り
     image: items-result.png
 

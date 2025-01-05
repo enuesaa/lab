@@ -18,7 +18,7 @@ units:
   - title: アプリケーション
     description: |
       アプリケーションは Go で作り Lambda Web Adapter を被せる
-    code:
+    inline:
       open: main.go
 
   - title: Lambda Web Adapter
@@ -40,6 +40,10 @@ units:
         - variables.tf
         - cloudfront_origin_access_control.tf
         - lambda_url.tf
+      units:
+        - links:
+            - title: Lambda Web Adapter
+              url: https://github.com/awslabs/aws-lambda-web-adapter
   
   - title: '[注意] POST or PUT はできない'
     description: |
