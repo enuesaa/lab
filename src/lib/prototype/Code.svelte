@@ -49,7 +49,7 @@
 		}
 		&.mark::after {
 			content: '\00a0';
-			animation: markAnimation 3s forwards;
+			animation: markAnimation 5s forwards;
 			@apply absolute top-0 left-0 w-full;
 		}
 	}

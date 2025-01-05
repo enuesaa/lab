@@ -36,7 +36,7 @@
 	section {
 		background-image: radial-gradient(#a5a5a5 2px, transparent 2px);
 		background-size: 20px 20px;
-		@apply bg-gray-600 pb-3 relative;
+		@apply bg-gray-600 pt-1 pb-8 relative;
 		@apply mt-2 mb-7;
 	}
 </style>

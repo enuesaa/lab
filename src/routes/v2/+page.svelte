@@ -4,6 +4,7 @@
 	import Description from './Description.svelte'
 	import PagePublishedBar from './PagePublishedBar.svelte'
 	import Unit from './Unit.svelte'
+	import Main from '../Main.svelte'
 
 	export let data: PageData
 </script>
@@ -13,12 +14,14 @@
 	<meta name="description" content={`${data.project.title} | lab.enuesaa.dev`} />
 </svelte:head>
 
-<div class="container mx-auto px-1 pt-8 pb-2">
-	<PageTitle title={data.project.title} />
-	<PagePublishedBar published={data.project.published} />
-	<Description content={data.project?.description ?? ''} />	
-</div>
-
-{#each data.project?.units ?? [] as unit}
-	<Unit projectName={data.project?.name} {unit} />
-{/each}
+<Main>
+	<div class="container mx-auto px-1 pt-8 pb-2">
+		<PageTitle title={data.project.title} />
+		<PagePublishedBar published={data.project.published} />
+		<Description content={data.project?.description ?? ''} />	
+	</div>
+	
+	{#each data.project?.units ?? [] as unit}
+		<Unit projectName={data.project?.name} {unit} />
+	{/each}	
+</Main>
