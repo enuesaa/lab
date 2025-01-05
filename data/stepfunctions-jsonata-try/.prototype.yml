@@ -40,10 +40,11 @@ units:
     description: 期待通り
     image: items-result.png
 
-  - title: コード (ASL)
-    open: items.asl.yml
-    include:
-      - uppercase.asl.yml
+  - code:
+      open: items.asl.yml
+      include:
+        - uppercase.asl.yml
+    # ASL
 
   - title: リンク
     links:

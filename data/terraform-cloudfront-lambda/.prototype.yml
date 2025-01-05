@@ -18,7 +18,8 @@ units:
   - title: アプリケーション
     description: |
       アプリケーションは Go で作り Lambda Web Adapter を被せる
-    open: main.go
+    code:
+      open: main.go
 
   - title: Lambda Web Adapter
     description: |
@@ -29,15 +30,16 @@ units:
         url: https://github.com/awslabs/aws-lambda-web-adapter?tab=readme-ov-file#aws-commercial-regions
 
   - title: Terraform
-    open: lambda.tf
-    include:
-      - main.tf
-      - lambda.tf
-      - cloudfront_distribution.tf
-      - lambda_role.tf
-      - variables.tf
-      - cloudfront_origin_access_control.tf
-      - lambda_url.tf
+    code:
+      open: lambda.tf
+      include:
+        - main.tf
+        - lambda.tf
+        - cloudfront_distribution.tf
+        - lambda_role.tf
+        - variables.tf
+        - cloudfront_origin_access_control.tf
+        - lambda_url.tf
   
   - title: '[注意] POST or PUT はできない'
     description: |

@@ -12,7 +12,7 @@ units:
     links:
       - title: github.com/Stuk/jszip
         url: https://github.com/Stuk/jszip
-    console: |
+    terminal: |
       $ pnpm add jszip
-  - title: コード
-    open: DownloadButton.svelte
+  - code:
+      open: DownloadButton.svelte

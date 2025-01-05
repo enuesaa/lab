@@ -10,7 +10,7 @@ units:
   - title: 悩み
     description: |
       記事データは +page.server.ts の load() で読み込めば良いが、アセットはどうしようか。
-    console: |
+    terminal: |
       /data
         ├── article.md // 記事データ
         └── image.png  // アセット (主に画像ファイル)
@@ -30,22 +30,22 @@ units:
       - title: ドキュメント
         url: https://rollupjs.org/plugin-development/#build-hooks
 
-  - title: コード全体
-    open: vite.config.ts
-    include:
-      - data
-      - data/something-image-file.png
-      - package.json
-      - src
-      - static
-      - static/robots.txt
-      - .gitignore
+  - code:
+      open: vite.config.ts
+      include:
+        - data
+        - data/something-image-file.png
+        - package.json
+        - src
+        - static
+        - static/robots.txt
+        - .gitignore
 
   - title: 実行結果
     description: |
       ビルドすると file copied! という文字列が出力される。
       うまく呼ばれてそう。
-    console: |
+    terminal: |
       $ pnpm build
       > vite build
 

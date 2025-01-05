@@ -4,7 +4,7 @@
 	import Description from './Description.svelte'
 	import PagePublishedBar from './PagePublishedBar.svelte'
 	import Unit from './Unit.svelte'
-	import Main from '../Main.svelte'
+	import Main from '../../Main.svelte'
 
 	export let data: PageData
 </script>

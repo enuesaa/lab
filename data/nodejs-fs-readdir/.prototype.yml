@@ -12,9 +12,10 @@ published: '2024-05-26'
 
 units:
   - title: 'withFileTypes: true を指定'
-    open: main.ts
+    code:
+      open: main.ts
   - title: 実行結果
-    console: |
+    terminal: |
       $ pnpm tsx main.ts
       [
         Dirent {
