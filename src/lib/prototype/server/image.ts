@@ -1,8 +1,8 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import type { Project } from '../types'
+import type { ProjectV2 } from '$lib/prototype/types'
 
-export const copyUnitImage = async (project: Project) => {
+export const copyUnitImage = async (project: ProjectV2) => {
 	const publishdir = path.join('./static/prototype', project.name)
 
 	try {

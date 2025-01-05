@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import { sveltekit } from '@sveltejs/kit/vite'
 import path from 'node:path'
-import { listProjects } from './src/lib/prototype/server/project'
+import { listProjectsV2 } from './src/lib/prototype/server/project'
 import { copyUnitImage } from './src/lib/prototype/server/image'
 
 export default defineConfig({
@@ -10,7 +10,7 @@ export default defineConfig({
 		{
 			name: 'file-copy',
 			async buildStart() {
-				const projects = await listProjects()
+				const projects = await listProjectsV2()
 				for (const project of projects) {
 					await copyUnitImage(project)
 				}

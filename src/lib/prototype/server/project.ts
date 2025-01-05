@@ -1,6 +1,5 @@
-import { readConfig } from './config'
 import fs from 'node:fs/promises'
-import type { Project, ProjectV2 } from '$lib/prototype/types'
+import type { ProjectV2 } from '$lib/prototype/types'
 import YAML from 'yaml'
 
 const listNames = async (): Promise<string[]> => {
@@ -8,12 +7,12 @@ const listNames = async (): Promise<string[]> => {
 	return files.map((f) => f.name)
 }
 
-export const listProjects = async (): Promise<Project[]> => {
+export const listProjectsV2 = async (): Promise<ProjectV2[]> => {
 	let list = []
 
 	for (const name of await listNames()) {
 		try {
-			const project = await getProject(name)
+			const project = await getProjectV2(name)
 			list.push(project)
 		} catch (e) {}
 	}
@@ -22,28 +21,6 @@ export const listProjects = async (): Promise<Project[]> => {
 	list.sort((a, b) => (a.published > b.published ? -1 : 1))
 
 	return list
-}
-
-/**
- * @deprecated
- * @throws if project is in private.
- */
-export const getProject = async (name: string): Promise<Project> => {
-	const config = await readConfig(name)
-	const project = {
-		name,
-		title: config.title,
-		description: config.description,
-		published: config.published,
-		units: config.units,
-	}
-
-	// ignore if published is null
-	if (project.published === undefined || project.published === null) {
-		throw new Error('Not Found')
-	}
-
-	return project
 }
 
 /**
