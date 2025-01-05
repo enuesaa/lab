@@ -1,17 +1,18 @@
-import type { PageServerLoad } from './$types'
-import { copyUnitImage, getProject, getUnitFiles, listProjects } from '$lib/prototype/server/export'
-import type { Project, UnitFiles } from '$lib/prototype/types'
+import { extractInlineFile } from '$lib/prototype/server/files'
+import { extractCodeFiles } from '$lib/prototype/server/files'
+import { getProjectV2, listProjects } from '$lib/prototype/server/project'
+import { error } from '@sveltejs/kit'
 
-type Data = {
-	project: Project
-	unitfiles: UnitFiles
-}
-export const load: PageServerLoad<Data> = async ({ params: { name } }) => {
-	const project = await getProject(name)
-	const unitfiles = await getUnitFiles(project)
-	await copyUnitImage(project)
+export const load = async ({ params: { name } }) => {
+	if (import.meta.env.PROD) {
+		error(404, 'Page not found')
+	}
 
-	return { project, unitfiles }
+	let project = await getProjectV2(name)
+	project = await extractCodeFiles(project)
+	project = await extractInlineFile(project)
+
+	return { project }
 }
 
 type Entry = {

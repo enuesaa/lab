@@ -8,7 +8,7 @@
 
 <style lang="postcss">
 	div {
-		@apply mx-2 py-1 mt-3 mb-1;
+		@apply mx-2 py-1 mt-1 mb-2;
 	}
 	h2 {
 		white-space: pre-wrap;

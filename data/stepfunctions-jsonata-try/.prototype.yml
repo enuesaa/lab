@@ -48,6 +48,9 @@ units:
       units:
         - description: |
             ASL (Amazon States Language) 形式です
+          links:
+            - title: ドキュメント
+              url: https://docs.aws.amazon.com/ja_jp/step-functions/latest/dg/concepts-amazon-states-language.html
 
   - title: リンク
     links:
