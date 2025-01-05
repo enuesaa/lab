@@ -1,15 +1,14 @@
 title: |
-  [Go] uber-go/fx で curl もどきを作ってみる
+  [Go] uber-go/fx で curl ライクな CLI を作ってみる
 description: |
   uber-go/fx は Go の DI ライブラリ。
+  フレームワークに近く、アプリケーション全体で導入するのが望ましい。
 
-  プログラム実行開始時に依存を決定するタイプ。
-  どちらかというとフレームワークに近く、アプリケーション全体で導入するのが望ましい。
-
+  fx はプログラム実行時に依存関係を決定し注入してくれる。
   学習コストがほんのちょっとあり、自分の理解を整理するためにもサンプルアプリを作ってみた。
 published: '2024-12-18'
 
-units:
+units: 
   - title: サンプルアプリ
     description: |
       curl ライクな CLI を作ってみる。
@@ -40,6 +39,8 @@ units:
         - go.mod
       units:
         - title: fx.New()
+          description: |
+            fx app を立ち上げる
           mark: main.go:10
 
         - description: |
@@ -50,17 +51,22 @@ units:
         - description: |
             エントリポイント
           mark: main.go:15
+          
+        - description: |
+            実処理
+          mark: main.go:19
 
-        - title: cmdfx.Module
+        - title: Module
           description: |
-            cmdfx.New() を fx に渡している
+            ファクトリ関数を fx に登録
           mark: cmdfx/module.go:7
 
         - title: cmdfx.New()
           description: |
-            cmdfx.ICmd は clientfx.IClient へ依存している
+            ファクトリ関数。clientfx.IClient へ依存している。
+            fx は関数のシグネチャを見て依存関係を構築する。
           mark: cmdfx/cmd.go:10
 
         - description: |
-            cmdfx と clientfx は interface を介してやり取りしているのがポイント。これにより mock へ差し替えできる
+            cmdfx と clientfx は interface を介してやり取りしている。これにより mock へ差し替えできる
           mark: cmdfx/cmd.go:24

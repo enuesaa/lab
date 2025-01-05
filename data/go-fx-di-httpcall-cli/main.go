@@ -16,12 +16,12 @@ func main() {
 			// fx.App をシャットダウン
 			defer shutdowner.Shutdown()
 
+			// メインロジック
 			// コマンドライン引数をパース
 			if err := cmd.Parse(); err != nil {
 				return err
 			}
-
-			// メインロジック
+			// http request
 			if err := cmd.Run(); err != nil {
 				return err
 			}
