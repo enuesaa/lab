@@ -8,7 +8,7 @@
 
 <style lang="postcss">
 	section {
-		@apply mt-1 mb-4 px-2 font-zenmaru text-[17px] w-full;
+		@apply my-4 px-2 font-zenmaru text-[17px] w-full;
 	}
 	section pre {
 		letter-spacing: 0.2px;

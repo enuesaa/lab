@@ -29,7 +29,7 @@
 
 	<!-- PanelGroup で overflow: hidden がデフォルトで付与されるので上書きしている -->
 	<PaneGroup direction="horizontal" style="overflow: visible">
-		<Pane defaultSize={15} class="p-2 pl-4 min-h-[800px] min-w-5 max-w-80 max-md:pl-1">
+		<Pane defaultSize={15} class="p-2 pl-2 min-h-[800px] min-w-5 max-w-80 max-md:pl-1">
 			{#each codeFiles as treeData}
 				<CodeTreeItemButton {treeData} />
 			{/each}

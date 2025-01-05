@@ -8,8 +8,10 @@ description: |
 published: '2024-05-26'
 
 units:
-  - code:
+  - title: コード
+    inline:
       open: main.go
+
   - title: 実行結果
     terminal: |
       $ go run . --help

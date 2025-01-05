@@ -45,7 +45,9 @@ units:
       open: items.asl.yml
       include:
         - uppercase.asl.yml
-    # ASL
+      units:
+        - description: |
+            ASL (Amazon States Language) 形式です
 
   - title: リンク
     links:

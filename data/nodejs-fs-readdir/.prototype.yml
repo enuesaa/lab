@@ -12,7 +12,7 @@ published: '2024-05-26'
 
 units:
   - title: 'withFileTypes: true を指定'
-    code:
+    inline:
       open: main.ts
   - title: 実行結果
     terminal: |

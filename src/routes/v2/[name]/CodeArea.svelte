@@ -23,7 +23,7 @@
 		</div>
 
 		{#if showCodeUnits}
-			<div class="overflow-hidden relative z-10">
+			<div class="flex-auto overflow-hidden relative z-10">
 				{#each codeUnits as codeUnit}
 					<CodeAreaUnit unit={codeUnit} {codeFiles} />
 				{/each}
@@ -37,6 +37,6 @@
 		background-image: radial-gradient(#a5a5a5 2px, transparent 2px);
 		background-size: 20px 20px;
 		@apply bg-gray-600 pt-1 pb-8 relative;
-		@apply my-7;
+		@apply mt-9 mb-7;
 	}
 </style>
