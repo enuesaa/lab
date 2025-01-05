@@ -24,7 +24,7 @@
 		{/if}
 		{#if unit.links !== undefined}
 			<UnitLinks links={unit.links} />
-		{/if}	
+		{/if}
 		{#if unit.image !== undefined}
 			<UnitImage {projectName} image={unit.image} />
 		{/if}

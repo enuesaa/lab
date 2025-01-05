@@ -61,7 +61,12 @@ export type UnitV2 = {
 export type CodeUnit = {
 	title?: string
 	description?: string
+	links?: { title: string; url: string }[]
 	terminal?: string
+	inline?: {
+		open: string
+		file?: TreeData
+	}
 	mark?: string
 }
 

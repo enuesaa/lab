@@ -1,0 +1,41 @@
+title: |
+  Sveltekit で開発用ページを作る方法。
+  本番環境では公開しない
+description: |
+  本番環境では 404 を返す
+published: '2025-01-05'
+
+units:
+  - title: 悩み
+    description: |
+      Sveltekit で SSG しているサイトがあり、
+
+      ・開発用のダッシュボードを作りたい
+      ・本番環境では 404 を返したい
+
+      という要件があった
+  - title: 解決策
+    description: |
+      +page.server.ts の load() で環境変数を見て、本番環境なら 404 を返す
+    links:
+      - title: ドキュメント
+        url: https://svelte.jp/docs/kit/errors#Expected-errors
+
+  - code:
+      open: +page.server.ts
+      include:
+        - +page.svelte
+      units:
+        - description: |
+            error() は内部で throw new Error() する。
+            なので後続の処理は実行されない。
+          links:
+            - title: GitHub
+              url: https://github.com/sveltejs/kit/blob/9fbfb22e442236e1a8ffa27a71fbef84166646e6/packages/kit/src/exports/index.js#L64
+          mark: +page.server.ts:5
+
+  - title: おわりに
+    description: |
+      たぶん他にも方法はある。
+
+      趣味で運営しているサイトなので、雑な実装をしているが、商用サイトなら別の手段を推奨。

@@ -4,6 +4,8 @@
 	import CodeAreaUnitDescription from './CodeAreaUnitDescription.svelte'
 	import UnitTerminal from './UnitTerminal.svelte'
 	import CodeAreaUnitOpenFileButton from './CodeAreaUnitOpenFileButton.svelte'
+	import UnitLinks from './UnitLinks.svelte'
+	import UnitInline from './UnitInline.svelte'
 
 	export let codeFiles: CodeFiles
 	export let unit: CodeUnit
@@ -19,6 +21,17 @@
 	{#if unit.terminal !== undefined}
 		<UnitTerminal content={unit.terminal} />
 	{/if}
+
+	{#if unit.links !== undefined}
+		<UnitLinks links={unit.links} />
+	{/if}
+	{#if unit?.terminal !== undefined}
+		<UnitTerminal content={unit.terminal} />
+	{/if}
+	{#if unit?.inline !== undefined}
+		<UnitInline inline={unit.inline} />
+	{/if}
+
 	{#if unit.mark !== undefined}
 		<CodeAreaUnitOpenFileButton mark={unit.mark} codeFiles={codeFiles} />
 	{/if}
