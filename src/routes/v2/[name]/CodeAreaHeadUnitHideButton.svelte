@@ -14,7 +14,7 @@
 	</button>
 {:else}
 	<button on:click|preventDefault={handleClick}>
-		<NotepadText class="inline align-bottom stroke-2 w-[22px]" /> Notes
+		<NotepadText class="inline align-bottom stroke-2 w-[22px]" /> メモ
 	</button>
 {/if}
 

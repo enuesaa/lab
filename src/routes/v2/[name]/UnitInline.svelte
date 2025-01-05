@@ -7,6 +7,6 @@
 </script>
 
 <UnitSep />
-<div class="py-2 pl-2 pb-1 bg-editorbg rounded-b-lg">
+<div class="p-2 mb-2 bg-editorbg rounded-b-lg">
 	<Code language={inline?.file?.language ?? ''} code={inline?.file?.code ?? ''} />
 </div>

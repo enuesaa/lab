@@ -52,7 +52,7 @@
 
 <style lang="postcss">
 	button {
-		@apply block ml-1 px-1 my-[1px] text-left text-editortext;
+		@apply block ml-1 px-1 my-[1px] text-left text-editortext whitespace-nowrap;
 		@apply rounded-sm select-none relative;
 
 		&.selected-file {

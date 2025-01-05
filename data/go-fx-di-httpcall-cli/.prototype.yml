@@ -39,20 +39,28 @@ units:
         - logger.go
         - go.mod
       units:
-        - title: Module
-          description: |
+        - title: fx.New()
+          mark: main.go:10
+
+        - description: |
             cmdfx.Module と clientfx.Module があり、
             両者を fx.New() に渡している。
-          mark: main.go:12
+          mark: main.go:11
 
         - description: |
-            cmdfx.ICmd は clientfx.IClient へ依存
+            エントリポイント
+          mark: main.go:15
+
+        - title: cmdfx.Module
+          description: |
+            cmdfx.New() を fx に渡している
+          mark: cmdfx/module.go:7
+
+        - title: cmdfx.New()
+          description: |
+            cmdfx.ICmd は clientfx.IClient へ依存している
           mark: cmdfx/cmd.go:10
 
-        - description: |
-            New() を fx に渡して依存を解決してもらう
-          mark: cmdfx/module.go:7
-        
         - description: |
             cmdfx と clientfx は interface を介してやり取りしているのがポイント。これにより mock へ差し替えできる
           mark: cmdfx/cmd.go:24

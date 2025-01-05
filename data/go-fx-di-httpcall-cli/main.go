@@ -6,7 +6,6 @@ import (
 	"go.uber.org/fx"
 )
 
-// http リクエストする CLI ツール。curl みたいに。
 func main() {
 	fxapp := fx.New(
 		cmdfx.Module,

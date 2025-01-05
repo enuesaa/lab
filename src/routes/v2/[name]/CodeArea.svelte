@@ -23,7 +23,8 @@
 		</div>
 
 		{#if showCodeUnits}
-			<div class="flex-auto overflow-hidden relative z-10">
+			<div class="flex-auto relative z-10">
+				<div class="absolute -top-8 left-3 font-semibold font-zenmaru text-lg text-gray-900">メモ</div>
 				{#each codeUnits as codeUnit}
 					<CodeAreaUnit unit={codeUnit} {codeFiles} />
 				{/each}
