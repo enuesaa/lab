@@ -1,10 +1,8 @@
 <script lang="ts">
 	import type { PageData } from './$types'
-	import PageTitle from './PageTitle.svelte'
-	import Description from './Description.svelte'
-	import PagePublishedBar from './PagePublishedBar.svelte'
 	import Unit from './Unit.svelte'
 	import Main from '../../Main.svelte'
+	import PageHead from './PageHead.svelte'
 
 	export let data: PageData
 </script>
@@ -15,11 +13,7 @@
 </svelte:head>
 
 <Main>
-	<div class="container mx-auto px-1 pt-8 pb-2">
-		<PageTitle title={data.project.title} />
-		<PagePublishedBar published={data.project.published} />
-		<Description content={data.project?.description ?? ''} />	
-	</div>
+	<PageHead project={data.project} />
 	
 	{#each data.project?.units ?? [] as unit}
 		<Unit projectName={data.project?.name} {unit} />

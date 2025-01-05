@@ -53,6 +53,10 @@ export type UnitV2 = {
 		units?: CodeUnit[]
 		files?: CodeFiles
 	}
+	inline?: {
+		open: string
+		file?: TreeData
+	}
 }
 export type CodeUnit = {
 	title?: string

@@ -23,10 +23,11 @@ units:
   - title: 配列のアイテムを集計・操作する
     description: |
       入力として次のJSONを渡す。
-      {
-        "items": [2,1,2,3]
-      }
 
+  - inline:
+      open: _input.json
+  
+  - description:
       このとき $min() や $max() という関数で集計。
       $sort() で並び替えて $distinct() で重複アイテムを取り除く。
     links:

@@ -12,11 +12,26 @@ export const extractCodeFiles = async (project: ProjectV2): Promise<ProjectV2> =
 
 		const include = unit.code?.include ?? []
 		include.push(unit.code?.open) // by default
-		unit.code.files = await extract(`./data/${project.name}`, '', include)
 
+		unit.code.files = await extract(`./data/${project.name}`, '', include)
 		project.units[i] = unit
 	}
+	return project
+}
 
+export const extractInlineFile = async (project: ProjectV2): Promise<ProjectV2> => {
+	for (let i = 0; i < project.units.length; i++) {
+		const unit = project.units[i]
+		if (unit.inline === undefined || unit.inline.open === undefined) {
+			continue
+		}
+
+		const files = await extract(`./data/${project.name}`, '', [unit.inline.open])
+		if (files.length > 0) {
+			unit.inline.file = files[0]
+			project.units[i] = unit
+		}
+	}
 	return project
 }
 

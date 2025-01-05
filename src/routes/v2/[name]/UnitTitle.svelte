@@ -4,8 +4,6 @@
 	export let title: string
 </script>
 
-<div class="container mx-auto font-semibold text-3xl font-zenmaru">
-	<span class="inline-block px-5 py-4">
-		<Diamond class="inline align-baseline w-[20px] fill-black stroke-black" /> {title}
-	</span>
+<div class="mt-2 mb-[6px] mx-auto px-3 font-semibold text-2xl font-zenmaru">
+	<Diamond class="inline-block align-bottom w-[14px] fill-gray-1000 stroke-gray-1000 pb-[4px] mr-[6px]" />{title}
 </div>
