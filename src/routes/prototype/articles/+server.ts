@@ -1,4 +1,4 @@
-import { listProjects } from '$lib/prototype/server/project'
+import { listProjectsV2 } from '$lib/prototype/server/project'
 import { json } from '@sveltejs/kit'
 
 export const prerender = true
@@ -9,7 +9,7 @@ type Item = {
 	published: string
 }
 export async function GET() {
-	const projects = await listProjects()
+	const projects = await listProjectsV2()
 
 	const items: Item[] = []
 	for (const project of projects) {
