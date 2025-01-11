@@ -58,7 +58,7 @@
 
 <style lang="postcss">
 	.fade {
-		animation: fade 1s ease forwards;
+		animation: fade 0.3s ease forwards;
 	}
 	@keyframes fade {
 		0% {
