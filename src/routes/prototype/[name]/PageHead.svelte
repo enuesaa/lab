@@ -10,7 +10,7 @@
 <section>
 	<PageTitle title={project.title} />
 	<PagePublishedBar published={project.published} />
-	<PageDescription description={project?.description ?? ''} />	
+	<PageDescription description={project?.description ?? ''} />
 </section>
 
 <style lang="postcss">

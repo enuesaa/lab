@@ -16,7 +16,7 @@
 	let originX = 50
 	let originY = 50
 	const handleZoom = () => {
-		scale = (scale === 1) ? 1.3 : 1
+		scale = scale === 1 ? 1.3 : 1
 	}
 	const handleMouseMove: MouseEventHandler<HTMLDivElement> = (e) => {
 		const rect = e.currentTarget.getBoundingClientRect()
@@ -39,9 +39,10 @@
 {#if $open}
 	<div use:melt={$portalled}>
 		<div use:melt={$overlay} class="fixed inset-0 bg-gray-900/90 fade"></div>
-		
+
 		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-		<img use:melt={$content}
+		<img
+			use:melt={$content}
 			src={`/prototype/${projectName}/${image}`}
 			alt={image}
 			bind:this={imgRef}

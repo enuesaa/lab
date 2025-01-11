@@ -11,7 +11,9 @@
 	export let unit: CodeUnit
 </script>
 
-<div class="min-w-full mb-3 max-md:mb-1 bg-gray rounded-xl overflow-hidden shadow-2xlu border-[0.2px] border-gray-700 text-gray-900 px-1 py-[2px]">
+<div
+	class="min-w-full mb-3 max-md:mb-1 bg-gray rounded-xl overflow-hidden shadow-2xlu border-[0.2px] border-gray-700 text-gray-900 px-1 py-[2px]"
+>
 	{#if unit.title !== undefined}
 		<CodeAreaUnitTitle title={unit.title} />
 	{/if}
@@ -33,6 +35,6 @@
 	{/if}
 
 	{#if unit.mark !== undefined}
-		<CodeAreaUnitOpenFileButton mark={unit.mark} codeFiles={codeFiles} />
+		<CodeAreaUnitOpenFileButton mark={unit.mark} {codeFiles} />
 	{/if}
 </div>

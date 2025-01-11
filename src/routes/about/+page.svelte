@@ -12,7 +12,7 @@
 	<div class="container mx-auto px-1 pt-8 pb-2">
 		<PageTitle title="About" />
 		<PageDescription description={about} />
-		
+
 		<Links {links} />
 	</div>
 </Main>

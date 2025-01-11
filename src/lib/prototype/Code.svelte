@@ -7,7 +7,7 @@
 	export let language: string
 	export let code: string
 	export let showLineNumber = false
-	export let markLine: number|undefined = undefined
+	export let markLine: number | undefined = undefined
 
 	const lines = code.split('\n')
 	const useAuto = highlightjs.getLanguage(language) === undefined
@@ -18,8 +18,8 @@
 		<tbody>
 			{#each lines as line, i}
 				<tr>
-					<td class="lineNumber">{i+1}</td>
-					<td class={markLine !== undefined && markLine-1 === i ? 'mark' : ''}>
+					<td class="lineNumber">{i + 1}</td>
+					<td class={markLine !== undefined && markLine - 1 === i ? 'mark' : ''}>
 						<CodeLine code={line} {language} auto={useAuto} />
 					</td>
 				</tr>
@@ -56,10 +56,10 @@
 
 	@keyframes markAnimation {
 		0% {
-			@apply bg-orange-500/30
+			@apply bg-orange-500/30;
 		}
 		90% {
-			@apply bg-orange-500/30
+			@apply bg-orange-500/30;
 		}
 		100% {
 			@apply bg-transparent;

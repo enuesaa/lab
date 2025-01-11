@@ -13,7 +13,7 @@
 <Main>
 	<div class="container mx-auto px-1 pt-8 pb-2">
 		{#each data.projects as project}
-			<ProjectLink project={project} />
+			<ProjectLink {project} />
 		{/each}
 	</div>
 </Main>

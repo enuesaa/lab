@@ -14,8 +14,8 @@
 
 <Main>
 	<PageHead project={data.project} />
-	
+
 	{#each data.project?.units ?? [] as unit}
 		<Unit projectName={data.project?.name} {unit} />
-	{/each}	
+	{/each}
 </Main>

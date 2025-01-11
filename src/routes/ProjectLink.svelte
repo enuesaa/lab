@@ -6,7 +6,7 @@
 
 <div>
 	<a href={`/prototype/${project.name}`}>{project.title}</a>
-	<span>{project.published}</span>	
+	<span>{project.published}</span>
 </div>
 
 <style lang="postcss">

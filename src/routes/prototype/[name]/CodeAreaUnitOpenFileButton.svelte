@@ -11,7 +11,7 @@
 
 	const viewing = useCodeViewer()
 
-	function searchFile(files: CodeFiles): TreeData|undefined {
+	function searchFile(files: CodeFiles): TreeData | undefined {
 		for (const data of files) {
 			if (data.id === filename) {
 				return data
@@ -29,7 +29,7 @@
 	function handleClick() {
 		const data = searchFile(codeFiles)
 		if (data !== undefined) {
-			viewing.set({...data, markLine})
+			viewing.set({ ...data, markLine })
 		}
 	}
 </script>

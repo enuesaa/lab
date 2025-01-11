@@ -15,12 +15,12 @@ type CodeViewerState = TreeData & {
 }
 export const initCodeViewer = () => {
 	const initial = {
-    id: '',
-    title: '',
-    isDir: false,
-    children: [],
-    code: '',
-    language: '',
+		id: '',
+		title: '',
+		isDir: false,
+		children: [],
+		code: '',
+		language: '',
 	}
 	setContext('codeViewer', writable<CodeViewerState>(initial))
 }

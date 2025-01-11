@@ -30,16 +30,14 @@
 			<span class="ml-[5px]">{treeData.title}</span>
 		</button>
 	{/if}
+{:else if $viewing?.id === treeData.id}
+	<button on:click|preventDefault={handleFileClick} class="selected-file">
+		{treeData.title}
+	</button>
 {:else}
-	{#if $viewing?.id === treeData.id}
-		<button on:click|preventDefault={handleFileClick} class='selected-file'>
-			{treeData.title}
-		</button>
-	{:else}
-		<button on:click|preventDefault={handleFileClick} class='notselected-file'>
-			{treeData.title}
-		</button>
-	{/if}
+	<button on:click|preventDefault={handleFileClick} class="notselected-file">
+		{treeData.title}
+	</button>
 {/if}
 
 {#if hasChildren && expanded}

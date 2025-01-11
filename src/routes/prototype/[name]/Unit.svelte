@@ -36,7 +36,7 @@
 		{/if}
 	</section>
 {:else}
-	<CodeArea unit={unit} />
+	<CodeArea {unit} />
 {/if}
 
 <style lang="postcss">
