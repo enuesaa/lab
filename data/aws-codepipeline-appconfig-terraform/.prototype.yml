@@ -1,0 +1,46 @@
+title: |
+  [Terraform]
+  CodePipeline で AppConfig の設定値をデプロイする
+description: |
+  AppConfig の設定値 (Configuration) をデプロイしてみた。
+published: '2025-01-22'
+
+units:
+  - title: 構成
+    description: |
+      TODO
+      構成図
+
+  - code:
+      open: appconfig.tf
+      include:
+        - codebuild_buildspec.yml
+        - codebuild_logs.tf
+        - codebuild_role.tf
+        - codebuild.tf
+        - codepipeline_artifact.tf
+        - codepipeline_role.tf
+        - codepipeline.tf
+        - main.tf
+        - variables.tf
+      units:
+        - description: AppConfig
+          mark: appconfig.tf:1
+        - description: |
+            location_uri のフォーマットは CloudFormation のドキュメントを参照。
+          links:
+            - title: CloudFormation ドキュメント
+              url: https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/aws-resource-appconfig-configurationprofile.html#cfn-appconfig-configurationprofile-locationuri
+            - title: aws_appconfig_configuration_profile
+              url: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appconfig_configuration_profile 
+          mark: appconfig.tf:15
+        - description: CodeBuild
+          mark: codebuild.tf:1
+        - description: |
+            サンプルとして config.json を作成。
+            これを AppConfig の設定値に保存する。
+          mark: codebuild_buildspec.yml:6
+        - description: CodePipeline
+          mark: codepipeline.tf:1
+        - description: AppConfig をデプロイするためのIAM権限が必要
+          mark: codepipeline_role.tf:80
