@@ -2,14 +2,25 @@ title: |
   [Terraform]
   CodePipeline で AppConfig の設定値をデプロイする
 description: |
-  AppConfig の設定値 (Configuration) をデプロイしてみた。
-published: '2025-01-22'
+  AppConfig の設定値をデプロイしてみた。
+published: '2025-01-23'
 
 units:
+  - title: AppConfig
+    description: |
+      AppConfig には 設定プロファイル (Configuration Profile) と 環境 (Environment) という2つの概念があります。
+
+      本記事では設定プロファイルのソースを CodePipeline に設定しました。
+      CodePipeline で設定値を更新して環境へデプロイします。
+    image: appconfig-configuration-profile.png
+
   - title: 構成
     description: |
-      TODO
-      構成図
+      ・git push で CodePipeline を実行
+      ・CodeBuild でビルド
+      ・AppConfig へ設定値をデプロイ
+
+    image: architecture.png
 
   - code:
       open: appconfig.tf
@@ -44,3 +55,7 @@ units:
           mark: codepipeline.tf:1
         - description: AppConfig をデプロイするためのIAM権限が必要
           mark: codepipeline_role.tf:80
+  - title: Links
+    links:
+      - title: https://aws.amazon.com/jp/blogs/news/automating-feature-release-using-aws-appconfig-integration-with-aws-codepipeline/
+        url: https://aws.amazon.com/jp/blogs/news/automating-feature-release-using-aws-appconfig-integration-with-aws-codepipeline/
