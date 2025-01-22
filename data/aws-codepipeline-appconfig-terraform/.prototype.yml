@@ -2,7 +2,7 @@ title: |
   [Terraform]
   CodePipeline で AppConfig の設定値をデプロイする
 description: |
-  AppConfig の設定値をデプロイしてみた。
+  AWS AppConfig の設定値をデプロイしてみた。
 published: '2025-01-23'
 
 units:
