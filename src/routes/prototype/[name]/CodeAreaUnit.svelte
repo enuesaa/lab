@@ -12,7 +12,7 @@
 </script>
 
 <div
-	class="min-w-full mb-3 max-md:mb-1 bg-gray rounded-xl overflow-hidden shadow-2xlu border-[0.2px] border-gray-700 text-gray-900 px-1 py-[2px]"
+	class="min-w-full mb-3 max-md:mb-1 bg-gray rounded-xl overflow-hidden shadow-2xlu border-[0.2px] border-gray-700 text-gray-900 px-1 py-[2px] break-all"
 >
 	{#if unit.title !== undefined}
 		<CodeAreaUnitTitle title={unit.title} />
