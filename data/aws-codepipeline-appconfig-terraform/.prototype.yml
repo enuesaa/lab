@@ -10,8 +10,8 @@ units:
     description: |
       AppConfig には 設定プロファイル (Configuration Profile) と 環境 (Environment) という2つの概念があります。
 
-      本記事では設定プロファイルのソースを CodePipeline に設定しました。
-      CodePipeline で設定値を更新して環境へデプロイします。
+      本記事では、設定プロファイルのソースを CodePipeline にセットします。
+      そして環境へのデプロイを試みます。
     image: appconfig-configuration-profile.png
 
   - title: 構成
