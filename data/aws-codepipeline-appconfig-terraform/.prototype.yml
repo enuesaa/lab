@@ -1,8 +1,8 @@
 title: |
   [Terraform]
-  CodePipeline で AppConfig の設定値をデプロイする
+  CodePipeline で AppConfig の設定データをデプロイする
 description: |
-  AWS AppConfig の設定値をデプロイしてみた。
+  AWS AppConfig の設定データをデプロイしてみた。
 published: '2025-01-23'
 
 units:
@@ -18,7 +18,7 @@ units:
     description: |
       ・git push で CodePipeline を実行
       ・CodeBuild でビルド
-      ・AppConfig へ設定値をデプロイ
+      ・AppConfig へデプロイ
 
     image: architecture.png
 
@@ -49,7 +49,7 @@ units:
           mark: codebuild.tf:1
         - description: |
             サンプルとして config.json を作成。
-            これを AppConfig の設定値に保存する。
+            これを AppConfig に保存する。
           mark: codebuild_buildspec.yml:6
         - description: CodePipeline
           mark: codepipeline.tf:1

@@ -1,0 +1,57 @@
+title: |
+  [Terraform]
+  Lambda で AppConfig の設定データを取得してみる
+description: |
+  AppConfig の設定データを取得する Lambda 関数を作成。
+  Terraform で管理する。
+published: '2025-01-26'
+
+units:
+  - title: 構成
+    description: |
+      Lambda 関数に Lambda Layer を付けるだけ。
+    image: ./architecture.png
+
+  - title: 仕組み
+    description: |
+      基本的に Lambda Layer がよしなにしてくれる。
+      AWS 公式ドキュメントの図が分かりやすい。
+    links:
+      - title: https://docs.aws.amazon.com/ja_jp/appconfig/latest/userguide/appconfig-integration-lambda-extensions-how-it-works.html
+        url: https://docs.aws.amazon.com/ja_jp/appconfig/latest/userguide/appconfig-integration-lambda-extensions-how-it-works.html
+
+  - code:
+      open: lambda_app.py
+      include:
+        - main.tf
+        - lambda.tf
+        - lambda_role.tf
+        - variables.tf
+        - .gitignore
+      units:
+        - description: |
+            Application Name を環境変数より取得
+          mark: lambda_app.py:5
+        - description: |
+            この URL はAWS公式ドキュメントより持ってきた
+          links:
+            - title: https://docs.aws.amazon.com/ja_jp/appconfig/latest/userguide/appconfig-integration-lambda-extensions-add.html
+              url: https://docs.aws.amazon.com/ja_jp/appconfig/latest/userguide/appconfig-integration-lambda-extensions-add.html
+          mark: lambda_app.py:12
+        - description: |
+            ここに Lambda Layer の ARN をセットする
+          links:
+            - title: https://docs.aws.amazon.com/ja_jp/appconfig/latest/userguide/appconfig-integration-lambda-extensions-versions.html
+              url: https://docs.aws.amazon.com/ja_jp/appconfig/latest/userguide/appconfig-integration-lambda-extensions-versions.html
+          mark: lambda.tf:24
+        - description: |
+            terraform apply で zip ファイルを作成する
+          mark: lambda.tf:28
+        - description: |
+            AppConfig からデータを取得するための IAM 権限が必要
+          mark: lambda_role.tf:38
+
+  - title: Links
+    links:
+      - title: https://docs.aws.amazon.com/ja_jp/appconfig/latest/userguide/appconfig-integration-lambda-extensions-add.html
+        url: https://docs.aws.amazon.com/ja_jp/appconfig/latest/userguide/appconfig-integration-lambda-extensions-add.html
