@@ -1,6 +1,6 @@
 title: |
   [Terraform]
-  Lambda で AppConfig の設定データを取得してみる
+  Lambda で AppConfig の設定データを取得する
 description: |
   AppConfig の設定データを取得する Lambda 関数を作成。
   Terraform で管理する。
