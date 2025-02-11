@@ -1,6 +1,6 @@
 title: |
   [Terraform]
-  CodePipeline で AppConfig の設定データをデプロイする
+  CodePipeline で AppConfig へデプロイする
 description: |
   AWS AppConfig の設定データをデプロイしてみた。
 published: '2025-01-23'
@@ -10,15 +10,20 @@ units:
     description: |
       AppConfig には 設定プロファイル (Configuration Profile) と 環境 (Environment) という2つの概念があります。
 
-      本記事では、設定プロファイルのソースを CodePipeline にセットします。
+      ・設定プロファイル ... 設定データのソースやバリデーションなど
+      ・環境 ... デプロイ先
+
+      本記事では、設定プロファイルにて CodePipeline をソースとして指定します。
       そして環境へのデプロイを試みます。
     image: appconfig-configuration-profile.png
 
   - title: 構成
     description: |
-      ・git push で CodePipeline を実行
-      ・CodeBuild でビルド
-      ・AppConfig へデプロイ
+      CodePipeline を実行すると AppConfig の環境へデプロイされます。
+      
+      1. git push で CodePipeline を実行
+      2. CodeBuild でビルド
+      3. AppConfig へデプロイ
 
     image: architecture.png
 
