@@ -14,7 +14,7 @@
 	let codeUnits: CodeUnit[] = unit?.code?.units ?? []
 </script>
 
-<section>
+<section class="bg-gray-600 pt-1 pb-8 relative mt-9 mb-7">
 	<CodeAreaHead bind:showCodeUnits {codeFiles} title={unit?.title} />
 
 	<div class="w-[99vw] m-auto flex gap-2 max-md:gap-1">
@@ -37,7 +37,5 @@
 	section {
 		background-image: radial-gradient(#a5a5a5 2px, transparent 2px);
 		background-size: 20px 20px;
-		@apply bg-gray-600 pt-1 pb-8 relative;
-		@apply mt-9 mb-7;
 	}
 </style>

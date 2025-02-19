@@ -7,9 +7,9 @@
 	export let links: Link[]
 </script>
 
-<ul>
+<ul class="block py-1 px-10 my-4 w-full">
 	{#each links as link}
-		<li>
+		<li class="font-zenmaru text-lg font-normal">
 			{#if link.key !== null}
 				{link.key}:
 			{/if}
@@ -21,7 +21,6 @@
 <style lang="postcss">
 	ul {
 		list-style-type: square;
-		@apply block py-1 px-10 my-4 w-full;
 	}
 	li {
 		letter-spacing: 0.1px;
@@ -31,7 +30,6 @@
 		line-break: strict;
 		white-space: pre-wrap;
 		font-feature-settings: 'palt';
-		@apply font-zenmaru text-lg font-normal;
 	}
 	a {
 		text-decoration: underline;

@@ -45,6 +45,7 @@
 			use:melt={$content}
 			src={`/prototype/${projectName}/${image}`}
 			alt={image}
+			class="fixed z-20 block w-10/12 inset-0 m-auto max-w-[1500px] fade"
 			bind:this={imgRef}
 			on:mousemove={handleMouseMove}
 			on:click={handleZoom}
@@ -67,10 +68,5 @@
 		100% {
 			opacity: 1;
 		}
-	}
-
-	img {
-		@apply fixed z-20 block w-10/12 inset-0 m-auto max-w-[1500px];
-		@apply fade;
 	}
 </style>

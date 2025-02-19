@@ -15,7 +15,7 @@
 </script>
 
 {#if isNormalContent}
-	<section>
+	<section class="w-full relative overflow-hidden container max-w-[1150px] mx-auto px-1 pt-2 pb-2">
 		{#if unit?.title !== undefined}
 			<UnitTitle title={unit.title} />
 		{/if}
@@ -38,10 +38,3 @@
 {:else}
 	<CodeArea {unit} />
 {/if}
-
-<style lang="postcss">
-	section {
-		@apply w-full relative overflow-hidden;
-		@apply container max-w-[1150px] mx-auto px-1 pt-2 pb-2;
-	}
-</style>
