@@ -1,0 +1,40 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/env
+
+      - uses: actions/cache@v4
+        with:
+          key: e2e-${{ hashFiles('pnpm-lock.yaml') }}
+          path: |
+            node_modules
+            /home/runner/.cache/ms-playwright
+
+      - run: pnpm install
+
+      - run: pnpm install
+        working-directory: ./e2e
+
+      # always mark success because this test aims to extract visual diffs.
+      - run: pnpm test || true
+        working-directory: ./e2e
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: report
+          path: e2e/pw-report
+          retention-days: 1
+      - uses: daun/playwright-report-summary@v3
+        with:
+          report-file: e2e/pw-results/results.json
+          job-summary: true
