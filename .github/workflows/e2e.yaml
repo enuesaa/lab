@@ -1,4 +1,4 @@
-name: ci
+name: e2e
 
 on:
   push:
@@ -25,16 +25,17 @@ jobs:
       - run: pnpm install
         working-directory: ./e2e
 
-      # always mark success because this test aims to extract visual diffs.
-      - run: pnpm test || true
+      - run: pnpm test
         working-directory: ./e2e
 
-      - uses: actions/upload-artifact@v4
+      - if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: report
           path: e2e/pw-report
           retention-days: 1
-      - uses: daun/playwright-report-summary@v3
+      - if: always()
+        uses: daun/playwright-report-summary@v3
         with:
           report-file: e2e/pw-results/results.json
           job-summary: true

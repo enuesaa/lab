@@ -7,5 +7,5 @@ type Page = {
 }
 
 export const pages: Page[] = [
-	{ name: 'CodePipeline AppConfig Deployment', path: '/prototype/aws-codepipeline-appconfig-terraform' },
+	{ name: 'aws-codepipeline-appconfig-terraform', path: '/prototype/aws-codepipeline-appconfig-terraform' },
 ]
