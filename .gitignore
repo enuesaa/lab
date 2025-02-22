@@ -13,3 +13,8 @@ dist
 
 # assets
 static/prototype/*
+
+# e2e
+e2e/pw-screenshots
+e2e/pw-results
+e2e/pw-report
