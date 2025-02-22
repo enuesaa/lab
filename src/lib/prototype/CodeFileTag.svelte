@@ -8,9 +8,8 @@
 
 <style lang="postcss">
 	div {
-		@apply absolute top-[-25px] left-6;
+		@apply absolute top-[-25px] left-6 text-[15px] font-murecho;
 		@apply bg-editorbg text-editortext px-[10px] pt-[1px] rounded-t-lg;
-		@apply text-[15px] font-murecho;
-		@apply border-[0.5px] border-b-0 border-editortext/50 whitespace-nowrap;
+		@apply border-[0.5px] border-b-0 border-editortext/50 whitespace-nowrap select-all cursor-auto;
 	}
 </style>
