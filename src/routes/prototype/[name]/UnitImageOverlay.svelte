@@ -38,7 +38,7 @@
 
 {#if $open}
 	<div use:melt={$portalled}>
-		<div use:melt={$overlay} class="fixed inset-0 bg-gray-900/90 fade"></div>
+		<div use:melt={$overlay} class="fixed inset-0 bg-gray-900/90 fade z-10"></div>
 
 		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 		<img
@@ -51,7 +51,7 @@
 			on:click={handleZoom}
 		/>
 
-		<button use:melt={$close} class="fixed text-gray top-1 right-1">
+		<button use:melt={$close} class="fixed text-gray top-1 right-1 z-20">
 			<CloseIcon class="w-8 h-8" />
 		</button>
 	</div>
