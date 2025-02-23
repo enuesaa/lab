@@ -4,17 +4,12 @@
 	export let project: ProjectV2
 </script>
 
-<div>
+<div class="inline-block h-48 my-3 mx-1 sm:mx-2 align-middle w-[47%] relative">
 	<a href={`/prototype/${project.name}`}>{project.title}</a>
 	<span>{project.published}</span>
 </div>
 
 <style lang="postcss">
-	div {
-		@apply inline-block h-48 my-3 mx-1 sm:mx-2 align-middle w-[47%];
-		@apply relative;
-	}
-
 	a {
 		border: solid 1px rgba(0, 0, 0, 0.2);
 		box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);

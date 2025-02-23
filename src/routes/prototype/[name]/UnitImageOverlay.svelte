@@ -45,7 +45,7 @@
 			use:melt={$content}
 			src={`/prototype/${projectName}/${image}`}
 			alt={image}
-			class="fixed z-20 block w-10/12 inset-0 m-auto max-w-[1500px] fade outline-none"
+			class="fixed z-20 block w-10/12 inset-0 m-auto max-w-[1500px] outline-none"
 			bind:this={imgRef}
 			on:mousemove={handleMouseMove}
 			on:click={handleZoom}
@@ -58,7 +58,7 @@
 {/if}
 
 <style lang="postcss">
-	.fade {
+	img {
 		animation: fade 0.3s ease forwards;
 	}
 	@keyframes fade {

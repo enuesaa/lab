@@ -2,7 +2,7 @@ title: |
   [Terraform]
   CodePipeline で AppConfig へデプロイする
 description: |
-  AWS AppConfig へデプロイしてみた
+  AWS AppConfig へデプロイしてみた。
 published: '2025-01-23'
 
 units:
