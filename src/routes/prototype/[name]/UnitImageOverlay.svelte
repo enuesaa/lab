@@ -24,7 +24,7 @@
 		originY = ((e.clientY - rect.top) / rect.height) * 100
 	}
 	$: {
-		if (imgRef !== undefined) {
+		if (imgRef !== undefined && imgRef !== null) {
 			imgRef.style.transformOrigin = `${originX}% ${originY}%`
 			imgRef.style.transform = `scale(${scale})`
 			imgRef.style.cursor = scale === 1 ? 'zoom-in' : 'zoom-out'
@@ -45,7 +45,7 @@
 			use:melt={$content}
 			src={`/prototype/${projectName}/${image}`}
 			alt={image}
-			class="fixed z-20 block w-10/12 inset-0 m-auto max-w-[1500px] fade"
+			class="fixed z-20 block w-10/12 inset-0 m-auto max-w-[1500px] fade outline-none"
 			bind:this={imgRef}
 			on:mousemove={handleMouseMove}
 			on:click={handleZoom}
