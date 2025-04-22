@@ -1,0 +1,77 @@
+title: |
+  Go で HCL ファイルを読み取る
+description: |
+  HCL は Terraform で採用されている設定ファイルのフォーマット。
+  構造化したり適度に改行を挟めば、人間にとって読みやすい、と個人的に思う。
+
+  プログラムで扱うにはどうすればいいのかと思い、Go 言語で HCL ファイルを読み取ってみた。
+
+published: '2025-04-22'
+
+units: 
+  - title: ライブラリ
+    description: |
+      hashicorp/hcl を用いて HCL をパースする。
+      HashiCorp 公式のリポジトリ。おそらく Terraform の内部でも使用されている (はず)
+
+    links:
+      - url: https://github.com/hashicorp/hcl
+        title: github.com/hashicorp/hcl
+
+  - title: コード
+    code:
+      open: main.go
+      include:
+        - sample.hcl
+        - go.mod
+      units:
+        - title: サンプル
+          description: |
+            この HCL ファイルを読み取ってみる
+          mark: sample.hcl:1
+
+        - description: |
+            struct tag でフィールドを指定する
+          mark: main.go:15
+
+        - description: |
+            オプショナルに。
+          mark: main.go:16
+
+        - description: |
+            sample.hcl を読み取る
+          mark: main.go:28
+
+        - description: |
+            parser にバイト列を渡すこともできる。
+          mark: main.go:28
+          links:
+            - title: ParseHCL
+              url: https://pkg.go.dev/github.com/hashicorp/hcl2/hclparse#Parser.ParseHCL
+
+        - description: |
+            デコード
+          mark: main.go:35
+
+  - title: Variable を実現するには？
+    description: |
+      Partial Decoding をすれば、Terraform の `variable` のように値を参照してセットすることができる。
+    inline:
+      open: partialdecoding.hcl
+
+  - description: |
+      下記のページや issue のコメントが分かりやすくありがたい。
+    links:
+      - title: https://hcl.readthedocs.io/en/latest/go_decoding_gohcl.html#partial-decoding
+        url: https://hcl.readthedocs.io/en/latest/go_decoding_gohcl.html#partial-decoding
+      - title: https://github.com/hashicorp/hcl/issues/496
+        url: https://github.com/hashicorp/hcl/issues/496
+  
+  - description: |
+      サンプルコードを書いてみた。
+    inline:
+      open: partialdecoding.go
+
+  - description: |
+      他にも方法があるかもしれない。
+      また Terraform の場合は、リソースに依存関係があるので、もっと高度な実装がされていると思う。
