@@ -13,7 +13,7 @@ type IClient interface {
 	Do(method string, url string) (string, error)
 }
 
-type Client struct {}
+type Client struct{}
 
 func (c *Client) Do(method string, url string) (string, error) {
 	client := http.Client{}

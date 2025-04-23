@@ -10,7 +10,7 @@ func NewLogger() fxevent.Logger {
 	return &Logger{}
 }
 
-type Logger struct {}
+type Logger struct{}
 
 func (l *Logger) LogEvent(event fxevent.Event) {
 	switch e := event.(type) {

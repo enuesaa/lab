@@ -22,7 +22,7 @@ type ICmd interface {
 type Cmd struct {
 	client clientfx.IClient
 
-	url string
+	url    string
 	method string
 }
 
