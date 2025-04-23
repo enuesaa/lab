@@ -10,14 +10,20 @@ func New() IClient {
 }
 
 type IClient interface {
-	Get(url string) (string, error)
+	Do(method string, url string) (string, error)
 }
 
 type Client struct {}
 
-func (c *Client) Get(url string) (string, error) {
+func (c *Client) Do(method string, url string) (string, error) {
 	client := http.Client{}
-	resp, err := client.Get(url)
+
+	req, err := http.NewRequest(method, url, nil)
+	if err != nil {
+		return "", err
+	}
+
+	resp, err := client.Do(req)
 	if err != nil {
 		return "", err
 	}

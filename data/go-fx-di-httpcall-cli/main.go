@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/enuesaa/.devdev/go-fx-httpcall/clientfx"
-	"github.com/enuesaa/.devdev/go-fx-httpcall/cmdfx"
+	"github.com/enuesaa/lab/data/go-fx-di-httpcall-cli/clientfx"
+	"github.com/enuesaa/lab/data/go-fx-di-httpcall-cli/cmdfx"
 	"go.uber.org/fx"
 )
 

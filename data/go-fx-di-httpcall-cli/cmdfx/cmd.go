@@ -4,13 +4,12 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/enuesaa/.devdev/go-fx-httpcall/clientfx"
+	"github.com/enuesaa/lab/data/go-fx-di-httpcall-cli/clientfx"
 )
 
 func New(client clientfx.IClient) ICmd {
 	cmd := Cmd{
 		client: client,
-		url: "",
 	}
 	return &cmd
 }
@@ -24,23 +23,25 @@ type Cmd struct {
 	client clientfx.IClient
 
 	url string
+	method string
 }
 
 func (c *Cmd) Parse() error {
-	flag.StringVar(&c.url, "url", "", "Url to call. Example: https://example.com/")
+	flag.StringVar(&c.method, "X", "GET", "HTTP Method. Example: GET, POST, PUT, DELETE")
 	flag.Parse()
 
-	// validate
-	if c.url == "" {
-		return fmt.Errorf("missing required flag: -url")
+	args := flag.Args()
+	if len(args) < 1 {
+		return fmt.Errorf("missing required argument: <url>")
 	}
+	c.url = args[0]
 
 	return nil
 }
 
 func (c *Cmd) Run() error {
 	// http リクエスト
-	body, err := c.client.Get(c.url)
+	body, err := c.client.Do(c.method, c.url)
 	if err != nil {
 		return err
 	}

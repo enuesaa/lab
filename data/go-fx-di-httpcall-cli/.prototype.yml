@@ -13,10 +13,12 @@ units:
     description: |
       curl ライクな CLI を作ってみる。
 
-      とは言っても GET しかできない。
-      curl とは似ても似つかないが、まあサンプルなので良いと思う。
+      ・-X フラグで HTTP メソッドを指定
+      ・URL を引数として渡す
+      ・レスポンスボディを標準出力する
+
     terminal: |
-      $ go run . -url https://example.com/
+      $ go run . -X GET https://example.com/
       <!doctype html>
       <html>
       <head>
@@ -69,4 +71,9 @@ units:
 
         - description: |
             cmdfx と clientfx は interface を介してやり取りしている。これにより mock へ差し替えできる
-          mark: cmdfx/cmd.go:24
+          mark: cmdfx/cmd.go:23
+
+  - title: Links
+    links:
+      - title: https://github.com/uber-go/fx
+        url: https://github.com/uber-go/fx
