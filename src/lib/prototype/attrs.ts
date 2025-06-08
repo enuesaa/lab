@@ -1,7 +1,7 @@
 type Parsed = {
 	content: string
 	attrs: {
-		[key: string]: string
+		[key: string]: string|undefined
 	}
 }
 

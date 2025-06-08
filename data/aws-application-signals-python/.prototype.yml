@@ -18,19 +18,19 @@ units:
 
   - description: ''
 
-  - title: symbol(1.) サービス検出を有効化
+  - title: symbol=(1.) サービス検出を有効化
     description: |
       Application Signals のコンソールに行き、サービス検出を有効にします。
       ボタンを押すとサービスロールが作成されます。
     image: size=(min) application-signals-start.png
 
-  - title: symbol(2.) インスタンスを起動 (Amazon Linux 2023)
+  - title: symbol=(2.) インスタンスを起動 (Amazon Linux 2023)
     description: |
       EC2 でインスタンスを起動します。
       OS は Amazon Linux 2023 にしました。
     image: ec2.png
 
-  - title: symbol(3.) インスタンスプロファイル
+  - title: symbol=(3.) インスタンスプロファイル
     description: |
       EC2 に CloudWatch Agent を立ち上げるため、インスタンスプロファイルに IAM 権限が必要です。
       CloudWatchAgentServerPolicy ポリシーをつけます。
@@ -39,7 +39,7 @@ units:
   - description: |
       EC2 インスタンスが立ち上がったら ssh しましょう。
 
-  - title: symbol(4.) CloudWatch Agent をセットアップ
+  - title: symbol=(4.) CloudWatch Agent をセットアップ
     description: |
       CloudWatch Agent をインストールしましょう。
     terminal: |
@@ -60,7 +60,7 @@ units:
   - description: |
       設定ファイルのパスをフラグとして渡しているので適宜調整ください。
 
-  - title: symbol(5.) Python アプリの作成
+  - title: symbol=(5.) Python アプリの作成
     description: |
       Python 3.12 をインストールします。
     terminal: |
@@ -77,7 +77,7 @@ units:
   - inline:
       open: main.py
 
-  - title: symbol(6.) aws-opentelemetry-distro
+  - title: symbol=(6.) aws-opentelemetry-distro
     description: |
       トレースするのに必要なパッケージをインストールします。
     links:
@@ -88,7 +88,7 @@ units:
 
   - description: ''
 
-  - title: symbol(7.) アプリを立ち上げ
+  - title: symbol=(7.) アプリを立ち上げ
     description: |
       Flask を立ち上げましょう。
   
@@ -109,7 +109,7 @@ units:
       - title: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable-EC2Main.html
         url: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable-EC2Main.html#CloudWatch-Application-Signals-Enable-Other-instrument
 
-  - title: symbol(8.) リクエスト
+  - title: symbol=(8.) リクエスト
     description: |
       リクエストしましょう。
     terminal: |

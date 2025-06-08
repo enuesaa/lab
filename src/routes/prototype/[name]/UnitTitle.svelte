@@ -1,16 +1,9 @@
 <script lang="ts">
+	import { parseAttrs } from '$lib/prototype/attrs'
 	import { Diamond } from 'lucide-svelte'
 
 	export let title: string
-
-	let symbol: string | undefined = undefined
-	let display = title
-
-	const match = title.match(/^symbol\(([^)]+)\)\s+(.+)$/)
-	if (match !== null && match.length > 0) {
-		symbol = match[1]
-		display = match[2]
-	}
+	const { content: display, attrs: { symbol } } = parseAttrs(title)
 </script>
 
 <div class="mt-6 mb-[6px] mx-auto px-3 font-semibold text-2xl font-zenmaru">
