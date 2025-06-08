@@ -1,7 +1,7 @@
 title: |
   Application Signals で Python アプリをトレースする
 description: |
-  CloudWatch Application Signals は、EC2 や ECS で稼働しているアプリケーションを自動計装するサービスです。
+  CloudWatch Application Signals は、EC2 や ECS で稼働しているアプリケーションをトレースするサービスです。
   Java や Python, Node.js に対応してます。
 
   EC2 に Python アプリを立てて、どんな感じか試してみました。
@@ -14,19 +14,13 @@ units:
       詳細はドキュメントを参照ください。
     links:
       - title: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable-EC2Main.html
-        url: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable-EC2Main.html#CloudWatch-Application-Signals-Enable-Other-instrument
+        url: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable-EC2Main.html
 
   - title: サービス検出を有効化
     description: |
       Application Signals のコンソールに行き、サービス検出を有効にします。
       ボタンを押すとサービスロールが作成されます。
-    image: start.png
-
-  - description: |
-      ドキュメント
-    links:
-      - title: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable.html
-        url: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable.html
+    image: application-signals-start.png
 
   - title: インスタンスを起動 (Amazon Linux 2023)
     description: |
@@ -36,7 +30,7 @@ units:
 
   - title: インスタンスプロファイル
     description: |
-      EC2 に CloudWatch Agent を入れるため、インスタンスプロファイルに IAM 権限が必要です。
+      EC2 に CloudWatch Agent を立ち上げるため、インスタンスプロファイルに IAM 権限が必要です。
       CloudWatchAgentServerPolicy ポリシーをつけます。
     image: ec2iamrole.png
 
@@ -51,13 +45,13 @@ units:
       $ dnf install amazon-cloudwatch-agent
 
   - description: |
-      設定ファイルを作成します
+      設定ファイルを作成します。
     terminal: |
       $ vim cloudwatch-agent-config.json
   - inline:
       open: cloudwatch-agent-config.jsonc
   - description: |
-      CloudWatch Agent を立ち上げます
+      CloudWatch Agent を立ち上げます。
     terminal: |
       $ /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
         -a fetch-config -m ec2 -s \
@@ -85,7 +79,7 @@ units:
 
   - title: aws-opentelemetry-distro
     description: |
-      自動計装するのに必要なパッケージをインストールします。
+      トレースするのに必要なパッケージをインストールします。
     terminal: |
       $ pip3.12 install aws-opentelemetry-distro
 
@@ -97,8 +91,8 @@ units:
 
   - title: アプリを立ち上げ
     description: |
-      アプリを立ち上げてトレースします。
-
+      アプリを立ち上げます。
+      
       opentelemetry-instrument をかませるのがミソです。
       これが 4316 ポート (CloudWatch Agent) へトレース情報を送信します。
     terminal: |
@@ -124,11 +118,11 @@ units:
       hello
 
   - description: |
-      しばらくすると X-Ray にトレースが表示されます。
+      X-Ray にトレースが表示されます。
     image: cloudwatch-traces.png
 
   - description: |
-      さらにしばらくすると Application Signals にも情報が表示されます。
+      しばらくすると Application Signals にも情報が表示されます。
     image: application-signals-services.png
   
   - description: |
