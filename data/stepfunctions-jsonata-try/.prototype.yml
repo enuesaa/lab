@@ -20,12 +20,12 @@ units:
     links:
       - title: https://docs.jsonata.org/string-functions#uppercase
         url: https://docs.jsonata.org/string-functions#uppercase
-    image: uppercase.png
+    image: size=(min) uppercase.png
 
   - title: 大文字へ (実行結果) 
     description: |
       期待通り大文字になった
-    image: uppercase-result.png
+    image: size=(min) uppercase-result.png
   
   - title: 配列を集計・操作
     description: |
@@ -42,11 +42,11 @@ units:
         url: https://docs.jsonata.org/aggregation-functions
       - title: https://docs.jsonata.org/array-functions
         url: https://docs.jsonata.org/array-functions
-    image: items.png
+    image: size=(min) items.png
   
   - title: 配列を集計・操作 (実行結果)
     description: 期待通り
-    image: items-result.png
+    image: size=(min) items-result.png
 
   - code:
       open: items.asl.yml

@@ -10,7 +10,7 @@ units:
   - title: 構成
     description: |
       Lambda 関数に Lambda Layer を付けるだけ。
-    image: ./architecture.png
+    image: size=(min) architecture.png
 
   - title: 仕組み
     description: |

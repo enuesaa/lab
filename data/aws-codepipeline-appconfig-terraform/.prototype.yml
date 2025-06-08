@@ -15,7 +15,7 @@ units:
 
       本記事では、設定プロファイルにて CodePipeline をソースとして指定します。
       そして環境へのデプロイを試みます。
-    image: appconfig-configuration-profile.png
+    image: size=(min) appconfig-configuration-profile.png
 
   - title: 構成
     description: |
@@ -25,7 +25,7 @@ units:
       2. CodeBuild でビルド
       3. AppConfig へデプロイ
 
-    image: architecture.png
+    image: size=(min) architecture.png
 
   - code:
       open: appconfig.tf
