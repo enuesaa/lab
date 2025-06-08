@@ -22,7 +22,7 @@ units:
     description: |
       Application Signals のコンソールに行き、サービス検出を有効にします。
       ボタンを押すとサービスロールが作成されます。
-    image: application-signals-start.png
+    image: size=(min) application-signals-start.png
 
   - title: symbol(2.) インスタンスを起動 (Amazon Linux 2023)
     description: |
@@ -34,7 +34,7 @@ units:
     description: |
       EC2 に CloudWatch Agent を立ち上げるため、インスタンスプロファイルに IAM 権限が必要です。
       CloudWatchAgentServerPolicy ポリシーをつけます。
-    image: ec2iamrole.png
+    image: size=(min) ec2iamrole.png
 
   - description: |
       EC2 インスタンスが立ち上がったら ssh しましょう。
@@ -42,7 +42,6 @@ units:
   - title: symbol(4.) CloudWatch Agent をセットアップ
     description: |
       CloudWatch Agent をインストールしましょう。
-
     terminal: |
       $ dnf install amazon-cloudwatch-agent
 
@@ -64,7 +63,6 @@ units:
   - title: symbol(5.) Python アプリの作成
     description: |
       Python 3.12 をインストールします。
-
     terminal: |
       $ dnf install python3.12-pip
       $ python3.12 --version
@@ -73,7 +71,6 @@ units:
   - description: |
       続いてトレースするアプリを用意します。
       Flask にしました。
-
     terminal: |
       $ pip3.12 install flask
       $ vim main.py

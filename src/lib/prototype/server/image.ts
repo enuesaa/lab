@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import type { ProjectV2 } from '$lib/prototype/types'
+import { parseAttrs } from '../attrs'
 
 export const copyUnitImage = async (project: ProjectV2) => {
 	const publishdir = path.join('./static/prototype', project.name)
@@ -14,7 +15,9 @@ export const copyUnitImage = async (project: ProjectV2) => {
 		if (unit.image === undefined) {
 			continue
 		}
-		const filename = unit.image
+		const parsed = parseAttrs(unit.image)
+		const filename = parsed.content
+
 		const src = path.join('./data', project.name, filename)
 		const dest = path.join(publishdir, filename)
 
