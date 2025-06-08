@@ -16,6 +16,8 @@ units:
       - title: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable-EC2Main.html
         url: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable-EC2Main.html
 
+  - description: ''
+
   - title: symbol(1.) サービス検出を有効化
     description: |
       Application Signals のコンソールに行き、サービス検出を有効にします。
@@ -74,6 +76,7 @@ units:
 
     terminal: |
       $ pip3.12 install flask
+      $ vim main.py
   - inline:
       open: main.py
 
@@ -86,9 +89,12 @@ units:
     terminal: |
       $ pip3.12 install aws-opentelemetry-distro
 
+  - description: ''
+
   - title: symbol(7.) アプリを立ち上げ
     description: |
-      アプリを立ち上げます。
+      Flask を立ち上げましょう。
+  
       opentelemetry-instrument をかませるのがミソです。
       これが 4316 ポート (CloudWatch Agent) へトレース情報を送信します。
     terminal: |
