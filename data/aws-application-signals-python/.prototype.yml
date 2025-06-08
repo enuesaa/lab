@@ -1,0 +1,136 @@
+title: |
+  Application Signals で Python アプリをトレースする
+description: |
+  CloudWatch Application Signals は、EC2 や ECS で稼働しているアプリケーションを自動計装するサービスです。
+  Java や Python, Node.js に対応してます。
+
+  EC2 に Python アプリを立てて、どんな感じか試してみました。
+published: '2025-06-08'
+
+units:
+  - title: はじめに
+    description: |
+      本記事では AWS ドキュメントの手順に沿ってセットアップを進めます。
+      詳細はドキュメントを参照ください。
+    links:
+      - title: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable-EC2Main.html
+        url: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable-EC2Main.html#CloudWatch-Application-Signals-Enable-Other-instrument
+
+  - title: サービス検出を有効化
+    description: |
+      Application Signals のコンソールに行き、サービス検出を有効にします。
+      ボタンを押すとサービスロールが作成されます。
+    image: start.png
+
+  - description: |
+      ドキュメント
+    links:
+      - title: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable.html
+        url: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable.html
+
+  - title: インスタンスを起動 (Amazon Linux 2023)
+    description: |
+      EC2 でインスタンスを起動します。
+      OS は Amazon Linux 2023 にしました。
+    image: ec2.png
+
+  - title: インスタンスプロファイル
+    description: |
+      EC2 に CloudWatch Agent を入れるため、インスタンスプロファイルに IAM 権限が必要です。
+      CloudWatchAgentServerPolicy ポリシーをつけます。
+    image: ec2iamrole.png
+
+  - description: |
+      EC2 インスタンスが立ち上がったら ssh しましょう。
+
+  - title: CloudWatch Agent をセットアップ
+    description: |
+      CloudWatch Agent をインストールしましょう。
+
+    terminal: |
+      $ dnf install amazon-cloudwatch-agent
+
+  - description: |
+      設定ファイルを作成します
+    terminal: |
+      $ vim cloudwatch-agent-config.json
+  - inline:
+      open: cloudwatch-agent-config.jsonc
+  - description: |
+      CloudWatch Agent を立ち上げます
+    terminal: |
+      $ /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
+        -a fetch-config -m ec2 -s \
+        -c file:cloudwatch-agent-config.json
+  - description: |
+      設定ファイルのパスをフラグとして渡しているので適宜調整ください。
+
+  - title: Python アプリの作成
+    description: |
+      Python 3.12 をインストールします。
+
+    terminal: |
+      $ dnf install python3.12-pip
+      $ python3.12 --version
+      Python 3.12.10
+
+  - description: |
+      続いてトレースするアプリを用意します。
+      Flask にしました。
+
+    terminal: |
+      $ pip3.12 install flask
+  - inline:
+      open: main.py
+
+  - title: aws-opentelemetry-distro
+    description: |
+      自動計装するのに必要なパッケージをインストールします。
+    terminal: |
+      $ pip3.12 install aws-opentelemetry-distro
+
+  - description: |
+      ドキュメント
+    links:
+      - title: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable-EC2Main.html
+        url: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable-EC2Main.html#CloudWatch-Application-Signals-Enable-Other-instrument
+
+  - title: アプリを立ち上げ
+    description: |
+      アプリを立ち上げてトレースします。
+
+      opentelemetry-instrument をかませるのがミソです。
+      これが 4316 ポート (CloudWatch Agent) へトレース情報を送信します。
+    terminal: |
+      $ OTEL_METRICS_EXPORTER=none \
+        OTEL_LOGS_EXPORTER=none \
+        OTEL_AWS_APPLICATION_SIGNALS_ENABLED=true \
+        OTEL_AWS_APPLICATION_SIGNALS_EXPORTER_ENDPOINT=http://localhost:4316/v1/metrics \
+        OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://localhost:4316/v1/traces \
+        opentelemetry-instrument python3.12 main.py
+
+  - description: |
+      環境変数はいろいろありますが、
+      ドキュメントが詳しいので、そちらを参照いただければと思います。
+    links:
+      - title: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable-EC2Main.html
+        url: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable-EC2Main.html#CloudWatch-Application-Signals-Enable-Other-instrument
+
+  - title: リクエスト
+    description: |
+      リクエストしましょう。
+    terminal: |
+      $ curl http://127.0.0.1:8080/
+      hello
+
+  - description: |
+      しばらくすると X-Ray にトレースが表示されます。
+    image: cloudwatch-traces.png
+
+  - description: |
+      さらにしばらくすると Application Signals にも情報が表示されます。
+    image: application-signals-services.png
+  
+  - description: |
+      トレースやメトリクスとも連携されます。
+    image: application-signals-traces.png
