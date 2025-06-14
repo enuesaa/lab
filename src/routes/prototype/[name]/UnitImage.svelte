@@ -8,10 +8,7 @@
 	const { content: filename, attrs } = parseAttrs(image)
 </script>
 
-<div
-	class="mb-3 relative"
-	style={attrs?.size === 'min' ? 'max-width: min(100%,800px)': 'max-width: min(100%,1150px)'}
->
+<div class="mb-3 relative" style={attrs?.size === 'min' ? 'max-width: min(100%,800px)' : 'max-width: min(100%,1150px)'}>
 	<img src={`/prototype/${projectName}/${filename}`} alt={filename} />
 	<UnitImageOverlay {projectName} image={filename} />
 </div>
