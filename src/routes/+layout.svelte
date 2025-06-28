@@ -2,6 +2,7 @@
 	import './app.css'
 	import Footer from './Footer.svelte'
 	import Header from './Header.svelte'
+	import Analytics from './Analytics.svelte'
 </script>
 
 <svelte:head>
@@ -16,6 +17,7 @@
 	<meta name="theme-color" content="#cccccc" />
 </svelte:head>
 
+<Analytics />
 <Header />
 
 <slot />
