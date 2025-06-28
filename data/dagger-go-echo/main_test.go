@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/enuesaa/lab/data/dagger-go-echo/db"
+	"github.com/enuesaa/playground-2025/dagger-go-echo-sqlc/db"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

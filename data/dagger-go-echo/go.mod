@@ -1,4 +1,4 @@
-module github.com/enuesaa/lab/data/dagger-go-echo
+module github.com/enuesaa/playground-2025/dagger-go-echo-sqlc
 
 go 1.24.0
 

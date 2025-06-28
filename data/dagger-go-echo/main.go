@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/enuesaa/lab/data/dagger-go-echo/db"
+	"github.com/enuesaa/playground-2025/dagger-go-echo-sqlc/db"
 
 	"github.com/labstack/echo/v4"
 )
