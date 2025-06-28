@@ -25,23 +25,21 @@ func (m *App) Sqlc(ctx context.Context) (string, error) {
 		Stdout(ctx)
 }
 
-// migrate up
-func (m *App) Migrate(ctx context.Context) (string, error) {
-	mysql := dag.Container().
-		From("mysql:8.0").
-		WithEnvVariable("MYSQL_ROOT_PASSWORD", "password").
-		WithEnvVariable("MYSQL_DATABASE", "app").
-		WithExposedPort(3306).
-		AsService()
-
-	src := dag.CurrentModule().Source().Directory("..")
-	
+// migrate
+func (m *App) Migrate(ctx context.Context,
+	// +optional
+	// +default="./migrations"
+	migrationPath string,
+	// +optional 
+	// +default="mysql://root:password@host.docker.internal:3306/app"
+	databaseUrl string,
+	// +optional
+	// +default="version"
+	command string,
+) (string, error) {
 	return m.Container().
-		WithServiceBinding("mysql", mysql).
-		WithDirectory("/app", src).
-		WithWorkdir("/app").
 		WithExec([]string{"go", "install", "-tags", "mysql", "github.com/golang-migrate/migrate/v4/cmd/migrate@latest"}).
-		WithExec([]string{"migrate", "-path", "./migrations", "-database", "mysql://root:password@mysql:3306/app", "up"}).
+		WithExec([]string{"migrate", "-path", migrationPath, "-database", databaseUrl, command}).
 		Stdout(ctx)
 }
 
@@ -58,20 +56,17 @@ func (m *App) Test(ctx context.Context) (string, error) {
 	mysql := dag.Container().
 		From("mysql:8.0").
 		WithEnvVariable("MYSQL_ROOT_PASSWORD", "password").
-		WithEnvVariable("MYSQL_DATABASE", "app").
+		WithEnvVariable("MYSQL_DATABASE", "test").
 		WithExposedPort(3306).
 		AsService()
-
-	src := dag.CurrentModule().Source().Directory("..")
 	
 	container := m.Container().
 		WithServiceBinding("mysql", mysql).
-		WithDirectory("/app", src).
 		WithEnvVariable("DB_HOST", "mysql").
 		WithEnvVariable("DB_PORT", "3306").
 		WithEnvVariable("DB_USER", "root").
 		WithEnvVariable("DB_PASSWORD", "password").
-		WithEnvVariable("DB_NAME", "app").
+		WithEnvVariable("DB_NAME", "test").
 		WithExec([]string{"go", "install", "-tags", "mysql", "github.com/golang-migrate/migrate/v4/cmd/migrate@latest"}).
 		WithExec([]string{"migrate", "-path", "./migrations", "-database", "mysql://root:password@mysql:3306/app", "up"})
 	
