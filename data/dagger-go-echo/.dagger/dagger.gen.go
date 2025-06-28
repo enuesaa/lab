@@ -196,6 +196,13 @@ func invoke(ctx context.Context, parentJSON []byte, parentName string, fnName st
 				panic(fmt.Errorf("%s: %w", "failed to unmarshal parent object", err))
 			}
 			return (*App).Build(&parent), nil
+		case "Generate":
+			var parent App
+			err = json.Unmarshal(parentJSON, &parent)
+			if err != nil {
+				panic(fmt.Errorf("%s: %w", "failed to unmarshal parent object", err))
+			}
+			return (*App).Generate(&parent, ctx), nil
 		case "Echo":
 			var parent App
 			err = json.Unmarshal(parentJSON, &parent)
@@ -228,11 +235,16 @@ func invoke(ctx context.Context, parentJSON []byte, parentName string, fnName st
 							dag.TypeDef().WithObject("Container")).
 							WithSourceMap(dag.SourceMap("main.go", 42, 1))).
 					WithFunction(
+						dag.Function("Generate",
+							dag.TypeDef().WithObject("Directory")).
+							WithDescription("Generate runs sqlc generate").
+							WithSourceMap(dag.SourceMap("main.go", 51, 1))).
+					WithFunction(
 						dag.Function("Echo",
 							dag.TypeDef().WithKind(dagger.TypeDefKindStringKind)).
 							WithDescription("このコメントがそのまま説明になる").
-							WithSourceMap(dag.SourceMap("main.go", 51, 1)).
-							WithArg("stringArg", dag.TypeDef().WithKind(dagger.TypeDefKindStringKind), dagger.FunctionWithArgOpts{SourceMap: dag.SourceMap("main.go", 51, 41)}))), nil
+							WithSourceMap(dag.SourceMap("main.go", 63, 1)).
+							WithArg("stringArg", dag.TypeDef().WithKind(dagger.TypeDefKindStringKind), dagger.FunctionWithArgOpts{SourceMap: dag.SourceMap("main.go", 63, 41)}))), nil
 	default:
 		return nil, fmt.Errorf("unknown object %s", parentName)
 	}

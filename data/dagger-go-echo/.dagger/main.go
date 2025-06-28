@@ -47,6 +47,18 @@ func (m *App) Build() *dagger.Container {
 	return container
 }
 
+// Generate runs sqlc generate
+func (m *App) Generate(ctx context.Context) *dagger.Directory {
+	src := dag.CurrentModule().Source().Directory("..")
+	return dag.Container().
+		From("golang:1.24").
+		WithMountedDirectory("/app", src).
+		WithWorkdir("/app").
+		WithExec([]string{"go", "install", "github.com/sqlc-dev/sqlc/cmd/sqlc@latest"}).
+		WithExec([]string{"sqlc", "generate"}).
+		Directory("/app")
+}
+
 // このコメントがそのまま説明になる
 func (m *App) Echo(ctx context.Context, stringArg string) (string, error) {
 	return dag.Container().From("alpine:latest").WithExec([]string{"echo", stringArg}).Stdout(ctx)
