@@ -45,6 +45,14 @@ func (m *App) Migrate(ctx context.Context) (string, error) {
 		Stdout(ctx)
 }
 
+// lint
+func (m *App) Lint(ctx context.Context) (string, error) {
+	return m.Container().
+		WithExec([]string{"go", "install", "honnef.co/go/tools/cmd/staticcheck@latest"}).
+		WithExec([]string{"staticcheck", "./..."}).
+		Stdout(ctx)
+}
+
 // test with mysql
 func (m *App) Test(ctx context.Context) (string, error) {
 	mysql := dag.Container().

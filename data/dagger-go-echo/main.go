@@ -3,11 +3,12 @@ package main
 import (
 	"database/sql"
 	"log"
-	"net/http"
 	"os"
 
 	"github.com/enuesaa/lab/data/dagger-go-echo/db"
 	_ "github.com/go-sql-driver/mysql"
+	"net/http"
+
 	"github.com/labstack/echo/v4"
 )
 
@@ -19,8 +20,13 @@ func main() {
 	defer dbConn.Close()
 
 	queries := db.New(dbConn)
+	e := setupRouter(queries)
+	e.Logger.Fatal(e.Start(":8080"))
+}
 
+func setupRouter(queries *db.Queries) *echo.Echo {
 	e := echo.New()
+	
 	e.GET("/", func(c echo.Context) error {
 		tasks, err := queries.ListTasks(c.Request().Context())
 		if err != nil {
@@ -28,5 +34,6 @@ func main() {
 		}
 		return c.JSON(http.StatusOK, tasks)
 	})
-	e.Logger.Fatal(e.Start(":8080"))
+	
+	return e
 }
