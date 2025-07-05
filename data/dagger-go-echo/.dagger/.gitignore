@@ -1,7 +1,5 @@
 /.env
-
-### 通常はignoreするがサンプルなのでコミット
-# /dagger.gen.go
-# /internal/dagger
-# /internal/querybuilder
-# /internal/telemetry
+/dagger.gen.go
+/internal/dagger
+/internal/querybuilder
+/internal/telemetry

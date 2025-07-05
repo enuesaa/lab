@@ -2,21 +2,34 @@ package db
 
 import (
 	"database/sql"
+	"fmt"
 	"os"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func Open() (*Queries, error) {
-	dburl := os.Getenv("DATABASE_URL")
+type DB struct {
+	*Queries
+	Conn *sql.DB
+}
 
-	conn, err := sql.Open("mysql", dburl)
+func Open() (*DB, error) {
+	dsn := os.Getenv("DATABASE_URL")
+	if dsn == "" {
+		return nil, fmt.Errorf("DATABASE_URL is empty")
+	}
+
+	conn, err := sql.Open("mysql", dsn)
 	if err != nil {
 		return nil, err
 	}
-	return New(conn), nil
+
+	return &DB{
+		Queries: New(conn),
+		Conn:    conn,
+	}, nil
 }
 
-// func Close(q *Queries) {
-// 	q.db.Close()
-// }
+func (db *DB) Close() error {
+	return db.Conn.Close()
+}

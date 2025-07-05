@@ -14,7 +14,6 @@ func (m *App) AppContainer() *dagger.Container {
 		Dockerfile: "Dockerfile",
 		Target: "builder",
 	}
-
 	return dag.Container().
 		Build(src, buildops).
 		WithExposedPort(8080)
@@ -28,42 +27,6 @@ func (m *App) MySQLContainer() *dagger.Container {
 		WithEnvVariable("MYSQL_DATABASE", "test").
 		WithExposedPort(3306)
 }
-
-// up dev server
-func (m *App) Up(ctx context.Context) error {
-	mysql := m.MySQLContainer().AsService()
-	app := m.AppContainer().
-		WithServiceBinding("mysql", mysql).
-		WithEnvVariable("DATABASE_URL", "root:password@tcp(mysql:3306)/test?parseTime=true").		
-		WithExec([]string{"go", "install", "-tags", "mysql", "github.com/golang-migrate/migrate/v4/cmd/migrate@latest"}).
-		WithExec([]string{"migrate", "-path", "migrations", "-database", "mysql://root:password@tcp(mysql:3306)/test", "up"}).
-		AsService()
-	return app.Up(ctx)
-}
-
-// sqlc generate
-func (m *App) Sqlc(ctx context.Context) (string, error) {
-	return m.AppContainer().
-		WithExec([]string{"go", "install", "github.com/sqlc-dev/sqlc/cmd/sqlc@latest"}).
-		WithExec([]string{"sqlc", "generate"}).
-		Stdout(ctx)
-}
-
-// // migrate
-// func (m *App) Migrate(ctx context.Context,
-// 	container *dagger.Container,
-// 	// +optional 
-// 	// +default="mysql://root:password@tcp(mysql:3306)/app"
-// 	databaseUrl string,
-// 	// +optional
-// 	// +default="version"
-// 	command string,
-// ) (string, error) {
-// 	return container.
-// 		WithExec([]string{"go", "install", "-tags", "mysql", "github.com/golang-migrate/migrate/v4/cmd/migrate@latest"}).
-// 		WithExec([]string{"migrate", "-path", "migrations", "-database", databaseUrl, command}).
-// 		Stdout(ctx)
-// }
 
 // lint
 func (m *App) Lint(ctx context.Context) (string, error) {
@@ -79,8 +42,7 @@ func (m *App) Test(ctx context.Context) (string, error) {
 	app := m.AppContainer().
 		WithServiceBinding("mysql", mysql).
 		WithEnvVariable("DATABASE_URL", "root:password@tcp(mysql:3306)/test?parseTime=true").
-		WithExec([]string{"go", "install", "-tags", "mysql", "github.com/golang-migrate/migrate/v4/cmd/migrate@latest"}).
-		WithExec([]string{"migrate", "-path", "migrations", "-database", "mysql://root:password@tcp(mysql:3306)/test", "up"})
+		WithExec([]string{"go", "tool", "goose", "mysql", "root:password@tcp(mysql:3306)/test", "-dir", "./migrations", "up"})
 
 	return app.WithExec([]string{"go", "test", "-v", "./..."}).Stdout(ctx)
 }

@@ -1,0 +1,27 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    environment:
+      - DATABASE_URL=root:password@tcp(mysql:3306)/app?parseTime=true
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/app
+    depends_on:
+      - mysql
+  
+  mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=app
+    ports:
+      - 3306:3306
+    volumes:
+      - mysqldata:/var/lib/mysql
+
+volumes:
+  mysqldata:
