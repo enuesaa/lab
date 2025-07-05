@@ -15,7 +15,7 @@ units:
 
   - title: インストール
     description: |
-      Mac では Homebrew でインストールできます
+      Mac では Homebrew でインストールできます。
 
     terminal: |
       $ brew install dagger/tap/dagger
@@ -77,7 +77,52 @@ units:
         - testdata
         - testdata/00001_seed_tasks_table.sql
 
-      # units:
-      #   - links:
-      #       - title: ドキュメント
-      #         url: https://rollupjs.org/plugin-development/#buildstart
+      units:
+        - description: |
+            アプリのコンテナです
+
+            Dagger ではベースイメージを指定してゼロから組み立てるケースが多いですが、私は Dockerfile ベースにしました
+          links:
+            - title: ドキュメント
+              url: https://docs.dagger.io/features/programmability
+          mark: .dagger/main.go:11
+        - description: |
+            MySQL のコンテナです。テストで使います
+          mark: .dagger/main.go:23
+        
+        - title: リント
+          description: |
+            `dagger call lint` で呼び出します
+          mark: .dagger/main.go:32
+        
+        - title: テスト
+          description: |
+            `dagger call test` で呼び出します
+          mark: .dagger/main.go:40
+          
+        - description: |
+            テストする前に、マグレーションをします
+          mark: .dagger/main.go:47
+
+
+  - title: テストを呼び出す
+    description: |
+      `dagger call <function-name>` で呼び出せます
+    terminal: |
+      $ dagger call test
+
+      ▶ connect 0.2s
+      ▶ load module: . 2.3s
+
+      ● app: App! 0.0s
+      ▶ .test: String! 34.1s
+
+      ● parsing command line arguments 0.0s
+
+      === RUN   TestGetTasksHandler
+      --- PASS: TestGetTasksHandler (0.00s)
+      PASS
+      ok  	github.com/enuesaa/lab/data/dagger-go-echo	0.003s
+      ?   	github.com/enuesaa/lab/data/dagger-go-echo/db	[no test files]
+  
+  - image: size=(min) test.gif
