@@ -48,7 +48,7 @@ units:
       .dagger/main.go に Dagger のスクリプトを記述します。
 
   - code:
-      open: main.go
+      open: .dagger/main.go
       include:
         - .dagger
         - .dagger/.gitattributes
@@ -58,25 +58,24 @@ units:
         - .dagger/main.go
         - .gitignore
         - .air.toml
-        - db
-        - db/db.go
-        - db/main.go
-        - db/models.go
-        - db/queries.sql
-        - db/queries.sql.go
+        - dagger.json
         - docker-compose.yml
         - Dockerfile
         - go.mod
         - go.sum
         - main.go
         - main_test.go
+        - sqlc.yaml
+        - db
+        - db/db.go
+        - db/main.go
+        - db/models.go
+        - db/queries.sql
+        - db/queries.sql.go
         - migrations
         - migrations/20250629061144_create_tasks_table.sql
-        - sqlc.yaml
         - testdata
         - testdata/00001_seed_tasks_table.sql
-        - dagger.json
-
 
       # units:
       #   - links:

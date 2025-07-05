@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { useCodeViewer } from '$lib/prototype/tree'
+	import { useCodeViewer, type TreeData } from '$lib/prototype/tree'
 	import { onMount } from 'svelte'
 	import Code from '$lib/prototype/Code.svelte'
 	import CodeSep from './CodeSep.svelte'
@@ -15,12 +15,21 @@
 
 	const viewing = useCodeViewer()
 	onMount(() => {
-		for (const data of codeFiles) {
-			if (data.id === firstOpen) {
-				viewing.set(data)
-				break
+		const findfile = (data: TreeData[]): boolean => {
+			for (const d of data) {
+				if (d.id === firstOpen) {
+					viewing.set(d)
+					return true
+				}
+				if (d.children.length > 0) {
+					if (findfile(d.children)) {
+						return true
+					}
+				}
 			}
+			return false
 		}
+		findfile(codeFiles)
 	})
 </script>
 
@@ -38,7 +47,7 @@
 			<Dot class="absolute top-48 left-[-10px] bg-editorbg text-editortext overflow-visible z-10 w-5" />
 			{#key $viewing}
 				{#if $viewing !== undefined}
-					<CodeAreaFileTag filename={$viewing.title} />
+					<CodeAreaFileTag filename={$viewing.id} />
 				{/if}
 			{/key}
 		</PaneResizer>
