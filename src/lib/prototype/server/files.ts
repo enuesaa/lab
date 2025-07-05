@@ -70,5 +70,10 @@ const extract = async (dir: string, baseDir: string = '', include: string[]): Pr
 			})
 		}
 	}
+	data.sort((a, b) => {
+		const ai = include.indexOf(a.id)
+		const bi = include.indexOf(b.id)
+		return ai - bi
+	})
 	return data
 }
