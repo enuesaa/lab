@@ -1,0 +1,84 @@
+title: |
+  [Go] Dagger でテストを呼び出す
+description: |
+  Dagger は CI/CD をポータブルにするツールです。
+  スクリプトを Docker コンテナに閉じ込めることで、どこでも実行できるようになります。
+
+  気になったのでサンプルアプリを作ってみました。
+published: '2025-07-05'
+
+units:
+  - title: 公式サイト
+    links:
+      - title: https://dagger.io/
+        url: https://dagger.io/
+
+  - title: インストール
+    description: |
+      Mac では Homebrew でインストールできます
+
+    terminal: |
+      $ brew install dagger/tap/dagger
+
+      $ dagger version
+      dagger v0.18.12 (docker-image://registry.dagger.io/engine:v0.18.12) darwin/arm64
+
+  - title: サンプルアプリ
+    description: |
+      Go でサンプルアプリを作りました。
+
+      ディレクトリ構造は次の通りです。
+    terminal: |
+      $ tree -a -L 2
+      .
+      ├── .dagger
+      │   ├── dagger.gen.go
+      │   ├── go.mod
+      │   ├── internal
+      │   └── main.go          // Dagger のスクリプト
+      ├── .gitignore
+      ├── dagger.json          // Dagger の設定ファイル
+      ├── db
+      ├── docker-compose.yml
+      ├── Dockerfile           // Dockerfile
+      ├── go.mod
+      └── main.go
+  
+  - description: |
+      .dagger/main.go に Dagger のスクリプトを記述します。
+
+  - code:
+      open: main.go
+      include:
+        - .dagger
+        - .dagger/.gitattributes
+        - .dagger/.gitignore
+        - .dagger/dagger.gen.go
+        - .dagger/go.mod
+        - .dagger/main.go
+        - .gitignore
+        - .air.toml
+        - db
+        - db/db.go
+        - db/main.go
+        - db/models.go
+        - db/queries.sql
+        - db/queries.sql.go
+        - docker-compose.yml
+        - Dockerfile
+        - go.mod
+        - go.sum
+        - main.go
+        - main_test.go
+        - migrations
+        - migrations/20250629061144_create_tasks_table.sql
+        - sqlc.yaml
+        - testdata
+        - testdata/00001_seed_tasks_table.sql
+        - dagger.json
+
+
+      # units:
+      #   - links:
+      #       - title: ドキュメント
+      #         url: https://rollupjs.org/plugin-development/#buildstart

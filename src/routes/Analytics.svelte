@@ -1,5 +1,5 @@
 <svelte:head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M85LPSR46E"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
   <script>
     window.dataLayer = window.dataLayer || []
 
@@ -8,6 +8,6 @@
     }
 
     gtag('js', new Date())
-    gtag('config', 'G-M85LPSR46E')
+    gtag('config', '')
   </script>
 </svelte:head>

@@ -23,7 +23,7 @@ func (m *App) AppContainer() *dagger.Container {
 func (m *App) MySQLContainer() *dagger.Container {
 	return dag.Container().
 		From("mysql:8.0").
-		WithEnvVariable("MYSQL_ROOT_PASSWORD", "password").
+		WithEnvVariable("MYSQL_ROOT_PASSWORD", "pass").
 		WithEnvVariable("MYSQL_DATABASE", "test").
 		WithExposedPort(3306)
 }
@@ -42,11 +42,11 @@ func (m *App) Test(ctx context.Context) (string, error) {
 
 	app := m.AppContainer().
 		WithServiceBinding("mysql", mysql).
-		WithEnvVariable("DATABASE_URL", "root:password@tcp(mysql:3306)/test?parseTime=true").
+		WithEnvVariable("DATABASE_URL", "root:pass@tcp(mysql:3306)/test?parseTime=true").
 		// migration
-		WithExec([]string{"go", "tool", "goose", "mysql", "root:password@tcp(mysql:3306)/test", "-dir", "./migrations", "up"}).
+		WithExec([]string{"go", "tool", "goose", "mysql", "root:pass@tcp(mysql:3306)/test", "-dir", "./migrations", "up"}).
 		// seed
-		WithExec([]string{"go", "tool", "goose", "mysql", "root:password@tcp(mysql:3306)/test", "-dir", "./testdata", "up", "-no-versioning"})
+		WithExec([]string{"go", "tool", "goose", "mysql", "root:pass@tcp(mysql:3306)/test", "-dir", "./testdata", "up", "-no-versioning"})
 
 	return app.WithExec([]string{"go", "test", "-v", "./..."}).Stdout(ctx)
 }
