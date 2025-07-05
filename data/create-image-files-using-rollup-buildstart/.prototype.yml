@@ -47,10 +47,10 @@ units:
       include:
         - data
         - data/something-image-file.png
-        - package.json
-        - src
         - static
         - static/robots.txt
+        - package.json
+        - src
         - .gitignore
       units:
         - links:
