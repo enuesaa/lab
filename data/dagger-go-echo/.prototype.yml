@@ -8,6 +8,8 @@ description: |
 published: '2025-07-05'
 
 units:
+  - image: size=(min) flow.png
+
   - title: 公式サイト
     links:
       - title: https://dagger.io/
@@ -92,12 +94,12 @@ units:
         
         - title: リント
           description: |
-            `dagger call lint` で呼び出します
+            `dagger call lint` で呼び出せます
           mark: .dagger/main.go:32
         
         - title: テスト
           description: |
-            `dagger call test` で呼び出します
+            `dagger call test` で呼び出せます
           mark: .dagger/main.go:40
           
         - description: |
@@ -107,7 +109,7 @@ units:
 
   - title: テストを呼び出す
     description: |
-      `dagger call <function-name>` で呼び出せます
+      `dagger call test` で呼び出せます
     terminal: |
       $ dagger call test
 
@@ -126,3 +128,20 @@ units:
       ?   	github.com/enuesaa/lab/data/dagger-go-echo/db	[no test files]
   
   - image: size=(min) test.gif
+
+  - title: GitHub Actions
+    description: |
+      Actions で dagger call するには `dagger/dagger-for-github` を使います。
+    links:
+      - title: dagger/dagger-for-github
+        url: https://github.com/dagger/dagger-for-github
+  - inline:
+      open: actions.yml
+
+  - title: 感想
+    description: |
+      往々にして、テストのセットアップ処理やコマンドは長くなりがちであり、それらが CI に散らばるのを課題に感じてました。
+      その意味で、Dagger を使えば DRY になります。
+
+      一方で、何をどこまで Dagger 経由にするかは考える必要がありそうで、
+      例えば `go fmt ./...` は、ふつうに直接呼び出したほうが楽でした。

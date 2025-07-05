@@ -1,0 +1,21 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dagger/dagger-for-github@8.0.0
+        with:
+          call: lint
+
+      - uses: dagger/dagger-for-github@8.0.0
+        with:
+          call: test
