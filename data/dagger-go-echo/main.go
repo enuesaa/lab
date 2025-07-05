@@ -13,14 +13,25 @@ func main() {
 	}
 	defer dbq.Close()
 
-	// routes
+	// handler
+	handler := Handler{dbq: dbq}
+
+	// routing
 	e := echo.New()
-	e.GET("/", func(c echo.Context) error {
-		tasks, err := dbq.ListTasks(c.Request().Context())
-		if err != nil {
-			return err
-		}
-		return c.JSON(200, tasks)
-	})
+	e.GET("/", handler.ListTasks)
+
+	// start
 	e.Logger.Fatal(e.Start(":8080"))
+}
+
+type Handler struct {
+	dbq *db.DB
+}
+
+func (h *Handler) ListTasks(c echo.Context) error {
+	tasks, err := h.dbq.ListTasks(c.Request().Context())
+	if err != nil {
+		return err
+	}
+	return c.JSON(200, tasks)
 }

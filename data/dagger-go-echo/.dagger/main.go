@@ -39,10 +39,14 @@ func (m *App) Lint(ctx context.Context) (string, error) {
 // test
 func (m *App) Test(ctx context.Context) (string, error) {
 	mysql := m.MySQLContainer().AsService()
+
 	app := m.AppContainer().
 		WithServiceBinding("mysql", mysql).
 		WithEnvVariable("DATABASE_URL", "root:password@tcp(mysql:3306)/test?parseTime=true").
-		WithExec([]string{"go", "tool", "goose", "mysql", "root:password@tcp(mysql:3306)/test", "-dir", "./migrations", "up"})
+		// migration
+		WithExec([]string{"go", "tool", "goose", "mysql", "root:password@tcp(mysql:3306)/test", "-dir", "./migrations", "up"}).
+		// seed
+		WithExec([]string{"go", "tool", "goose", "mysql", "root:password@tcp(mysql:3306)/test", "-dir", "./testdata", "up", "-no-versioning"})
 
 	return app.WithExec([]string{"go", "test", "-v", "./..."}).Stdout(ctx)
 }

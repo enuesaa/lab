@@ -182,69 +182,61 @@ func invoke(ctx context.Context, parentJSON []byte, parentName string, fnName st
 	switch parentName {
 	case "App":
 		switch fnName {
-		case "BuildScratch":
+		case "AppContainer":
 			var parent App
 			err = json.Unmarshal(parentJSON, &parent)
 			if err != nil {
 				panic(fmt.Errorf("%s: %w", "failed to unmarshal parent object", err))
 			}
-			return (*App).BuildScratch(&parent), nil
-		case "Build":
+			return (*App).AppContainer(&parent), nil
+		case "MySQLContainer":
 			var parent App
 			err = json.Unmarshal(parentJSON, &parent)
 			if err != nil {
 				panic(fmt.Errorf("%s: %w", "failed to unmarshal parent object", err))
 			}
-			return (*App).Build(&parent), nil
-		case "Generate":
+			return (*App).MySQLContainer(&parent), nil
+		case "Lint":
 			var parent App
 			err = json.Unmarshal(parentJSON, &parent)
 			if err != nil {
 				panic(fmt.Errorf("%s: %w", "failed to unmarshal parent object", err))
 			}
-			return (*App).Generate(&parent, ctx), nil
-		case "Echo":
+			return (*App).Lint(&parent, ctx)
+		case "Test":
 			var parent App
 			err = json.Unmarshal(parentJSON, &parent)
 			if err != nil {
 				panic(fmt.Errorf("%s: %w", "failed to unmarshal parent object", err))
 			}
-			var stringArg string
-			if inputArgs["stringArg"] != nil {
-				err = json.Unmarshal([]byte(inputArgs["stringArg"]), &stringArg)
-				if err != nil {
-					panic(fmt.Errorf("%s: %w", "failed to unmarshal input arg stringArg", err))
-				}
-			}
-			return (*App).Echo(&parent, ctx, stringArg)
+			return (*App).Test(&parent, ctx)
 		default:
 			return nil, fmt.Errorf("unknown function %s", fnName)
 		}
 	case "":
 		return dag.Module().
-			WithDescription("A generated module for App functions\n\nThis module has been generated via dagger init and serves as a reference to\nbasic module structure as you get started with Dagger.\n\nTwo functions have been pre-created. You can modify, delete, or add to them,\nas needed. They demonstrate usage of arguments and return types using simple\necho and grep commands. The functions can be called from the dagger CLI or\nfrom one of the SDKs.\n\nThe first line in this comment block is a short description line and the\nrest is a long description with more detail on the module's purpose or usage,\nif appropriate. All modules should have a short description.\n").
 			WithObject(
-				dag.TypeDef().WithObject("App", dagger.TypeDefWithObjectOpts{SourceMap: dag.SourceMap("main.go", 22, 6)}).
+				dag.TypeDef().WithObject("App", dagger.TypeDefWithObjectOpts{SourceMap: dag.SourceMap("main.go", 8, 6)}).
 					WithFunction(
-						dag.Function("BuildScratch",
+						dag.Function("AppContainer",
 							dag.TypeDef().WithObject("Container")).
-							WithDescription("build scratch").
-							WithSourceMap(dag.SourceMap("main.go", 25, 1))).
+							WithDescription("app container").
+							WithSourceMap(dag.SourceMap("main.go", 11, 1))).
 					WithFunction(
-						dag.Function("Build",
+						dag.Function("MySQLContainer",
 							dag.TypeDef().WithObject("Container")).
-							WithSourceMap(dag.SourceMap("main.go", 42, 1))).
+							WithDescription("mysql container").
+							WithSourceMap(dag.SourceMap("main.go", 23, 1))).
 					WithFunction(
-						dag.Function("Generate",
-							dag.TypeDef().WithObject("Directory")).
-							WithDescription("Generate runs sqlc generate").
-							WithSourceMap(dag.SourceMap("main.go", 51, 1))).
-					WithFunction(
-						dag.Function("Echo",
+						dag.Function("Lint",
 							dag.TypeDef().WithKind(dagger.TypeDefKindStringKind)).
-							WithDescription("このコメントがそのまま説明になる").
-							WithSourceMap(dag.SourceMap("main.go", 63, 1)).
-							WithArg("stringArg", dag.TypeDef().WithKind(dagger.TypeDefKindStringKind), dagger.FunctionWithArgOpts{SourceMap: dag.SourceMap("main.go", 63, 41)}))), nil
+							WithDescription("lint").
+							WithSourceMap(dag.SourceMap("main.go", 32, 1))).
+					WithFunction(
+						dag.Function("Test",
+							dag.TypeDef().WithKind(dagger.TypeDefKindStringKind)).
+							WithDescription("test").
+							WithSourceMap(dag.SourceMap("main.go", 40, 1)))), nil
 	default:
 		return nil, fmt.Errorf("unknown object %s", parentName)
 	}

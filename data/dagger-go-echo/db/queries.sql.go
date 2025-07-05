@@ -7,21 +7,7 @@ package db
 
 import (
 	"context"
-	"database/sql"
 )
-
-const createTask = `-- name: CreateTask :execresult
-INSERT INTO tasks (title, description) VALUES (?, ?)
-`
-
-type CreateTaskParams struct {
-	Title       string         `json:"title"`
-	Description sql.NullString `json:"description"`
-}
-
-func (q *Queries) CreateTask(ctx context.Context, arg CreateTaskParams) (sql.Result, error) {
-	return q.db.ExecContext(ctx, createTask, arg.Title, arg.Description)
-}
 
 const listTasks = `-- name: ListTasks :many
 SELECT id, title, description, created_at, updated_at FROM tasks ORDER BY created_at DESC
