@@ -36,44 +36,65 @@ export const extractInlineFile = async (project: ProjectV2): Promise<ProjectV2> 
 }
 
 const extract = async (dir: string, baseDir: string = '', include: string[]): Promise<TreeData[]> => {
-	const data: TreeData[] = []
+	const ret: TreeData[] = []
 	const files = await fs.readdir(dir, { withFileTypes: true })
 
-	for (const file of files) {
-		const filepath = path.join(dir, file.name)
-		const relpath = path.join(baseDir, file.name)
+	for (const f of files) {
+		const filepath = path.join(dir, f.name)
+		const relpath = path.join(baseDir, f.name)
+
+		if (f.isDirectory()) {
+			const children = await extract(filepath, relpath, include)
+			if (children.length > 0) {
+				ret.push({
+					id: relpath,
+					title: f.name,
+					isDir: true,
+					children,
+					code: '',
+					language: '',
+				})
+			}
+			continue
+		}
 
 		if (!include.includes(relpath)) {
 			continue
 		}
 
-		if (file.isDirectory()) {
-			const children = await extract(filepath, relpath, include)
-			data.push({
-				id: relpath,
-				title: file.name,
-				isDir: true,
-				children,
-				code: '',
-				language: '',
-			})
-		} else {
-			const language = file.name.split('.').at(-1) ?? ''
-			const code = await fs.readFile(filepath, 'utf8')
-			data.push({
-				id: relpath,
-				title: file.name,
-				isDir: false,
-				children: [],
-				code,
-				language,
-			})
-		}
+		const language = f.name.split('.').at(-1) ?? ''
+		const code = await fs.readFile(filepath, 'utf8')
+		ret.push({
+			id: relpath,
+			title: f.name,
+			isDir: false,
+			children: [],
+			code,
+			language,
+		})
 	}
-	data.sort((a, b) => {
-		const ai = include.indexOf(a.id)
-		const bi = include.indexOf(b.id)
+
+	// order by `include`
+	ret.sort((a, b) => {
+		let ai = include.indexOf(a.id)
+		let bi = include.indexOf(b.id)
+		if (ai === -1) {
+			const child = findchild(a)
+			ai = include.indexOf(child.id)
+		}
+		if (bi === -1) {
+			const child = findchild(b)
+			bi = include.indexOf(child.id)
+		}
 		return ai - bi
 	})
+
+	return ret
+}
+
+const findchild = (data: TreeData): TreeData => {
+	if (data.isDir && data.children.length > 0) {
+		return findchild(data.children[0])
+	}
 	return data
 }
