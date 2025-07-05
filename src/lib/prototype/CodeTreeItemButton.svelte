@@ -8,7 +8,7 @@
 	const hasChildren = treeData.children.length > 0
 	const viewing = useCodeViewer()
 
-	let expanded = true
+	let expanded = treeData?.expanded ?? true
 
 	function handleDirClick() {
 		expanded = !expanded

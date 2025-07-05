@@ -53,6 +53,8 @@ const extract = async (dir: string, baseDir: string = '', include: string[]): Pr
 					children,
 					code: '',
 					language: '',
+					// ディレクトリが列挙されていたらデフォルトで開く
+					expanded: include.includes(relpath),
 				})
 			}
 			continue

@@ -8,6 +8,7 @@ export type TreeData = {
 	children: TreeData[]
 	code: string
 	language: string
+	expanded?: boolean
 }
 
 type CodeViewerState = TreeData & {

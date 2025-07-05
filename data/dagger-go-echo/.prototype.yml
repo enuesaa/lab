@@ -68,15 +68,12 @@ units:
         - main.go
         - main_test.go
         - sqlc.yaml
-        # - db
         - db/db.go
         - db/main.go
         - db/models.go
         - db/queries.sql
         - db/queries.sql.go
-        # - migrations
         - migrations/20250629061144_create_tasks_table.sql
-        # - testdata
         - testdata/00001_seed_tasks_table.sql
 
       units:
