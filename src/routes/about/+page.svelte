@@ -5,7 +5,7 @@
 	import Main from '../Main.svelte'
 
 	const about = 'このサイトは個人のメモ帳です。\nちょっと調べて気づいたことをメモしてます。\n\n'
-	const links = [{ url: 'https://enuesaa.dev/', text: 'nua', key: '運営者' }]
+	const links = [{ url: 'https://enuesaa.dev/about', text: 'nua', key: '運営者' }]
 </script>
 
 <Main>
