@@ -28,6 +28,46 @@ units:
 
   - description: |
 
-      試してみます
 
-  - title: symbol=(1.) Coder を立ち上げる
+      実際に Coder を立ち上げてみます。
+
+  - title: symbol=(1.) Coder をダウンロードする
+    description: |
+      はじめに Coder をダウンロードします。
+      GitHub の Releases よりダウンロードしましょう。
+
+  - title: symbol=(2.) PostgreSQL を立ち上げる
+    description: |
+      Coder のデータの保存先です。
+      docker compose で立ち上げましょう。
+    terminal: |
+      $ docker compose up
+
+  - title: symbol=(3.) Coder を立ち上げる 
+    description: |
+      ダウンロードしたバイナリを実行しましょう。
+      coder server コマンドで立ち上がります。
+    terminal: |
+      $ coder server
+  
+  - title: symbol=(4.) アカウント作成 & ログイン
+    description: |
+      ブラウザで localhost:3000 を開きましょう。
+      メールアドレスでアカウント作成するか GitHub でログインしましょう。
+
+      ローカルPC で立ち上げているだけなので、メールアドレスでログインするのが手軽です。
+
+      Coder にログインすると次のような画面へ遷移します。
+
+  - title: symbol=(5.) テンプレート登録
+    description: |
+      では、インフラ担当者になったつもりで、テンプレートを登録しましょう。
+      テンプレートは Terraform で記述します。
+
+      ミニマムなテンプレートを用意しました。
+      シンプルに docker コンテナを立ち上げます。
+
+  - title: symbol=(6.) クラウド開発環境を立ち上げる
+    description: |
+      アプリケーションエンジニアになったつもりで、クラウド開発環境を立ち上げます。
+
