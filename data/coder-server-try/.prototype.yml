@@ -1,46 +1,50 @@
 title: |
-  Coder でクラウド開発環境を立ち上げてみた
+  Coder でクラウド開発環境を立ち上げる
 description: |
-  Coder は、クラウド開発環境をセットアップするためのアプリケーションです。
-  開発環境のテンプレを用意しておくと、好きな時に開発環境を立ち上げできます。
+  クラウド開発環境といえば Codespaces や Cloud9 などマネージドなサービスが多いですが、
+  Coder を使うとクラウド開発環境をセルフホストできます。
 
   気になって触ってみました。
-published: '2025-07-23'
+published: '2025-07-26'
 
 units:
   - title: Coder とは？
   - image: architecture.png
   - description: |
-      ひとことで言うのは難しいですが、Coder はクラウド開発環境のコントローラーであり、いわゆる管理サーバーです。
+      ひとことで言うのは難しいですが、Coder はクラウド開発環境の管理サーバーであり、コントローラーです。
 
-      開発環境のテンプレートを Terraform で書いておくと、好きな時に環境を立ち上げできます。
-      また、その環境へ VS Code から接続できます。
+      開発環境のテンプレートを書いて登録しておくと、好きな時に環境を立ち上げできます。
+      そして VS Code から環境へ接続できます。
 
   - title: ユースケース
     description: |
-      個人的には Platform Engineering の領域に近いと感じており、
-      ユースケースとして、
+      Platform Engineering の領域に近いアプリケーションだと個人的に思っており、
+      ユースケースとしては、
       
       1. インフラ担当者が開発環境のテンプレート (Terraform) を作成
       2. アプリケーション開発者が好きな時に立ち上げ
 
-      というのが想定されてそうです。
+      というのがありそうです。
 
   - description: |
 
 
-      実際に Coder を立ち上げてみます。
+      では、実際に Coder を立ち上げていきます。
 
   - title: symbol=(1.) Coder をダウンロードする
     description: |
       はじめに Coder をダウンロードします。
       GitHub の Releases よりダウンロードしましょう。
 
+    image: size=(min) releases.png
+
   - title: symbol=(2.) PostgreSQL を立ち上げる
     description: |
       Coder のデータの保存先です。
       docker compose で立ち上げましょう。
-    terminal: |
+    inline:
+      open: docker-compose.yml
+  - terminal: |
       $ docker compose up
 
   - title: symbol=(3.) Coder を立ち上げる 
@@ -48,26 +52,45 @@ units:
       ダウンロードしたバイナリを実行しましょう。
       coder server コマンドで立ち上がります。
     terminal: |
-      $ coder server
+      $ coder server \
+          --postgres-url "postgres://coder:coder@localhost:5432/coder?sslmode=disable" \
+          --access-url "http://127.0.0.1:3000"
   
-  - title: symbol=(4.) アカウント作成 & ログイン
+  - title: symbol=(4.) アカウント作成
     description: |
-      ブラウザで localhost:3000 を開きましょう。
-      メールアドレスでアカウント作成するか GitHub でログインしましょう。
+      ブラウザで `http://127.0.0.1:3000` を開きましょう。
 
-      ローカルPC で立ち上げているだけなので、メールアドレスでログインするのが手軽です。
+      セットアップページが表示されます。
+      メールアドレスでアカウントを作成するか GitHub でログインしましょう。
 
-      Coder にログインすると次のような画面へ遷移します。
+    image: size=(min) setup.png
 
-  - title: symbol=(5.) テンプレート登録
+  - title: symbol=(5.) テンプレート登録ページへ
     description: |
-      では、インフラ担当者になったつもりで、テンプレートを登録しましょう。
-      テンプレートは Terraform で記述します。
+      では、テンプレートを登録しましょう。
+      画像赤枠の「Templates」をクリック。テンプレートの登録へ進みます。
+    image: size=(min) templates.png
 
-      ミニマムなテンプレートを用意しました。
-      シンプルに docker コンテナを立ち上げます。
+  - description: |
+      スターターテンプレートの「Docker Containers」を選択します。
+    image: size=(min) templateselect.png
+
+  - description: |
+      そのまま Save しましょう。
+      しばらくするとテンプレートが登録されます。
+    image: size=(min) templatecreated.png
+
+  - description: |
+      ちなみに、このテンプレートには Terraform でいろいろ書かれてますが、
+      削ぎ落とすと次のような感じになります。
+  - inline:
+      open: main.tf
+  - description: |
+      テンプレートを自作するときは、参考にしてください。
 
   - title: symbol=(6.) クラウド開発環境を立ち上げる
     description: |
-      アプリケーションエンジニアになったつもりで、クラウド開発環境を立ち上げます。
+      さて、クラウド開発環境を立ち上げます。
+      画像赤枠の「Workspaces」をクリック。テンプレートを選択してワークスペースを作ります。
+    image: size=(min) workspaces.png
 
