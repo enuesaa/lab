@@ -1,8 +1,8 @@
 title: |
   Coder でクラウド開発環境を立ち上げる
 description: |
-  クラウド開発環境といえば Codespaces や Gitpod などマネージドサービスが多いですが、
-  Coder ではクラウド開発環境をセルフホストできます。
+  クラウド開発環境といえば Codespaces や Gitpod などマネージドなサービスが多いですが、
+  Coder では環境をセルフホストできます。
 
   気になって試してみました。
 published: '2025-07-27'
@@ -22,7 +22,7 @@ units:
         url: https://coder.com/
   - description: |
 
-      では、実際に Coder を立ち上げていきましょう。
+      では、実際に Coder を試していきましょう。
 
   - title: symbol=(1.) ダウンロード
     description: |
