@@ -1,42 +1,37 @@
 title: |
   Coder でクラウド開発環境を立ち上げる
 description: |
-  クラウド開発環境といえば Codespaces や Cloud9 などマネージドなサービスが多いですが、
-  Coder を使うとクラウド開発環境をセルフホストできます。
+  クラウド開発環境といえば Codespaces や Gitpod などマネージドサービスが多いですが、
+  Coder ではクラウド開発環境をセルフホストできます。
 
-  気になって触ってみました。
-published: '2025-07-26'
+  気になって試してみました。
+published: '2025-07-27'
 
 units:
   - title: Coder とは？
   - image: architecture.png
   - description: |
-      ひとことで言うのは難しいですが、Coder はクラウド開発環境の管理サーバーであり、コントローラーです。
+      Coder は、クラウド開発環境をセットアップするアプリケーションです。いわゆる管理サーバーに相当します。
 
-      開発環境のテンプレートを書いて登録しておくと、好きな時に環境を立ち上げできます。
-      そして VS Code から環境へ接続できます。
+      開発環境のテンプレートを書いて登録しておくことで、好きな時に環境を立ち上げできます。
+      そしてエディタで開けます。
 
-  - title: ユースケース
-    description: |
-      Platform Engineering の領域に近いアプリケーションだと個人的に思っており、
-      ユースケースとしては、
-      
-      1. インフラ担当者が開発環境のテンプレート (Terraform) を作成
-      2. アプリケーション開発者が好きな時に立ち上げ
-
-      というのがありそうです。
-
+  - title: 公式サイト
+    links:
+      - title: coder.com
+        url: https://coder.com/
   - description: |
 
+      では、実際に Coder を立ち上げていきましょう。
 
-      では、実際に Coder を立ち上げていきます。
-
-  - title: symbol=(1.) Coder をダウンロードする
+  - title: symbol=(1.) ダウンロード
     description: |
       はじめに Coder をダウンロードします。
       GitHub の Releases よりダウンロードしましょう。
-
-    image: size=(min) releases.png
+    links:
+      - title: github.com/coder/coder/releases
+        url: https://github.com/coder/coder/releases
+  - image: size=(min) releases.png
 
   - title: symbol=(2.) PostgreSQL を立ち上げる
     description: |
@@ -56,32 +51,34 @@ units:
           --postgres-url "postgres://coder:coder@localhost:5432/coder?sslmode=disable" \
           --access-url "http://127.0.0.1:3000"
   
-  - title: symbol=(4.) アカウント作成
+  - title: symbol=(4.) セットアップ
     description: |
-      ブラウザで `http://127.0.0.1:3000` を開きましょう。
+      ブラウザで http://127.0.0.1:3000 を開きましょう。
 
       セットアップページが表示されます。
-      メールアドレスでアカウントを作成するか GitHub でログインしましょう。
+      メールアドレスでアカウントを作成するか、GitHub でログインしましょう。
 
     image: size=(min) setup.png
 
   - title: symbol=(5.) テンプレート登録ページへ
     description: |
-      では、テンプレートを登録しましょう。
-      画像赤枠の「Templates」をクリック。テンプレートの登録へ進みます。
+      はじめにテンプレートを登録します。
+      画像赤枠の「Templates」をクリック。テンプレートの登録へ進みましょう。
     image: size=(min) templates.png
 
   - description: |
-      スターターテンプレートの「Docker Containers」を選択します。
+      スターターがいくつかありますが、そのうちの「Docker Containers」を選択します。
     image: size=(min) templateselect.png
 
   - description: |
+      設定項目がいくつかありますが、デフォルトの値で大丈夫です。
       そのまま Save しましょう。
-      しばらくするとテンプレートが登録されます。
+
+      しばらくするとテンプレートの登録が完了します。
     image: size=(min) templatecreated.png
 
   - description: |
-      ちなみに、このテンプレートには Terraform でいろいろ書かれてますが、
+      ちなみに、このテンプレートは Terraform で書かれており、いろいろリソースがありますが、
       削ぎ落とすと次のような感じになります。
   - inline:
       open: main.tf
@@ -90,7 +87,40 @@ units:
 
   - title: symbol=(6.) クラウド開発環境を立ち上げる
     description: |
-      さて、クラウド開発環境を立ち上げます。
+      さて、環境を立ち上げます。
       画像赤枠の「Workspaces」をクリック。テンプレートを選択してワークスペースを作ります。
     image: size=(min) workspaces.png
 
+  - description: |
+      名前やパラメータを入力して、ワークスペースを作成します。
+    image: size=(min) workspacecreate.png
+
+  - description: |
+      作成ボタンを押すと、Coder は内部で terraform を実行します。
+      加えて、docker コンテナを立ち上げたりもします。
+
+  - description: |
+      そのため時間がかかりますが、
+      しばらくするとワークスペースが立ち上がります。
+    image: size=(min) workspacecreated.png
+
+  - description: |
+      「code-server」というボタンを押すと、別ウィンドウでエディタが立ち上がります。
+    image: size=(min) codeserver.png
+  
+  - description: |
+      もちろん VS Code からも接続できます。
+
+      　
+
+  - title: おわり
+    description: |
+      Coder は、Platform Engineering にマッチするアプリケーションだと思っており、
+      
+      例えば
+        1. インフラ担当者が、開発環境のテンプレート (Terraform) を作成
+        2. アプリケーション開発者が、好きな時に立ち上げ
+
+      という風な使い方ができます。
+
+      カスタマイズ性がありますし、UI も優れているので、上手く使えばとても便利そうです。
