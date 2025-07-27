@@ -60,7 +60,7 @@ units:
 
     image: size=(min) setup.png
 
-  - title: symbol=(5.) テンプレート登録ページへ
+  - title: symbol=(5.) テンプレートの登録
     description: |
       はじめにテンプレートを登録します。
       画像赤枠の「Templates」をクリック。テンプレートの登録へ進みましょう。
@@ -85,7 +85,7 @@ units:
   - description: |
       テンプレートを自作するときは、参考にしてください。
 
-  - title: symbol=(6.) クラウド開発環境を立ち上げる
+  - title: symbol=(6.) 環境の立ち上げ
     description: |
       さて、環境を立ち上げます。
       画像赤枠の「Workspaces」をクリック。テンプレートを選択してワークスペースを作ります。
