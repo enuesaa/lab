@@ -1,0 +1,51 @@
+title: |
+  Coder のテンプレートを Tarraform で管理する
+description: |
+  クラウド開発環境である Coder のテンプレートを Terraform で登録します。
+  管理者向けの内容です。
+
+published: '2025-08-02'
+
+units:
+  - title: Links
+    links:
+      - title: coder.com
+        url: https://coder.com/
+      - title: 'coder.com: Chane Management'
+        url: https://coder.com/docs/admin/templates/managing-templates/change-management
+
+  - title: symbol=(1.) トークンを発行
+    description: |
+      Terraform で Coder へアクセスする際にトークンが必要です。
+      アカウント設定より発行できます。
+  - title: symbol=(2.) Terraform のコードを作成
+    description: |
+      コードを作成しましょう。
+
+      1. で発行したトークンを terraform.tfvars にセットします。
+
+  - title: サンプルコード
+    code:
+      open: main.tf
+      include:
+        - templates
+        - templates/minimum
+        - templates/minimum/main.tf
+        - templates/minimum/README.md
+        - terraform.tfvars
+      units:
+        - description: |
+            Coder へアクセスするためのトークンです
+          mark: main.tf:9
+        - description: |
+            coderd_template というリソースでテンプレートを管理できます。
+          links:
+            - title: 'Terraform Registry: coderd_template (Resource)'
+              url: https://registry.terraform.io/providers/coder/coderd/latest/docs/resources/template
+          mark: main.tf:20
+
+  - title: symbol=(3.) terraform apply
+    terminal: |
+      terraform apply
+  - description: |
+      登録されました。
