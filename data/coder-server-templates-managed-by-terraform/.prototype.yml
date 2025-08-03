@@ -1,26 +1,34 @@
 title: |
   Coder のテンプレートを Tarraform で管理する
 description: |
-  クラウド開発環境である Coder のテンプレートを Terraform で登録します。
+  テンプレートを Terraform で登録してみます。
   管理者向けの内容です。
 
 published: '2025-08-02'
 
 units:
-  - title: Links
+  - image: architecture.png
+
+  - title: 公式ドキュメント
     links:
-      - title: coder.com
-        url: https://coder.com/
       - title: 'coder.com: Chane Management'
         url: https://coder.com/docs/admin/templates/managing-templates/change-management
+  
+  - description: |
+
+      さっそく登録していきます。
 
   - title: symbol=(1.) トークンを発行
     description: |
       Terraform で Coder へアクセスする際にトークンが必要です。
       アカウント設定より発行できます。
+  - image: size=(min) accountsetting.png
+  - image: size=(min) tokenadd.png
+  - image: size=(min) tokencreated.png
+
   - title: symbol=(2.) Terraform のコードを作成
     description: |
-      コードを作成しましょう。
+      Terraform を書きましょう。
 
       1. で発行したトークンを terraform.tfvars にセットします。
 
@@ -34,6 +42,11 @@ units:
         - templates/minimum/README.md
         - terraform.tfvars
       units:
+        - description: Coder の Provider です
+          links:
+            - title: 'Terraform Registry: coderd Provider'
+              url: https://registry.terraform.io/providers/coder/coderd/latest/docs
+          mark: main.tf:4
         - description: |
             Coder へアクセスするためのトークンです
           mark: main.tf:9
@@ -43,9 +56,24 @@ units:
             - title: 'Terraform Registry: coderd_template (Resource)'
               url: https://registry.terraform.io/providers/coder/coderd/latest/docs/resources/template
           mark: main.tf:20
+        - description: ここで指定したディレクトリがテンプレートとして登録されます
+          mark: main.tf:28
 
-  - title: symbol=(3.) terraform apply
+  - title: symbol=(3.) 登録する
+    description: |
+      Coder へ登録します。terraform apply を実行しましょう。
     terminal: |
-      terraform apply
+      $ terraform apply
+
+      coderd_template.minimum: Creating...
+      coderd_template.minimum: Creation complete after 8s [id=9a0a42b9-1af9-a498-c031-a9a04d17ca9a]
+
+      Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
   - description: |
       登録されました。
+  - image: size=(min) registered.png
+
+  - title: おわり
+    description: |
+      テンプレートをTerraformで管理できるのは良きですね。
+      画面でぽちぽち作るのと比べて、格段に楽でした。
