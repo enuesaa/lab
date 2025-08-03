@@ -7,7 +7,7 @@ terraform {
 }
 
 variable "token" {
-  description = "Coder authentication token"
+  description = "Coder token"
   type        = string
   sensitive   = true
 }
