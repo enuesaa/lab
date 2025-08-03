@@ -4,7 +4,7 @@ description: |
   テンプレートを Terraform で登録してみます。
   管理者向けの内容です。
 
-published: '2025-08-02'
+published: '2025-08-03'
 
 units:
   - image: architecture.png
