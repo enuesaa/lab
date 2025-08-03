@@ -1,9 +1,8 @@
 title: |
   Coder のテンプレートを Tarraform で管理する
 description: |
-  管理者向けの内容です。
-  Coder のテンプレートを Terraform で登録してみました。
-
+  Coder はクラウド開発環境をセットアップするツールです。
+  ドキュメントを見ていたところ、テンプレートを Terraform で登録できると知りました。
 published: '2025-08-03'
 
 units:
@@ -16,7 +15,7 @@ units:
 
   - description: |
 
-      さっそく登録していきます。
+      さっそく試してみます。
 
   - title: symbol=(1.) トークンを発行
     description: |
@@ -26,10 +25,9 @@ units:
   - image: size=(min) tokenadd.png
   - image: size=(min) tokencreated.png
 
-  - title: symbol=(2.) Terraform のコードを作成
+  - title: symbol=(2.) Terraform を書く
     description: |
-      Terraform を書きましょう。
-
+      コードを書きましょう。
       1. で発行したトークンを terraform.tfvars にセットします。
 
   - title: サンプルコード
