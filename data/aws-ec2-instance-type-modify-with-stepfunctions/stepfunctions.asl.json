@@ -1,0 +1,82 @@
+{
+  "QueryLanguage": "JSONata",
+  "StartAt": "Describe",
+  "States": {
+    "Describe": {
+      "Type": "Task",
+      "Arguments": {
+        "Filters": [
+          {
+            "Name": "tag:Name",
+            "Values": ["${identifier}"]
+          },
+          {
+            "Name": "instance-state-name",
+            "Values": ["running", "stopped"]
+          }
+        ]
+      },
+      "Resource": "arn:aws:states:::aws-sdk:ec2:describeInstances",
+      "Next": "CheckExistence"
+    },
+    "CheckExistence": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Next": "Stop",
+          "Condition": "{% $states.input.Reservations[0].Instances[0].State.Name = 'running' %}",
+          "Comment": "running",
+          "Assign": {
+            "instanceId": "{% $states.input.Reservations[0].Instances[0].InstanceId %}"
+          }
+        },
+        {
+          "Next": "Start",
+          "Condition": "{% $states.input.Reservations[0].Instances[0].State.Name = 'stopped' %}",
+          "Comment": "stopped",
+          "Assign": {
+            "instanceId": "{% $states.input.Reservations[0].Instances[0].InstanceId %}"
+          }
+        }
+      ],
+      "Default": "StopInstance"
+    },
+    "StopInstance": {
+      "Type": "Task",
+      "Arguments": {
+        "InstanceIds": "{% [$instanceId] %}"
+      },
+      "Resource": "arn:aws:states:::aws-sdk:ec2:stopInstances",
+      "Next": "StoppingSetupInstance"
+    },
+    "StoppingSetupInstance": {
+      "Type": "Wait",
+      "Seconds": 60,
+      "Next": "ChangeInstanceType"
+    },
+    "ChangeInstanceType": {
+      "Type": "Task",
+      "Arguments": {
+        "InstanceId": "{% $instanceId %}",
+        "InstanceType": {
+          "Value": "t4g.nano"
+        }
+      },
+      "Resource": "arn:aws:states:::aws-sdk:ec2:modifyInstanceAttribute",
+      "Next": "ChangingInstanceType"
+    },
+    "ChangingInstanceType": {
+      "Type": "Wait",
+      "Seconds": 10,
+      "Next": "Start"
+    },
+    "Start": {
+      "Type": "Task",
+      "Arguments": {
+        "InstanceIds": "{% [$instanceId] %}"
+      },
+      "Resource": "arn:aws:states:::aws-sdk:ec2:startInstances",
+      "End": true
+    }
+  }
+}
