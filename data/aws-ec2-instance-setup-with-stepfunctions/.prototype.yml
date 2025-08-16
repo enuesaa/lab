@@ -2,8 +2,8 @@ title: |
   [雑記]
   Step Functions で EC2 インスタンスを立ち上げる
 description: |
-  EC2 インスタンスを立ち上げて開発することがたまにあるのですが、
-  その立ち上げを自動化したく、Step Functions に処理をまとめてみました。
+  インスタンスを立ち上げて開発することがたまにあるのですが、
+  その立ち上げを自動化したく、Step Functions に処理をまとめました。
 
   雑記としてステートマシンの ASL を載せます。
 published: '2025-08-17'
@@ -12,13 +12,13 @@ units:
   - title: 構成
     description: |
       Step Functions で EC2 インスタンスを立ち上げます。
-      そして Systems Manager Run Command でコマンドを実行し、EC2 インスタンスをセットアップします。
+      そして Systems Manager 経由でコマンドを実行し、インスタンスをセットアップします。
     
   - image: architecture.png
 
   - description: |
-      なお、この構成だとインスタンスが増える一方です。
-      不要なインスタンスが残らないよう注意ください。
+      インスタンスのセットアップが完了したら、SNS で通知します。
+      10分待機している間に ssh して、必要な処理をするイメージです。
 
   - code:
       open: stepfunctions.asl.json
@@ -27,6 +27,10 @@ units:
             AMI の ID へ置き換えます
             例: ami-xxx
           mark: stepfunctions.asl.json:9
+        - description: |
+            インスタンスタイプを埋めます
+            例: t4g.small
+          mark: stepfunctions.asl.json:10
         - description: |
             Security Group の ID へ置き換えます
             例: sg-xxx
@@ -39,16 +43,20 @@ units:
             Instance Profile の名前へ置き換えます
             
             なお Systems Manager でコマンドを実行するには、
-            AmazonSSMManagedInstanceCore ポリシーの権限が必要。
+            AmazonSSMManagedInstanceCore ポリシーが必要です
           links:
             - title: AmazonSSMManagedInstanceCore
               url: https://docs.aws.amazon.com/ja_jp/aws-managed-policy/latest/reference/AmazonSSMManagedInstanceCore.html
           mark: stepfunctions.asl.json:18
         - description: EC2 インスタンスの名前です
           mark: stepfunctions.asl.json:26
+        - description: 通知先の SNS トピックの ARN を埋めます
+          mark: stepfunctions.asl.json:94
 
   - title: おわり
     description: |
-      シンプルに AMI を取って起動した方がたぶん楽です。
 
-      私の場合は、上記の処理の他にいろいろ行いたいことがあり、そのため Step Functions に寄せちゃいました。
+      EC2 インスタンスをセットアップするだけであれば、
+      例えば AMI を取得したり、ユーザーデータでシェルスクリプトを実行したほうが手軽です。
+
+      私の場合は、インスタンスの起動・終了まで制御したかったので、Step Functions に寄せちゃいました。

@@ -7,7 +7,7 @@
       "Resource": "arn:aws:states:::aws-sdk:ec2:runInstances",
       "Arguments": {
         "ImageId": "<AMIID>",
-        "InstanceType": "t4g.small",
+        "InstanceType": "<InstanceType>",
         "MinCount": 1,
         "MaxCount": 1,
         "SecurityGroupIds": [
@@ -80,29 +80,36 @@
           "Comment": "InProgress"
         },
         {
-          "Next": "NotifyCommandFailed",
+          "Next": "TerminateInstance",
           "Condition": "{% $states.input.Status = \"Failed\" %}",
           "Comment": "Failed"
         }
       ],
-      "Default": "Succeed"
+      "Default": "Notify"
     },
-    "NotifyCommandFailed": {
+    "Notify": {
       "Type": "Task",
       "Resource": "arn:aws:states:::sns:publish",
       "Arguments": {
         "TopicArn": "<SNSTopicArn>",
         "Message": {
-          "message": "コマンドの実行に失敗しました"
+          "message": "EC2インスタンスが立ち上がりました"
         }
       },
-      "Next": "Fail"
+      "Next": "Wait10minutes"
     },
-    "Succeed": {
-      "Type": "Succeed"
+    "Wait10minutes": {
+      "Type": "Wait",
+      "Seconds": 600,
+      "Next": "TerminateInstance"
     },
-    "Fail": {
-      "Type": "Fail"
+    "TerminateInstance": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::aws-sdk:ec2:terminateInstances",
+      "Arguments": {
+        "InstanceIds": "{% [$instanceId] %}"
+      },
+      "End": true
     }
   }
 }
