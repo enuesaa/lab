@@ -1,82 +1,110 @@
 {
   "QueryLanguage": "JSONata",
-  "StartAt": "Describe",
+  "StartAt": "StartEC2Instance",
   "States": {
-    "Describe": {
+    "StartEC2Instance": {
       "Type": "Task",
+      "Resource": "arn:aws:states:::aws-sdk:ec2:runInstances",
       "Arguments": {
-        "Filters": [
+        "ImageId": "ami-0cef62348b8426830",
+        "InstanceType": "t4g.small",
+        "MinCount": 1,
+        "MaxCount": 1,
+        "SecurityGroupIds": [
+          "<SecurityGroupId>"
+        ],
+        "SubnetId": "<SubnetID>",
+        "IamInstanceProfile": {
+          "Name": "<InstanceProfileName>"
+        },
+        "TagSpecifications": [
           {
-            "Name": "tag:Name",
-            "Values": ["${identifier}"]
-          },
-          {
-            "Name": "instance-state-name",
-            "Values": ["running", "stopped"]
+            "ResourceType": "instance",
+            "Tags": [
+              {
+                "Key": "Name",
+                "Value": "testec2"
+              }
+            ]
           }
         ]
       },
-      "Resource": "arn:aws:states:::aws-sdk:ec2:describeInstances",
-      "Next": "CheckExistence"
+      "Assign": {
+        "instanceId": "{% $states.result.Instances[0].InstanceId %}"
+      },
+      "Next": "WaitEC2InstanceStartUp"
     },
-    "CheckExistence": {
+    "WaitEC2InstanceStartUp": {
+      "Type": "Wait",
+      "Seconds": 60,
+      "Next": "RunCommand"
+    },
+    "RunCommand": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::aws-sdk:ssm:sendCommand",
+      "Arguments": {
+        "DocumentName": "AWS-RunShellScript",
+        "InstanceIds": "{% [$instanceId] %}",
+        "Parameters": {
+          "commands": [
+            "apt update",
+            "apt install -y git"
+          ]
+        }
+      },
+      "Assign": {
+        "commandId": "{% $states.result.Command.CommandId %}"
+      },
+      "Next": "WaitCommand"
+    },
+    "WaitCommand": {
+      "Type": "Wait",
+      "Next": "GetCommandStatus",
+      "Seconds": 30
+    },
+    "GetCommandStatus": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::aws-sdk:ssm:getCommandInvocation",
+      "Arguments": {
+        "CommandId": "{% $commandId %}",
+        "InstanceId": "{% $instanceId %}"
+      },
+      "Next": "CheckCommandStatus"
+    },
+    "CheckCommandStatus": {
       "Type": "Choice",
       "Choices": [
         {
-          "Next": "Stop",
-          "Condition": "{% $states.input.Reservations[0].Instances[0].State.Name = 'running' %}",
-          "Comment": "running",
-          "Assign": {
-            "instanceId": "{% $states.input.Reservations[0].Instances[0].InstanceId %}"
-          }
+          "Next": "WaitCommand",
+          "Condition": "{% $states.input.Status = \"InProgress\" %}",
+          "Comment": "InProgress"
         },
         {
-          "Next": "Start",
-          "Condition": "{% $states.input.Reservations[0].Instances[0].State.Name = 'stopped' %}",
-          "Comment": "stopped",
-          "Assign": {
-            "instanceId": "{% $states.input.Reservations[0].Instances[0].InstanceId %}"
-          }
+          "Next": "NotifyCommandFailed",
+          "Condition": "{% $states.input.Status = \"Failed\" %}",
+          "Comment": "Failed"
         }
       ],
-      "Default": "StopInstance"
+      "Default": "TerminateEC2Instance"
     },
-    "StopInstance": {
+    "NotifyCommandFailed": {
       "Type": "Task",
+      "Resource": "arn:aws:states:::sns:publish",
       "Arguments": {
-        "InstanceIds": "{% [$instanceId] %}"
-      },
-      "Resource": "arn:aws:states:::aws-sdk:ec2:stopInstances",
-      "Next": "StoppingSetupInstance"
-    },
-    "StoppingSetupInstance": {
-      "Type": "Wait",
-      "Seconds": 60,
-      "Next": "ChangeInstanceType"
-    },
-    "ChangeInstanceType": {
-      "Type": "Task",
-      "Arguments": {
-        "InstanceId": "{% $instanceId %}",
-        "InstanceType": {
-          "Value": "t4g.nano"
+        "TopicArn": "<SNSTopicArn>",
+        "Message": {
+          "message": "コマンドの実行に失敗しました"
         }
       },
-      "Resource": "arn:aws:states:::aws-sdk:ec2:modifyInstanceAttribute",
-      "Next": "ChangingInstanceType"
+      "Next": "TerminateEC2Instance"
     },
-    "ChangingInstanceType": {
-      "Type": "Wait",
-      "Seconds": 10,
-      "Next": "Start"
-    },
-    "Start": {
+    "TerminateEC2Instance": {
       "Type": "Task",
+      "Resource": "arn:aws:states:::aws-sdk:ec2:terminateInstances",
+      "End": true,
       "Arguments": {
         "InstanceIds": "{% [$instanceId] %}"
-      },
-      "Resource": "arn:aws:states:::aws-sdk:ec2:startInstances",
-      "End": true
+      }
     }
   }
 }

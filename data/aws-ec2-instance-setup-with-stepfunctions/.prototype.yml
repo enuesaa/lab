@@ -1,21 +1,28 @@
 title: |
-  Step Functions で EC2 インスタンスをセットアップする
-description: ''
-published: '2025-08-12'
+  [雑記]
+  Step Functions で EC2 インスタンスを立ち上げる
+description: |
+  たまに EC2 インスタンスを立ち上げて開発しているのですが、
+  インスタンスの立ち上げを自動化したく、Step Functions に処理をまとめてみました。
+
+  雑記として ASL を載せます。
+published: '2025-08-16'
 
 units:
   - title: 構成
     description: |
-      AWS Step Functions で EC2 インスタンスをセットアップします。
-      EC2 インスタンスがすでにあったら何もしません。
+      Step Functions で EC2 インスタンスを立ち上げます。
+      そして Systems Manager Run Command でコマンドを実行し、EC2 インスタンスをセットアップします。
+
+      もし既に EC2 インスタンスが立ち上がっていたら何もしません。
     
-  # - image: # AWS コンソールのキャプチャ
+  - image: architecture.png
+
+  - code:
+      open: stepfunctions.asl.json
 
   - title: おわり
     description: |
-      開発の都合で EC2 インスタンスを立ち上げる時があるのですが、
-      その度に AWS コンソールをぽちぽちするのは面倒で。自動でセットアップしてほしく。
-
       今回は Step Functions にしましたが、他にも方法はいろいろあります。
       ・ゴールデンイメージにする (AMI)
       ・EC2 のユーザーデータでシェルスクリプトを実行する
