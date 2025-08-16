@@ -6,7 +6,7 @@
       "Type": "Task",
       "Resource": "arn:aws:states:::aws-sdk:ec2:runInstances",
       "Arguments": {
-        "ImageId": "ami-0cef62348b8426830",
+        "ImageId": "<AMIID>",
         "InstanceType": "t4g.small",
         "MinCount": 1,
         "MaxCount": 1,
@@ -23,7 +23,7 @@
             "Tags": [
               {
                 "Key": "Name",
-                "Value": "testec2"
+                "Value": "dev"
               }
             ]
           }
@@ -85,7 +85,7 @@
           "Comment": "Failed"
         }
       ],
-      "Default": "TerminateEC2Instance"
+      "Default": "Succeed"
     },
     "NotifyCommandFailed": {
       "Type": "Task",
@@ -96,15 +96,13 @@
           "message": "コマンドの実行に失敗しました"
         }
       },
-      "Next": "TerminateEC2Instance"
+      "Next": "Fail"
     },
-    "TerminateEC2Instance": {
-      "Type": "Task",
-      "Resource": "arn:aws:states:::aws-sdk:ec2:terminateInstances",
-      "End": true,
-      "Arguments": {
-        "InstanceIds": "{% [$instanceId] %}"
-      }
+    "Succeed": {
+      "Type": "Succeed"
+    },
+    "Fail": {
+      "Type": "Fail"
     }
   }
 }

@@ -2,30 +2,53 @@ title: |
   [雑記]
   Step Functions で EC2 インスタンスを立ち上げる
 description: |
-  たまに EC2 インスタンスを立ち上げて開発しているのですが、
-  インスタンスの立ち上げを自動化したく、Step Functions に処理をまとめてみました。
+  EC2 インスタンスを立ち上げて開発することがたまにあるのですが、
+  その立ち上げを自動化したく、Step Functions に処理をまとめてみました。
 
-  雑記として ASL を載せます。
-published: '2025-08-16'
+  雑記としてステートマシンの ASL を載せます。
+published: '2025-08-17'
 
 units:
   - title: 構成
     description: |
       Step Functions で EC2 インスタンスを立ち上げます。
       そして Systems Manager Run Command でコマンドを実行し、EC2 インスタンスをセットアップします。
-
-      もし既に EC2 インスタンスが立ち上がっていたら何もしません。
     
   - image: architecture.png
 
+  - description: |
+      なお、この構成だとインスタンスが増える一方です。
+      不要なインスタンスが残らないよう注意ください。
+
   - code:
       open: stepfunctions.asl.json
+      units:
+        - description: |
+            AMI の ID へ置き換えます
+            例: ami-xxx
+          mark: stepfunctions.asl.json:9
+        - description: |
+            Security Group の ID へ置き換えます
+            例: sg-xxx
+          mark: stepfunctions.asl.json:14
+        - description: |
+            Subnet の ID へ置き換えます
+            例: subnet-xxx
+          mark: stepfunctions.asl.json:16
+        - description: |
+            Instance Profile の名前へ置き換えます
+            
+            なお Systems Manager でコマンドを実行するには、
+            AmazonSSMManagedInstanceCore ポリシーの権限が必要。
+          links:
+            - title: AmazonSSMManagedInstanceCore
+              url: https://docs.aws.amazon.com/ja_jp/aws-managed-policy/latest/reference/AmazonSSMManagedInstanceCore.html
+          mark: stepfunctions.asl.json:18
+        - description: EC2 インスタンスの名前です
+          mark: stepfunctions.asl.json:26
 
   - title: おわり
     description: |
-      今回は Step Functions にしましたが、他にも方法はいろいろあります。
-      ・ゴールデンイメージにする (AMI)
-      ・EC2 のユーザーデータでシェルスクリプトを実行する
-      
-      メンテナンスを
-      
+      シンプルに AMI を取って起動した方がたぶん楽です。
+
+      私の場合は、上記の処理の他にいろいろ行いたいことがあり、そのため Step Functions に寄せちゃいました。
