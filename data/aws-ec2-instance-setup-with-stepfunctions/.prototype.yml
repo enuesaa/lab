@@ -1,5 +1,4 @@
 title: |
-  [雑記]
   Step Functions で EC2 インスタンスを立ち上げる
 description: |
   インスタンスを立ち上げて開発することがたまにあるのですが、
