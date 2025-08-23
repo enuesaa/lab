@@ -1,0 +1,14 @@
+title: |
+  AWS Systems Manager Automation で EC2 へ接続し Nginx のログを取得する
+description: |
+  Automation の存在は知っていたが何ができるか気になっており試してみた。
+published: '2025-08-24'
+
+units:
+  - title: 構成
+    # image: 
+  
+  - code:
+      open: runbook.yml
+      includes:
+        - iam.json

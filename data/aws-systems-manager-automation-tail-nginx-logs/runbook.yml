@@ -1,0 +1,33 @@
+description: Get latest nginx log lines
+schemaVersion: '0.3'
+assumeRole: '{{ AutomationAssumeRole }}'
+parameters:
+  TargetInstanceId:
+    type: AWS::EC2::Instance::Id
+    description: EC2 Instance ID
+  AutomationAssumeRole:
+    type: AWS::IAM::Role::Arn
+    description: IAM Role to assume
+mainSteps:
+  - name: GetAccessLog
+    action: aws:runCommand
+    nextStep: GetErrorLog
+    isEnd: false
+    inputs:
+      DocumentName: AWS-RunShellScript
+      InstanceIds:
+        - '{{ TargetInstanceId }}'
+      Parameters:
+        commands:
+          - tail -n 100 /var/log/nginx/access.log
+  - name: GetErrorLog
+    action: aws:runCommand
+    isEnd: true
+    inputs:
+      DocumentName: AWS-RunShellScript
+      InstanceIds:
+        - '{{ TargetInstanceId }}'
+      Parameters:
+        commands:
+          - tail -n 100 /var/log/nginx/error.log
+
