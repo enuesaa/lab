@@ -19,7 +19,7 @@ mainSteps:
         - '{{ TargetInstanceId }}'
       Parameters:
         commands:
-          - tail -n 100 /var/log/nginx/access.log
+          - tail /var/log/nginx/access.log
   - name: GetErrorLog
     action: aws:runCommand
     isEnd: true
@@ -29,5 +29,4 @@ mainSteps:
         - '{{ TargetInstanceId }}'
       Parameters:
         commands:
-          - tail -n 100 /var/log/nginx/error.log
-
+          - tail /var/log/nginx/error.log

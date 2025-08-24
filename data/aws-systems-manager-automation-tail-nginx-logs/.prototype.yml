@@ -1,14 +1,48 @@
 title: |
-  AWS Systems Manager Automation で EC2 へ接続し Nginx のログを取得する
+  [雑記] Systems Manager Automation を試す
 description: |
-  Automation の存在は知っていたが何ができるか気になっており試してみた。
+  Automation の存在は知っていたが何ができるか気になっており試してみた
 published: '2025-08-24'
 
 units:
   - title: 構成
-    # image: 
+    description: Automation で EC2 へ接続しコマンドを実行する
+    image: size=(min) architecture.png
+
+  - title: Runbook
+    description: |
+      試しに EC2 へ接続します。そして Nginx のログを tail します
+    image: size=(min) runbook.png
   
+  - title: symbol=(⚠︎) 注意
+    description: |
+      末尾に書いてますが、
+      ログを取得できても truncate されてしまいます。そのため実務では使えません。
+
   - code:
       open: runbook.yml
-      includes:
+      include:
         - iam.json
+      units:
+        - description: Runbook
+          mark: runbook.yml:1
+        - description: アクセスログを tail する
+          mark: runbook.yml:22
+        - description: エラーログを tail する
+          mark: runbook.yml:32
+        - description: Automation の実行に必要な IAM 権限
+          mark: iam.json:1
+
+  - title: 実行結果
+    description: |
+      Nginx のアクセスログを取得して AWS コンソールに表示する
+    image: size=(min) out.png
+
+  - title: symbol=(⚠︎) Truncate される
+    description: |
+      アクセスログが長いと Truncate されます
+    image: size=(min) truncate.png
+
+  - description: |
+      そのため実務では使えません。
+      このケースで言えば、ふつうに CloudWatch Agent を入れてログを CloudWatch Logs へ転送するのが良さそうです。
