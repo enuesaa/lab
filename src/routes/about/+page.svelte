@@ -9,7 +9,7 @@
 </script>
 
 <Main>
-	<div class="container mx-auto px-1 pt-8 pb-2">
+	<div class="container mx-auto max-w-[1150px] px-1 pt-8 pb-2">
 		<PageTitle title="About" />
 		<PageDescription description={about} />
 
