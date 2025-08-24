@@ -11,7 +11,7 @@ units:
 
   - title: Runbook
     description: |
-      試しに EC2 へ接続します。そして Nginx のログを tail します
+      試しに Nginx のアクセスログやエラーログを tail します
     image: size=(min) runbook.png
   
   - title: symbol=(⚠︎) 注意
