@@ -4,20 +4,13 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    // mod
-    const mod = b.addModule("wtmp", .{
-        .root_source_file = b.path("src/root.zig"),
-        .target = target,
-    });
     const exe = b.addExecutable(.{
-        .name = "wtmp",
+        .name = "tryapp",
         .root_module = b.createModule(.{
             .root_source_file = b.path("src/main.zig"),
             .target = target,
             .optimize = optimize,
-            .imports = &.{
-                .{ .name = "wtmp", .module = mod },
-            },
+            .imports = &.{},
         }),
     });
     b.installArtifact(exe);

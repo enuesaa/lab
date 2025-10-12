@@ -1,7 +1,7 @@
 .{
-    .name = .wtmp, // TODO rename
+    .name = .tryapp,
     .version = "0.0.0",
-    .fingerprint = 0x402e363288218a5,
+    .fingerprint = 0x827b1b10e971a3d0,
     .minimum_zig_version = "0.15.1",
     .dependencies = .{},
     .paths = .{
