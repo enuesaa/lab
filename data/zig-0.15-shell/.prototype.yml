@@ -1,8 +1,8 @@
 title: |
-  Zig でサブシェルを立ち上げる
+  Zig でシェルを立ち上げる
 description: |
   Zig へ入門して5日目に書いたコード。考慮漏れあるかも
-published: '2025-10-13s'
+published: '2025-10-13'
 
 units:
   - title: バージョン
