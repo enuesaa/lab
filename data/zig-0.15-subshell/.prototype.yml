@@ -1,68 +1,51 @@
 title: |
   Zig でサブシェルを立ち上げる
 description: |
-  Zig へ入門して5日目に書いたコードなので考慮漏れあるかも
-# published: '2025-10-10'
-
-# ちょっとマニアックすぎるかもしれないが、まあいいかも。
-# サブシェルという用語の使い方はあってそう。
-# https://github.com/99designs/aws-vault/blob/d4706c87383ca9ac8492c48e2d8a84dbd7e6cc07/cli/exec.go#L324
-
-# TODO
-# - ビルドコマンドの整理 (普通の感じであればいいと思う)
-# - root.zig を解く。
-# - コードの整理
-# - gif
-# - zig のバージョンの件
+  Zig へ入門して5日目に書いたコード。考慮漏れあるかも
+published: '2025-10-13s'
 
 units:
-  # - image: architecture.png
+  - title: バージョン
+    terminal: |
+      $ zig version
+      0.15.1
 
-#   - title: 公式ドキュメント
-#     links:
-#       - title: 'coder.com: Chane Management'
-#         url: https://coder.com/docs/admin/templates/managing-templates/change-management
+  - title: コード
+    code:
+      open: src/main.zig
+      include:
+        - src
+        - .gitignore
+        - build.zig
+        - build.zig.zon
+      units:
+        - links:
+            - title: ziglang.org/documentation/0.15.1/std/#std.process.Child.init
+              url: https://ziglang.org/documentation/0.15.1/std/#std.process.Child.init
+          mark: src/main.zig:8
+        
+        - links:
+            - title: ziglang.org/documentation/0.15.1/std/#std.fs.cwd
+              url: https://ziglang.org/documentation/0.15.1/std/#std.fs.cwd
+          mark: src/main.zig:11
 
-#   - description: |
+        - links:
+            - title: ziglang.org/documentation/0.15.1/std/#std.process.getEnvMap
+              url: https://ziglang.org/documentation/0.15.1/std/#std.process.getEnvMap
+          mark: src/main.zig:14
 
-#       さっそく試してみます。
+        - links:
+            - title: ziglang.org/documentation/0.15.1/std/#std.process.Child.spawnAndWait
+              url: https://ziglang.org/documentation/0.15.1/std/#std.process.Child.spawnAndWait
+          mark: src/main.zig:19
 
-#   - title: symbol=(1.) トークンを発行
-#     description: |
-#       Terraform から Coder へアクセスするにはトークンが必要です。
-#       アカウント設定より発行できます。
-#   - image: size=(min) accountsetting.png
-#   - image: size=(min) tokenadd.png
-#   - image: size=(min) tokencreated.png
 
-#   - title: symbol=(2.) Terraform を書く
-#     description: |
-#       コードを書きましょう。
-#       1. で発行したトークンを terraform.tfvars にセットします。
+  - title: 実行
+    terminal: |
+      $ zig build run
+      
+      $ printenv | grep AAA
+      AAA=bbb
 
-#   - title: サンプルコード
-#     code:
-#       open: main.tf
-#       include:
-#         - templates
-#         - templates/minimum
-#         - templates/minimum/main.tf
-#         - templates/minimum/README.md
-#         - terraform.tfvars
-#       units:
-#         - description: Coder の Provider です
-#           links:
-#             - title: 'Terraform Registry: coderd Provider'
-#               url: https://registry.terraform.io/providers/coder/coderd/latest/docs
-#           mark: main.tf:4
-#         - description: |
-#             Coder へアクセスするためのトークンです
-#           mark: main.tf:9
-#         - description: |
-#             coderd_template というリソースでテンプレートを管理できます。
-#           links:
-#             - title: 'Terraform Registry: coderd_template (Resource)'
-#               url: https://registry.terraform.io/providers/coder/coderd/latest/docs/resources/template
-#           mark: main.tf:20
-#         - description: ここで指定したディレクトリがテンプレートとして登録されます
-#           mark: main.tf:28
+      $ exit
+      exit code: 0
