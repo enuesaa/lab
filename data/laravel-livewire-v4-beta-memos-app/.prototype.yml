@@ -8,17 +8,16 @@ units:
   - title: Livewire v4 (beta)
     description: |
       Livewire v4 のベータ版が公開されました。
-      下記のURLにドキュメントがあります。
-    links:
-      - title: https://livewire.laravel.com/docs/4.x/quickstart
-        url: https://livewire.laravel.com/docs/4.x/quickstart
-
-  - description: |
       記事執筆時点の最新バージョンは v4.0.0-beta.3 です。
-
     links:
       - title: v4.0.0-beta.3
         url: https://github.com/livewire/livewire/releases/tag/v4.0.0-beta.3
+
+  - description: |
+      ドキュメントは下記のURLにあります。
+    links:
+      - title: https://livewire.laravel.com/docs/4.x/quickstart
+        url: https://livewire.laravel.com/docs/4.x/quickstart
 
   - title: symbol=(⚠︎) 注意
     description: |
