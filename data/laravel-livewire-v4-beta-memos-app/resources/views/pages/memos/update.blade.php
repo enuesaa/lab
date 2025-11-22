@@ -1,43 +1,39 @@
 <?php
 
 use App\Models\Memo;
-use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Attributes\Validate;
 
 new class extends Component
 {
-    public $show = false;
-
+    public Memo $memo;
+ 
     #[Validate('required|max:100', message: 'Please provide a title')]
     public $title = '';
  
     #[Validate('required')]
     public $content = '';
  
+    public function mount($id) 
+    {
+        $this->memo = Memo::findOrFail($id);
+        $this->title = $this->memo->title;
+        $this->content = $this->memo->content;
+    }
+
     public function save()
     {
-        Memo::create($this->validate());
+        $this->memo->update($this->validate());
 
         return redirect()->to('/');
-    }
-
-    #[On('createMemoModal.close')] 
-    public function close(): void
-    {
-        $this->show = false;
-    }
-
-    #[On('createMemoModal.open')] 
-    public function open(): void
-    {
-        $this->show = true;
     }
 };
 ?>
 
-<livewire:modal title="New Memo" wire:model="show" dispatchOnClose="createMemoModal.close">
-    <form wire:submit="save" class="space-y-3">
+<div>
+    <livewire:pagetop title="Update" />
+
+    <form wire:submit="save" class="space-y-3 mt-6">
         <label>
             Title
             <input type="text" wire:model="title" class="mt-1 block w-full rounded-md border px-3 py-2 text-sm">
@@ -49,8 +45,12 @@ new class extends Component
             @error('content') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
         </label>
         <div class="flex justify-end gap-2">
-            <button type="button" wire:click="close" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm bg-transparent text-slate-700 hover:bg-slate-50">Cancel</button>
-            <livewire:button type="submit" label="Save" />
+            <a href="/memos/{{ $memo->id }}" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm bg-transparent text-slate-700 hover:bg-slate-50">
+                Cancel
+            </a>
+            <button type="submit" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-sky-600 text-white text-sm hover:bg-sky-700">
+                Save
+            </button>
         </div>
     </form>
-</livewire:modal>
+</div>

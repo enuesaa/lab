@@ -2,7 +2,7 @@ title: |
   Laravel Livewire v4 (beta) でメモ帳アプリを作る
 description: |
   ベータ版が公開されたので、試してみた。
-published: '2025-11-22'
+published: '2025-11-23'
 
 units:
   - title: Livewire v4 (beta)
@@ -21,16 +21,17 @@ units:
 
   - title: symbol=(⚠︎) 注意
     description: |
-      ドキュメントに記載されておりますが、
+      ドキュメントに記載ありますが、
       アクティブな開発が続いており安定版ではないため、プロダクション環境への適用はお勧めしません。
   
   - title: 変更点
     description: |
-      変更点はいろいろありますが、大きなところで言うと、Single-file component でしょうか。
+      変更点はいろいろあるようです。
+      大きなところで言うと、Single-file component でしょうか。
       
       v3 ではコンポーネント1つにつき2つのファイルが必要でした。
       例：app/Livewire/TopPage.php
-      　　resources/views/top/page.blade.php
+      　　resources/views/top-page.blade.php
 
       v4 では Single-file component というものが登場し、blade にロジックを記述できるようになります。
   - inline:
@@ -40,23 +41,23 @@ units:
       アップグレードガイドが公開されておりますので、詳細はそちらをご確認ください。
     
     links:
-      - title: https://livewire.laravel.com/docs/4.x/quickstart
-        url: https://livewire.laravel.com/docs/4.x/quickstart
+      - title: https://livewire.laravel.com/docs/4.x/upgrading
+        url: https://livewire.laravel.com/docs/4.x/upgrading
 
   - title: メモ帳アプリを作る
     description: |
       シンプルなメモ帳アプリを作り、CRUD をひととおり見ていきます。
 
+    image: size=(min) .memosapp.gif
+
   - code:
-      open: resources/views/pages/top.blade.php
+      open: resources/views/layouts/app.blade.php
       include:
         - app/Http/Controllers/Controller.php
         - app/Models/Memo.php
         - app/Providers/AppServiceProvider.php
         - bootstrap/app.php
         - bootstrap/cache/.gitignore
-        - bootstrap/cache/packages.php
-        - bootstrap/cache/services.php
         - bootstrap/providers.php
         - config/app.php
         - config/auth.php
@@ -79,14 +80,15 @@ units:
         - public/robots.txt
         - resources
         - resources/views
-        - resources/views/components/memos/create.blade.php
-        - resources/views/components/button.blade.php
+        - resources/views/components
         - resources/views/components/footer.blade.php
         - resources/views/components/header.blade.php
-        - resources/views/components/modal.blade.php
         - resources/views/components/pagetop.blade.php
+        - resources/views/layouts
         - resources/views/layouts/app.blade.php
         - resources/views/pages
+        - resources/views/pages/memos/create.blade.php
+        - resources/views/pages/memos/update.blade.php
         - resources/views/pages/memos/view.blade.php
         - resources/views/pages/about.blade.php
         - resources/views/pages/top.blade.php
@@ -110,56 +112,53 @@ units:
         - artisan
         - compose.yml
         - composer.json
+        - composer.lock
         - Dockerfile
-        - README.md
+      units:
+        - description: |
+            レイアウトです。
+            ここで header や footer のコンポーネントを読み込みます。
+          mark: resources/views/layouts/app.blade.php:15
+        - description: |
+            UnoCSS でスタイリングをします。
+          mark: resources/views/layouts/app.blade.php:8
+          links:
+            - title: unocss.dev
+              url: https://unocss.dev/
+        - description: |
+            トップページです。
+          mark: resources/views/pages/top.blade.php:8
+        - description: |
+            ページタイトル <title> を Title Attribute で書いてます。
+          mark: resources/views/pages/top.blade.php:8
+          links:
+            - title: Title Attribute
+              url: https://livewire.laravel.com/docs/4.x/attribute-title
+        - description: |
+            メモ一覧を取ってきて、ここでリスト表示します。
+          mark: resources/views/pages/top.blade.php:26
+        - description: |
+            メモ作成ページです。
+          mark: resources/views/pages/memos/create.blade.php:7
+        - description: |
+            Validate Attribute でバリデーションをします。
+          mark: resources/views/pages/memos/create.blade.php:9
+          links:
+            - title: Validate Attribute
+              url: https://livewire.laravel.com/docs/4.x/attribute-validate
+        - description: |
+            デフォルトではファイルの先頭に絵文字がつくようですが、つけない設定にしてます。
+          mark: config/livewire.php:73
+          links:
+            - title: livewire.laravel.com/docs/4.x/components
+              url: https://livewire.laravel.com/docs/4.x/components#creating-components
 
+  - description: 立ち上げかた
+    terminal: |
+      docker compose build
+      docker compose up
 
-
-  # - title: バージョン
-  #   terminal: |
-  #     $ zig version
-  #     0.15.1
-
-  # - title: コード
-  #   code:
-  #     open: src/main.zig
-  #     include:
-  #       - src
-  #       - .gitignore
-  #       - build.zig
-  #       - build.zig.zon
-  #     units:
-  #       - description: std.process.Child.init
-  #         links:
-  #           - title: ziglang.org/documentation/0.15.1/std/#std.process.Child.init
-  #             url: https://ziglang.org/documentation/0.15.1/std/#std.process.Child.init
-  #         mark: src/main.zig:10
-        
-  #       - description: std.fs.cwd
-  #         links:
-  #           - title: ziglang.org/documentation/0.15.1/std/#std.fs.cwd
-  #             url: https://ziglang.org/documentation/0.15.1/std/#std.fs.cwd
-  #         mark: src/main.zig:13
-
-  #       - description: std.process.getEnvMap
-  #         links:
-  #           - title: ziglang.org/documentation/0.15.1/std/#std.process.getEnvMap
-  #             url: https://ziglang.org/documentation/0.15.1/std/#std.process.getEnvMap
-  #         mark: src/main.zig:16
-
-  #       - description: std.process.Child.spawnAndWait
-  #         links:
-  #           - title: ziglang.org/documentation/0.15.1/std/#std.process.Child.spawnAndWait
-  #             url: https://ziglang.org/documentation/0.15.1/std/#std.process.Child.spawnAndWait
-  #         mark: src/main.zig:22
-
-
-  # - title: 実行
-  #   terminal: |
-  #     $ zig build run
-      
-  #     $ printenv | grep AAA
-  #     AAA=bbb
-
-  #     $ exit
-  #     exit code: 0
+  - title: おわり
+    description: |
+      個人的にはこちらの方が好みです。
+      Svelte や Vue のコンポーネントに近づいて、書きやすくなった印象があります。

@@ -11,5 +11,5 @@ new #[Title('about')] class extends Component
 <div>
     <livewire:pagetop title="About" />
 
-    ...
+    about...
 </div>

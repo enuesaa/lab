@@ -1,23 +1,21 @@
 <?php
  
 use App\Models\Memo;
-use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
  
 new #[Title('memo')] class extends Component
 {
-    public Memo $post;
+    public Memo $memo;
  
     public function mount($id) 
     {
-        $this->post = Memo::findOrFail($id);
+        $this->memo = Memo::findOrFail($id);
     }
 
-    #[On('memos.{post.id}.delete')] 
     public function delete()
     {
-        $this->post->deleteOrFail();
+        $this->memo->deleteOrFail();
 
         return redirect()->to('/');
     }
@@ -25,15 +23,22 @@ new #[Title('memo')] class extends Component
 ?>
 
 <div>
-    <livewire:pagetop title="{{ $this->post->title }}">
-        <livewire:button label="delete" dispatchOnClick="memos.{{ $post->id }}.delete" />
+    <livewire:pagetop title="{{ $memo->title }}">
+        <div class="flex justify-end gap-2">
+            <button wire:click="delete" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm bg-transparent text-slate-700 hover:bg-slate-50">
+                Delete
+            </button>
+            <a href="/memos/{{ $memo->id }}/update" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-sky-600 text-white text-sm hover:bg-sky-700">
+                Update
+            </a>
+        </div>
     </livewire:pagetop>
 
     <div class="text-sm text-slate-500 mb-3">
-        Created {{ $this->post->created_at->diffForHumans() }}
+        Created {{ $memo->created_at->diffForHumans() }}
     </div>
 
     <div class="bg-white rounded-lg border border-slate-100 p-6 prose prose-slate max-w-none">
-        {{ $this->post->content }}
+        {{ $memo->content }}
     </div>
 </div>

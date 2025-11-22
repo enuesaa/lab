@@ -3,15 +3,20 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ $title ?? 'Page Title' }}</title>
 
         <!-- styles -->
-        <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime/uno.global.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/tailwind-compat.min.css" />
-
-        <title>{{ $title ?? 'Page Title' }}</title>
+        <style>
+            /* https://unocss.dev/integrations/runtime#preventing-fouc */
+            [un-cloak] {
+                display: none;
+            }
+        </style>
     </head>
 
-    <body class="min-h-screen bg-slate-50 text-slate-900 antialiased">
+    <body class="min-h-screen bg-slate-50 text-slate-900 antialiased" un-cloak>
         <livewire:header />
 
         <main class="max-w-4xl mx-auto p-4 min-h-dvh">

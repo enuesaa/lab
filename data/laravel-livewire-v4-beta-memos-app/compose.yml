@@ -5,6 +5,7 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - .:/var/www/html
+    command: sh -c 'composer install && composer run setup && apache2-foreground'
     ports:
       - 8080:80
     tty: true
