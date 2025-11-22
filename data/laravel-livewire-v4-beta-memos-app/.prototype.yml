@@ -1,0 +1,166 @@
+title: |
+  Laravel Livewire v4 (beta) でメモ帳アプリを作る
+description: |
+  ベータ版が公開されたので、試してみた。
+published: '2025-11-22'
+
+units:
+  - title: Livewire v4 (beta)
+    description: |
+      Livewire v4 のベータ版が公開されました。
+      下記のURLにドキュメントがあります。
+    links:
+      - title: https://livewire.laravel.com/docs/4.x/quickstart
+        url: https://livewire.laravel.com/docs/4.x/quickstart
+
+  - description: |
+      記事執筆時点の最新バージョンは v4.0.0-beta.3 です。
+
+    links:
+      - title: v4.0.0-beta.3
+        url: https://github.com/livewire/livewire/releases/tag/v4.0.0-beta.3
+
+  - title: symbol=(⚠︎) 注意
+    description: |
+      ドキュメントに記載されておりますが、
+      アクティブな開発が続いており安定版ではないため、プロダクション環境への適用はお勧めしません。
+  
+  - title: 変更点
+    description: |
+      変更点はいろいろありますが、大きなところで言うと、Single-file component でしょうか。
+      
+      v3 ではコンポーネント1つにつき2つのファイルが必要でした。
+      例：app/Livewire/TopPage.php
+      　　resources/views/top/page.blade.php
+
+      v4 では Single-file component というものが登場し、blade にロジックを記述できるようになります。
+  - inline:
+      open: .v4-single-file-component-example.php
+
+  - description: |
+      アップグレードガイドが公開されておりますので、詳細はそちらをご確認ください。
+    
+    links:
+      - title: https://livewire.laravel.com/docs/4.x/quickstart
+        url: https://livewire.laravel.com/docs/4.x/quickstart
+
+  - title: メモ帳アプリを作る
+    description: |
+      シンプルなメモ帳アプリを作り、CRUD をひととおり見ていきます。
+
+  - code:
+      open: resources/views/pages/top.blade.php
+      include:
+        - app/Http/Controllers/Controller.php
+        - app/Models/Memo.php
+        - app/Providers/AppServiceProvider.php
+        - bootstrap/app.php
+        - bootstrap/cache/.gitignore
+        - bootstrap/cache/packages.php
+        - bootstrap/cache/services.php
+        - bootstrap/providers.php
+        - config/app.php
+        - config/auth.php
+        - config/cache.php
+        - config/database.php
+        - config/filesystems.php
+        - config/livewire.php
+        - config/logging.php
+        - config/mail.php
+        - config/queue.php
+        - config/services.php
+        - config/session.php
+        - database/.gitignore
+        - database/factories/.gitkeep
+        - database/migrations/2025_11_03_145052_create_memos_table.php
+        - database/seeders/DatabaseSeeder.php
+        - public/.htaccess
+        - public/favicon.ico
+        - public/index.php
+        - public/robots.txt
+        - resources
+        - resources/views
+        - resources/views/components/memos/create.blade.php
+        - resources/views/components/button.blade.php
+        - resources/views/components/footer.blade.php
+        - resources/views/components/header.blade.php
+        - resources/views/components/modal.blade.php
+        - resources/views/components/pagetop.blade.php
+        - resources/views/layouts/app.blade.php
+        - resources/views/pages
+        - resources/views/pages/memos/view.blade.php
+        - resources/views/pages/about.blade.php
+        - resources/views/pages/top.blade.php
+        - routes/console.php
+        - routes/web.php
+        - storage/app/private/.gitignore
+        - storage/app/public/.gitignore
+        - storage/app/.gitignore
+        - storage/framework/cache/.gitignore
+        - storage/framework/sessions/.gitignore
+        - storage/framework/testing/.gitignore
+        - storage/framework/views/.gitignore
+        - storage/framework/.gitignore
+        - storage/logs/.gitignore
+        - tests/Feature/ExampleTest.php
+        - tests/Unit/ExampleTest.php
+        - tests/Pest.php
+        - tests/TestCase.php
+        - .env.example
+        - .gitignore
+        - artisan
+        - compose.yml
+        - composer.json
+        - Dockerfile
+        - README.md
+
+
+
+  # - title: バージョン
+  #   terminal: |
+  #     $ zig version
+  #     0.15.1
+
+  # - title: コード
+  #   code:
+  #     open: src/main.zig
+  #     include:
+  #       - src
+  #       - .gitignore
+  #       - build.zig
+  #       - build.zig.zon
+  #     units:
+  #       - description: std.process.Child.init
+  #         links:
+  #           - title: ziglang.org/documentation/0.15.1/std/#std.process.Child.init
+  #             url: https://ziglang.org/documentation/0.15.1/std/#std.process.Child.init
+  #         mark: src/main.zig:10
+        
+  #       - description: std.fs.cwd
+  #         links:
+  #           - title: ziglang.org/documentation/0.15.1/std/#std.fs.cwd
+  #             url: https://ziglang.org/documentation/0.15.1/std/#std.fs.cwd
+  #         mark: src/main.zig:13
+
+  #       - description: std.process.getEnvMap
+  #         links:
+  #           - title: ziglang.org/documentation/0.15.1/std/#std.process.getEnvMap
+  #             url: https://ziglang.org/documentation/0.15.1/std/#std.process.getEnvMap
+  #         mark: src/main.zig:16
+
+  #       - description: std.process.Child.spawnAndWait
+  #         links:
+  #           - title: ziglang.org/documentation/0.15.1/std/#std.process.Child.spawnAndWait
+  #             url: https://ziglang.org/documentation/0.15.1/std/#std.process.Child.spawnAndWait
+  #         mark: src/main.zig:22
+
+
+  # - title: 実行
+  #   terminal: |
+  #     $ zig build run
+      
+  #     $ printenv | grep AAA
+  #     AAA=bbb
+
+  #     $ exit
+  #     exit code: 0
