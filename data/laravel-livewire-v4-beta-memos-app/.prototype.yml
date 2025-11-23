@@ -13,21 +13,29 @@ units:
       - title: v4.0.0-beta.3
         url: https://github.com/livewire/livewire/releases/tag/v4.0.0-beta.3
 
-  - description: |
-      ドキュメントは下記のURLにあります。
+  - title: ドキュメント
+    description: |
+      下記のURLにドキュメントがあります。
     links:
       - title: https://livewire.laravel.com/docs/4.x/quickstart
         url: https://livewire.laravel.com/docs/4.x/quickstart
 
+  - description: |
+      アップグレードガイドも公開されてます。
+    links:
+      - title: https://livewire.laravel.com/docs/4.x/upgrading
+        url: https://livewire.laravel.com/docs/4.x/upgrading
+
   - title: symbol=(⚠︎) 注意
     description: |
-      ドキュメントに記載ありますが、
-      アクティブな開発が続いており安定版ではないため、プロダクション環境への適用はお勧めしません。
+      ドキュメントに記載ありますが、アクティブな開発が続いており安定版ではないそうです。
+      そのためプロダクション環境への適用はお勧めしません。
   
-  - title: 変更点
+  - description: ''
+  
+  - title: 'Single-file component'
     description: |
-      変更点はいろいろあるようです。
-      大きなところで言うと、Single-file component でしょうか。
+      変更点はいろいろありますが、大きなところで言うと、Single-file component でしょうか。
       
       v3 ではコンポーネント1つにつき2つのファイルが必要でした。
       例：app/Livewire/TopPage.php
@@ -38,11 +46,14 @@ units:
       open: .v4-single-file-component-example.php
 
   - description: |
-      アップグレードガイドが公開されておりますので、詳細はそちらをご確認ください。
+      従来のコンポーネント (Class-based components) を使い続けることもできるそうで、
+      このあたりはドキュメントに記載されておりますので、詳細はそちらをご確認ください。
     
     links:
-      - title: https://livewire.laravel.com/docs/4.x/upgrading
-        url: https://livewire.laravel.com/docs/4.x/upgrading
+      - title: https://livewire.laravel.com/docs/4.x/components#when-to-use-each-format
+        url: https://livewire.laravel.com/docs/4.x/components#when-to-use-each-format
+
+  - description: ''
 
   - title: メモ帳アプリを作る
     description: |
