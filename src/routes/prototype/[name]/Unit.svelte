@@ -7,6 +7,7 @@
 	import UnitTerminal from './UnitTerminal.svelte'
 	import CodeArea from './CodeArea.svelte'
 	import UnitInline from './UnitInline.svelte'
+	import UnitCap from './UnitCap.svelte'
 
 	export let projectName: string
 	export let unit: UnitV2
@@ -16,6 +17,9 @@
 
 {#if isNormalContent}
 	<section class="w-full relative overflow-hidden container max-w-[1150px] mx-auto px-1 pt-2 pb-2">
+		{#if unit?.cap !== undefined}
+			<UnitCap text={unit.cap} />
+		{/if}
 		{#if unit?.title !== undefined}
 			<UnitTitle title={unit.title} />
 		{/if}

@@ -31,9 +31,8 @@ units:
       ドキュメントに記載ありますが、アクティブな開発が続いており安定版ではないそうです。
       そのためプロダクション環境への適用はお勧めしません。
   
-  - description: ''
-  
-  - title: 'Single-file component'
+  - cap: 変更点
+    title: Single-file component
     description: |
       変更点はいろいろありますが、大きなところで言うと、Single-file component でしょうか。
       
@@ -53,9 +52,8 @@ units:
       - title: https://livewire.laravel.com/docs/4.x/components#when-to-use-each-format
         url: https://livewire.laravel.com/docs/4.x/components#when-to-use-each-format
 
-  - description: ''
-
-  - title: メモ帳アプリを作る
+  - cap: 試す
+    title: メモ帳アプリを作る
     description: |
       シンプルなメモ帳アプリを作り、CRUD をひととおり見ていきます。
 
