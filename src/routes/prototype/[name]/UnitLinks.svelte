@@ -2,8 +2,10 @@
 	export let links: { title: string; url: string }[]
 </script>
 
-<div class="pl-10 mt-2 mb-3">
+<ul class="pl-10 mt-2 mb-3 list-disc">
 	{#each links as link}
-		<a href={link.url} class="underline list-item" target="_blank">{link.title}</a>
+		<li>
+			<a href={link.url} class="underline" target="_blank">{link.title}</a>
+		</li>
 	{/each}
-</div>
+</ul>
