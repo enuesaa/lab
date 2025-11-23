@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { parseAttrs } from '$lib/prototype/attrs'
-	import { Diamond } from 'lucide-svelte'
+	import { Diamond, Square } from 'lucide-svelte'
 
 	export let title: string
 	const {
@@ -11,9 +11,9 @@
 
 <div class="mt-6 mb-[6px] mx-auto px-3 font-semibold text-2xl font-zenmaru">
 	{#if symbol === undefined}
-		<Diamond class="inline-block align-bottom w-[14px] fill-gray-1000 stroke-gray-1000 pb-[4px] mr-[6px]" />
+		<Diamond class="inline-block align-bottom w-[14px] fill-editorbg stroke-editorbg pb-[4px] mr-1" />
 	{:else}
-		<span class="font-bold text-[1.6rem]">{symbol}</span>
+		<span class="font-bold align-text-bottom text-[1.6rem]">{symbol}</span>
 	{/if}
 	{display}
 </div>

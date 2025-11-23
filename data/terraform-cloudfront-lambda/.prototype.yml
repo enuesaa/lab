@@ -45,7 +45,7 @@ units:
             - title: Lambda Web Adapter
               url: https://github.com/awslabs/aws-lambda-web-adapter
   
-  - title: '[注意] POST or PUT はできない'
+  - title: 'symbol=(⚠︎) 注意: POST, PUT はできない'
     description: |
       CloudFront OAC がリクエストボディのハッシュ計算に対応していない様子。
       POST or PUT を叩くとエラーが返ってくる。
