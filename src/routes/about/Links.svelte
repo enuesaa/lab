@@ -10,7 +10,7 @@
 <ul class="block py-1 px-10 my-4 w-full">
 	{#each links as link}
 		<li class="font-zenmaru text-lg font-normal">
-			{#if link.key !== null}
+			{#if link.key !== undefined}
 				{link.key}:
 			{/if}
 			<a href={link.url} target="_blank">{link.text}</a>
