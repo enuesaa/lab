@@ -1,0 +1,48 @@
+title: |
+  Azure Static Web Apps + Functions でウェブアプリをホストする
+description: ''
+published: '2026-01-30'
+
+units:
+  - description: |
+
+      さっそく試してみます。
+
+  - title: symbol=(1.) 作成
+    description: |
+      Azure コンソールにて Static Web Apps を作成します
+  - image: size=(min) create.png
+
+  - title: symbol=(2.) APIキーを取得する
+    description: |
+      デプロイに必要な API キーを取得します
+  - image: size=(min) apikey.png
+
+  - title: symbol=(3.) コードを書く
+    description: |
+      SvelteKit + Python の構成です
+
+  - title: コード
+    code:
+      open: main.tf
+      include:
+        - api
+        - api/function_app.py
+      units:
+        - description: Azure Functions のコードです
+          links:
+            - title: 'Azure Functions の Python 開発者向けガイド'
+              url: https://learn.microsoft.com/ja-jp/azure/azure-functions/functions-reference-python?tabs=get-started%2Casgi%2Capplication-level&pivots=python-mode-decorators
+          mark: api/function_app.py:1
+
+  - title: symbol=(4.) デプロイする
+    description: |
+      デプロイしましょう。
+      手順3で発行したAPIキーをセットしてください。
+    terminal: |
+      $ swa deploy
+
+  - title: Links
+    links:
+      - title: 'https://learn.microsoft.com/ja-jp/azure/static-web-apps/overview'
+        url: https://learn.microsoft.com/ja-jp/azure/static-web-apps/overview
