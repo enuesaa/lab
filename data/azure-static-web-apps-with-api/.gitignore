@@ -2,10 +2,13 @@
 .DS_Store
 .vscode
 
-# nodejs
-node_modules
-
 # app
+node_modules
 dist
 .svelte-kit
 .env.local
+
+# python
+__pycache__
+.venv
+.python_packages
