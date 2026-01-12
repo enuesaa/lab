@@ -11,7 +11,8 @@ units:
   - title: symbol=(1.) 作成
     description: |
       Azure コンソールにて Static Web Apps を作成します
-  - image: size=(min) create.png
+  - image: size=(min) staticapp-create.png
+  - image: size=(min) staticapp-resource.png
 
   - title: symbol=(2.) APIキーを取得する
     description: |
