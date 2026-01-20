@@ -15,12 +15,20 @@ units:
   - title: symbol=(1.) 作成
     description: |
       Azure コンソールにて Static Web Apps を作成します
-  - image: size=(min) staticapp-create.png
+
+  - description: |
+      プランは Free を選びました。
+      またデプロイ方法は「その他」にしました。トークンを使用してデプロイする方式です。
+    image: size=(min) staticapp-create.png
+  - description: |
+      作成ボタンを押し、しばらく待ちます。
+      構築できたら「リソースに移動」というボタンを押して、リソースの詳細を確認しましょう。
   - image: size=(min) staticapp-resource.png
 
   - title: symbol=(2.) デプロイトークンを取得
     description: |
-      デプロイに必要なトークンを取得します
+      デプロイに必要なトークンを取得します。
+      「デプロイトークンを管理」というボタンを押すと、右パネルが開き、そこでトークンを確認できます。
   - image: size=(min) staticapp-deploytoken.png
 
   - title: symbol=(3.) コードを書く
