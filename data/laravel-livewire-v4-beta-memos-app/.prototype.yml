@@ -1,16 +1,15 @@
 title: |
   Laravel Livewire v4 (beta) でメモ帳アプリを作る
 description: |
-  ベータ版が公開されたので、試してみた。
+  ベータ版が公開されたので試してみた。
 published: '2025-11-23'
 
 units:
-  - title: Livewire v4 (beta)
+  - title: バージョン
     description: |
-      Livewire v4 のベータ版が公開されました。
       記事執筆時点の最新バージョンは v4.0.0-beta.3 です。
     links:
-      - title: v4.0.0-beta.3
+      - title: Laravel Livewire v4.0.0-beta.3
         url: https://github.com/livewire/livewire/releases/tag/v4.0.0-beta.3
 
   - title: ドキュメント
