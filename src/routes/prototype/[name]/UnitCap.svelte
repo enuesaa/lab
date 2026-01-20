@@ -9,6 +9,6 @@
 <style lang="postcss">
 	div {
 		@apply w-full font-zenmaru text-3xl text-center font-medium;
-		@apply mt-3 mb-1;
+		@apply mt-16 mb-1;
 	}
 </style>
