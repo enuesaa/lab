@@ -1,12 +1,16 @@
 title: |
-  Azure Static Web Apps + Functions でウェブアプリをホストする
+  Azure Static Web Apps でウェブアプリをホストする
 description: ''
 published: '2026-01-30'
 
 units:
-  - description: |
+  - title: 構成
+    description: |
+      Azure Static Web Apps でフロントエンドアプリをホストし、
+      Azure Functions を呼び出してみました。
+    image: size=(min) architecture.png
 
-      さっそく試してみます。
+  - cap: 構築手順
 
   - title: symbol=(1.) 作成
     description: |
@@ -14,10 +18,10 @@ units:
   - image: size=(min) staticapp-create.png
   - image: size=(min) staticapp-resource.png
 
-  - title: symbol=(2.) APIキーを取得する
+  - title: symbol=(2.) デプロイトークンを取得
     description: |
-      デプロイに必要な API キーを取得します
-  - image: size=(min) apikey.png
+      デプロイに必要なトークンを取得します
+  - image: size=(min) staticapp-deploytoken.png
 
   - title: symbol=(3.) コードを書く
     description: |
