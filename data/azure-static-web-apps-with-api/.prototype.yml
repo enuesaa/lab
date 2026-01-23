@@ -37,10 +37,16 @@ units:
 
   - title: コード
     code:
-      open: main.tf
+      open: index.html
       include:
         - api
         - api/function_app.py
+        - api/host.json
+        - api/pyproject.toml
+        - api/uv.lock
+        - index.html
+        - staticwebapp.config.json
+        - swa-cli.config.json
       units:
         - description: Azure Functions のコードです
           links:
