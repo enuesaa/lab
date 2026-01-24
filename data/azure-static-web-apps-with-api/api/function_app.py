@@ -1,16 +1,22 @@
 import azure.functions as func
+import json
 
 app = func.FunctionApp()
 
-@app.route(route='bookmarks', methods=['GET'], auth_level=func.AuthLevel.ANONYMOUS)
-def handle_list_bookmarks(req: func.HttpRequest) -> func.HttpResponse:
+@app.route(route='info', methods=['GET'], auth_level=func.AuthLevel.ANONYMOUS)
+def handle_get_info(req: func.HttpRequest) -> func.HttpResponse:
     try:
-        # verify_request(req)
-        # keyword = req.params.get('keyword')
-        # if keyword is None:
-        #     bookmarks = list_bookmarks()
-        #     return ListResponse(items=bookmarks).ok()
-        bookmarks = search_bookmarks(keyword)
-        return func.HttpResponse(bookmarks.model_dump_json(), mimetype='application/json', status_code=200)
+        data = {
+            'version': 'v0.0.1',
+            'message': 'Hello from azure functions',
+        }
+        return func.HttpResponse(
+            body=json.dumps(data),
+            mimetype='application/json',
+            status_code=200,
+        )
     except Exception as e:
-        return func.HttpResponse('{}', mimetype='application/json', status_code=400)
+        return func.HttpResponse(
+            body=str(e),
+            status_code=400,
+        )

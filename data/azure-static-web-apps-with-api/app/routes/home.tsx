@@ -1,25 +1,24 @@
 import type { Route } from './+types/home'
 
-type Post = {
-  id: number
-  userId: number
-  title: string
-  body: string
+type Info = {
+  version: string
+  message: string
 }
 
 export async function clientLoader({}: Route.ClientLoaderArgs) {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/1`)
+  // const res = await fetch(`https://jsonplaceholder.typicode.com/posts/1`)
+  const res = await fetch('/api/info')
   const resbody = await res.json()
-  return resbody as Post
+  return resbody as Info
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
-  const { title, body } = loaderData
+  const { version, message } = loaderData
 
   return (
-    <div className='mx-auto max-w-4/5'>
-      <div className='text-amber-300'>{title}</div>
-      <div>{body}</div>
+    <div className="w-96 p-6 my-5 mx-auto rounded-xl border border-white/10 bg-white/5">
+      a{message} <br />
+      (version: b{version})
     </div>
   )
 }
