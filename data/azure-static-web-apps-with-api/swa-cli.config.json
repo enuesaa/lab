@@ -3,9 +3,9 @@
   "configurations": {
     "starrel": {
       "appLocation": ".",
-      "outputLocation": "dist/starrel/browser",
-      "run": "pnpm dev",
-      "appBuildCommand": "pnpm build:prod",
+      "outputLocation": "dist/client",
+      "run": "npm run dev",
+      "appBuildCommand": "npm run build",
       "appDevserverUrl": "http://localhost:3000",
       "apiLocation": "api",
       "apiLanguage": "python",
