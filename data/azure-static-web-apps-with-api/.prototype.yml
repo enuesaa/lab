@@ -14,7 +14,7 @@ units:
 
   - title: symbol=(1.) 作成
     description: |
-      まず Static Web Apps を作成します。
+      はじめに Static Web Apps を作成します。
       Azure コンソールにて「静的 Wweb アプリ」を開き、作成ボタンを押しましょう。
     image: size=(min) staticapp-create-init.png
 
@@ -67,26 +67,27 @@ units:
       units:
         - description: |
             Static Web Apps の設定ファイルです。
-            ここでリダイレクトなど設定できます。
+            ここでリダイレクト等を制御できます。
           links:
             - title: https://learn.microsoft.com/ja-jp/azure/static-web-apps/configuration
               url: https://learn.microsoft.com/ja-jp/azure/static-web-apps/configuration#example-configuration-file
           mark: staticwebapp.config.json:1
         - description: |
             Static Web Apps CLI の設定ファイルです。
-            ビルドコマンド等を記述します
+            ビルドコマンドを記述します。
           links:
             - title: https://learn.microsoft.com/ja-jp/azure/static-web-apps/static-web-apps-cli-configuration
               url: https://learn.microsoft.com/ja-jp/azure/static-web-apps/static-web-apps-cli-configuration
           mark: swa-cli.config.json:1
         - description: |
-            依存パッケージをダウンロードして一緒にデプロイします。
-            AWS Lambda をデプロイするときにコードを ZIP ファイルへ固める作業がありますが、それとだいたい一緒です。
+            ここでは Python の依存パッケージをダウンロードしてます。
+
+            AWS Lambda にて、デプロイ時にコードを zip ファイルへ固める作業がありますが、それとだいたい一緒です。
           links:
             - title: https://docs.astral.sh/uv/guides/integration/aws-lambda/#deploying-a-zip-archive
               url: https://docs.astral.sh/uv/guides/integration/aws-lambda/#deploying-a-zip-archive
           mark: swa-cli.config.json:11
-        - description: ここでバックエンドを呼び出します
+        - description: ここでバックエンドを呼び出します。
           mark: app/routes/home.tsx:9
         
         - description: |
@@ -107,6 +108,20 @@ units:
     terminal: |
       $ pnpm swa deploy --env production --deployment-token <DEPLOYMENT_TOKEN>
   - image: size=(min) deploy.png
+  - description: |
+      なお Static Web Apps には production 環境と preview 環境の2つがあります。
+      デフォルトでは preview 環境へデプロイされます。production 環境へデプロイするには --env production を渡す必要があります。
+
+  - title: 動作確認
+    description: |
+      ブラウザで確認しましょう。
+      Azure Functions で返している文字列が表示されているので、うまくデプロイできてそうです。
+    image: size=(min) staticapp-check-ui.png
+
+  - description: |
+      Azure コンソールも確認しましょう。
+      Azure Functions のデプロイに成功すると、コンソールに関数名が表記されます。
+    image: size=(min) staticapp-api-created.png
 
   - title: Links
     links:
