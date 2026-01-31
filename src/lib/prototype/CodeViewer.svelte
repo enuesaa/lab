@@ -5,7 +5,7 @@
 	import CodeSep from './CodeSep.svelte'
 	import type { CodeFiles } from '$lib/prototype/types'
 	import CodeCopyButton from './CodeCopyButton.svelte'
-	import CodeAreaFileTag from './CodeFileTag.svelte'
+	import CodeFileTag from './CodeFileTag.svelte'
 	import CodeTreeItemButton from './CodeTreeItemButton.svelte'
 	import { PaneGroup, Pane, PaneResizer } from 'paneforge'
 	import { Dot } from 'lucide-svelte'
@@ -47,7 +47,7 @@
 			<Dot class="absolute top-48 left-[-10px] bg-editorbg text-editortext overflow-visible z-10 w-5" />
 			{#key $viewing}
 				{#if $viewing !== undefined}
-					<CodeAreaFileTag filename={$viewing.id} />
+					<CodeFileTag filename={$viewing.id} />
 				{/if}
 			{/key}
 		</PaneResizer>
