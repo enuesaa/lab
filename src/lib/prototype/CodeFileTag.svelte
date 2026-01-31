@@ -1,8 +1,23 @@
 <script lang="ts">
+	import type { MouseEventHandler } from 'svelte/elements'
+
 	export let filename: string
+
+	const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
+		e.preventDefault()
+		if (!e.target) {
+			return
+		}
+		const range = document.createRange();
+		range.selectNodeContents(e.target as Node);
+		const selection = window.getSelection();
+		selection?.removeAllRanges();
+		selection?.addRange(range);
+	}
 </script>
 
-<div>
+<!-- svelte-ignore a11y_no_static_element_interactions a11y_click_events_have_key_events -->
+<div on:click={handleClick}>
 	{filename}
 </div>
 
