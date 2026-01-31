@@ -11,3 +11,6 @@ dist
 __pycache__
 .venv
 .python_packages
+
+# swa-cli deploy file
+*.zip

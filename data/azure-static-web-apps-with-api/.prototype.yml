@@ -6,39 +6,44 @@ published: '2026-01-30'
 units:
   - title: 構成
     description: |
-      Azure Static Web Apps でフロントエンドアプリをホストし、
-      Azure Functions を呼び出してみました。
+      Static Web Apps でフロントエンドアプリをホストして、
+      Azure Functions を呼び出してみます。
     image: size=(min) architecture.png
 
   - cap: 構築手順
 
   - title: symbol=(1.) 作成
     description: |
-      Azure コンソールにて Static Web Apps を作成します
+      まず Static Web Apps を作成します。
+      Azure コンソールにて「静的 Wweb アプリ」を開き、作成ボタンを押しましょう。
+    image: size=(min) staticapp-create-init.png
 
   - description: |
-      プランは Free を選びました。
-      またデプロイ方法は「その他」にしました。トークンを使用してデプロイする方式です。
+      プランは Free を選びます。
+      デプロイ方法は「その他」にします。トークンを使用してデプロイする方式です。
     image: size=(min) staticapp-create.png
   - description: |
       作成ボタンを押し、しばらく待ちます。
       構築できたら「リソースに移動」というボタンを押して、リソースの詳細を確認しましょう。
-  - image: size=(min) staticapp-resource.png
+    image: size=(min) staticapp-created.png
 
   - title: symbol=(2.) デプロイトークンを取得
     description: |
       デプロイに必要なトークンを取得します。
-      「デプロイトークンを管理」というボタンを押すと、右パネルが開き、そこでトークンを確認できます。
+      「デプロイトークンを管理」というボタンを押すと、パネルが開きトークンを確認できます。
   - image: size=(min) staticapp-deploytoken.png
 
-  - title: symbol=(3.) コードを書く
+  - cap: アプリを作成
     description: |
-      Vite + React Router (SPA) でフロントエンドを実装。
-      バックエンドは Python で書いて Azure Functions へデプロイします。
+      コードを書きましょう。
+      ここでは下記のような構成にしました。
 
+      ・フロントエンド: Vite, React Router v7 (SPA)
+      ・バックエンド: Python
+      
   - title: コード
     code:
-      open: index.html
+      open: package.json
       include:
         - api
         - api/function_app.py
@@ -52,7 +57,7 @@ units:
         - app/routes.ts
         - app/style.css
         - .gitignore
-        - package-lock.json
+        - pnpm-lock.yaml
         - package.json
         - react-router.config.ts
         - staticwebapp.config.json
@@ -60,18 +65,48 @@ units:
         - tsconfig.json
         - vite.config.ts
       units:
-        - description: Azure Functions のコードです
+        - description: |
+            Static Web Apps の設定ファイルです。
+            ここでリダイレクトなど設定できます。
           links:
-            - title: 'Azure Functions の Python 開発者向けガイド'
-              url: https://learn.microsoft.com/ja-jp/azure/azure-functions/functions-reference-python?tabs=get-started%2Casgi%2Capplication-level&pivots=python-mode-decorators
-          mark: api/function_app.py:1
+            - title: https://learn.microsoft.com/ja-jp/azure/static-web-apps/configuration
+              url: https://learn.microsoft.com/ja-jp/azure/static-web-apps/configuration#example-configuration-file
+          mark: staticwebapp.config.json:1
+        - description: |
+            Static Web Apps CLI の設定ファイルです。
+            ビルドコマンド等を記述します
+          links:
+            - title: https://learn.microsoft.com/ja-jp/azure/static-web-apps/static-web-apps-cli-configuration
+              url: https://learn.microsoft.com/ja-jp/azure/static-web-apps/static-web-apps-cli-configuration
+          mark: swa-cli.config.json:1
+        - description: |
+            依存パッケージをダウンロードして一緒にデプロイします。
+            AWS Lambda をデプロイするときにコードを ZIP ファイルへ固める作業がありますが、それとだいたい一緒です。
+          links:
+            - title: https://docs.astral.sh/uv/guides/integration/aws-lambda/#deploying-a-zip-archive
+              url: https://docs.astral.sh/uv/guides/integration/aws-lambda/#deploying-a-zip-archive
+          mark: swa-cli.config.json:11
+        - description: ここでバックエンドを呼び出します
+          mark: app/routes/home.tsx:9
+        
+        - description: |
+            バックエンドのコードです。
+            GET /api/info を実装します。
+          mark: api/function_app.py:8
+  
+  - description: |
+      ビルドしましょう。
+    terminal: |
+      $ pnpm i
+      $ pnpm build
 
-  - title: symbol=(4.) デプロイする
+  - cap: デプロイ
     description: |
       デプロイしましょう。
-      手順3で発行したAPIキーをセットしてください。
+      手順2で取得したトークンをセットしてください。
     terminal: |
-      $ swa deploy
+      $ pnpm swa deploy --env production --deployment-token <DEPLOYMENT_TOKEN>
+  - image: size=(min) deploy.png
 
   - title: Links
     links:

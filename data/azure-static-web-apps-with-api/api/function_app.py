@@ -3,6 +3,7 @@ import json
 
 app = func.FunctionApp()
 
+# see https://learn.microsoft.com/ja-jp/azure/azure-functions/functions-reference-python
 @app.route(route='info', methods=['GET'], auth_level=func.AuthLevel.ANONYMOUS)
 def handle_get_info(req: func.HttpRequest) -> func.HttpResponse:
     try:
