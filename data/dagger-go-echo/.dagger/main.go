@@ -31,7 +31,7 @@ func (m *App) MySQLContainer() *dagger.Container {
 // lint
 func (m *App) Lint(ctx context.Context) (string, error) {
 	return m.AppContainer().
-		WithExec([]string{"go", "install", "honnef.co/go/tools/cmd/staticcheck@latest"}).
+		WithExec([]string{"go", "install", "honnef.co/go/tools/cmd/staticcheck@v0.6.1"}).
 		WithExec([]string{"staticcheck", "./..."}).
 		Stdout(ctx)
 }

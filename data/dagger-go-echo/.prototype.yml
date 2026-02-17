@@ -47,7 +47,7 @@ units:
       └── main.go
   
   - description: |
-      .dagger/main.go に Dagger のスクリプトを記述します。
+      .dagger/main.go に Dagger のスクリプトを書きます。
 
   - code:
       open: .dagger/main.go
@@ -103,28 +103,48 @@ units:
             テストする前に、マグレーションをします
           mark: .dagger/main.go:47
 
+  - description: |
+      アプリケーションを立ち上げます
+    terminal: |
+      docker compose up
+  - description: |
+      マイグレーションします
+    terminal: |
+      docker compose exec app go tool goose mysql 'root:pass@tcp(mysql:3306)/app' -dir migrations up
 
-  - title: テストを呼び出す
+  - title: テストする
     description: |
-      `dagger call test` で呼び出せます
+      `dagger call test` を実行します
     terminal: |
       $ dagger call test
 
-      ▶ connect 0.2s
-      ▶ load module: . 2.3s
+      ✔ connect 36.8s
+      ✔ load module: . 6.7s
+      ✔ parsing command line arguments 0.0s
 
-      ● app: App! 0.0s
-      ▶ .test: String! 34.1s
-
-      ● parsing command line arguments 0.0s
+      ✔ app: App! 0.0s
+      ✔ .test: String! 1m35s
 
       === RUN   TestGetTasksHandler
       --- PASS: TestGetTasksHandler (0.00s)
       PASS
-      ok  	github.com/enuesaa/lab/data/dagger-go-echo	0.003s
+      ok  	github.com/enuesaa/lab/data/dagger-go-echo	0.004s
       ?   	github.com/enuesaa/lab/data/dagger-go-echo/db	[no test files]
   
   - image: size=(min) test.gif
+
+  - title: リントする
+    description: |
+      `dagger call lint` を実行します
+    terminal: |
+      $ dagger call lint
+
+      ✔ connect 0.6s
+      ✔ load module: . 1.3s
+      ✔ parsing command line arguments 0.0s
+
+      ✔ app: App! 0.0s
+      ✔ .lint: String! 22.7s
 
   - title: GitHub Actions
     description: |
@@ -137,8 +157,8 @@ units:
 
   - title: 感想
     description: |
-      往々にして、テストのセットアップ処理やコマンドは長くなりがちであり、それらが CI に散らばるのを課題に感じてました。
-      その意味で、Dagger を使えば DRY になります。
+      往々にして、テスト環境を構築するためのコマンドは長くなりがちであり、それらが CI に散らばることを課題に感じてました。
+      その意味で、Dagger を使えば DRY にできます。
 
-      一方で、何をどこまで Dagger 経由にするかは考える必要がありそうで、
+      一方で、何をどこまで Dagger に寄せるか考える必要がありそうです。
       例えば `go fmt ./...` は、ふつうに直接呼び出したほうが楽でした。
