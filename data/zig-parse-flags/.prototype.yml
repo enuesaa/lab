@@ -1,0 +1,42 @@
+title: |
+  Zig でフラグをパースする
+description: ''
+published: '2026-03-21'
+
+units:
+  - description: |
+      かんたんなコードを書いた。
+      自分用。
+      
+      Zig らしいコードになっているか不明。
+
+  - title: バージョン
+    description: |
+      Zig v0.15.2
+
+  - code:
+      open: src/main.zig
+      include:
+        - src
+        - src/cli.zig
+        - .gitignore
+        - build.zig
+        - build.zig.zon
+        - LICENSE
+      units:
+        - description: |
+            ここでフラグを定義
+          mark: src/main.zig:16
+        - description: |
+            フラグをパース
+          mark: src/main.zig:20
+        - description: |
+            ヘルプテキストを表示
+          mark: src/main.zig:27
+
+  - description: |
+      実行するとこんな感じ
+    image: size=(min) result.png
+  - description: |
+      ヘルプテキスト
+    image: size=(min) helptext.png
