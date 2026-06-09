@@ -1,0 +1,21 @@
+title: |
+  M5Stack Core S3 を AWS Iot Core へ登録する
+description: ''
+published: '2026-06-09'
+
+units:
+  - title: モノ
+    description: |
+      M5Stack Core S3 です。
+      これを AWS Iot Core へ登録します。
+
+  - title: AWS コンソールを開く
+  - title: AWS IoT Core へ
+  - title: 「モノの登録」というボタンを押す
+  - title: 選択
+  - title: 証明書をダウンロード
+  - title: コードを書く
+  - title: 証明書を設置
+  - title: M5Stack へ書き込み
+  - title: 動作確認
+  - title: MQTT でメッセージを送信
