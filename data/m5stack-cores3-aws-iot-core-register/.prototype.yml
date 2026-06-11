@@ -9,10 +9,19 @@ units:
       M5Stack Core S3 です。
       これを AWS Iot Core へ登録します。
 
-  - title: AWS コンソールを開く
-  - title: AWS IoT Core へ
-  - title: 「モノの登録」というボタンを押す
-  - title: 選択
+  - title: symbol=(1.) AWS コンソールを開く
+    description: |
+      AWSコンソールを開いて、IoT Core の管理画面へ飛びましょう。
+    image: ./aws-console.png
+
+  - title: symbol=(2.) デバイスを登録
+    description: |
+      左サイドメニューの「1 個のデバイスを接続」というリンクをクリックすると、デバイスの登録ページへ遷移できます。こちらで M5Stack をデバイス登録しましょう。
+    image: ./aws-iot-core-console-register-start.png
+
+  - description: |
+      「新しいモノを作成」を選んで各項目を入力します。
+
   - title: 証明書をダウンロード
   - title: コードを書く
   - title: 証明書を設置
