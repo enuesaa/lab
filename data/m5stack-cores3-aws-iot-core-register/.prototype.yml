@@ -16,11 +16,14 @@ units:
 
   - title: symbol=(2.) デバイスを登録
     description: |
-      左サイドメニューの「1 個のデバイスを接続」というリンクをクリックすると、デバイスの登録ページへ遷移できます。こちらで M5Stack をデバイス登録しましょう。
+      画面中央の「デバイスを接続」というボタンを押しましょう。
+      こちらよりデバイス登録できます。
     image: ./aws-iot-core-console-register-start.png
-
+  - description: 「次へ」をクリックします。
+    image: ./aws-iot-core-console-register-step1.png
   - description: |
-      「新しいモノを作成」を選んで各項目を入力します。
+      「新しいモノを作成」を選んで名前を入力しましょう。
+    image: ./aws-iot-core-console-register-step2.png
 
   - title: 証明書をダウンロード
   - title: コードを書く
