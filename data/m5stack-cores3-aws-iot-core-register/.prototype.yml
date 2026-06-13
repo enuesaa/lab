@@ -4,10 +4,10 @@ description: ''
 published: '2026-06-09'
 
 units:
-  - title: モノ
-    description: |
-      M5Stack Core S3 です。
-      これを AWS Iot Core へ登録します。
+  - description: |
+      M5Stack Core S3 を買いました。
+      これを AWS Iot Core へ登録してみます。
+    image: size=(min) ./m5stackcores3.jpg
 
   - title: symbol=(1.) AWS コンソールを開く
     description: |
@@ -23,6 +23,7 @@ units:
     image: ./aws-iot-core-console-register-step1.png
   - description: |
       「新しいモノを作成」を選んで名前を入力しましょう。
+      残りはデフォルトの設定で大丈夫です。「次へ」を押しましょう。
     image: ./aws-iot-core-console-register-step2.png
 
   - title: 証明書をダウンロード
