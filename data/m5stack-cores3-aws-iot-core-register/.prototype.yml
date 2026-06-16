@@ -25,6 +25,11 @@ units:
       「新しいモノを作成」を選んで名前を入力しましょう。
       残りはデフォルトの設定で大丈夫です。「次へ」を押しましょう。
     image: ./aws-iot-core-console-register-step2.png
+  
+  - description: |
+      次はSDKの設定になります。
+      今回は SDK は使用しないためこちらもデフォルト設定で大丈夫です。「次へ」を押しましょう。
+    image: ./aws-iot-core-console-register-step3.png
 
   - title: 証明書をダウンロード
   - title: コードを書く
