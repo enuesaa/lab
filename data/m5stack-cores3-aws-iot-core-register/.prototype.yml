@@ -31,8 +31,19 @@ units:
       今回は SDK は使用しないためこちらもデフォルト設定で大丈夫です。「次へ」を押しましょう。
     image: ./aws-iot-core-console-register-step3.png
 
-  - title: 証明書をダウンロード
-  - title: コードを書く
+  - description: |
+      こちらのページにて接続キットをダウンロードしてください。
+      接続キットには証明書等が含まれており後ほど使います。
+    image: ./aws-iot-core-console-register-step4.png 
+  - description: |
+      こちらのページはスキップしましょう。
+    image: ./aws-iot-core-console-register-step5.png 
+  - description: |
+      これにてモノの登録は完了です。
+      「モノを表示」をクリックして詳細ページへ行きましょう。
+    image: ./aws-iot-core-console-register-step6.png 
+
+  - title: symbol=(3.) コードを書く
   - title: 証明書を設置
   - title: M5Stack へ書き込み
   - title: 動作確認
