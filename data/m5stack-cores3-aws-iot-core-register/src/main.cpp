@@ -6,33 +6,34 @@
 
 WiFiUDP ntpUDP;
 WiFiClientSecure net;
-PubSubClient client(net);
+PubSubClient mqtt(net);
 
 void setup() {
   M5.begin();
-  M5.Speaker.setVolume(150);
-  M5.Speaker.setAllChannelVolume(150);
+  M5.Lcd.setTextSize(6);
 
+  // wifi へ接続
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   while (WiFi.status() != WL_CONNECTED) {
     M5.delay(1000);
   }
-  M5.Lcd.setTextSize(6);
-  M5.Display.println("OK");
+  M5.Display.println("wifi ok");
 
+  // AWS IoT Core の MQTT エンドポイントへ接続
   net.setCACert(AWSIOT_ROOT_CA);
   net.setCertificate(AWSIOT_CERTIFICATE);
   net.setPrivateKey(AWSIOT_PRIVATE_KEY);
-  client.setServer(AWSIOT_ENDPOINT, 8883);
+  mqtt.setServer(AWSIOT_ENDPOINT, 8883);
 
-  while (!client.connected()) {
-    if (client.connect(AWSIOT_THING_ID)) {
-      M5.Display.println("MQTT OK");
-    } else {
+  while (!mqtt.connected()) {
+    if (!mqtt.connect(AWSIOT_THING_ID)) {
       M5.delay(1000);
     }
   }
-  client.publish("sdk/test/python", "hello");
+  M5.Display.println("mqtt ok");
+
+  mqtt.publish("sdk/test/js", "hello");
+  M5.Display.println("mqtt publish");
 }
 
 void loop() {
