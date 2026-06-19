@@ -44,6 +44,18 @@ units:
     image: ./aws-iot-core-console-register-step6.png 
 
   - title: symbol=(3.) コードを書く
+    code:
+      open: src/main.cpp
+      include:
+        - src
+        - src/main.cpp
+        - src/vars.hpp
+        - .gitignore
+        - platformio.ini
+      units:
+        - description: ''
+          mark: src/vars.hpp:15
+  
   - title: 証明書を設置
   - title: M5Stack へ書き込み
   - title: 動作確認
