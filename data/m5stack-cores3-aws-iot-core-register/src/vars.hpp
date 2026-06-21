@@ -2,7 +2,8 @@
 static const char *WIFI_SSID = "";
 static const char *WIFI_PASSWORD = "";
 
-// https://www.amazontrust.com/repository/AmazonRootCA1.pem より。
+// 接続キットの start.sh を参照
+// curl https://www.amazontrust.com/repository/AmazonRootCA1.pem する
 static const char *AWSIOT_ROOT_CA = R"(-----BEGIN CERTIFICATE-----
 -----END CERTIFICATE-----
 )";
@@ -17,6 +18,8 @@ static const char *AWSIOT_PRIVATE_KEY = R"(-----BEGIN RSA PRIVATE KEY-----
 -----END RSA PRIVATE KEY-----
 )";
 
-// IoT Core のエンドポイント。AWSコンソールに記載
+// IoT Core のエンドポイント。接続キットの start.sh を参照。AWSコンソールにも記載がある
 static const char *AWSIOT_ENDPOINT = "xx.amazonaws.com";
-static const char *AWSIOT_THING_ID = "";
+
+// クライアントID
+static const char *AWSIOT_CLIENT_ID = "sdk-nodejs-test";

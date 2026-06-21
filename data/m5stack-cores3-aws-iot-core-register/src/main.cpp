@@ -12,26 +12,27 @@ void setup() {
   M5.begin();
   M5.Lcd.setTextSize(6);
 
-  // wifi へ接続
+  // WiFi へ接続
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   while (WiFi.status() != WL_CONNECTED) {
     M5.delay(1000);
   }
   M5.Display.println("wifi ok");
 
-  // AWS IoT Core の MQTT エンドポイントへ接続
+  // AWS IoT Core のエンドポイントへ接続
   net.setCACert(AWSIOT_ROOT_CA);
   net.setCertificate(AWSIOT_CERTIFICATE);
   net.setPrivateKey(AWSIOT_PRIVATE_KEY);
   mqtt.setServer(AWSIOT_ENDPOINT, 8883);
 
   while (!mqtt.connected()) {
-    if (!mqtt.connect(AWSIOT_THING_ID)) {
+    if (!mqtt.connect(AWSIOT_CLIENT_ID)) {
       M5.delay(1000);
     }
   }
   M5.Display.println("mqtt ok");
 
+  // MQTT 通信を試みる
   mqtt.publish("sdk/test/js", "hello");
   M5.Display.println("mqtt publish");
 }

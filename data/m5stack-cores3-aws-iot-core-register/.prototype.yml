@@ -1,7 +1,7 @@
 title: |
   M5Stack Core S3 を AWS Iot Core へ登録する
 description: ''
-published: '2026-06-09'
+published: '2026-06-21'
 
 units:
   - description: |
@@ -9,41 +9,52 @@ units:
       これを AWS Iot Core へ登録してみます。
     image: size=(min) ./m5stackcores3.jpg
 
-  - title: symbol=(1.) AWS コンソールを開く
-    description: |
-      AWSコンソールを開いて、IoT Core の管理画面へ飛びましょう。
-    image: ./aws-console.png
+  - cap: AWS IoT Core にてデバイス登録
+  - description: |
+      まずはAWSコンソールを開きましょう。
+      AWS IoT Core の管理画面へ飛びます。
+    image: size=(min) ./aws-console.png
 
-  - title: symbol=(2.) デバイスを登録
-    description: |
-      画面中央の「デバイスを接続」というボタンを押しましょう。
+  - description: |
+      つづいて画面中央の「デバイスを接続」というボタンを押しましょう。
       こちらよりデバイス登録できます。
-    image: ./aws-iot-core-console-register-start.png
+    image: size=(min) ./aws-iot-core-console-register-start.png
   - description: 「次へ」をクリックします。
-    image: ./aws-iot-core-console-register-step1.png
+    image: size=(min) ./aws-iot-core-console-register-step1.png
   - description: |
       「新しいモノを作成」を選んで名前を入力しましょう。
       残りはデフォルトの設定で大丈夫です。「次へ」を押しましょう。
-    image: ./aws-iot-core-console-register-step2.png
+    image: size=(min) ./aws-iot-core-console-register-step2.png
   
   - description: |
       次はSDKの設定になります。
       今回は SDK は使用しないためこちらもデフォルト設定で大丈夫です。「次へ」を押しましょう。
-    image: ./aws-iot-core-console-register-step3.png
+    image: size=(min) ./aws-iot-core-console-register-step3.png
 
   - description: |
       こちらのページにて接続キットをダウンロードしてください。
       接続キットには証明書等が含まれており後ほど使います。
-    image: ./aws-iot-core-console-register-step4.png 
+    image: size=(min) ./aws-iot-core-console-register-step4.png 
   - description: |
       こちらのページはスキップしましょう。
-    image: ./aws-iot-core-console-register-step5.png 
+    image: size=(min) ./aws-iot-core-console-register-step5.png 
   - description: |
       これにてモノの登録は完了です。
       「モノを表示」をクリックして詳細ページへ行きましょう。
-    image: ./aws-iot-core-console-register-step6.png 
+    image: size=(min) ./aws-iot-core-console-register-step6.png 
+  
+  - cap: コードを書く
+    description: |
+      つづいて MQTT のクライアントを実装しましょう。
 
-  - title: symbol=(3.) コードを書く
+      サンプルコードを載せます。実装内容は下記です
+      ・WiFi へ接続
+      ・AWS IoT Core のエンドポイントへ接続し MQTT 通信を試みる
+
+      接続キットの情報を元に src/vars.hpp を適宜変更してください。      
+      そして PlatformIO にて M5Stack へアップロードしましょう。
+
+  - title: サンプルコード
     code:
       open: src/main.cpp
       include:
@@ -53,10 +64,38 @@ units:
         - .gitignore
         - platformio.ini
       units:
-        - description: ''
-          mark: src/vars.hpp:15
-  
-  - title: 証明書を設置
-  - title: M5Stack へ書き込み
-  - title: 動作確認
-  - title: MQTT でメッセージを送信
+        - title: エンドポイント
+          description: |
+            接続キットの start.sh に記載があります。もしくはAWSコンソールの「ドメイン設定」というページにも記載があります
+          mark: src/vars.hpp:22
+          links:
+            - title: https://docs.aws.amazon.com/ja_jp/iot/latest/developerguide/iot-custom-endpoints-configurable.html
+              url: https://docs.aws.amazon.com/ja_jp/iot/latest/developerguide/iot-custom-endpoints-configurable.html
+        - title: クライアントID
+          description: |
+            IoT Core Policy にて当該クライアントからの接続が許可されている必要があります。デフォルトでは sdk-nodejs-* が許可されているためこのようにしてますが後々見直されるのをお勧めします
+          mark: src/vars.hpp:25
+          links:
+            - title: https://docs.aws.amazon.com/iot/latest/developerguide/connect-policy.html
+              url: https://docs.aws.amazon.com/iot/latest/developerguide/connect-policy.html
+        - title: トピック名
+          description: |
+            MQTTのトピック名も IoT Core Policy にて制御されます。こちらもデフォルトで許可されているものを記載しておりますが、後々見直されるのをお勧めします
+          mark: src/main.cpp:36
+
+  - cap: 動作確認
+    description: |
+      M5Stack へアップロードできたら動作確認しましょう。
+      まず IoT Core の管理画面にてトピックをサブスクライブします。
+
+      トピックのフィルターに sdk/test/js を入力して、サブスクライブボタンを押します。
+    image: size=(min) ./aws-iot-core-mqtt-publish-subscribe.png
+
+  - description: |
+      次に M5Stack を起動しましょう。
+      すると IoT Core の管理画面にて、メッセージが流れてくるはずです。
+    image: size=(min) ./aws-iot-core-mqtt-publish-result.png
+
+  - cap: おわり
+    description: |
+      以上にて AWS IoT Core へ接続し MQTT 通信できました。
