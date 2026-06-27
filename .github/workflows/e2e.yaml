@@ -35,7 +35,7 @@ jobs:
           path: e2e/pw-report
           retention-days: 1
       - if: always()
-        uses: daun/playwright-report-summary@v3
+        uses: daun/playwright-report-summary@v4
         with:
           report-file: e2e/pw-results/results.json
           job-summary: true
