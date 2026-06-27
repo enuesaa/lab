@@ -10,12 +10,13 @@ units:
     image: size=(min) ./m5stackcores3.jpg
 
   - outline:
-      - title: AWS IoT Core にてデバイス登録
-        as: register
-      - title: コードを書く
-        as: code
-      - title: 動作確認
-        as: check
+      items:
+        - title: ・AWS IoT Core にてデバイス登録
+          as: register
+        - title: ・コードを書く
+          as: code
+        - title: ・動作確認
+          as: check
 
   - as: register
     cap: AWS IoT Core にてデバイス登録

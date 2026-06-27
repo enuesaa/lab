@@ -1,15 +1,15 @@
 <script lang="ts">
-	import type { UnitV2 } from '$lib/prototype/types'
+	import type { Outline } from '$lib/prototype/types'
 
-	export let unit: UnitV2
+	export let outline: Outline
 </script>
 
-<nav class="m-6 w-fit min-w-[260px] border rounded-xl p-5 font-zenmaru">
-	<div class="text-2xl mb-3 font-medium">目次</div>
+<nav class="m-6 w-fit min-w-[260px] border rounded-xl p-5 font-zenmaru text-blackgray/85">
+	<div class="text-2xl mb-3 font-medium">{outline?.title ?? '目次'}</div>
 	<ol class="flex flex-col list-none m-0 p-0">
-		{#each unit.outline ?? [] as item}
+		{#each outline.items ?? [] as item}
 			<li>
-				<a href="#{item.as}" class="flex items-center gap-1 py-2 text-xl no-underline hover:font-medium">
+				<a href="#{item.as}" class="flex items-center gap-1 p-2 rounded-xl text-lg no-underline font-medium hover:bg-graywhite/80">
 					{item.title}
 				</a>
 			</li>

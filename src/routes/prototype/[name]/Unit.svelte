@@ -32,7 +32,7 @@
 			<UnitLinks links={unit.links} />
 		{/if}
 		{#if unit.outline !== undefined}
-			<UnitOutline {unit} />
+			<UnitOutline outline={unit.outline} />
 		{/if}
 		{#if unit.image !== undefined}
 			<UnitImage {projectName} image={unit.image} />
