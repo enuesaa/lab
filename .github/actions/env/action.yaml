@@ -6,7 +6,7 @@ runs:
   steps:
     - uses: actions/setup-node@v4
       with:
-        node-version: '22'
+        node-version: '24'
     - uses: pnpm/action-setup@v4
       with:
-        version: '9'
+        version: '11'
