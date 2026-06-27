@@ -3,6 +3,7 @@
 	import UnitTitle from './UnitTitle.svelte'
 	import UnitDescription from './UnitDescription.svelte'
 	import UnitLinks from './UnitLinks.svelte'
+	import UnitOutline from './UnitOutline.svelte'
 	import UnitImage from './UnitImage.svelte'
 	import UnitTerminal from './UnitTerminal.svelte'
 	import CodeArea from './CodeArea.svelte'
@@ -11,11 +12,13 @@
 
 	export let projectName: string
 	export let unit: UnitV2
-
-	const isNormalContent = unit?.code === undefined
 </script>
 
-{#if isNormalContent}
+{#if unit?.code !== undefined}
+	<CodeArea {unit} />
+{:else if unit?.outline !== undefined}
+	<UnitOutline {unit} />
+{:else}
 	<section class="w-full relative overflow-hidden container max-w-[1150px] mx-auto px-1 pt-2 pb-2">
 		{#if unit?.cap !== undefined}
 			<UnitCap text={unit.cap} />
@@ -39,6 +42,4 @@
 			<UnitInline inline={unit.inline} />
 		{/if}
 	</section>
-{:else}
-	<CodeArea {unit} />
 {/if}

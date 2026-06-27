@@ -14,6 +14,7 @@ export type UnitV2 = {
 	links?: { title: string; url: string }[]
 	image?: string
 	terminal?: string
+	outline?: Outline[]
 	code?: {
 		open: string
 		include: string[]
@@ -24,6 +25,10 @@ export type UnitV2 = {
 		open: string
 		file?: TreeData
 	}
+}
+export type Outline = {
+	title: string
+	as: string
 }
 export type CodeUnit = {
 	title?: string
