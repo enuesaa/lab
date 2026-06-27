@@ -8,11 +8,11 @@
 		if (!e.target) {
 			return
 		}
-		const range = document.createRange();
-		range.selectNodeContents(e.target as Node);
-		const selection = window.getSelection();
-		selection?.removeAllRanges();
-		selection?.addRange(range);
+		const range = document.createRange()
+		range.selectNodeContents(e.target as Node)
+		const selection = window.getSelection()
+		selection?.removeAllRanges()
+		selection?.addRange(range)
 	}
 </script>
 
