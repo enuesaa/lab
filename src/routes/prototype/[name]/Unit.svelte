@@ -16,8 +16,6 @@
 
 {#if unit?.code !== undefined}
 	<CodeArea {unit} />
-{:else if unit?.outline !== undefined}
-	<UnitOutline {unit} />
 {:else}
 	<section class="w-full relative overflow-hidden container max-w-[1150px] mx-auto px-1 pt-2 pb-2">
 		{#if unit?.cap !== undefined}
@@ -29,8 +27,12 @@
 		{#if unit.description !== undefined}
 			<UnitDescription description={unit.description} />
 		{/if}
+
 		{#if unit.links !== undefined}
 			<UnitLinks links={unit.links} />
+		{/if}
+		{#if unit.outline !== undefined}
+			<UnitOutline {unit} />
 		{/if}
 		{#if unit.image !== undefined}
 			<UnitImage {projectName} image={unit.image} />

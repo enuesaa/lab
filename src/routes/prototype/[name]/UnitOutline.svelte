@@ -4,17 +4,15 @@
 	export let unit: UnitV2
 </script>
 
-<nav class="my-6 flex justify-center">
-	<div class="w-fit min-w-[260px]">
-		<p class="text-xs text-gray-500 mb-3 tracking-wider">目次</p>
-		<ol class="flex flex-col list-none m-0 p-0">
-			{#each unit.outline ?? [] as item}
-				<li class="border-t border-gray-400 last:border-b">
-					<a href="#{item.as}" class="flex items-center gap-3 py-2.5 text-base text-gray-800 no-underline hover:text-black hover:underline transition-colors duration-100">
-						{item.title}
-					</a>
-				</li>
-			{/each}
-		</ol>
-	</div>
+<nav class="m-6 w-fit min-w-[260px] border rounded-xl p-5 font-zenmaru">
+	<div class="text-2xl mb-3 font-medium">目次</div>
+	<ol class="flex flex-col list-none m-0 p-0">
+		{#each unit.outline ?? [] as item}
+			<li>
+				<a href="#{item.as}" class="flex items-center gap-1 py-2 text-xl no-underline hover:font-medium">
+					{item.title}
+				</a>
+			</li>
+		{/each}
+	</ol>
 </nav>
