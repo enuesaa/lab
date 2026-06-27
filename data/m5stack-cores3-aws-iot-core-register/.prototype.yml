@@ -93,6 +93,8 @@ units:
 
   - description: |
       次に M5Stack を起動しましょう。
+    image: size=(min) ./m5stackcores3-aws-iot.jpg
+  - description: |
       すると IoT Core の管理画面にて、メッセージが流れてくるはずです。
     image: size=(min) ./aws-iot-core-mqtt-publish-result.png
 
