@@ -9,7 +9,16 @@ units:
       これを AWS Iot Core へ登録してみます。
     image: size=(min) ./m5stackcores3.jpg
 
-  - cap: AWS IoT Core にてデバイス登録
+  - outline:
+      - title: AWS IoT Core にてデバイス登録
+        as: register
+      - title: コードを書く
+        as: code
+      - title: 動作確認
+        as: check
+
+  - as: register
+    cap: AWS IoT Core にてデバイス登録
   - description: |
       まずはAWSコンソールを開きましょう。
       AWS IoT Core の管理画面へ飛びます。
@@ -43,7 +52,8 @@ units:
       「モノを表示」をクリックして詳細ページへ行きましょう。
     image: size=(min) ./aws-iot-core-console-register-step6.png 
   
-  - cap: コードを書く
+  - as: code
+    cap: コードを書く
     description: |
       つづいて MQTT のクライアントを実装しましょう。
 
@@ -83,7 +93,8 @@ units:
             MQTTのトピック名も IoT Core Policy にて制御されます。こちらもデフォルトで許可されているものを記載しておりますが、後々見直されるのをお勧めします
           mark: src/main.cpp:36
 
-  - cap: 動作確認
+  - as: check
+    cap: 動作確認
     description: |
       M5Stack へアップロードできたら動作確認しましょう。
       まず IoT Core の管理画面にてトピックをサブスクライブします。
