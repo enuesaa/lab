@@ -5,14 +5,27 @@ description: |
 published: '2025-11-23'
 
 units:
-  - title: バージョン
+  - outline:
+      items:
+        - title: ・バージョン
+          as: version
+        - title: ・ドキュメント
+          as: docs
+        - title: ・変更点
+          as: changed
+        - title: ・メモ帳アプリを作る
+          as: code
+
+  - as: version
+    title: バージョン
     description: |
       記事執筆時点の最新バージョンは v4.0.0-beta.3 です。
     links:
       - title: Laravel Livewire v4.0.0-beta.3
         url: https://github.com/livewire/livewire/releases/tag/v4.0.0-beta.3
 
-  - title: ドキュメント
+  - as: docs
+    title: ドキュメント
     description: |
       下記のURLにドキュメントがあります。
     links:
@@ -30,7 +43,8 @@ units:
       ドキュメントに記載ありますが、アクティブな開発が続いており安定版ではないそうです。
       そのためプロダクション環境への適用はお勧めしません。
   
-  - cap: 変更点
+  - as: changed
+    cap: 変更点
     title: Single-file component
     description: |
       変更点はいろいろありますが、大きなところで言うと、Single-file component でしょうか。
@@ -51,7 +65,8 @@ units:
       - title: https://livewire.laravel.com/docs/4.x/components#when-to-use-each-format
         url: https://livewire.laravel.com/docs/4.x/components#when-to-use-each-format
 
-  - cap: 試す
+  - as: code
+    cap: 試す
     title: メモ帳アプリを作る
     description: |
       シンプルなメモ帳アプリを作り、CRUD をひととおり見ていきます。
