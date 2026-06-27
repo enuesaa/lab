@@ -8,6 +8,7 @@ export type ProjectV2 = {
 	units: UnitV2[]
 }
 export type UnitV2 = {
+	as?: string
 	cap?: string
 	title?: string
 	description?: string

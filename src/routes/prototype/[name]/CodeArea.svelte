@@ -14,7 +14,7 @@
 	let codeUnits: CodeUnit[] = unit?.code?.units ?? []
 </script>
 
-<section class="bg-gray-600 pt-1 pb-8 relative mt-9 mb-7">
+<section id={unit?.as ?? undefined} class="bg-gray-600 pt-1 pb-8 relative mt-9 mb-7">
 	<CodeAreaHead bind:showCodeUnits {codeFiles} title={unit?.title} />
 
 	<div class="w-[99vw] m-auto flex gap-2 max-md:gap-1">
