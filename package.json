@@ -9,8 +9,7 @@
 		"postbuild": "svelte-sitemap --domain https://lab.enuesaa.dev --out-dir dist --change-freq monthly",
 		"preview": "vite preview",
 		"test": "pnpm sync && vitest run",
-		"format": "prettier --write src",
-    "fmt": "oxfmt --write src"
+		"format": "oxfmt --write src"
 	},
 	"devDependencies": {
 		"@melt-ui/pp": "^0.3.2",
@@ -22,8 +21,6 @@
 		"autoprefixer": "^10.4.21",
 		"oxfmt": "^0.56.0",
 		"postcss": "^8.5.5",
-		"prettier": "^3.5.3",
-		"prettier-plugin-svelte": "^3.4.0",
 		"svelte": "5.17.3",
 		"svelte-sitemap": "^2.7.0",
 		"tailwindcss": "^3.4.17",
@@ -37,25 +34,5 @@
 		"lucide-svelte": "^0.471.0",
 		"paneforge": "^0.0.6",
 		"yaml": "^2.8.0"
-	},
-	"prettier": {
-		"printWidth": 120,
-		"tabWidth": 2,
-		"semi": false,
-		"singleQuote": true,
-		"endOfLine": "lf",
-		"trailingComma": "es5",
-		"plugins": [
-			"prettier-plugin-svelte"
-		],
-		"useTabs": true,
-		"overrides": [
-			{
-				"files": "*.svelte",
-				"options": {
-					"parser": "svelte"
-				}
-			}
-		]
 	}
 }
