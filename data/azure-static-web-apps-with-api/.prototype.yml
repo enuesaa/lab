@@ -4,13 +4,24 @@ description: ''
 published: '2026-01-31'
 
 units:
-  - title: 構成
-    description: |
+  - description: |
       Static Web Apps でフロントエンドアプリをホストして、
       Azure Functions を呼び出してみます。
     image: size=(min) architecture.png
 
-  - cap: 構築手順
+  - outline:
+      items:
+        - title: 構築手順
+          as: settings
+        - title: アプリを作成
+          as: code
+        - title: デプロイ
+          as: deploy
+        - title: 動作確認
+          as: check
+
+  - as: settings
+    cap: 構築手順
 
   - title: symbol=(1.) 作成
     description: |
@@ -33,7 +44,8 @@ units:
       「デプロイトークンを管理」というボタンを押すと、パネルが開きトークンを確認できます。
   - image: size=(min) staticapp-deploytoken.png
 
-  - cap: アプリを作成
+  - as: code
+    cap: アプリを作成
     description: |
       コードを書きましょう。
       ここでは下記のような構成にしました。
@@ -101,7 +113,8 @@ units:
       $ pnpm i
       $ pnpm build
 
-  - cap: デプロイ
+  - as: deploy
+    cap: デプロイ
     description: |
       デプロイしましょう。
       手順2で取得したトークンをセットしてください。
@@ -112,7 +125,8 @@ units:
       なお Static Web Apps には production 環境と preview 環境の2つがあります。
       デフォルトでは preview 環境へデプロイされます。production 環境へデプロイするには --env production を渡す必要があります。
 
-  - title: 動作確認
+  - as: check
+    title: 動作確認
     description: |
       ブラウザで確認しましょう。
       Azure Functions で返している文字列が表示されているので、うまくデプロイできてそうです。
