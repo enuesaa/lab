@@ -5,6 +5,7 @@ resource "aws_appsync_resolver" "create_note" {
   kind        = "UNIT"
   data_source = aws_appsync_datasource.dynamodb.name
 
+  // see https://docs.aws.amazon.com/ja_jp/appsync/latest/devguide/js-aws-appsync-resolver-reference-dynamodb-putitem.html
   code = <<EOF
 import { util } from '@aws-appsync/utils';
 

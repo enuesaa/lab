@@ -1,20 +1,50 @@
 title: |
   [Terraform]
-  AWS AppSync GraphQL API + DynamoDB で CRUD
+  AppSync GraphQL API + DynamoDB で CRUD する
 description: ''
 published: '2026-07-13'
 
-units: []
-  # - title: AppConfig
-  #   description: ''
+units:
+  - description: |
+      AppSync を DynamoDB に繋げます。
+      そして CRUD (Create/Read/Update/Delete) してみます。
+  - title: 構成
+    image: arch.png
 
-  # - code:
-  #     open: appconfig.tf
-  #     include:
-  #       - codebuild_buildspec.yml
-  #       - codebuild_logs.tf
-  #       - main.tf
-  #       - variables.tf
-  #     units:
-  #       - description: AppConfig
-  #         mark: appconfig.tf:1
+  - code:
+      open: appsync.tf
+      include:
+        - appsync_datasource_role.tf
+        - appsync_datasource.tf
+        - appsync_logging_role.tf
+        - appsync_resolver_notes.tf
+        - appsync_resolver_note.tf
+        - appsync_resolver_create_note.tf
+        - appsync_resolver_update_note.tf
+        - appsync_resolver_delete_note.tf
+        - appsync_schema.graphql
+        - appsync.tf
+        - dynamodb_table.tf
+        - main.tf
+        - variables.tf
+      units:
+        - description: AppSync GraphQL API を立てます。authentication_type は API キーにしました。コンソールで API キーを発行しリクエストに付与すると API にアクセスできます
+          mark: appsync.tf:1
+          links:
+            - url: https://docs.aws.amazon.com/ja_jp/appsync/latest/devguide/security-authz.html
+              title: https://docs.aws.amazon.com/ja_jp/appsync/latest/devguide/security-authz.html
+        - description: ロギング設定です。とりあえず全部ログに出力します
+          mark: appsync.tf:8
+        - description: |
+            GraphQL のスキーマです。CRUDします
+            ・notes
+            ・note
+            ・createNote
+            ・updateNote
+            ・deleteNote
+          mark: appsync_schema.graphql:1
+        - description: |
+            createNote のリゾルバーです
+          mark: appsync_resolver_create_note.tf:1
+        - description: DyanmoDB の設定です
+          mark: dynamodb_table.tf:1
