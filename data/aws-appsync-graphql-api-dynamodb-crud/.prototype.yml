@@ -1,0 +1,20 @@
+title: |
+  [Terraform]
+  AWS AppSync GraphQL API + DynamoDB で CRUD
+description: ''
+published: '2026-07-13'
+
+units: []
+  # - title: AppConfig
+  #   description: ''
+
+  # - code:
+  #     open: appconfig.tf
+  #     include:
+  #       - codebuild_buildspec.yml
+  #       - codebuild_logs.tf
+  #       - main.tf
+  #       - variables.tf
+  #     units:
+  #       - description: AppConfig
+  #         mark: appconfig.tf:1
