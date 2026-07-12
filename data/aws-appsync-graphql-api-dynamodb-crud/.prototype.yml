@@ -48,3 +48,9 @@ units:
           mark: appsync_resolver_create_note.tf:1
         - description: DyanmoDB の設定です
           mark: dynamodb_table.tf:1
+
+  # - description: |
+  #     これを apply します
+  #   terminal: |
+  #     terraform plan | grep will
+  #     terraform apply
