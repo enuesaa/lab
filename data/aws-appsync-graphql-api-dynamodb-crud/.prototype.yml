@@ -9,7 +9,7 @@ units:
       AppSync を DynamoDB に繋げます。
       そして CRUD (Create/Read/Update/Delete) してみます。
   - title: 構成
-    image: arch.png
+    image: size=(min) arch.png
 
   - code:
       open: appsync.tf
