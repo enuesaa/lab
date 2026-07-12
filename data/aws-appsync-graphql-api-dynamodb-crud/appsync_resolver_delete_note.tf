@@ -6,16 +6,21 @@ resource "aws_appsync_resolver" "delete_note" {
   data_source = aws_appsync_datasource.dynamodb.name
 
   code = <<EOF
+import { util } from '@aws-appsync/utils';
+
 export function request(ctx) {
   return {
     operation: 'DeleteItem',
-    key: {
-      id: { S: ctx.args.id },
-    },
+    key: util.dynamodb.toMapValues({
+      id: ctx.args.id,
+    }),
   };
 }
 
 export function response(ctx) {
+  if (ctx.error) {
+    util.error(ctx.error.message, ctx.error.type);
+  }
   return true;
 }
 EOF

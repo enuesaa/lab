@@ -9,27 +9,20 @@ resource "aws_appsync_resolver" "create_note" {
 import { util } from '@aws-appsync/utils';
 
 export function request(ctx) {
-  const note = {
-    id: util.autoUlid(),
-    title: ctx.args.input.title,
-    message: ctx.args.input.message,
-  };
-  ctx.stash.note = note;
-
   return {
     operation: 'PutItem',
     key: util.dynamodb.toMapValues({
-      id: note.id,
+      id: util.autoUlid(),
     }),
     attributeValues: util.dynamodb.toMapValues({
-      title: note.title,
-      message: note.message,
+      title: ctx.args.input.title,
+      message: ctx.args.input.message,
     }),
   };
 }
 
 export function response(ctx) {
-  return ctx.stash.note;
+  return ctx.result;
 }
 EOF
 
