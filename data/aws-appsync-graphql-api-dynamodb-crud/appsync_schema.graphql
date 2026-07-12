@@ -1,0 +1,26 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  notes: [Note!]!
+  note(id: ID!): Note
+}
+
+type Mutation {
+  createNote(input: NoteInput!): Note
+  updateNote(id: ID!, input: NoteInput!): Note
+  deleteNote(id: ID!): Boolean!
+}
+
+input NoteInput {
+  title: String!
+  message: String!
+}
+
+type Note {
+  id: ID!
+  title: String!
+  message: String!
+}

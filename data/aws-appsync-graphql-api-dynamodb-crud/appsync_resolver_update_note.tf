@@ -1,6 +1,6 @@
-resource "aws_appsync_resolver" "create_note" {
+resource "aws_appsync_resolver" "update_note" {
   api_id      = aws_appsync_graphql_api.main.id
-  field       = "createNote"
+  field       = "updateNote"
   type        = "Mutation"
   kind        = "UNIT"
   data_source = aws_appsync_datasource.dynamodb.name
@@ -9,27 +9,23 @@ resource "aws_appsync_resolver" "create_note" {
 import { util } from '@aws-appsync/utils';
 
 export function request(ctx) {
-  const note = {
-    id: util.autoUlid(),
-    title: ctx.args.input.title,
-    message: ctx.args.input.message,
-  };
-  ctx.stash.note = note;
-
   return {
-    operation: 'PutItem',
+    operation: 'UpdateItem',
     key: util.dynamodb.toMapValues({
-      id: note.id,
+      id: ctx.args.id,
     }),
-    attributeValues: util.dynamodb.toMapValues({
-      title: note.title,
-      message: note.message,
-    }),
+    update: {
+      expression: 'SET title = :title, message = :message',
+      expressionValues: util.dynamodb.toMapValues({
+        ':title': ctx.args.input.title,
+        ':message': ctx.args.input.message,
+      }),
+    },
   };
 }
 
 export function response(ctx) {
-  return ctx.stash.note;
+  return ctx.result;
 }
 EOF
 
