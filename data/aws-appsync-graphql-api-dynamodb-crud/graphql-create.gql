@@ -1,0 +1,8 @@
+mutation {
+  createNote(input: {
+    title: "タイトル",
+    message: "テキスト"
+  }) {
+    id
+  }
+}

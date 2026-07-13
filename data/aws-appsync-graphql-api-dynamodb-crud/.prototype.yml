@@ -6,11 +6,19 @@ published: '2026-07-13'
 
 units:
   - description: |
-      AppSync を DynamoDB に繋げます。
-      そして CRUD (Create/Read/Update/Delete) してみます。
+      AppSync を DynamoDB に繋げて CRUD しました。
+      Terraform のサンプルコードを載せます。
+
   - title: 構成
     image: size=(min) arch.png
 
+  - title: GraphQL スキーマ
+    description: |
+      スキーマはこんな感じです。
+      Create/Read/Update/Deleteします。
+    inline:
+      open: appsync_schema.graphql
+  
   - code:
       open: appsync.tf
       include:
@@ -49,8 +57,46 @@ units:
         - description: DyanmoDB の設定です
           mark: dynamodb_table.tf:1
 
-  # - description: |
-  #     これを apply します
-  #   terminal: |
-  #     terraform plan | grep will
-  #     terraform apply
+  - description: |
+      これを apply します
+    terminal: |
+      $ terraform plan | grep will
+      Terraform will perform the following actions:
+        # aws_appsync_datasource.dynamodb will be created
+        # aws_appsync_graphql_api.main will be created
+        # aws_appsync_resolver.create_note will be created
+        # aws_appsync_resolver.delete_note will be created
+        # aws_appsync_resolver.note will be created
+        # aws_appsync_resolver.notes will be created
+        # aws_appsync_resolver.update_note will be created
+        # aws_dynamodb_table.main will be created
+        # aws_iam_role.appsync_datasource_dynamodb will be created
+        # aws_iam_role.appsync_logging will be created
+        # aws_iam_role_policy.appsync_datasource_dynamodb_dynamodb will be created
+        # aws_iam_role_policy.appsync_logging_logs will be created
+      
+      $ terraform apply
+
+  - cap: 動作確認
+  - title: APIキーの発行
+    description: |
+      では実際にGraphQLのリクエストを投げていきますが、
+      その前にまずAPIキーを発行します。
+    image: size=(min) create-apikey.png
+
+  - title: GraphQLリクエスト
+  - description: |
+      では実際にリクエストを投げていきます。
+      まずはデータの作成です。
+    inline:
+      open: graphql-create.gql
+  - image: size=(min) graphql-create.png
+  - description: つづいて更新です。
+    image: size=(min) graphql-update.png
+  - description: 一覧
+    image: size=(min) graphql-list.png
+  - description: 詳細
+    image: size=(min) graphql-get.png
+  - description: 削除
+    image: size=(min) graphql-delete.png
+  
