@@ -9,17 +9,31 @@ units:
       AppSync を DynamoDB に繋げて CRUD しました。
       Terraform のサンプルコードを載せます。
 
-  - title: 構成
+  - outline:
+      items:
+        - title: ・構成
+          as: arch
+        - title: ・GraphQL スキーマ
+          as: gqlschema
+        - title: ・コード
+          as: code
+        - title: ・動作確認
+          as: check
+
+  - as: arch
+    title: 構成
     image: size=(min) arch.png
 
-  - title: GraphQL スキーマ
+  - as: gqlschema
+    title: GraphQL スキーマ
     description: |
       スキーマはこんな感じです。
       Create/Read/Update/Deleteします。
     inline:
       open: appsync_schema.graphql
   
-  - code:
+  - as: code
+    code:
       open: appsync.tf
       include:
         - appsync_datasource_role.tf
@@ -77,8 +91,9 @@ units:
       
       $ terraform apply
 
-  - cap: 動作確認
-  - title: APIキーの発行
+  - as: check
+    cap: 動作確認
+    title: APIキーの発行
     description: |
       では実際にGraphQLのリクエストを投げていきますが、
       その前にまずAPIキーを発行します。
