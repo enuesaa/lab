@@ -1,12 +1,12 @@
 title: |
-  M5Stack Core S3 を AWS Iot Core へ登録する
+  M5Stack CoreS3 を AWS IoT Core へ登録する
 description: ''
 published: '2026-06-21'
 
 units:
   - description: |
-      M5Stack Core S3 を買いました。
-      これを AWS Iot Core へ登録してみます。
+      M5Stack CoreS3 を買いました。
+      これを AWS IoT Core へ登録してみます。
     image: size=(min) ./m5stackcores3.jpg
 
   - outline:
