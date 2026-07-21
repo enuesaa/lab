@@ -4,4 +4,19 @@ description: ''
 published: '2026-07-25'
 
 units:
-  - title: はじめに
+  - description: |
+      API Gateway HTTP API にはデフォルトルートなるルーティングがあります。
+      これは他のどのルートにもマッチしなかったときに呼ばれるいわゆるワイルドカード的な存在です。
+
+      API Gateway REST API にはこのような仕組みは存在しません。
+      どのような挙動をするのか把握するために検証してみました。
+
+  - title: 構成
+  - title: コード
+  - title: 検証
+    description: |
+      curl -X POST <url>
+      curl -X GET <url>
+      curl -X OPTIONS <url>
+      curl -X HEAD <url>
+      curl -X QUERY <url>
