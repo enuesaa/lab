@@ -3,6 +3,21 @@ resource "aws_apigatewayv2_api" "main" {
   protocol_type = "HTTP"
 }
 
+# デフォルトルート
+resource "aws_apigatewayv2_route" "post_hooks" {
+  api_id    = aws_apigatewayv2_api.main.id
+  route_key = "POST /hooks"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+}
+
+resource "aws_apigatewayv2_integration" "lambda" {
+  api_id                 = aws_apigatewayv2_api.main.id
+  integration_type       = "AWS_PROXY"
+  integration_uri        = aws_lambda_function.main.invoke_arn
+  payload_format_version = "2.0"
+}
+
+# ステージ
 resource "aws_apigatewayv2_stage" "main" {
   api_id      = aws_apigatewayv2_api.main.id
   name        = "main"

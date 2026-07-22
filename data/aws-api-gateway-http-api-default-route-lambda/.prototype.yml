@@ -11,8 +11,33 @@ units:
       API Gateway REST API にはこのような仕組みは存在しません。
       どのような挙動をするのか把握するために検証してみました。
 
-  - title: 構成
-  - title: コード
+  - outline:
+      items:
+        - title: ・構成
+          as: arch
+        - title: ・コード
+          as: code
+
+  - as: arch
+    title: 構成
+  - as: code
+    code:
+      open: apigateway_api.tf
+      include:
+        - apigateway_api.tf
+        - lambda_role.tf
+        - lambda.tf
+        - main.tf
+        - outputs.tf
+        - variables.tf
+      units:
+        - description: HTTP API を使います
+          mark: apigateway_api.tf:3
+        - description: デフォルトルートです
+          mark: apigateway_api.tf:7
+        - description: デフォルトルートのバックエンドとなる Lambda です
+          mark: lambda.tf:1
+
   - title: 検証
     description: |
       curl -X POST <url>
