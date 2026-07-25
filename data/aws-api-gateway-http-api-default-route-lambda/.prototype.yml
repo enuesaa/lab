@@ -16,10 +16,10 @@ units:
       items:
         - title: ・構成
           as: arch
-        - title: ・AWSコンソール
-          as: awsconsole
         - title: ・Terraform
           as: code
+        - title: ・検証
+          as: check
 
   - as: arch
     title: 構成
@@ -30,8 +30,8 @@ units:
       GET /hello とデフォルトルート ($default) の2つを用意し、
       どちらのルートも Lambda へリクエストを向けます
  
-  - as: awsconsole
-    title: AWSコンソール
+  - description: |
+      AWSコンソールはこのような感じです。
     image: size=(min) awsconsole.png
 
   - as: code
@@ -39,24 +39,82 @@ units:
     code:
       open: apigateway_api.tf
       include:
+        - .gitignore
+        - apigateway_api_routes.tf
         - apigateway_api.tf
+        - lambda_app.py
         - lambda_role.tf
         - lambda.tf
         - main.tf
         - outputs.tf
         - variables.tf
       units:
-        - description: HTTP API を使います
-          mark: apigateway_api.tf:3
+        - description: API Gateway です。HTTP API を使います
+          mark: apigateway_api.tf:2
         - description: デフォルトルートです
-          mark: apigateway_api.tf:7
-        - description: デフォルトルートのバックエンドとなる Lambda です
+          mark: apigateway_api_routes.tf:2
+        - description: Lambda です。デフォルトルートおよび GET /hello のバックエンドとなります
           mark: lambda.tf:1
+        - description: Lambda では event をログ出力します
+          mark: lambda_app.py:2
+        - description: API Gateway のステージです。デフォルトステージにします
+          mark: apigateway_api.tf:8
+          links:
+            - title: https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/http-api-stages.html
+              url: https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/http-api-stages.html
 
-  - title: 検証
+  - as: check
+    title: 検証
     description: |
-      curl -X POST <url>
-      curl -X GET <url>
-      curl -X OPTIONS <url>
-      curl -X HEAD <url>
-      curl -X QUERY <url>
+      では、実際に確認していきましょう。
+      まずは GET /hello からです。
+  
+  - title: GET /hello
+    terminal: |
+      curl 'https://{id}.execute-api.{region}.amazonaws.com/hello'
+  - description: |
+      こちらは API Gateway へルートが定義されてますので、デフォルトルートは通りません。
+      Lambda へも "routeKey": "GET /hello" という値が渡ってきてます。
+    image: size=(min) ./result-get-hello.png
+
+  - title: GET /not-exists
+    terminal: |
+      curl 'https://{id}.execute-api.{region}.amazonaws.com/not-exists'
+  - description: |
+      こちらは未定義のルートです。そのためデフォルトルートへ入ります。
+      Lambda へも "routeKey": "$default" という値が渡ってきました。
+    image: size=(min) ./result-get-not-exists.png
+
+  - title: POST /not-exists
+    terminal: |
+      curl -X POST --json '{"a":"aa"}' 'https://{id}.execute-api.{region}.amazonaws.com/not-exists'
+  - description: |
+      POST でも同じくデフォルトルートへ入ります。
+    image: size=(min) ./result-post-not-exists.png
+
+  - title: DELETE /not-exists
+    terminal: |
+      curl -X DELETE 'https://{id}.execute-api.{region}.amazonaws.com/not-exists'
+  - description: |
+      DELETE でも同じくデフォルトルートへ入ります。
+    image: size=(min) ./result-delete-not-exists.png
+
+  - title: QUERY /not-exists
+    terminal: |
+      curl -X QUERY --json '{"a":"aa"}' 'https://{id}.execute-api.{region}.amazonaws.com/not-exists'
+  - description: |
+      最近標準化された HTTP QUERY メソッドでも同じくデフォルトルートへ渡りました。
+      ほかの HTTP メソッドでも試しましたが、マッチするルートがなければとにかくデフォルトルートへ渡るようです。
+    image: size=(min) ./result-query-not-exists.png
+
+  - title: POST /hello
+    terminal: |
+      curl -X POST --json '{"a":"aa"}' 'https://{id}.execute-api.{region}.amazonaws.com/hello' 
+  - description: |
+      いちおう POST /hello も呼び出しました。
+      これも未定義ですのでデフォルトルートに入ります。
+    image: size=(min) ./result-post-hello.png
+
+  - title: おわり
+    description: |
+      デフォルトルートは便利な機能ですが、実際どういうユースケースがあるのだろうと思い挙動を検証してみました。
