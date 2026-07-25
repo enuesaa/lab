@@ -115,6 +115,11 @@ units:
       これも未定義ですのでデフォルトルートに入ります。
     image: size=(min) ./result-post-hello.png
 
+  - title: Links
+    links: 
+      - title: https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/http-api-develop-routes.html#http-api-develop-routes.default
+        url: https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/http-api-develop-routes.html#http-api-develop-routes.default
+
   - title: おわり
     description: |
       デフォルトルートは便利な機能ですが、実際どういうユースケースがあるのだろうと思い挙動を検証してみました。

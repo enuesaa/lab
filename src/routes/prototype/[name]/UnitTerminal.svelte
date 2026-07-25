@@ -1,11 +1,9 @@
 <script lang="ts">
 	import Code from '$lib/prototype/Code.svelte'
-	import UnitTerminalHead from './UnitTerminalHead.svelte'
 
 	export let content: string
 </script>
 
-<UnitTerminalHead />
-<div class="py-2 pl-2 pb-1 bg-editorbg rounded-b-lg">
+<div class="p-4 bg-editorbg rounded-lg w-fit min-w-[50%]">
 	<Code language="console" code={content} />
 </div>
