@@ -1,16 +1,16 @@
-# GET Health
-resource "aws_apigatewayv2_route" "get_health" {
+# デフォルトルート
+resource "aws_apigatewayv2_route" "default" {
   api_id    = aws_apigatewayv2_api.main.id
-  route_key = "GET /health"
+  route_key = "$default"
   target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
 }
 
-# # デフォルトルート
-# resource "aws_apigatewayv2_route" "post_hooks" {
-#   api_id    = aws_apigatewayv2_api.main.id
-#   route_key = "POST /hooks"
-#   target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
-# }
+# GET /hello
+resource "aws_apigatewayv2_route" "get_hello" {
+  api_id    = aws_apigatewayv2_api.main.id
+  route_key = "GET /hello"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+}
 
 # Integration (Lambda)
 resource "aws_apigatewayv2_integration" "lambda" {
