@@ -1,29 +1,41 @@
 title: |
-  AWS API Gateway
+  [AWS] API Gateway
   HTTP API のデフォルトルートの挙動を確認してみた
 description: ''
 published: '2026-07-25'
 
 units:
   - description: |
-      API Gateway の HTTP API にはデフォルトルートなるルーティングがあります。
+      HTTP API にはデフォルトルートなるルーティングがあります。
       これは他のどのルートにもマッチしなかったときに呼ばれるいわゆるワイルドカード的な存在です。
 
       REST API にはこのような仕組みは存在しません。
-      どのような挙動をするのか把握するために検証してみました。
+      どのような挙動をするのか確認してみました。
 
   - outline:
       items:
         - title: ・構成
           as: arch
-        - title: ・コード
+        - title: ・AWSコンソール
+          as: awsconsole
+        - title: ・Terraform
           as: code
 
   - as: arch
     title: 構成
+    description: API Gateway と Lambda を作ります
     image: size=(min) arch.png
+  
+  - description: |
+      GET /hello とデフォルトルート ($default) の2つを用意し、
+      どちらのルートも Lambda へリクエストを向けます
+ 
+  - as: awsconsole
+    title: AWSコンソール
+    image: size=(min) awsconsole.png
 
   - as: code
+    title: Terraform
     code:
       open: apigateway_api.tf
       include:
