@@ -20,7 +20,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      terraform = "aws-appsync-graphql-api-dynamodb-crud"
+      terraform = "try-httpapi"
     }
   }
 }
