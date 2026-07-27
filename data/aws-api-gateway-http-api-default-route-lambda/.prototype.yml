@@ -64,7 +64,7 @@ units:
               url: https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/http-api-stages.html
 
   - as: check
-    title: 検証
+    cap: 検証
     description: |
       では、実際に確認していきましょう。
       まずは GET /hello からです。
