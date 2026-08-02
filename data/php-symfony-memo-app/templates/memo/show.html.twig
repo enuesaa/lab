@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Memo{% endblock %}
+
+{% block body %}
+    <h1>Memo</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ memo.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ memo.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ memo.description }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ memo.createdAt ? memo.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ memo.updatedAt ? memo.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_memo_index') }}">back to list</a>
+
+    <a href="{{ path('app_memo_edit', {'id': memo.id}) }}">edit</a>
+
+    {{ include('memo/_delete_form.html.twig') }}
+{% endblock %}

@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     libicu-dev \
     libzip-dev \
-    && docker-php-ext-install intl zip
+    && docker-php-ext-install intl zip pdo_mysql
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
