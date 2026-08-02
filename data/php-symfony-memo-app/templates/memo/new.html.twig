@@ -1,11 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Memo{% endblock %}
+{% block title %}New memo{% endblock %}
 
 {% block body %}
-    <h1>Create new Memo</h1>
+    <h1 class="mb-6 text-xl font-semibold">New memo</h1>
 
-    {{ include('memo/_form.html.twig') }}
-
-    <a href="{{ path('app_memo_index') }}">back to list</a>
+    {{ include('memo/_form.html.twig', {'button_label': 'Create'}) }}
 {% endblock %}
