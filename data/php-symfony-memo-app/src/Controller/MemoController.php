@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/memo')]
 final class MemoController extends AbstractController
 {
+    // これいちおう make:crud で生成されたコードっぽい
     #[Route('/new', name: 'app_memo_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
