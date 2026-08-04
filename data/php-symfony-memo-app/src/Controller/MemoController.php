@@ -13,17 +13,22 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/memo')]
 final class MemoController extends AbstractController
 {
+    public function __construct(
+        protected EntityManagerInterface $entityManager,
+    ){}
+
     // これいちおう make:crud で生成されたコードっぽい
+    // https://qiita.com/ippey_s/items/be50ff0294837b8f8b1f
     #[Route('/new', name: 'app_memo_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request): Response
     {
         $memo = new Memo();
         $form = $this->createForm(MemoType::class, $memo);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($memo);
-            $entityManager->flush();
+            $this->entityManager->persist($memo);
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
@@ -43,13 +48,13 @@ final class MemoController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_memo_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Memo $memo, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Memo $memo): Response
     {
         $form = $this->createForm(MemoType::class, $memo);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
@@ -61,11 +66,11 @@ final class MemoController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_memo_delete', methods: ['POST'])]
-    public function delete(Request $request, Memo $memo, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Memo $memo): Response
     {
         if ($this->isCsrfTokenValid('delete'.$memo->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($memo);
-            $entityManager->flush();
+            $this->entityManager->remove($memo);
+            $this->entityManager->flush();
         }
 
         return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
