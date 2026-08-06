@@ -5,6 +5,9 @@ namespace App\Entity;
 use App\Repository\MemoRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Types\DatePointType;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Clock\DatePoint;
 
 #[ORM\Entity(repositoryClass: MemoRepository::class)]
 class Memo
@@ -15,16 +18,30 @@ class Memo
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
+    #[Assert\WordCount(max: 500)]
     private ?string $description = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
+    #[ORM\Column(type: DatePointType::NAME)]
+    private DatePoint $createdAt;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $updated_at = null;
+    #[ORM\Column(type: DatePointType::NAME)]
+    private DatePoint $updatedAt;
+
+    #[ORM\PrePersist]
+    public function onCreate(): void {
+        $this->createdAt = $this->updatedAt = new DatePoint();
+    }
+
+    #[ORM\PreUpdate]
+    public function onUpdate(): void {
+        $this->updatedAt = new DatePoint();
+    }
 
     public function getId(): ?int
     {
@@ -55,26 +72,26 @@ class Memo
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): DatePoint
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    public function setCreatedAt(DatePoint $createdAt): static
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): DatePoint
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updated_at): static
+    public function setUpdatedAt(DatePoint $updatedAt): static
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
