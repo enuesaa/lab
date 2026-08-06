@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsCsrfTokenValid;
+use Symfony\Component\ExpressionLanguage\Expression;
 
 #[Route('/memo')]
 final class MemoController extends AbstractController
@@ -66,12 +68,11 @@ final class MemoController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_memo_delete', methods: ['POST'])]
-    public function delete(Request $request, Memo $memo): Response
+    #[IsCsrfTokenValid(new Expression('"delete" ~ args["memo"].getId()'))]
+    public function delete(Memo $memo): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$memo->getId(), $request->getPayload()->getString('_token'))) {
-            $this->entityManager->remove($memo);
-            $this->entityManager->flush();
-        }
+        $this->entityManager->remove($memo);
+        $this->entityManager->flush();
 
         return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
