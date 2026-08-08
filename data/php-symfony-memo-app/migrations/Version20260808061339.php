@@ -30,22 +30,11 @@ final class Version20260808061339 extends AbstractMigration
               PRIMARY KEY (id)
             ) DEFAULT CHARACTER SET utf8mb4
         SQL);
-        $this->addSql('DROP TABLE memo');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql(<<<'SQL'
-            CREATE TABLE memo (
-              id INT AUTO_INCREMENT NOT NULL,
-              title VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_uca1400_ai_ci`,
-              description LONGTEXT CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_uca1400_ai_ci`,
-              created_at DATETIME NOT NULL,
-              updated_at DATETIME NOT NULL,
-              PRIMARY KEY (id)
-            ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_uca1400_ai_ci` ENGINE = InnoDB COMMENT = ''
-        SQL);
         $this->addSql('DROP TABLE memos');
     }
 }
