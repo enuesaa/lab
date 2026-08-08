@@ -9,7 +9,9 @@ use Symfony\Bridge\Doctrine\Types\DatePointType;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Clock\DatePoint;
 
+#[ORM\Table(name: 'memos')]
 #[ORM\Entity(repositoryClass: MemoRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Memo
 {
     #[ORM\Id]
@@ -28,19 +30,19 @@ class Memo
     private ?string $description = null;
 
     #[ORM\Column(type: DatePointType::NAME)]
-    private DatePoint $createdAt;
+    private DatePoint $created_at;
 
     #[ORM\Column(type: DatePointType::NAME)]
-    private DatePoint $updatedAt;
+    private DatePoint $updated_at;
 
     #[ORM\PrePersist]
     public function onCreate(): void {
-        $this->createdAt = $this->updatedAt = new DatePoint();
+        $this->created_at = $this->updated_at = new DatePoint();
     }
 
     #[ORM\PreUpdate]
     public function onUpdate(): void {
-        $this->updatedAt = new DatePoint();
+        $this->updated_at = new DatePoint();
     }
 
     public function getId(): ?int
@@ -74,24 +76,24 @@ class Memo
 
     public function getCreatedAt(): DatePoint
     {
-        return $this->createdAt;
+        return $this->created_at;
     }
 
     public function setCreatedAt(DatePoint $createdAt): static
     {
-        $this->createdAt = $createdAt;
+        $this->created_at = $createdAt;
 
         return $this;
     }
 
     public function getUpdatedAt(): DatePoint
     {
-        return $this->updatedAt;
+        return $this->updated_at;
     }
 
     public function setUpdatedAt(DatePoint $updatedAt): static
     {
-        $this->updatedAt = $updatedAt;
+        $this->updated_at = $updatedAt;
 
         return $this;
     }
