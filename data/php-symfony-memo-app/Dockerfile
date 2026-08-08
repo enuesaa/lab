@@ -27,8 +27,4 @@ CMD ["apache2-foreground"]
 ### dev
 FROM base AS dev
 
-# symfony cli
-COPY --link --from=ghcr.io/symfony-cli/symfony-cli:latest \
-    /usr/local/bin/symfony /usr/local/bin/symfony
-
-CMD ["symfony", "server:start", "--allow-all-ip"]
+CMD ["sh", "-c", "composer run dev & apache2-foreground"]

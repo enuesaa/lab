@@ -1,8 +1,0 @@
-workers:
-  tailwind:
-    cmd: ['symfony', 'console', 'tailwind:build', '--watch']
-
-http:
-  port: 80
-  allow_http: true
-  no_tls: true

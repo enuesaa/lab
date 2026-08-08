@@ -82,6 +82,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "dev": [
+            "php bin/console tailwind:build --watch"
         ]
     },
     "conflict": {
