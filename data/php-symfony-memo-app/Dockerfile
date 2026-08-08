@@ -22,7 +22,7 @@ COPY . .
 FROM base AS prod
 
 RUN composer install --optimize-autoloader --no-scripts --no-dev
-RUN composer run build
+RUN php bin/console tailwind:build
 CMD ["apache2-foreground"]
 
 
@@ -30,4 +30,4 @@ CMD ["apache2-foreground"]
 FROM base AS dev
 
 RUN composer install --optimize-autoloader --no-scripts
-CMD ["sh", "-c", "composer run dev & apache2-foreground"]
+CMD ["sh", "bin/dev"]

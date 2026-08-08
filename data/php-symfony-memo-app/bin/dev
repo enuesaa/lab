@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# tailwind
+php bin/console tailwind:build --watch &
+
+# migrate (if need)
+# php bin/console doctrine:migrations:migrate
+
+# apache
+apache2-foreground
