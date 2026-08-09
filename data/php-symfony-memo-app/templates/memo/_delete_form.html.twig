@@ -1,4 +1,8 @@
-<form method="post" action="{{ path('app_memo_delete', {'id': memo.id}) }}" onsubmit="return confirm('Delete this memo?');">
+<form
+    method="post"
+    action="/memo/{{ memo.id }}"
+    onsubmit="return confirm('Delete this memo?');"
+>
     <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">
     <button class="rounded-md border border-red-300 px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50">
         Delete
