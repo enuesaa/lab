@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home', methods: ['GET'])]
+    #[Route('/', methods: ['GET'])]
     public function index(MemoRepository $memoRepository): Response
     {
         return $this->render('home/index.html.twig', [
