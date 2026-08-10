@@ -5,8 +5,75 @@ description: ''
 published: '2026-08-10'
 
 units:
-  # - description: |
-  #     HTTP API にはデフォルトルートなるルーティングがあります。
+  - description: |
+      勉強のために Symfony でメモ帳アプリを作ってみました。
+      コードを置きます。
+  
+  - title: バージョン
+    description: |
+      PHP 8.4
+      Symfony 8.1
+
+  - code:
+      open: src/Controller/MemoController.php
+      include:
+        - assets/styles/app.css
+        - assets/app.js
+        - bin/console
+        - bin/dev
+        - bin/phpunit
+        - config/packages/asset_mapper.yaml
+        - config/packages/cache.yaml
+        - config/packages/csrf.yaml
+        - config/packages/debug.yaml
+        - config/packages/doctrine_migrations.yaml
+        - config/packages/doctrine.yaml
+        - config/packages/framework.yaml
+        - config/packages/monolog.yaml
+        - config/packages/property_info.yaml
+        - config/packages/routing.yaml
+        - config/packages/security.yaml
+        - config/packages/symfonycasts_tailwind.yaml
+        - config/packages/twig.yaml
+        - config/packages/validator.yaml
+        - config/packages/web_profiler.yaml
+        - config/routes/framework.yaml
+        - config/routes/security.yaml
+        - config/routes/web_profiler.yaml
+        - config/bundles.php
+        - config/preload.php
+        - config/reference.php
+        - config/routes.yaml
+        - config/services.yaml
+        - migrations/Version20260808061339.php
+        - public/.htaccess
+        - public/favicon.ico
+        - public/index.php
+        - src/Controller/HomeController.php
+        - src/Controller/MemoController.php
+        - src/Controller
+        - src/Entity/Memo.php
+        - src/Form/MemoType.php
+        - src/Repository/MemoRepository.php
+        - src/Kernel.php
+        - src
+        - templates/form/theme.html.twig
+        - templates/home/index.html.twig
+        - templates/memo/_delete_form.html.twig
+        - templates/memo/_form.html.twig
+        - templates/memo/edit.html.twig
+        - templates/memo/new.html.twig
+        - templates/memo/show.html.twig
+        - templates/base.html.twig
+        - tests/bootstrap.php
+        - .env.example
+        - .gitignore
+        - composer.json
+        - composer.lock
+        - docker-compose.yml
+        - Dockerfile
+        - importmap.php
+        - symfony.lock
 
 # command: php bin/console make:migration --formatted
 # command: php bin/console doctrine:migrations:migrate
