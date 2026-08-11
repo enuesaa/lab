@@ -38,7 +38,7 @@ final class MemoController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_memo_show', methods: ['GET'])]
+    #[Route('/{id}', methods: ['GET'])]
     public function show(Memo $memo): Response
     {
         return $this->render('memo/show.html.twig', [
