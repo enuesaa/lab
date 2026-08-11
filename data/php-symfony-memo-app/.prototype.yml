@@ -8,11 +8,13 @@ units:
   - description: |
       勉強のために Symfony でメモ帳アプリを作ってみました。
       コードを置きます。
+    image: size=(min) sapp.png
   
   - title: バージョン
     description: |
       PHP 8.4
       Symfony 8.1
+      MariaDB 11
 
   - code:
       open: src/Controller/MemoController.php
@@ -82,18 +84,25 @@ units:
       docker compose up
 
   - description: |
-      コンテナが立ち上がったら app コンテナへ乗り込んでマイグレーション等をしましょう。
+      コンテナが立ち上がったら app コンテナへ乗り込んでマイグレーションをしましょう。
     terminal: |
-      # シークレットを作成
-      php bin/console secrets:set APP_SECRET --random --local
-
-      # マイグレーションを実行
       php bin/console doctrine:migrations:migrate
 
-  - title: 便利コマンド
-    terminal: |
-      # マイグレーションファイルを作るには
-      php bin/console make:migration --formatted
+  - title: 動作確認
+    description: |
+      localhost:8000 にアプリケーションが立ち上がります。
+    image: size=(min) slist.png
 
-      # Controller のスケルトンを作成
-      php bin/console make:crud Memo
+  - description: |
+      メモ作成画面です
+    image: size=(min) screate.png
+  
+  - description: |
+      バリデーションもされてますね
+    image: size=(min) svalidate.png
+  
+  - description: |
+      Symfony Profiler の画面です。
+      これは便利ですね。
+    image: size=(min) sprofiler.png
+
