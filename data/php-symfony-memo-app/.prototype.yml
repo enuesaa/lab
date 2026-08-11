@@ -102,6 +102,11 @@ units:
           links:
             - title: https://symfony.com/doc/current/doctrine.html#migrations-creating-the-database-tables-schema
               url: https://symfony.com/doc/current/doctrine.html#migrations-creating-the-database-tables-schema
+        - description: Form
+          mark: src/Entity/Memo.php:15
+          links:
+            - title: https://symfony.com/doc/current/forms.html
+              url: https://symfony.com/doc/current/forms.html
 
   - title: 立ち上げ
     description: |
@@ -132,3 +137,7 @@ units:
       これは便利ですね。
     image: size=(min) sprofiler.png
 
+  - title: Links
+    links:
+      - title: https://symfony.com/
+        url: https://symfony.com/
