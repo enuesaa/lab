@@ -54,6 +54,7 @@ units:
         - src/Controller/HomeController.php
         - src/Controller/MemoController.php
         - src/Controller
+        - src/DataFixtures/AppFixtures.php
         - src/Entity/Memo.php
         - src/Form/MemoType.php
         - src/Repository/MemoRepository.php
@@ -107,6 +108,11 @@ units:
           links:
             - title: https://symfony.com/doc/current/forms.html
               url: https://symfony.com/doc/current/forms.html
+        - description: DataFixtures
+          mark: src/DataFixtures/AppFixtures.php:9
+          links:
+            - title: https://symfony.com/bundles/DoctrineFixturesBundle/current/index.html
+              url: https://symfony.com/bundles/DoctrineFixturesBundle/current/index.html
 
   - title: 立ち上げ
     description: |
@@ -117,7 +123,14 @@ units:
   - description: |
       コンテナが立ち上がったら app コンテナへ乗り込んでマイグレーションをしましょう。
     terminal: |
+      docker compose exec app bash
+    
+  - terminal: |
+      # マイグレーション
       php bin/console doctrine:migrations:migrate
+
+      # シードデータの投入 (src/DataFixtures/AppFixtures.php)
+      php bin/console doctrine:fixtures:load
 
   - title: 動作確認
     description: |
