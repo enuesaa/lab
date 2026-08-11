@@ -2,7 +2,7 @@ title: |
   [PHP]
   Symfony でメモ帳を作る
 description: ''
-published: '2026-08-10'
+published: '2026-08-11'
 
 units:
   - description: |
@@ -76,7 +76,33 @@ units:
         - Dockerfile
         - importmap.php
         - symfony.lock
-  
+      units:
+        - description: Controller
+          mark: src/Controller/MemoController.php:15
+          links:
+            - title: https://symfony.com/doc/current/controller.html
+              url: https://symfony.com/doc/current/controller.html
+        - description: EntityManager
+          mark: src/Controller/MemoController.php:18
+          links:
+            - title: https://symfony.com/doc/current/doctrine.html#persisting-objects-to-the-database
+              url: https://symfony.com/doc/current/doctrine.html#persisting-objects-to-the-database
+        - description: EntityValueResolver
+          mark: src/Controller/MemoController.php:42
+          links:
+            - title: https://symfony.com/doc/current/doctrine.html#automatically-fetching-objects-entityvalueresolver
+              url: https://symfony.com/doc/current/doctrine.html#automatically-fetching-objects-entityvalueresolver
+        - description: Entity
+          mark: src/Entity/Memo.php:15
+          links:
+            - title: https://symfony.com/doc/current/doctrine.html#creating-an-entity-class
+              url: https://symfony.com/doc/current/doctrine.html#creating-an-entity-class
+        - description: マイグレーション
+          mark: migrations/Version20260808061339.php:13
+          links:
+            - title: https://symfony.com/doc/current/doctrine.html#migrations-creating-the-database-tables-schema
+              url: https://symfony.com/doc/current/doctrine.html#migrations-creating-the-database-tables-schema
+
   - title: 立ち上げ
     description: |
       ローカル開発環境を立ち上げます。
