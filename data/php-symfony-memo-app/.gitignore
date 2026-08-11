@@ -3,7 +3,6 @@
 .vscode
 
 # symfony
-/.env
 /.env.dev
 /.env.local
 /.env.local.php
