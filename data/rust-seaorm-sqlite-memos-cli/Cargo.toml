@@ -13,3 +13,5 @@ crossterm = "0.29"
 anyhow = "1.0.104"
 chrono = "0.4"
 inquire = { version = "0.9.4", features = ["editor"] }
+tempfile = "3.27.0"
+edit = "0.1.5"

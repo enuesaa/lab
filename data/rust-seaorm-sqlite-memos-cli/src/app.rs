@@ -1,6 +1,5 @@
 use anyhow::Result;
 use inquire::Text;
-use inquire::Editor;
 
 use crate::cli::{Args, Command};
 use crate::db;
@@ -32,23 +31,20 @@ pub async fn run(args: Args) -> Result<()> {
 }
 
 use std::ffi::OsStr;
+use std::fs;
+use std::process::Command as Cmd;
 
-pub struct Note {
-    pub title: String,
-    pub description: String,
+fn open_editor(editor_command: &OsStr, file_extension: &str) -> std::io::Result<String> {
+    let file = tempfile::Builder::new().suffix(file_extension).tempfile()?;
+    let path = file.path().to_owned();
+
+    Cmd::new(editor_command).arg(&path).status()?;
+
+    fs::read_to_string(&path)
 }
 
-pub fn prompt_note() -> Result<Note> {
-    let title = Text::new("Title:")
-        .prompt()?;
-
-    let description = Editor::new("Description")
-        .with_editor_command(OsStr::new("vim"))
-        .with_file_extension(".md")
-        .prompt()?;
-
-    Ok(Note {
-        title,
-        description,
-    })
+pub fn prompt_note() -> Result<()> {
+    let title = Text::new("Title:").prompt()?;
+    let description = open_editor(OsStr::new("vim"), ".md")?;
+    Ok(())
 }
