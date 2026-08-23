@@ -1,4 +1,6 @@
 use anyhow::Result;
+use inquire::Text;
+use inquire::Editor;
 
 use crate::cli::{Args, Command};
 use crate::db;
@@ -10,6 +12,8 @@ pub async fn run(args: Args) -> Result<()> {
 
     match args.command.unwrap_or(Command::Search) {
         Command::Search => {
+            prompt_note()?;
+
             let memo_list = MemoRepository::find_all(&db).await?;
             let items: Vec<(i32, String)> = memo_list.into_iter().map(|m| (m.id, m.title)).collect();
 
@@ -25,4 +29,26 @@ pub async fn run(args: Args) -> Result<()> {
     }
 
     Ok(())
+}
+
+use std::ffi::OsStr;
+
+pub struct Note {
+    pub title: String,
+    pub description: String,
+}
+
+pub fn prompt_note() -> Result<Note> {
+    let title = Text::new("Title:")
+        .prompt()?;
+
+    let description = Editor::new("Description")
+        .with_editor_command(OsStr::new("vim"))
+        .with_file_extension(".md")
+        .prompt()?;
+
+    Ok(Note {
+        title,
+        description,
+    })
 }
