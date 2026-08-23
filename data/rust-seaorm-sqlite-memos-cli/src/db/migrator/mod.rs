@@ -1,6 +1,6 @@
+use anyhow::Result;
 use sea_orm::DatabaseConnection;
 use sea_orm_migration::prelude::*;
-use anyhow::Result;
 
 mod m20250801_000002_create_memos_table;
 

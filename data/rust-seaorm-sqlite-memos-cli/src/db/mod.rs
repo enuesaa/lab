@@ -5,10 +5,8 @@ pub mod repositories;
 use anyhow::Result;
 use sea_orm::{Database, DatabaseConnection};
 
-use crate::paths;
-
-pub async fn connect() -> Result<DatabaseConnection> {
-    let db = Database::connect(paths::db_uri()?).await?;
+pub async fn connect(dburi: String) -> Result<DatabaseConnection> {
+    let db = Database::connect(dburi).await?;
     migrator::migrate(&db).await?;
 
     Ok(db)

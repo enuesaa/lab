@@ -1,22 +1,13 @@
-use anyhow::{anyhow, Result};
-use chrono::Utc;
-use sea_orm::{
-    ActiveModelTrait,
-    DatabaseConnection,
-    EntityTrait,
-    Set,
-};
 use crate::db::entities::memos;
+use anyhow::{Result, anyhow};
+use chrono::Utc;
+use sea_orm::{ActiveModelTrait, DatabaseConnection, EntityTrait, Set};
 
 pub struct MemoRepository;
 
 impl MemoRepository {
-    pub async fn find_all(
-        db: &DatabaseConnection,
-    ) -> Result<Vec<memos::Model>> {
-        let memos = memos::Entity::find()
-            .all(db)
-            .await?;
+    pub async fn find_all(db: &DatabaseConnection) -> Result<Vec<memos::Model>> {
+        let memos = memos::Entity::find().all(db).await?;
 
         Ok(memos)
     }
@@ -41,10 +32,7 @@ impl MemoRepository {
         Ok(inserted)
     }
 
-    pub async fn find_by_id(
-        db: &DatabaseConnection,
-        id: i32,
-    ) -> Result<memos::Model> {
+    pub async fn find_by_id(db: &DatabaseConnection, id: i32) -> Result<memos::Model> {
         memos::Entity::find_by_id(id)
             .one(db)
             .await?
@@ -66,10 +54,7 @@ impl MemoRepository {
         Ok(updated)
     }
 
-    pub async fn delete(
-        db: &DatabaseConnection,
-        id: i32,
-    ) -> Result<()> {
+    pub async fn delete(db: &DatabaseConnection, id: i32) -> Result<()> {
         memos::Entity::delete_by_id(id).exec(db).await?;
         Ok(())
     }

@@ -1,23 +1,9 @@
 use anyhow::Result;
 use inquire::{Confirm, Select, Text};
 
-use crate::cli::{Args, Command};
-use crate::db;
 use crate::db::repositories::memos::MemoRepository;
 
-pub async fn run(args: Args) -> Result<()> {
-    let db = db::connect().await?;
-
-    match args.command.unwrap_or(Command::Search) {
-        Command::Search => search(&db).await?,
-        Command::Add => add(&db).await?,
-        Command::Delete => delete(&db).await?,
-    }
-
-    Ok(())
-}
-
-async fn search(db: &sea_orm::DatabaseConnection) -> Result<()> {
+pub async fn list(db: &sea_orm::DatabaseConnection) -> Result<()> {
     let memos = MemoRepository::find_all(db).await?;
     if memos.is_empty() {
         println!("No memos yet.");
@@ -27,7 +13,7 @@ async fn search(db: &sea_orm::DatabaseConnection) -> Result<()> {
     let items: Vec<(i32, String)> = memos.into_iter().map(|m| (m.id, m.title)).collect();
     let labels: Vec<String> = items.iter().map(|(_, t)| t.clone()).collect();
 
-    let selected_label = Select::new("Memo:", labels.clone()).prompt()?;
+    let selected_label = Select::new("Memo:", labels.clone()).without_help_message().prompt()?;
     let (id, _) = items[labels.iter().position(|l| l == &selected_label).unwrap()].clone();
 
     let memo = MemoRepository::find_by_id(db, id).await?;
@@ -40,16 +26,15 @@ async fn search(db: &sea_orm::DatabaseConnection) -> Result<()> {
     Ok(())
 }
 
-async fn add(db: &sea_orm::DatabaseConnection) -> Result<()> {
+pub async fn new(db: &sea_orm::DatabaseConnection) -> Result<()> {
     let title = Text::new("Title:").prompt()?;
     let description = open_editor_with_content("", ".md")?;
 
-    let inserted = MemoRepository::create(db, title, description).await?;
-    println!("Inserted: {:?}", inserted);
+    MemoRepository::create(db, title, description).await?;
     Ok(())
 }
 
-async fn delete(db: &sea_orm::DatabaseConnection) -> Result<()> {
+pub async fn delete(db: &sea_orm::DatabaseConnection) -> Result<()> {
     let memos = MemoRepository::find_all(db).await?;
     if memos.is_empty() {
         println!("No memos yet.");
