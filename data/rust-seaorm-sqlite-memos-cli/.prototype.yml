@@ -1,0 +1,38 @@
+title: |
+  [Rust]
+  SQLite + SeaORM でメモ帳CLIを作る
+description: ''
+published: '2026-08-30'
+
+units:
+  - description: |
+      ローカルにメモ帳があれば便利だーと思い、
+      メモ帳CLIを試しに作ってみました。
+      
+      SQLiteへメモを書き込みます。
+      言語としてはRustを、ORMとしてはSeaORMを選定してます。
+
+  - title: 構成
+    description: |
+      Tokio
+      SeaORM (SQLx)
+      SQLite
+      Clap
+
+  # - code:
+  #     open: src/Controller/MemoController.php
+  #     include:
+  #       - assets/styles/app.css
+  #       - assets/app.js
+  #     units:
+  #       - description: Controller
+  #         mark: src/Controller/MemoController.php:15
+  #         links:
+  #           - title: https://symfony.com/doc/current/controller.html
+  #             url: https://symfony.com/doc/current/controller.html
+  #       - description: EntityManager
+  #         mark: src/Controller/MemoController.php:18
+  #         links:
+  #           - title: https://symfony.com/doc/current/doctrine.html#persisting-objects-to-the-database
+  #             url: https://symfony.com/doc/current/doctrine.html#persisting-objects-to-the-database
+  
