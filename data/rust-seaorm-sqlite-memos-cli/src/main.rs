@@ -2,7 +2,6 @@ mod cli;
 mod commands;
 mod db;
 mod editor;
-mod paths;
 
 use anyhow::Result;
 use clap::Parser;
@@ -10,7 +9,12 @@ use clap::Parser;
 #[tokio::main]
 async fn main() -> Result<()> {
     let args = cli::Args::parse();
-    let db = db::connect(paths::db_uri()?).await?;
+
+    let dburi = match args.dburi {
+        Some(uri) => uri,
+        None => db::get_default_uri()?,
+    };
+    let db = db::connect(dburi).await?;
 
     match args.command.unwrap_or(cli::Command::List) {
         cli::Command::List => commands::list(&db).await?,
