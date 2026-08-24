@@ -1,7 +1,7 @@
 mod cli;
-mod commands;
 mod db;
-mod editor;
+mod libs;
+mod service;
 
 use anyhow::Result;
 use clap::Parser;
@@ -17,9 +17,9 @@ async fn main() -> Result<()> {
     let db = db::connect(dburi).await?;
 
     match args.command.unwrap_or(cli::Command::List) {
-        cli::Command::List => commands::list(&db).await?,
-        cli::Command::New => commands::new(&db).await?,
-        cli::Command::Delete => commands::delete(&db).await?,
+        cli::Command::List => cli::handler::list(&db).await?,
+        cli::Command::New => cli::handler::new(&db).await?,
+        cli::Command::Delete => cli::handler::delete(&db).await?,
     }
     Ok(())
 }

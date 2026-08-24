@@ -1,15 +1,13 @@
-use crate::db::entity::memos;
+use crate::db::memos;
 use anyhow::{Result, anyhow};
 use chrono::Utc;
 use sea_orm::{ActiveModelTrait, DatabaseConnection, EntityTrait, Set};
 
-pub struct MemoRepository;
+pub struct MemoService;
 
-impl MemoRepository {
-    pub async fn find_all(db: &DatabaseConnection) -> Result<Vec<memos::Model>> {
-        let memos = memos::Entity::find().all(db).await?;
-
-        Ok(memos)
+impl MemoService {
+    pub async fn list(db: &DatabaseConnection) -> Result<Vec<memos::Model>> {
+        Ok(memos::Entity::find().all(db).await?)
     }
 
     pub async fn create(
@@ -27,9 +25,7 @@ impl MemoRepository {
             ..Default::default()
         };
 
-        let inserted = memo.insert(db).await?;
-
-        Ok(inserted)
+        Ok(memo.insert(db).await?)
     }
 
     pub async fn find_by_id(db: &DatabaseConnection, id: i32) -> Result<memos::Model> {
@@ -50,8 +46,7 @@ impl MemoRepository {
         active.description = Set(description);
         active.updated_at = Set(Utc::now().into());
 
-        let updated = active.update(db).await?;
-        Ok(updated)
+        Ok(active.update(db).await?)
     }
 
     pub async fn delete(db: &DatabaseConnection, id: i32) -> Result<()> {
