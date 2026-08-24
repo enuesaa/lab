@@ -1,4 +1,4 @@
-use crate::db::entities::memos;
+use crate::db::entity::memos;
 use anyhow::{Result, anyhow};
 use chrono::Utc;
 use sea_orm::{ActiveModelTrait, DatabaseConnection, EntityTrait, Set};

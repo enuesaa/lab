@@ -1,6 +1,6 @@
-pub mod entities;
+pub mod entity;
 pub mod migrator;
-pub mod repositories;
+pub mod repository;
 
 use anyhow::Result;
 use sea_orm::{Database, DatabaseConnection};

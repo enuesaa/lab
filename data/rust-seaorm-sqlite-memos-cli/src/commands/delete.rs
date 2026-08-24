@@ -1,7 +1,7 @@
 use anyhow::Result;
 use sea_orm::DatabaseConnection;
 
-use crate::db::repositories::memos::MemoRepository;
+use crate::db::repository::memos::MemoRepository;
 use crate::editor;
 
 pub async fn delete(db: &DatabaseConnection) -> Result<()> {
