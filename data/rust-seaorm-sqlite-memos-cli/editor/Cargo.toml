@@ -1,0 +1,9 @@
+[package]
+name = "editor"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0"
+inquire = "0.9.4"
+tempfile = "3.27.0"

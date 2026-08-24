@@ -574,6 +574,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d0881ea181b1df73ff77ffaaf9c7544ecc11e82fba9b5f27b262a3c73a332555"
 
 [[package]]
+name = "editor"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "inquire",
+ "tempfile",
+]
+
+[[package]]
 name = "either"
 version = "1.18.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1193,10 +1202,10 @@ dependencies = [
  "anyhow",
  "chrono",
  "clap",
- "inquire",
+ "editor",
+ "migration",
  "sea-orm",
  "sea-orm-migration",
- "tempfile",
  "tokio",
 ]
 
@@ -1207,6 +1216,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "488016bfae457b036d996092f6cb448677611ce4449e970ceaf42695203f218a"
 dependencies = [
  "autocfg",
+]
+
+[[package]]
+name = "migration"
+version = "0.1.0"
+dependencies = [
+ "sea-orm",
+ "sea-orm-migration",
 ]
 
 [[package]]

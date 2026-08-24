@@ -1,4 +1,4 @@
-use crate::libs::editor;
+use editor;
 use crate::service::MemoService;
 use anyhow::Result;
 use sea_orm::DatabaseConnection;

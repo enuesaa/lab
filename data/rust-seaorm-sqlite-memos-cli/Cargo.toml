@@ -1,3 +1,6 @@
+[workspace]
+members = [".", "migration", "editor"]
+
 [package]
 name = "memm"
 version = "0.1.0"
@@ -10,5 +13,5 @@ sea-orm-migration = { version = "1", features = ["runtime-tokio-rustls", "sqlx-s
 clap = { version = "4.6.5", features = ["derive"] }
 anyhow = "1.0.104"
 chrono = "0.4"
-inquire = "0.9.4"
-tempfile = "3.27.0"
+migration = { path = "migration" }
+editor = { path = "editor" }
