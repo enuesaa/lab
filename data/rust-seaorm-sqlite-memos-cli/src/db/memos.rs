@@ -1,3 +1,4 @@
+use chrono::Utc;
 use sea_orm::entity::prelude::*;
 
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
@@ -9,6 +10,18 @@ pub struct Model {
     pub description: String,
     pub created_at: DateTimeUtc,
     pub updated_at: DateTimeUtc,
+}
+
+impl Model {
+    pub fn new() -> Self {
+        Self {
+            id: 0,
+            title: String::new(),
+            description: String::new(),
+            created_at: Utc::now(),
+            updated_at: Utc::now(),
+        }
+    }
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

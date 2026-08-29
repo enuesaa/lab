@@ -1,7 +1,7 @@
 use crate::db::memos;
-use anyhow::{Result, anyhow};
+use anyhow::Result;
 use chrono::Utc;
-use sea_orm::{ActiveModelTrait, DatabaseConnection, EntityTrait, Set};
+use sea_orm::{ActiveModelTrait, ActiveValue::NotSet, DatabaseConnection, EntityTrait, Set};
 
 pub struct MemoService;
 
@@ -10,17 +10,14 @@ impl MemoService {
         Ok(memos::Entity::find().all(db).await?)
     }
 
-    pub async fn create(db: &DatabaseConnection, title: String, description: String) -> Result<memos::Model> {
+    pub async fn create(db: &DatabaseConnection, memo: &memos::Model) -> Result<()> {
         let now = Utc::now();
-
-        let memo = memos::ActiveModel {
-            title: Set(title),
-            description: Set(description),
-            created_at: Set(now.into()),
-            updated_at: Set(now.into()),
-            ..Default::default()
-        };
-        Ok(memo.insert(db).await?)
+        let mut active: memos::ActiveModel = memo.clone().into();
+        active.id = NotSet;
+        active.created_at = Set(now.into());
+        active.updated_at = Set(now.into());
+        active.insert(db).await?;
+        Ok(())
     }
 
     pub async fn update(db: &DatabaseConnection, memo: memos::Model) -> Result<memos::Model> {

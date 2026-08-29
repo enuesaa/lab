@@ -1,11 +1,12 @@
-use crate::service::MemoService;
+use crate::{db::memos, service::MemoService};
 use anyhow::Result;
 use sea_orm::DatabaseConnection;
 
 pub async fn new(db: &DatabaseConnection) -> Result<()> {
-    let title = libeditor::text("Title:")?;
-    let description = libeditor::edit("")?;
+    let mut memo = memos::Model::new();
+    memo.title = libeditor::text("Title:")?;
+    memo.description = libeditor::edit("")?;
 
-    MemoService::create(db, title, description).await?;
+    MemoService::create(db, &memo).await?;
     Ok(())
 }
