@@ -2,14 +2,15 @@ title: |
   [雑記]
   SQLite + SeaORM でメモ帳CLIを作る
 description: ''
-published: '2026-08-30'
+published: '2026-08-29'
 
 units:
   - description: |
+      メモ帳CLIを作ってみました。試しに。
       雑コードです。
-      試しにメモ帳CLIを作ってみました。
 
       ローカルのSQLiteへメモを書き込みます。
+    image: size=(min) memm.gif
 
   - title: 構成
     description: |
@@ -48,5 +49,26 @@ units:
         - Cargo.toml
 
       units:
-        - description: プロンプト・エディタは、いろんなところで使うため、別のCrateに切り出してます。
+        - description: Clap でコマンドライン引数をパースします
+          mark: src/main.rs:10
+        - description: ここで SQLite へ接続します
+          mark: src/db/connect.rs:10
+        - description: プロンプト・エディタは、いろんなところで使うため、別のCrateに切り出します
           mark: libeditor/Cargo.toml:15
+
+  - description: ビルド
+    
+    image: size=(min) helptext.png
+
+  - title: おわり
+    description: |
+      SeaORMを使ってみたくて試しに作ってみた。が、
+
+      例えば
+      ・DIするか
+      ・DIコンテナどうしよう
+      ・ディレクトリ構成はどうあるべきか
+      ・マイグレーションどうしようか
+
+      など考えることが思ったより多い。      
+      そのためここらで一旦書き出した。
