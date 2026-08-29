@@ -56,8 +56,11 @@ units:
         - description: プロンプト・エディタは、いろんなところで使うため、別のCrateに切り出します
           mark: libeditor/Cargo.toml:15
 
-  - description: ビルド
-    
+  - title: ビルド
+    terminal: |
+      cargo build
+
+  - title: 実行
     image: size=(min) helptext.png
 
   - title: おわり
