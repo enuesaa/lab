@@ -1,4 +1,3 @@
-use libeditor;
 use crate::service::MemoService;
 use anyhow::Result;
 use sea_orm::DatabaseConnection;

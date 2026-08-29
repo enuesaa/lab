@@ -1,6 +1,5 @@
 use crate::service::MemoService;
 use anyhow::Result;
-use libeditor;
 use sea_orm::DatabaseConnection;
 
 pub async fn delete(db: &DatabaseConnection) -> Result<()> {

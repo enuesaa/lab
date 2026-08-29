@@ -3,8 +3,8 @@ use clap::{Parser, Subcommand};
 #[derive(Parser, Debug)]
 #[command(version = "v0.0.1")]
 pub struct Args {
-    /// Database URI (default: sqlite://data.db)
-    #[arg(long, default_value="sqlite://data.db")]
+    /// SQLite DB File Path
+    #[arg(long, default_value="data.db")]
     pub dbpath: String, 
 
     #[command(subcommand)]
