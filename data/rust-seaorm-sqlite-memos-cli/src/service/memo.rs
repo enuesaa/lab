@@ -20,10 +20,11 @@ impl MemoService {
         Ok(())
     }
 
-    pub async fn update(db: &DatabaseConnection, memo: memos::Model) -> Result<memos::Model> {
-        let mut active: memos::ActiveModel = memo.into();
+    pub async fn update(db: &DatabaseConnection, memo: &memos::Model) -> Result<()> {
+        let mut active: memos::ActiveModel = memo.clone().into();
         active.updated_at = Set(Utc::now().into());
-        Ok(active.update(db).await?)
+        active.update(db).await?;
+        Ok(())
     }
 
     pub async fn delete(db: &DatabaseConnection, id: i32) -> Result<()> {

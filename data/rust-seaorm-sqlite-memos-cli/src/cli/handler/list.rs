@@ -14,6 +14,6 @@ pub async fn list(db: &DatabaseConnection) -> Result<()> {
     let mut memo = memos.into_iter().nth(selected.index).unwrap();
 
     memo.description = libeditor::edit(&memo.description)?;
-    MemoService::update(db, memo).await?;
+    MemoService::update(db, &memo).await?;
     Ok(())
 }
