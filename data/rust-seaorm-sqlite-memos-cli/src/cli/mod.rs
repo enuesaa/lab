@@ -1,4 +1,6 @@
-pub mod handler;
+pub mod delete;
+pub mod list;
+pub mod new;
 
 use clap::{Parser, Subcommand};
 
