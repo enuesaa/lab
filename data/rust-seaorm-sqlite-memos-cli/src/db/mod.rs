@@ -2,21 +2,22 @@ pub mod memos;
 pub mod migration;
 
 use anyhow::Result;
-use sea_orm::{Database, DatabaseConnection};
-use std::env;
+use sea_orm::{
+    DatabaseConnection, SqlxSqliteConnector,
+    sqlx::sqlite::{SqliteConnectOptions, SqlitePoolOptions},
+};
 
 use migration::Migrator;
 use sea_orm_migration::MigratorTrait;
 
-pub fn get_default_uri() -> Result<String> {
-    let path = env::current_dir()?.join("data.db");
-    Ok(format!("sqlite://{}?mode=rwc", path.to_string_lossy()))
-}
+pub async fn connect(path: String) -> Result<DatabaseConnection> {
+    let opts = SqliteConnectOptions::new()
+        .filename(path)
+        .create_if_missing(true);
 
-pub async fn connect(dburi: String) -> Result<DatabaseConnection> {
-    let db = Database::connect(dburi).await?;
+    let pool = SqlitePoolOptions::new().connect_with(opts).await?;
+    let db = SqlxSqliteConnector::from_sqlx_sqlite_pool(pool);
 
     Migrator::up(&db, None).await?;
-
     Ok(db)
 }

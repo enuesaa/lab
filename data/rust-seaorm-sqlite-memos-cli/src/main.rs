@@ -8,12 +8,7 @@ use clap::Parser;
 #[tokio::main]
 async fn main() -> Result<()> {
     let args = cli::Args::parse();
-
-    let dburi = match args.dburi {
-        Some(uri) => uri,
-        None => db::get_default_uri()?,
-    };
-    let db = db::connect(dburi).await?;
+    let db = db::connect(args.dbpath).await?;
 
     match args.command.unwrap_or(cli::Command::List) {
         cli::Command::List => cli::handler::list(&db).await?,
