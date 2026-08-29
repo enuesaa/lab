@@ -1,4 +1,5 @@
 pub mod memos;
+pub mod migration;
 
 use anyhow::Result;
 use sea_orm::{Database, DatabaseConnection};

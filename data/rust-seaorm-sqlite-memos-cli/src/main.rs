@@ -16,9 +16,9 @@ async fn main() -> Result<()> {
     let db = db::connect(dburi).await?;
 
     match args.command.unwrap_or(cli::Command::List) {
-        cli::Command::List => cli::list::list(&db).await?,
-        cli::Command::New => cli::new::new(&db).await?,
-        cli::Command::Delete => cli::delete::delete(&db).await?,
+        cli::Command::List => cli::handler::list(&db).await?,
+        cli::Command::New => cli::handler::new(&db).await?,
+        cli::Command::Delete => cli::handler::delete(&db).await?,
     }
     Ok(())
 }

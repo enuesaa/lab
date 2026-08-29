@@ -1,9 +1,9 @@
-use editor;
 use crate::service::MemoService;
 use anyhow::Result;
+use libeditor;
 use sea_orm::DatabaseConnection;
 
-pub async fn list(db: &DatabaseConnection) -> Result<()> {
+pub async fn delete(db: &DatabaseConnection) -> Result<()> {
     let memos = MemoService::list(db).await?;
     if memos.is_empty() {
         println!("No memos.");
@@ -11,13 +11,11 @@ pub async fn list(db: &DatabaseConnection) -> Result<()> {
     }
 
     let titles: Vec<String> = memos.iter().map(|m| m.title.clone()).collect();
-    let selected_title = editor::select_from("Select a memo:", titles)?;
-
+    let selected_title = libeditor::select_from("Delete which memo?", titles.clone())?;
     let memo = memos.into_iter().find(|m| m.title == selected_title).unwrap();
-    let edited = editor::edit(&memo.description)?;
 
-    if edited != memo.description {
-        MemoService::update_description(db, memo.id, edited).await?;
+    if libeditor::confirm(&format!("Delete \"{}\"?", memo.title))? {
+        MemoService::delete(db, memo.id).await?;
     }
     Ok(())
 }
