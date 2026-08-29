@@ -1,11 +1,11 @@
 use anyhow::Result;
 use inquire::{Confirm, Select, Text};
+use inquire::list_option::ListOption;
 
-pub fn select_from(prompt: &str, labels: Vec<String>) -> Result<String> {
+pub fn select(prompt: &str, labels: Vec<String>) -> Result<ListOption<String>> {
     let selected = Select::new(prompt, labels)
         .without_help_message()
-        .prompt()?;
-
+        .raw_prompt()?;
     Ok(selected)
 }
 

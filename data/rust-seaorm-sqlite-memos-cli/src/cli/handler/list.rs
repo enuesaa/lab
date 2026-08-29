@@ -9,14 +9,11 @@ pub async fn list(db: &DatabaseConnection) -> Result<()> {
         return Ok(());
     }
 
-    let titles: Vec<String> = memos.iter().map(|m| m.title.clone()).collect();
-    let selected_title = libeditor::select_from("Select a memo:", titles)?;
+    let titles = memos.iter().map(|m| m.title.clone()).collect();
+    let selected = libeditor::select("Select a memo", titles)?;
+    let mut memo = memos.into_iter().nth(selected.index).unwrap();
 
-    let memo = memos.into_iter().find(|m| m.title == selected_title).unwrap();
-    let edited = libeditor::edit(&memo.description)?;
-
-    if edited != memo.description {
-        MemoService::update_description(db, memo.id, edited).await?;
-    }
+    memo.description = libeditor::edit(&memo.description)?;
+    MemoService::update(db, memo).await?;
     Ok(())
 }

@@ -10,11 +10,7 @@ impl MemoService {
         Ok(memos::Entity::find().all(db).await?)
     }
 
-    pub async fn create(
-        db: &DatabaseConnection,
-        title: String,
-        description: String,
-    ) -> Result<memos::Model> {
+    pub async fn create(db: &DatabaseConnection, title: String, description: String) -> Result<memos::Model> {
         let now = Utc::now();
 
         let memo = memos::ActiveModel {
@@ -24,28 +20,12 @@ impl MemoService {
             updated_at: Set(now.into()),
             ..Default::default()
         };
-
         Ok(memo.insert(db).await?)
     }
 
-    pub async fn find_by_id(db: &DatabaseConnection, id: i32) -> Result<memos::Model> {
-        memos::Entity::find_by_id(id)
-            .one(db)
-            .await?
-            .ok_or_else(|| anyhow!("memo not found: {}", id))
-    }
-
-    pub async fn update_description(
-        db: &DatabaseConnection,
-        id: i32,
-        description: String,
-    ) -> Result<memos::Model> {
-        let memo = Self::find_by_id(db, id).await?;
+    pub async fn update(db: &DatabaseConnection, memo: memos::Model) -> Result<memos::Model> {
         let mut active: memos::ActiveModel = memo.into();
-
-        active.description = Set(description);
         active.updated_at = Set(Utc::now().into());
-
         Ok(active.update(db).await?)
     }
 

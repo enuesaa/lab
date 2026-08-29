@@ -9,9 +9,9 @@ pub async fn delete(db: &DatabaseConnection) -> Result<()> {
         return Ok(());
     }
 
-    let titles: Vec<String> = memos.iter().map(|m| m.title.clone()).collect();
-    let selected_title = libeditor::select_from("Delete which memo?", titles.clone())?;
-    let memo = memos.into_iter().find(|m| m.title == selected_title).unwrap();
+    let titles = memos.iter().map(|m| m.title.clone()).collect();
+    let selected = libeditor::select("Delete which memo?", titles)?;
+    let memo = memos.into_iter().nth(selected.index).unwrap();
 
     if libeditor::confirm(&format!("Delete \"{}\"?", memo.title))? {
         MemoService::delete(db, memo.id).await?;
