@@ -1,5 +1,5 @@
 mod edit;
-mod prompt;
-
 pub use edit::edit;
+
+mod prompt;
 pub use prompt::{confirm, select, text};

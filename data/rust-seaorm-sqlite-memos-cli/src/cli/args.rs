@@ -4,8 +4,8 @@ use clap::{Parser, Subcommand};
 #[command(version = "v0.0.1")]
 pub struct Args {
     /// SQLite DB File Path
-    #[arg(long, default_value="data.db")]
-    pub dbpath: String, 
+    #[arg(long, default_value = "data.db")]
+    pub dbpath: String,
 
     #[command(subcommand)]
     pub command: Option<Command>,

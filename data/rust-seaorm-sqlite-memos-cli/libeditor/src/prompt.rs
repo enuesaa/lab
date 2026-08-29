@@ -1,6 +1,6 @@
 use anyhow::Result;
-use inquire::{Confirm, Select, Text};
 use inquire::list_option::ListOption;
+use inquire::{Confirm, Select, Text};
 
 pub fn select(prompt: &str, labels: Vec<String>) -> Result<ListOption<String>> {
     let selected = Select::new(prompt, labels)
@@ -10,9 +10,7 @@ pub fn select(prompt: &str, labels: Vec<String>) -> Result<ListOption<String>> {
 }
 
 pub fn confirm(message: &str) -> Result<bool> {
-    let confirmed = Confirm::new(message)
-        .with_default(false)
-        .prompt()?;
+    let confirmed = Confirm::new(message).with_default(false).prompt()?;
 
     Ok(confirmed)
 }
