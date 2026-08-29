@@ -11,7 +11,6 @@ pub fn select(prompt: &str, labels: Vec<String>) -> Result<ListOption<String>> {
 
 pub fn confirm(message: &str) -> Result<bool> {
     let confirmed = Confirm::new(message).with_default(false).prompt()?;
-
     Ok(confirmed)
 }
 

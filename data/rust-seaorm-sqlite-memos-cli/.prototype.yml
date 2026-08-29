@@ -6,33 +6,47 @@ published: '2026-08-30'
 
 units:
   - description: |
-      ローカルにメモ帳があれば便利だーと思い、
-      メモ帳CLIを試しに作ってみました。
-      
-      SQLiteへメモを書き込みます。
-      言語としてはRustを、ORMとしてはSeaORMを選定してます。
+      雑コードです。
+      試しにメモ帳CLIを作ってみました。
+
+      ローカルのSQLiteへメモを書き込みます。
 
   - title: 構成
     description: |
-      Tokio
-      SeaORM (SQLx)
-      SQLite
-      Clap
+      言語としてはRustを、
+      ORMとしてはSeaORMを選定してます。
 
-  # - code:
-  #     open: src/Controller/MemoController.php
-  #     include:
-  #       - assets/styles/app.css
-  #       - assets/app.js
-  #     units:
-  #       - description: Controller
-  #         mark: src/Controller/MemoController.php:15
-  #         links:
-  #           - title: https://symfony.com/doc/current/controller.html
-  #             url: https://symfony.com/doc/current/controller.html
-  #       - description: EntityManager
-  #         mark: src/Controller/MemoController.php:18
-  #         links:
-  #           - title: https://symfony.com/doc/current/doctrine.html#persisting-objects-to-the-database
-  #             url: https://symfony.com/doc/current/doctrine.html#persisting-objects-to-the-database
-  
+      ・Tokio
+      ・SeaORM (SQLx)
+      ・SQLite
+      ・Clap
+
+  - code:
+      open: src/main.rs
+      include:
+        - libeditor/src/edit.rs
+        - libeditor/src/lib.rs
+        - libeditor/src/prompt.rs
+        - libeditor/Cargo.toml
+        - src/cli/handler/delete.rs
+        - src/cli/handler/list.rs
+        - src/cli/handler/mod.rs
+        - src/cli/handler/new.rs
+        - src/cli/args.rs
+        - src/cli/mod.rs
+        - src/db/migration/m20250801_000001_create_memos_table.rs
+        - src/db/migration/mod.rs
+        - src/db/connect.rs
+        - src/db/memos.rs
+        - src/db/mod.rs
+        - src/service/memo.rs
+        - src/service/mod.rs
+        - src/main.rs
+        - src
+        - .gitignore
+        - Cargo.lock
+        - Cargo.toml
+
+      units:
+        - description: プロンプト・エディタは、いろんなところで使うため、別のCrateに切り出してます。
+          mark: libeditor/Cargo.toml:15
