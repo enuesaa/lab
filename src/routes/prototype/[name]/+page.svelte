@@ -19,4 +19,8 @@
 	{#each data.project?.units ?? [] as unit}
 		<Unit projectName={data.project?.name} {unit} />
 	{/each}
+
+	<div class="container max-w-[1150px] mx-auto px-3 pt-6 pb-6 text-sm text-right">
+		<a href={`/prototype/${data.project.name}.md`} class="hover:underline">View as Markdown</a>
+	</div>
 </Main>
