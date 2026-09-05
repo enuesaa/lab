@@ -10,6 +10,7 @@
 <svelte:head>
 	<title>{data.project.title}</title>
 	<meta name="description" content={`${data.project.title} | lab.enuesaa.dev`} />
+	<link rel="alternate" type="text/markdown" href={`https://lab.enuesaa.dev/prototype/${data.project.name}.md`} />
 </svelte:head>
 
 <Main>
