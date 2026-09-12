@@ -11,12 +11,10 @@ services:
     depends_on:
       - dynamodb-local
 
+  # TODO: -inMemory resets whenever this container restarts
   dynamodb-local:
     image: amazon/dynamodb-local:latest
-    command: ["-jar", "DynamoDBLocal.jar", "-sharedDb", "-dbPath", "./data"]
-    working_dir: /home/dynamodblocal
-    volumes:
-      - dynamodblocaldata:/home/dynamodblocal/data
+    command: ["-jar", "DynamoDBLocal.jar", "-inMemory", "-sharedDb"]
     ports:
       - 8001:8000
 
@@ -31,6 +29,3 @@ services:
       - dynamodb-local
     ports:
       - 8002:8001
-
-volumes:
-  dynamodblocaldata:

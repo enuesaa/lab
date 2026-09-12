@@ -46,10 +46,7 @@ class MemoRepository
             $params['ExclusiveStartKey'] = $result->get('LastEvaluatedKey');
         } while ($params['ExclusiveStartKey']);
 
-        // DynamoDB Scan doesn't guarantee (or support sorting) result order,
-        // so sort client-side. Fine at this app's scale; a GSI keyed on a
-        // constant partition + created_at sort key would be the way to
-        // paginate this efficiently at larger scale.
+        // sort
         usort($memos, static fn (Memo $a, Memo $b) => $b->getCreatedAt() <=> $a->getCreatedAt());
 
         return $memos;
