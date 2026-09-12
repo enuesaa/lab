@@ -1,0 +1,9 @@
+#!/bin/sh
+
+composer install
+
+# tailwind
+php bin/console tailwind:build --watch &
+
+# apache
+apache2-foreground

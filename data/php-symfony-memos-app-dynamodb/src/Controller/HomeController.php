@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Controller;
+
+use App\Repository\MemoRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+
+final class HomeController extends AbstractController
+{
+    #[Route('/', methods: ['GET'])]
+    public function index(MemoRepository $memoRepository): Response
+    {
+        return $this->render('home/index.html.twig', [
+            'memos' => $memoRepository->findAllOrderedByCreatedAtDesc(),
+        ]);
+    }
+}

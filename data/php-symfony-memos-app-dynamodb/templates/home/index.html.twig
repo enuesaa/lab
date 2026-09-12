@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Memos{% endblock %}
+
+{% block body %}
+    <div class="mb-6 flex items-center justify-between">
+        <h1 class="text-xl font-semibold">Memos</h1>
+        <a href="{{ path('app_memo_new') }}"
+           class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white hover:bg-gray-700">
+            New memo
+        </a>
+    </div>
+
+    <div class="divide-y divide-gray-200 overflow-hidden rounded-lg border border-gray-200 bg-white">
+        {% for memo in memos %}
+            <div class="flex items-center justify-between gap-4 px-4 py-3">
+                <div class="min-w-0">
+                    <a href="{{ path('app_memo_show', {'id': memo.id}) }}" class="font-medium hover:underline">
+                        {{ memo.title }}
+                    </a>
+                    <p class="truncate text-sm text-gray-500">{{ memo.description }}</p>
+                </div>
+                <div class="flex shrink-0 items-center gap-3 text-sm">
+                    <time class="text-gray-400">{{ memo.createdAt ? memo.createdAt|date('Y-m-d') : '' }}</time>
+                    <a href="{{ path('app_memo_edit', {'id': memo.id}) }}" class="text-gray-600 hover:underline">Edit</a>
+                </div>
+            </div>
+        {% else %}
+            <p class="px-4 py-8 text-center text-sm text-gray-500">No memos yet.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

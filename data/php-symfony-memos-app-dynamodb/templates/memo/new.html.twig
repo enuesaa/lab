@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New memo{% endblock %}
+
+{% block body %}
+    <h1 class="mb-6 text-xl font-semibold">New memo</h1>
+
+    {{ include('memo/_form.html.twig', {'button_label': 'Create'}) }}
+{% endblock %}
