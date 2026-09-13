@@ -17,7 +17,7 @@ services:
     depends_on:
       - dynamodb-local
 
-  # TODO: -inMemory resets whenever this container restarts
+  # see https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html
   dynamodb-local:
     image: amazon/dynamodb-local:latest
     command: ["-jar", "DynamoDBLocal.jar", "-inMemory", "-sharedDb"]

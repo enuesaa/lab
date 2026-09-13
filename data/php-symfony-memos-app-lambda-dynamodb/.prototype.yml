@@ -1,13 +1,13 @@
 title: |
-  [PHP]
-  Symfony を Lambda でホストして DynamoDB へ接続する
+  [雑記]
+  Symfony を Lambda でホストする。DynamoDB へ接続する
 description: ''
 published: '2026-09-14'
 
 units:
   - description: |
       Symfony でメモ帳アプリを作り AWS Lambda でホストします。
-      データは DynamoDB へホストします。
+      データは DynamoDB へ保存します。
 
   - title: 構成
     description: |
@@ -51,7 +51,7 @@ units:
         - config/services.yaml
         - public/.htaccess
         - public/index.php
-        - src/Command/CreateTableCommand.php
+        - bin/dynamodb-local-create-table.php
         - src/Command/LoadFixturesCommand.php
         - src/Controller/HomeController.php
         - src/Controller/MemoController.php
@@ -107,8 +107,10 @@ units:
         # - description: |
         #     AWS SDK の DynamoDbClient と Marshaler を使って CRUD しています。
         #   mark: src/Repository/MemoRepository.php:10
-        # - description: テーブル作成コマンド (マイグレーション代わり)
-        #   mark: src/Command/CreateTableCommand.php:14
+        # - description: |
+        #     DynamoDB Local 用にテーブルを作る補助スクリプト。
+        #     本番のテーブルは template.yaml (SAM) 側で作成するので、これは Symfony を通さないプレーンな PHP スクリプト。
+        #   mark: bin/dynamodb-local-create-table.php:1
         # - description: シードデータ投入コマンド
         #   mark: src/Command/LoadFixturesCommand.php:14
         - description: |
@@ -129,8 +131,8 @@ units:
       docker compose exec app bash
 
   - terminal: |
-      # テーブル作成 (マイグレーション代わり)
-      php bin/console app:dynamodb:create-table
+      # DynamoDB Local にテーブルを作成
+      composer run setup:dynamodblocal
 
       # シードデータの投入
       php bin/console app:fixtures:load
