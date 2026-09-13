@@ -9,148 +9,156 @@ units:
       以前作ったメモ帳アプリの DB を DynamoDB にしてみました。
       コードを置きます。
     # image: size=(min) sapp.png
-  
-  # - title: バージョン
-  #   description: |
-  #     PHP 8.4
-  #     Symfony 8.1
-  #     MariaDB 11
 
-  # - code:
-  #     open: src/Controller/MemoController.php
-  #     include:
-  #       - assets/styles/app.css
-  #       - assets/app.js
-  #       - bin/console
-  #       - bin/dev
-  #       - bin/phpunit
-  #       - config/packages/asset_mapper.yaml
-  #       - config/packages/cache.yaml
-  #       - config/packages/csrf.yaml
-  #       - config/packages/debug.yaml
-  #       - config/packages/doctrine_migrations.yaml
-  #       - config/packages/doctrine.yaml
-  #       - config/packages/framework.yaml
-  #       - config/packages/monolog.yaml
-  #       - config/packages/property_info.yaml
-  #       - config/packages/routing.yaml
-  #       - config/packages/security.yaml
-  #       - config/packages/symfonycasts_tailwind.yaml
-  #       - config/packages/twig.yaml
-  #       - config/packages/validator.yaml
-  #       - config/packages/web_profiler.yaml
-  #       - config/routes/framework.yaml
-  #       - config/routes/security.yaml
-  #       - config/routes/web_profiler.yaml
-  #       - config/bundles.php
-  #       - config/preload.php
-  #       - config/reference.php
-  #       - config/routes.yaml
-  #       - config/services.yaml
-  #       - migrations/Version20260808061339.php
-  #       - public/.htaccess
-  #       - public/favicon.ico
-  #       - public/index.php
-  #       - src/Controller/HomeController.php
-  #       - src/Controller/MemoController.php
-  #       - src/Controller
-  #       - src/DataFixtures/AppFixtures.php
-  #       - src/Entity/Memo.php
-  #       - src/Form/MemoType.php
-  #       - src/Repository/MemoRepository.php
-  #       - src/Kernel.php
-  #       - src
-  #       - templates/form/theme.html.twig
-  #       - templates/home/index.html.twig
-  #       - templates/memo/_delete_form.html.twig
-  #       - templates/memo/_form.html.twig
-  #       - templates/memo/edit.html.twig
-  #       - templates/memo/new.html.twig
-  #       - templates/memo/show.html.twig
-  #       - templates/base.html.twig
-  #       - tests/bootstrap.php
-  #       - .env
-  #       - .gitignore
-  #       - composer.json
-  #       - composer.lock
-  #       - docker-compose.yml
-  #       - Dockerfile
-  #       - importmap.php
-  #       - symfony.lock
-  #     units:
-  #       - description: Controller
-  #         mark: src/Controller/MemoController.php:15
-  #         links:
-  #           - title: https://symfony.com/doc/current/controller.html
-  #             url: https://symfony.com/doc/current/controller.html
-  #       - description: EntityManager
-  #         mark: src/Controller/MemoController.php:18
-  #         links:
-  #           - title: https://symfony.com/doc/current/doctrine.html#persisting-objects-to-the-database
-  #             url: https://symfony.com/doc/current/doctrine.html#persisting-objects-to-the-database
-  #       - description: EntityValueResolver
-  #         mark: src/Controller/MemoController.php:42
-  #         links:
-  #           - title: https://symfony.com/doc/current/doctrine.html#automatically-fetching-objects-entityvalueresolver
-  #             url: https://symfony.com/doc/current/doctrine.html#automatically-fetching-objects-entityvalueresolver
-  #       - description: Entity
-  #         mark: src/Entity/Memo.php:15
-  #         links:
-  #           - title: https://symfony.com/doc/current/doctrine.html#creating-an-entity-class
-  #             url: https://symfony.com/doc/current/doctrine.html#creating-an-entity-class
-  #       - description: マイグレーション
-  #         mark: migrations/Version20260808061339.php:13
-  #         links:
-  #           - title: https://symfony.com/doc/current/doctrine.html#migrations-creating-the-database-tables-schema
-  #             url: https://symfony.com/doc/current/doctrine.html#migrations-creating-the-database-tables-schema
-  #       - description: Form
-  #         mark: src/Form/MemoType.php:14
-  #         links:
-  #           - title: https://symfony.com/doc/current/forms.html
-  #             url: https://symfony.com/doc/current/forms.html
-  #       - description: DataFixtures
-  #         mark: src/DataFixtures/AppFixtures.php:9
-  #         links:
-  #           - title: https://symfony.com/bundles/DoctrineFixturesBundle/current/index.html
-  #             url: https://symfony.com/bundles/DoctrineFixturesBundle/current/index.html
+  - title: バージョン
+    description: |
+      PHP 8.4
+      Symfony 8.1
+      DynamoDB (ローカルは DynamoDB Local)
+      Lambda Web Adapter でコンテナのまま Lambda にデプロイ
 
-  # - title: 立ち上げ
-  #   description: |
-  #     ローカル開発環境を立ち上げます。
-  #   terminal: |
-  #     docker compose up
+  - code:
+      open: src/Controller/MemoController.php
+      include:
+        - assets/styles/app.css
+        - assets/app.js
+        - bin/console
+        - bin/dev
+        - bin/lambda-bootstrap
+        - bin/phpunit
+        - config/packages/asset_mapper.yaml
+        - config/packages/cache.yaml
+        - config/packages/csrf.yaml
+        - config/packages/debug.yaml
+        - config/packages/framework.yaml
+        - config/packages/monolog.yaml
+        - config/packages/property_info.yaml
+        - config/packages/routing.yaml
+        - config/packages/security.yaml
+        - config/packages/symfonycasts_tailwind.yaml
+        - config/packages/twig.yaml
+        - config/packages/validator.yaml
+        - config/packages/web_profiler.yaml
+        - config/routes/framework.yaml
+        - config/routes/security.yaml
+        - config/routes/web_profiler.yaml
+        - config/bundles.php
+        - config/preload.php
+        - config/reference.php
+        - config/routes.yaml
+        - config/services.yaml
+        - public/.htaccess
+        - public/index.php
+        - src/Command/CreateTableCommand.php
+        - src/Command/LoadFixturesCommand.php
+        - src/Controller/HomeController.php
+        - src/Controller/MemoController.php
+        - src/Controller
+        - src/Entity/Memo.php
+        - src/Form/MemoType.php
+        - src/Infrastructure/Aws/DynamoDbClientFactory.php
+        - src/Repository/MemoRepository.php
+        - src/Kernel.php
+        - src
+        - templates/form/theme.html.twig
+        - templates/home/index.html.twig
+        - templates/memo/_delete_form.html.twig
+        - templates/memo/_form.html.twig
+        - templates/memo/edit.html.twig
+        - templates/memo/new.html.twig
+        - templates/memo/show.html.twig
+        - templates/base.html.twig
+        - tests/bootstrap.php
+        - .env
+        - .env.dev
+        - .gitignore
+        - composer.json
+        - composer.lock
+        - docker-compose.yml
+        - Dockerfile
+        - importmap.php
+        - symfony.lock
+        - template.yaml
+        - samconfig.toml
+      units:
+        - description: Controller
+          mark: src/Controller/MemoController.php:15
+          links:
+            - title: https://symfony.com/doc/current/controller.html
+              url: https://symfony.com/doc/current/controller.html
+        - description: MemoRepository を DI している
+          mark: src/Controller/MemoController.php:19
+        - description: Entity 相当のクラス (Doctrine ではないので普通の PHP クラス)
+          mark: src/Entity/Memo.php:7
+        - description: Form
+          mark: src/Form/MemoType.php:14
+          links:
+            - title: https://symfony.com/doc/current/forms.html
+              url: https://symfony.com/doc/current/forms.html
+        - description: |
+            DynamoDbClient を作るファクトリ。
+            サービスとして DI コンテナに登録して __invoke で組み立てる形にしています。
+          mark: src/Infrastructure/Aws/DynamoDbClientFactory.php:7
+          links:
+            - title: https://symfony.com/doc/current/service_container/factories.html
+              url: https://symfony.com/doc/current/service_container/factories.html
+        - description: |
+            AWS SDK の DynamoDbClient と Marshaler を使って CRUD しています。
+          mark: src/Repository/MemoRepository.php:10
+        - description: テーブル作成コマンド (マイグレーション代わり)
+          mark: src/Command/CreateTableCommand.php:14
+        - description: シードデータ投入コマンド
+          mark: src/Command/LoadFixturesCommand.php:14
+        - description: |
+            SAM テンプレート。
+            DynamoDB テーブルと Lambda 関数 (コンテナイメージ + Lambda Web Adapter) を定義しています。
+          mark: template.yaml:1
+          links:
+            - title: https://github.com/awslabs/aws-lambda-web-adapter
+              url: https://github.com/awslabs/aws-lambda-web-adapter
 
-  # - description: |
-  #     コンテナが立ち上がったら app コンテナへ乗り込んでマイグレーションをしましょう。
-  #   terminal: |
-  #     docker compose exec app bash
-    
-  # - terminal: |
-  #     # マイグレーション
-  #     php bin/console doctrine:migrations:migrate
+  - title: 立ち上げ
+    description: |
+      ローカル開発環境を立ち上げます。DynamoDB Local と管理画面 (dynamodb-admin) もコンテナで一緒に上がります。
+    terminal: |
+      docker compose up
 
-  #     # シードデータの投入 (src/DataFixtures/AppFixtures.php)
-  #     php bin/console doctrine:fixtures:load
+  - description: |
+      コンテナが立ち上がったら app コンテナへ乗り込んでテーブルを作成しましょう。
+    terminal: |
+      docker compose exec app bash
 
-  # - title: 動作確認
-  #   description: |
-  #     localhost:8000 にアプリケーションが立ち上がります。
-  #   image: size=(min) slist.png
+  - terminal: |
+      # テーブル作成 (マイグレーション代わり)
+      php bin/console app:dynamodb:create-table
 
-  # - description: |
-  #     メモ作成画面です
-  #   image: size=(min) screate.png
-  
-  # - description: |
-  #     バリデーションもされてますね
-  #   image: size=(min) svalidate.png
-  
-  # - description: |
-  #     Symfony Profiler の画面です。
-  #     これは便利ですね。
-  #   image: size=(min) sprofiler.png
+      # シードデータの投入
+      php bin/console app:fixtures:load
 
-  # - title: Links
-  #   links:
-  #     - title: https://symfony.com/
-  #       url: https://symfony.com/
+  - title: 動作確認
+    description: |
+      localhost:8000 にアプリケーションが立ち上がります。
+      localhost:8002 で dynamodb-admin からテーブルの中身も確認できます。
+    image: size=(min) slist.png
+
+  - description: |
+      メモ作成画面です
+    image: size=(min) screate.png
+
+  - description: |
+      バリデーションもされてますね
+    image: size=(min) svalidate.png
+
+  - title: Lambda へのデプロイ
+    description: |
+      SAM でビルド & デプロイします。コンテナイメージのまま Lambda Web Adapter 経由で動かしています。
+    terminal: |
+      sam build
+      sam deploy --guided
+
+  - title: Links
+    links:
+      - title: https://symfony.com/
+        url: https://symfony.com/
+      - title: https://github.com/awslabs/aws-lambda-web-adapter
+        url: https://github.com/awslabs/aws-lambda-web-adapter
