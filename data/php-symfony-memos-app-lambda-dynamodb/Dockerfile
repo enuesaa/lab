@@ -28,7 +28,6 @@ RUN echo "session.save_path = /tmp/sessions" > /usr/local/etc/php/conf.d/zz-lamb
 COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:1.0.1 /lambda-adapter /opt/extensions/lambda-adapter
 ENV AWS_LWA_PORT=80
 
-RUN chmod +x bin/lambda-bootstrap
 CMD ["sh", "bin/lambda-bootstrap"]
 
 

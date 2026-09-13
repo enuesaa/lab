@@ -52,7 +52,6 @@ units:
         - public/.htaccess
         - public/index.php
         - bin/dynamodb-local-create-table.php
-        - src/Command/LoadFixturesCommand.php
         - src/Controller/HomeController.php
         - src/Controller/MemoController.php
         - src/Controller
@@ -111,8 +110,6 @@ units:
         #     DynamoDB Local 用にテーブルを作る補助スクリプト。
         #     本番のテーブルは template.yaml (SAM) 側で作成するので、これは Symfony を通さないプレーンな PHP スクリプト。
         #   mark: bin/dynamodb-local-create-table.php:1
-        # - description: シードデータ投入コマンド
-        #   mark: src/Command/LoadFixturesCommand.php:14
         - description: |
             SAM のテンプレート。
             DynamoDB テーブルと Lambda 関数を作成します。
@@ -133,9 +130,6 @@ units:
   - terminal: |
       # DynamoDB Local にテーブルを作成
       composer run setup:dynamodblocal
-
-      # シードデータの投入
-      php bin/console app:fixtures:load
 
   - title: 動作確認
     description: |
