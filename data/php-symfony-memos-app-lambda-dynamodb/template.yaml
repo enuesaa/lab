@@ -2,11 +2,6 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 # Description: Sample App
 
-Parameters:
-  AppSecret:
-    Type: String
-    NoEcho: true
-
 Resources:
   MemosTable:
     Type: AWS::DynamoDB::Table
@@ -29,7 +24,7 @@ Resources:
       Environment:
         Variables:
           APP_ENV: prod
-          APP_SECRET: !Ref AppSecret
+          APP_SECRET: SampleAppSecret
           DYNAMODB_TABLE: !Ref MemosTable
           DYNAMODB_REGION: !Ref AWS::Region
       FunctionUrlConfig:
