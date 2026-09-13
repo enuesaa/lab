@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
 
-mkdir -p /tmp/sessions /tmp/xdg-data /tmp/xdg-config /tmp/symfony-cache
+mkdir -p /tmp/sessions /tmp/symfony-cache
 
 exec frankenphp run --config /etc/frankenphp/Caddyfile --adapter caddyfile
