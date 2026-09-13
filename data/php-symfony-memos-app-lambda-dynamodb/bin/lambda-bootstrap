@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+
+mkdir -p /tmp/apache2/run /tmp/apache2/lock /tmp/apache2/log /tmp/sessions
+
+exec apache2-foreground

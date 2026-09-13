@@ -16,4 +16,13 @@ class Kernel extends BaseKernel
     {
         return ['prod', 'dev', 'test'];
     }
+
+    public function getCacheDir(): string
+    {
+        if (getenv('AWS_LAMBDA_RUNTIME_API')) {
+            return \sprintf('/tmp/symfony-cache/%s', $this->environment);
+        }
+
+        return parent::getCacheDir();
+    }
 }

@@ -1,0 +1,53 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Symfony memos app on Lambda (container image + Lambda Web Adapter) backed by DynamoDB
+
+Parameters:
+  AppSecret:
+    Type: String
+    NoEcho: true
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 512
+    Architectures: [arm64]
+
+Resources:
+  MemosTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+
+  MemosFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Environment:
+        Variables:
+          APP_ENV: prod
+          APP_SECRET: !Ref AppSecret
+          DYNAMODB_TABLE: !Ref MemosTable
+          DYNAMODB_REGION: !Ref AWS::Region
+      FunctionUrlConfig:
+        AuthType: NONE
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref MemosTable
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: .
+      DockerTag: prod
+      DockerBuildTarget: prod
+
+Outputs:
+  FunctionUrl:
+    Value: !GetAtt MemosFunctionUrl.FunctionUrl
+  TableName:
+    Value: !Ref MemosTable

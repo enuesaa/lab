@@ -1,0 +1,6 @@
+.git
+.aws-sam
+var
+vendor
+node_modules
+tests

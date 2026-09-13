@@ -23,17 +23,13 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    # DynamoDB client, pointed at DynamoDB Local via DYNAMODB_ENDPOINT in dev.
-    # Drop "endpoint" (and use real credentials) to talk to AWS DynamoDB.
     Aws\DynamoDb\DynamoDbClient:
+        factory: ['App\Infrastructure\Aws\DynamoDbClientFactory', 'create']
         arguments:
-            -
-                version: 'latest'
-                region: '%env(DYNAMODB_REGION)%'
-                endpoint: '%env(DYNAMODB_ENDPOINT)%'
-                credentials:
-                    key: '%env(AWS_ACCESS_KEY_ID)%'
-                    secret: '%env(AWS_SECRET_ACCESS_KEY)%'
+            $region: '%env(DYNAMODB_REGION)%'
+            $endpoint: '%env(default::DYNAMODB_ENDPOINT)%'
+            $accessKeyId: '%env(default::AWS_ACCESS_KEY_ID)%'
+            $secretAccessKey: '%env(default::AWS_SECRET_ACCESS_KEY)%'
 
     Aws\DynamoDb\Marshaler: ~
 

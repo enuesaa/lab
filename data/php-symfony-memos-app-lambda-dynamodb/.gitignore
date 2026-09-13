@@ -19,3 +19,6 @@
 # phpunit
 /phpunit.xml
 /.phpunit.cache/
+
+# aws sam
+/.aws-sam/
