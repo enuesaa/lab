@@ -1,17 +1,11 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Symfony memos app on Lambda (container image + Lambda Web Adapter) backed by DynamoDB
+Description: Sample App
 
 Parameters:
   AppSecret:
     Type: String
     NoEcho: true
-
-Globals:
-  Function:
-    Timeout: 30
-    MemorySize: 512
-    Architectures: [arm64]
 
 Resources:
   MemosTable:
@@ -29,6 +23,9 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
+      Timeout: 30
+      MemorySize: 512
+      Architectures: [arm64]
       Environment:
         Variables:
           APP_ENV: prod
