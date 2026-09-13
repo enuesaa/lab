@@ -23,13 +23,15 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    Aws\DynamoDb\DynamoDbClient:
-        factory: ['App\Infrastructure\Aws\DynamoDbClientFactory', 'create']
+    App\Infrastructure\Aws\DynamoDbClientFactory:
         arguments:
             $region: '%env(DYNAMODB_REGION)%'
             $endpoint: '%env(default::DYNAMODB_ENDPOINT)%'
             $accessKeyId: '%env(default::AWS_ACCESS_KEY_ID)%'
             $secretAccessKey: '%env(default::AWS_SECRET_ACCESS_KEY)%'
+
+    Aws\DynamoDb\DynamoDbClient:
+        factory: '@App\Infrastructure\Aws\DynamoDbClientFactory'
 
     Aws\DynamoDb\Marshaler: ~
 
