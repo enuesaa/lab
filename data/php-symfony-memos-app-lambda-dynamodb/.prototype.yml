@@ -1,6 +1,6 @@
 title: |
   [雑記]
-  Symfony を Lambda でホストする。DynamoDB へ接続する
+  Symfony を Lambda でホストして DynamoDB へ接続する
 description: ''
 published: '2026-09-14'
 
@@ -147,20 +147,7 @@ units:
       メモ作成画面です
     image: size=(min) screate.png
 
-  - description: |
-      バリデーションもされてますね
-    image: size=(min) svalidate.png
-
-  - title: Lambda へのデプロイ
-    description: |
-      SAM でビルド & デプロイします。コンテナイメージのまま Lambda Web Adapter 経由で動かしています。
+  - title: デプロイ
     terminal: |
       sam build
-      sam deploy --guided
-
-  - title: Links
-    links:
-      - title: https://symfony.com/
-        url: https://symfony.com/
-      - title: https://github.com/awslabs/aws-lambda-web-adapter
-        url: https://github.com/awslabs/aws-lambda-web-adapter
+      sam deploy

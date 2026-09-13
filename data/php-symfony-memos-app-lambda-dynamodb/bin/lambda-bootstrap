@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
 
-mkdir -p /tmp/apache2/run /tmp/apache2/lock /tmp/apache2/log /tmp/sessions
+mkdir -p /tmp/sessions /tmp/xdg-data /tmp/xdg-config
 
-exec apache2-foreground
+exec frankenphp run --config /etc/frankenphp/Caddyfile --adapter caddyfile

@@ -5,5 +5,5 @@ composer install
 # tailwind
 php bin/console tailwind:build --watch &
 
-# apache
-apache2-foreground
+# frankenphp
+frankenphp run --config /etc/frankenphp/Caddyfile --adapter caddyfile
