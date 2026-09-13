@@ -24,6 +24,8 @@ RUN composer install --optimize-autoloader --no-scripts --no-dev
 RUN php bin/console tailwind:build --env=prod
 RUN php bin/console asset-map:compile --env=prod
 
+ENV APP_CACHE_DIR=/tmp/symfony-cache
+
 ENV XDG_DATA_HOME=/tmp/xdg-data
 ENV XDG_CONFIG_HOME=/tmp/xdg-config
 RUN echo "session.save_path = /tmp/sessions" > /usr/local/etc/php/conf.d/zz-lambda.ini
