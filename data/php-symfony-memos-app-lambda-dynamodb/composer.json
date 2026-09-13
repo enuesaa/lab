@@ -55,7 +55,7 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "setup:dynamodblocal": "php bin/dynamodb-local-create-table.php"
+        "setup:dynamodblocal": "php bin/console app:dynamodb-local:setup"
     },
     "config": {
         "allow-plugins": {

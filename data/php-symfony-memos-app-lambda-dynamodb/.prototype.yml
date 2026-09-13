@@ -51,7 +51,7 @@ units:
         - config/services.yaml
         - public/.htaccess
         - public/index.php
-        - bin/dynamodb-local-create-table.php
+        - src/Command/DynamoDbLocalSetupCommand.php
         - src/Controller/HomeController.php
         - src/Controller/MemoController.php
         - src/Controller
@@ -107,9 +107,9 @@ units:
         #     AWS SDK の DynamoDbClient と Marshaler を使って CRUD しています。
         #   mark: src/Repository/MemoRepository.php:10
         # - description: |
-        #     DynamoDB Local 用にテーブルを作る補助スクリプト。
-        #     本番のテーブルは template.yaml (SAM) 側で作成するので、これは Symfony を通さないプレーンな PHP スクリプト。
-        #   mark: bin/dynamodb-local-create-table.php:1
+        #     DynamoDB Local 用にテーブルを作るコマンド。
+        #     本番のテーブルは template.yaml (SAM) 側で作成します。
+        #   mark: src/Command/DynamoDbLocalSetupCommand.php:1
         - description: |
             SAM のテンプレート。
             DynamoDB テーブルと Lambda 関数を作成します。

@@ -38,3 +38,8 @@ services:
     App\Repository\MemoRepository:
         arguments:
             $tableName: '%app.dynamodb_table%'
+
+    App\Command\DynamoDbLocalSetupCommand:
+        arguments:
+            $tableName: '%app.dynamodb_table%'
+            $endpoint: '%env(default::DYNAMODB_ENDPOINT)%'
