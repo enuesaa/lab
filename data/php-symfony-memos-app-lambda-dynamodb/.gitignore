@@ -9,12 +9,10 @@
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
-/var/
-/vendor/
-
-# symfony
 /public/assets/
 /assets/vendor/
+/var/
+/vendor/
 
 # phpunit
 /phpunit.xml

@@ -100,7 +100,6 @@ units:
       docker compose exec app bash
 
   - terminal: |
-      # DynamoDB Local にテーブルを作成
       composer run setup:dynamodblocal
 
   # - title: 動作確認

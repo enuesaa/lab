@@ -46,7 +46,6 @@ class MemoRepository
             $params['ExclusiveStartKey'] = $result->get('LastEvaluatedKey');
         } while ($params['ExclusiveStartKey']);
 
-        // sort
         usort($memos, static fn (Memo $a, Memo $b) => $b->getCreatedAt() <=> $a->getCreatedAt());
 
         return $memos;
