@@ -26,7 +26,6 @@ units:
         - assets/app.js
         - bin/console
         - bin/dev
-        - bin/lambda-bootstrap
         - config/packages/asset_mapper.yaml
         - config/packages/cache.yaml
         - config/packages/csrf.yaml
@@ -98,7 +97,7 @@ units:
       docker compose exec app bash
 
   - terminal: |
-      composer run setup:dynamodblocal
+      composer run setup:local
 
   # - title: 動作確認
   #   description: |

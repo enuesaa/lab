@@ -36,8 +36,8 @@ Resources:
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: .
-      DockerTag: prod
-      DockerBuildTarget: prod
+      DockerTag: lambda
+      DockerBuildTarget: lambda
 
 Outputs:
   FunctionUrl:
