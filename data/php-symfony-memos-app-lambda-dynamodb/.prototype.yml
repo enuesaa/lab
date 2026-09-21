@@ -27,7 +27,6 @@ units:
         - bin/console
         - bin/dev
         - bin/lambda-bootstrap
-        - bin/phpunit
         - config/packages/asset_mapper.yaml
         - config/packages/cache.yaml
         - config/packages/csrf.yaml
@@ -69,7 +68,6 @@ units:
         - templates/memo/new.html.twig
         - templates/memo/show.html.twig
         - templates/base.html.twig
-        - tests/bootstrap.php
         - .env
         - .env.dev
         - .gitignore

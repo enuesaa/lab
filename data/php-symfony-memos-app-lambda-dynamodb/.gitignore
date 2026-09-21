@@ -14,9 +14,5 @@
 /var/
 /vendor/
 
-# phpunit
-/phpunit.xml
-/.phpunit.cache/
-
-# aws sam
+# sam
 /.aws-sam/
