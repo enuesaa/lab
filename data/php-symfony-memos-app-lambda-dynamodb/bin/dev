@@ -2,8 +2,5 @@
 
 composer install
 
-# tailwind
-php bin/console tailwind:build --watch &
-
 # frankenphp
 frankenphp run --config /etc/frankenphp/Caddyfile --adapter caddyfile

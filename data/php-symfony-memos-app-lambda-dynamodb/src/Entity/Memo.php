@@ -9,8 +9,10 @@ class Memo
     private ?string $id = null;
 
     #[Assert\NotBlank]
+    #[Assert\Length(min: 3, minMessage: '3文字以上で入力してください')]
     private ?string $title = null;
 
+    #[Assert\Length(max: 100, maxMessage: '100文字以内で入力してください')]
     private ?string $description = null;
 
     private ?\DateTimeImmutable $createdAt = null;

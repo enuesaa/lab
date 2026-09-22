@@ -15,7 +15,6 @@ COPY Caddyfile /etc/frankenphp/Caddyfile
 FROM base AS lambda
 
 RUN composer install --optimize-autoloader --no-scripts
-RUN composer build:lambda
 
 ENV APP_CACHE_DIR=/tmp/symfony-cache
 
