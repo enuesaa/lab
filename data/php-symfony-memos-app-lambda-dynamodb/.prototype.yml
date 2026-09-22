@@ -84,10 +84,31 @@ units:
             DynamoDB テーブルと Lambda 関数を作成します。
           mark: template.yaml:1
 
-  - title: ローカル開発環境
+  - cap: デプロイ
     description: |
-      Docker でローカル開発環境を立ち上げます。
-      DynamoDB のエミュレータとして DynamoDB Local を使います。
+      AWS へデプロイします。
+    terminal: |
+      sam build
+      sam deploy --guided
+    image: size=(min) ./sdeployguide.png
+  
+  - description: |
+      Lambda 関数がデプロイされました。
+      関数URLを curl で叩きます。
+    
+    terminal: |
+      curl <関数のURL>/memos
+
+  # - title: 動作確認
+  #   description: |
+  #     localhost:8000 にアプリケーションが立ち上がります。
+  #     localhost:8002 で dynamodb-admin からテーブルの中身も確認できます。
+  #   image: size=(min) slist.png
+
+  - cap: ローカル開発
+    description: |
+      docker compose でローカル開発できます。
+      ローカルでは DynamoDB の代わりとして DynamoDB Local を立ち上げます。
     terminal: |
       docker compose up
 
@@ -98,18 +119,3 @@ units:
 
   - terminal: |
       composer run setup:local
-
-  # - title: 動作確認
-  #   description: |
-  #     localhost:8000 にアプリケーションが立ち上がります。
-  #     localhost:8002 で dynamodb-admin からテーブルの中身も確認できます。
-  #   image: size=(min) slist.png
-
-  - description: |
-      メモ作成画面です
-    image: size=(min) screate.png
-
-  # - title: デプロイ
-  #   terminal: |
-  #     sam build
-  #     sam deploy
