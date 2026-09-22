@@ -9,13 +9,16 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 #[AsCommand(name: 'app:dynamodb-local:setup', description: 'Creates the memos table in DynamoDB Local, if it does not already exist.')]
 class DynamoDbLocalSetupCommand extends Command
 {
     public function __construct(
         private readonly DynamoDbClient $client,
+        #[Autowire(env: 'DYNAMODB_TABLE')]
         private readonly string $tableName,
+        #[Autowire(env: 'default::DYNAMODB_ENDPOINT')]
         private readonly ?string $endpoint,
     ) {
         parent::__construct();
