@@ -9,11 +9,13 @@ use Symfony\Component\Uid\Uuid;
 
 class MemoRepository
 {
+    private readonly Marshaler $marshaler;
+
     public function __construct(
         private readonly DynamoDbClient $client,
-        private readonly Marshaler $marshaler,
         private readonly string $tableName,
     ) {
+        $this->marshaler = new Marshaler();
     }
 
     public function find(string $id): ?Memo

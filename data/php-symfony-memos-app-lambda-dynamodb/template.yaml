@@ -27,7 +27,6 @@ Resources:
           APP_DEBUG: "0"
           APP_SECRET: SampleAppSecret
           DYNAMODB_TABLE: !Ref MemosTable
-          DYNAMODB_REGION: !Ref AWS::Region
       FunctionUrlConfig:
         AuthType: NONE
       Policies:
