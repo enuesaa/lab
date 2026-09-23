@@ -2,7 +2,7 @@ title: |
   [雑記]
   Symfony を Lambda でホストして DynamoDB へ接続する
 description: ''
-published: '2026-09-14'
+published: '2026-09-26'
 
 units:
   - description: |
@@ -13,6 +13,7 @@ units:
     description: |
       Lambda (Web Adapter + Function URL)
       DynamoDB
+    image: size=(min) ./sarch.png
 
   - title: バージョン
     description: |
@@ -93,16 +94,29 @@ units:
   
   - description: |
       Lambda 関数がデプロイされました。
+    image: size=(min) ./slambda.png
+  
+  - description: |
       関数URLを curl で叩きます。
     
     terminal: |
-      curl <関数のURL>/memos
+      ### 作成
+      curl -X POST 'https://xxx.on.aws/memos' --json '{"title":"aaa","description":"aaa aaa"}'
 
-  # - title: 動作確認
-  #   description: |
-  #     localhost:8000 にアプリケーションが立ち上がります。
-  #     localhost:8002 で dynamodb-admin からテーブルの中身も確認できます。
-  #   image: size=(min) slist.png
+      ### 一覧
+      curl 'https://xxx.on.aws/memos'
+      
+      ### 一覧（キーワード検索）
+      curl 'https://xxx.on.aws/memos?q=aaa'
+      
+      ### 詳細
+      curl 'https://xxx.on.aws/memos/<id>'
+
+      ### 更新
+      curl -X PUT 'https://xxx.on.aws/memos/<id>' --json '{"title":"aaa","description":"ccc ccc"}'
+
+      ### 削除
+      curl -X DELETE 'https://xxx.on.aws/memos/<id>'
 
   - cap: ローカル開発
     description: |
