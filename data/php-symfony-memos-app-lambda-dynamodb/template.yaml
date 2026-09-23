@@ -1,6 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-# Description: Sample App
 
 Resources:
   MemosTable:
@@ -24,7 +23,6 @@ Resources:
       Environment:
         Variables:
           APP_ENV: prod
-          APP_DEBUG: "0"
           APP_SECRET: SampleAppSecret
           DYNAMODB_TABLE: !Ref MemosTable
       FunctionUrlConfig:
@@ -35,11 +33,4 @@ Resources:
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: .
-      DockerTag: lambda
       DockerBuildTarget: lambda
-
-Outputs:
-  FunctionUrl:
-    Value: !GetAtt MemosFunctionUrl.FunctionUrl
-  TableName:
-    Value: !Ref MemosTable

@@ -1,12 +1,11 @@
 version = 0.1
 
 [default.deploy.parameters]
-stack_name = "php-symfony-memos-app-lambda-dynamodb"
-region = "ap-northeast-1"
+stack_name = "symfony-memos-app"
 capabilities = "CAPABILITY_IAM"
 resolve_image_repos = true
 resolve_s3 = true
-s3_prefix = "php-symfony-memos-app-lambda-dynamodb"
+s3_prefix = "symfony-memos-app"
 confirm_changeset = true
 disable_rollback = true
 
