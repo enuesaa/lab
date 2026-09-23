@@ -14,9 +14,13 @@ COPY Caddyfile /etc/frankenphp/Caddyfile
 ### lambda ###
 FROM base AS lambda
 
-RUN composer install --optimize-autoloader --no-scripts
-
+ENV APP_ENV=prod
+ENV APP_BUILD_DIR=/var/www/html/var/build
 ENV APP_CACHE_DIR=/tmp/symfony-cache
+
+RUN composer install --optimize-autoloader --no-scripts \
+    && php bin/console cache:warmup \
+    && rm -rf /tmp/symfony-cache
 
 COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:1.0.1 /lambda-adapter /opt/extensions/lambda-adapter
 ENV AWS_LWA_PORT=8080

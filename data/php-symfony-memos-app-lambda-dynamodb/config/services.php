@@ -5,6 +5,8 @@ use App\Repository\MemoRepository;
 use Aws\DynamoDb\DynamoDbClient;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
+use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
+
 return function (ContainerConfigurator $container) {
     $services = $container->services()
         ->defaults()
@@ -17,8 +19,8 @@ return function (ContainerConfigurator $container) {
         ->args([[]]);
 
     $services->set(MemoRepository::class)
-        ->arg('$tableName', getenv('DYNAMODB_TABLE'));
+        ->arg('$tableName', env('DYNAMODB_TABLE'));
 
     $services->set(SetupLocalCommand::class)
-        ->arg('$tableName', getenv('DYNAMODB_TABLE'));
+        ->arg('$tableName', env('DYNAMODB_TABLE'));
 };
