@@ -4,7 +4,6 @@ namespace App\EventListener;
 
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\Validator\Exception\ValidationFailedException;
@@ -20,7 +19,7 @@ final class ApiExceptionListener
         $event->setResponse(match (true) {
             $previous instanceof ValidationFailedException => $this->validationResponse($exception, $previous),
             $exception instanceof HttpExceptionInterface => new JsonResponse(['error' => $exception->getMessage()], $exception->getStatusCode()),
-            default => new JsonResponse(['error' => 'Internal Server Error'], Response::HTTP_INTERNAL_SERVER_ERROR),
+            default => new JsonResponse(['error' => 'Internal Server Error'], 500),
         });
     }
 
@@ -31,7 +30,7 @@ final class ApiExceptionListener
             $errors[$violation->getPropertyPath()][] = $violation->getMessage();
         }
 
-        $status = $exception instanceof HttpExceptionInterface ? $exception->getStatusCode() : Response::HTTP_UNPROCESSABLE_ENTITY;
+        $status = $exception instanceof HttpExceptionInterface ? $exception->getStatusCode() : 422;
 
         return new JsonResponse(['errors' => $errors], $status);
     }

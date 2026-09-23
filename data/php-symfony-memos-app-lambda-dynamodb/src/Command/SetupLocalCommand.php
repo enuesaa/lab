@@ -30,7 +30,7 @@ class SetupLocalCommand extends Command
 
             return 0;
         } catch (DynamoDbException $e) {
-            if ('ResourceNotFoundException' !== $e->getAwsErrorCode()) {
+            if ($e->getAwsErrorCode() !== 'ResourceNotFoundException') {
                 throw $e;
             }
         }

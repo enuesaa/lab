@@ -23,17 +23,14 @@ final class MemoController extends AbstractController
     }
 
     #[Route('', methods: ['GET'])]
-    public function list(
-        #[MapQueryParameter] ?string $q = null,
-        #[MapQueryParameter] ?string $cursor = null,
-        #[MapQueryParameter(options: ['min_range' => 1, 'max_range' => 100], validationFailedStatusCode: Response::HTTP_BAD_REQUEST)] int $limit = 20,
-    ): JsonResponse {
-        $page = $this->memoRepository->findLatest($limit, $cursor, $q);
+    public function list(#[MapQueryParameter] ?string $q = null): JsonResponse
+    {
+        $memos = array_map(
+            MemoResponse::fromEntity(...),
+            $this->memoRepository->findLatest($q),
+        );
 
-        return $this->json([
-            'items' => array_map(MemoResponse::fromEntity(...), $page->memos),
-            'next_cursor' => $page->nextCursor,
-        ]);
+        return $this->json($memos);
     }
 
     #[Route('', methods: ['POST'])]
@@ -45,7 +42,7 @@ final class MemoController extends AbstractController
 
         $this->memoRepository->save($memo);
 
-        return $this->json(MemoResponse::fromEntity($memo), Response::HTTP_CREATED);
+        return $this->json(MemoResponse::fromEntity($memo), 201);
     }
 
     #[Route('/{id}', methods: ['GET'])]
@@ -76,6 +73,6 @@ final class MemoController extends AbstractController
 
         $this->memoRepository->remove($memo);
 
-        return new Response(status: Response::HTTP_NO_CONTENT);
+        return new Response(status: 204);
     }
 }
