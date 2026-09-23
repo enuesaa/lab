@@ -4,36 +4,21 @@ namespace App\Response;
 
 use App\Entity\Memo;
 
-final class MemoResponse implements \JsonSerializable
+final class MemoResponse
 {
-    private function __construct(
-        private readonly ?string $id,
-        private readonly ?string $title,
-        private readonly ?string $description,
-        private readonly ?string $createdAt,
-        private readonly ?string $updatedAt,
-    ) {
-    }
-
-    public static function fromEntity(Memo $memo): self
-    {
-        return new self(
-            $memo->getId(),
-            $memo->getTitle(),
-            $memo->getDescription(),
-            $memo->getCreatedAt()?->format(\DATE_ATOM),
-            $memo->getUpdatedAt()?->format(\DATE_ATOM),
-        );
-    }
-
-    public function jsonSerialize(): array
+    public static function fromEntity(Memo $memo): array
     {
         return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'description' => $this->description,
-            'created_at' => $this->createdAt,
-            'updated_at' => $this->updatedAt,
+            'id' => $memo->getId(),
+            'title' => $memo->getTitle(),
+            'description' => $memo->getDescription(),
+            'created_at' => $memo->getCreatedAt()?->format(\DATE_ATOM),
+            'updated_at' => $memo->getUpdatedAt()?->format(\DATE_ATOM),
         ];
+    }
+
+    public static function deleted(): object
+    {
+        return (object)[];
     }
 }
