@@ -38,10 +38,12 @@ class SetupLocalCommand extends Command
         $this->client->createTable([
             'TableName' => $this->tableName,
             'AttributeDefinitions' => [
-                ['AttributeName' => 'id', 'AttributeType' => 'S'],
+                ['AttributeName' => 'pk', 'AttributeType' => 'S'],
+                ['AttributeName' => 'sk', 'AttributeType' => 'S'],
             ],
             'KeySchema' => [
-                ['AttributeName' => 'id', 'KeyType' => 'HASH'],
+                ['AttributeName' => 'pk', 'KeyType' => 'HASH'],
+                ['AttributeName' => 'sk', 'KeyType' => 'RANGE'],
             ],
             'BillingMode' => 'PAY_PER_REQUEST',
         ]);

@@ -9,6 +9,8 @@ use Symfony\Component\Uid\Uuid;
 
 class MemoRepository
 {
+    private const PARTITION_KEY = 'MEMO';
+
     private readonly Marshaler $marshaler;
 
     public function __construct(
@@ -22,7 +24,7 @@ class MemoRepository
     {
         $result = $this->client->getItem([
             'TableName' => $this->tableName,
-            'Key' => $this->marshaler->marshalItem(['id' => $id]),
+            'Key' => $this->key($id),
         ]);
 
         $item = $result->get('Item');
@@ -30,27 +32,51 @@ class MemoRepository
         return $item ? $this->hydrate($this->marshaler->unmarshalItem($item)) : null;
     }
 
-    /**
-     * @return Memo[]
-     */
-    public function findAllOrderedByCreatedAtDesc(): array
+    public function findLatest(int $limit, ?string $cursor = null, ?string $keyword = null): MemoPage
     {
+        $keyCondition = 'pk = :pk';
+        $values = [':pk' => self::PARTITION_KEY];
+
+        if (null !== $cursor && '' !== $cursor) {
+            $keyCondition .= ' AND sk < :cursor';
+            $values[':cursor'] = $cursor;
+        }
+
+        $params = [
+            'TableName' => $this->tableName,
+            'KeyConditionExpression' => $keyCondition,
+            'ScanIndexForward' => false,
+        ];
+
+        $keyword = $this->normalize($keyword ?? '');
+        if ('' === $keyword) {
+            $params['Limit'] = $limit + 1;
+        } else {
+            $params['FilterExpression'] = 'contains(search_text, :keyword)';
+            $values[':keyword'] = $keyword;
+        }
+
+        $params['ExpressionAttributeValues'] = $this->marshaler->marshalItem($values);
+
         $memos = [];
-        $params = ['TableName' => $this->tableName];
 
         do {
-            $result = $this->client->scan($params);
+            $result = $this->client->query($params);
 
             foreach ($result->get('Items') as $item) {
                 $memos[] = $this->hydrate($this->marshaler->unmarshalItem($item));
             }
 
             $params['ExclusiveStartKey'] = $result->get('LastEvaluatedKey');
-        } while ($params['ExclusiveStartKey']);
+        } while ($params['ExclusiveStartKey'] && \count($memos) <= $limit);
 
-        usort($memos, static fn (Memo $a, Memo $b) => $b->getCreatedAt() <=> $a->getCreatedAt());
+        if (\count($memos) <= $limit) {
+            return new MemoPage($memos, null);
+        }
 
-        return $memos;
+        $memos = \array_slice($memos, 0, $limit);
+
+        return new MemoPage($memos, end($memos)->getId());
     }
 
     public function save(Memo $memo): void
@@ -67,11 +93,14 @@ class MemoRepository
         $this->client->putItem([
             'TableName' => $this->tableName,
             'Item' => $this->marshaler->marshalItem([
+                'pk' => self::PARTITION_KEY,
+                'sk' => $memo->getId(),
                 'id' => $memo->getId(),
                 'title' => $memo->getTitle(),
                 'description' => $memo->getDescription(),
                 'created_at' => $memo->getCreatedAt()->format(\DATE_ATOM),
                 'updated_at' => $memo->getUpdatedAt()->format(\DATE_ATOM),
+                'search_text' => $this->normalize($memo->getTitle()."\n".$memo->getDescription()),
             ]),
         ]);
     }
@@ -80,8 +109,18 @@ class MemoRepository
     {
         $this->client->deleteItem([
             'TableName' => $this->tableName,
-            'Key' => $this->marshaler->marshalItem(['id' => $memo->getId()]),
+            'Key' => $this->key($memo->getId()),
         ]);
+    }
+
+    private function key(string $id): array
+    {
+        return $this->marshaler->marshalItem(['pk' => self::PARTITION_KEY, 'sk' => $id]);
+    }
+
+    private function normalize(string $text): string
+    {
+        return mb_strtolower(trim(\Normalizer::normalize($text, \Normalizer::FORM_KC)));
     }
 
     /**

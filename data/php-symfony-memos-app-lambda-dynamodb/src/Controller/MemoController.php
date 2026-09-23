@@ -9,6 +9,7 @@ use App\Response\MemoResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
@@ -22,14 +23,17 @@ final class MemoController extends AbstractController
     }
 
     #[Route('', methods: ['GET'])]
-    public function list(): JsonResponse
-    {
-        $memos = array_map(
-            MemoResponse::fromEntity(...),
-            $this->memoRepository->findAllOrderedByCreatedAtDesc(),
-        );
+    public function list(
+        #[MapQueryParameter] ?string $q = null,
+        #[MapQueryParameter] ?string $cursor = null,
+        #[MapQueryParameter(options: ['min_range' => 1, 'max_range' => 100], validationFailedStatusCode: Response::HTTP_BAD_REQUEST)] int $limit = 20,
+    ): JsonResponse {
+        $page = $this->memoRepository->findLatest($limit, $cursor, $q);
 
-        return $this->json($memos);
+        return $this->json([
+            'items' => array_map(MemoResponse::fromEntity(...), $page->memos),
+            'next_cursor' => $page->nextCursor,
+        ]);
     }
 
     #[Route('', methods: ['POST'])]
