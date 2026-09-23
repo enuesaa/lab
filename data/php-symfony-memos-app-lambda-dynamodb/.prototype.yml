@@ -47,7 +47,6 @@ units:
         - config/reference.php
         - config/routes.yaml
         - config/services.yaml
-        - public/.htaccess
         - public/index.php
         - src/Command/DynamoDbLocalSetupCommand.php
         - src/Controller/HomeController.php
