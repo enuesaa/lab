@@ -47,17 +47,14 @@ class MemoRepository
             $params['FilterExpression'] = 'contains(title, :keyword) OR contains(description, :keyword)';
             $values[':keyword'] = $keyword;
         }
-
         $params['ExpressionAttributeValues'] = $this->marshaler->marshalItem($values);
 
         $memos = [];
-
         foreach ($this->client->getPaginator('Query', $params) as $result) {
             foreach ($result->get('Items') as $item) {
                 $memos[] = $this->hydrate($this->marshaler->unmarshalItem($item));
             }
         }
-
         return $memos;
     }
 
@@ -69,7 +66,6 @@ class MemoRepository
             $memo->setId(Uuid::v7()->toRfc4122());
             $memo->setCreatedAt($now);
         }
-
         $memo->setUpdatedAt($now);
 
         $this->client->putItem([

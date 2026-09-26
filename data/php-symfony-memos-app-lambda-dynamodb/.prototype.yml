@@ -128,13 +128,15 @@ units:
 
       # 削除
       curl -X DELETE 'https://xxx.on.aws/memos/<id>'
+    
+  - image: size=(min) ./sresult.png
 
   - cap: ローカル開発
     description: |
       ローカル開発は docker compose で行います。
       DynamoDB のエミュレータとして DynamoDB Local を立ち上げます。
-    terminal: |
-      docker compose up
+    inline:
+      open: docker-compose.yml
 
   - description: |
       なお SAM CLI を使っているので SAM Local にて開発する手もあります。
@@ -142,16 +144,16 @@ units:
 
   - title: ローカル開発環境の立ち上げ
     description: |
-      まずはコンテナを立ち上げましょう。
-      その次に DynamoDB Local のセットアップをします。
+      コンテナを立ち上げて、
+      次に DynamoDB Local のセットアップをします。
     terminal: |
-      # コンテナ立ち上げ
       docker compose up
-
-      # DynamoDB Local のセットアップ
       docker compose exec app composer run setup:local
 
   - cap: 終わり
     title: 感想
     description: |
       コールドスタート何とかならんか..
+      
+      データ量が少ないという前提で DynamoDB のテーブル設計をした。
+      その前提であれば、案外雑にテーブル設計してもいいんじゃないかと思えてきた。
