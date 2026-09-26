@@ -1,6 +1,6 @@
 title: |
-  [雑記]
-  Symfony を Lambda でホストして DynamoDB へ接続する
+  [PHP]
+  Symfony でメモ帳アプリを作り Lambda でホストする
 description: ''
 published: '2026-09-26'
 
@@ -15,10 +15,11 @@ units:
       DynamoDB
     image: size=(min) ./sarch.png
 
-  - title: バージョン
-    description: |
-      PHP 8.4
-      Symfony 8.1
+  - description: |
+      クライアントは Lambda Function URL を叩きます。
+      すると Lambda が起動します。Symfony へリクエストが流れ DynamoDB へ接続します。
+    terminal: |
+      curl 'https://xxx.on.aws/memos'
 
   - code:
       open: src/Controller/MemoController.php
@@ -49,7 +50,7 @@ units:
         - config/routes.yaml
         - config/services.yaml
         - public/index.php
-        - src/Command/DynamoDbLocalSetupCommand.php
+        - src/Command/SetupLocalCommand.php
         - src/Controller/HomeController.php
         - src/Controller/MemoController.php
         - src/Controller
@@ -83,52 +84,70 @@ units:
             SAM のテンプレート。
             DynamoDB テーブルと Lambda 関数を作成します。
           mark: template.yaml:1
+        - description: |
+            ローカル開発用のスクリプト。
+            DynamoDB Local へテーブルを作成します。
+          mark: src/Command/DynamoDbLocalSetupCommand.php:38
 
-  - cap: デプロイ
+  - title: デプロイ
     description: |
-      AWS へデプロイします。
+      SAM CLI を使ってデプロイします。
+      構築されるリソースは Lambda, DynamoDB です。※template.yamlへ記載
     terminal: |
       sam build
       sam deploy --guided
-    image: size=(min) ./sdeployguide.png
+  - image: size=(min) ./sdeployguide.png
   
   - description: |
-      Lambda 関数がデプロイされました。
+      コマンドを実行すると、
+      Lambda 関数が作成されました。
     image: size=(min) ./slambda.png
-  
+
   - description: |
+      関数URLが有効化されてます。
+    image: size=(min) ./slambdafunctionurl.png
+  
+  - title: 動作確認
+    description: |
       関数URLを curl で叩きます。
     
     terminal: |
-      ### 作成
+      # 作成
       curl -X POST 'https://xxx.on.aws/memos' --json '{"title":"aaa","description":"aaa aaa"}'
 
-      ### 一覧
+      # 一覧
       curl 'https://xxx.on.aws/memos'
       
-      ### 一覧（キーワード検索）
+      # 一覧（キーワード検索）
       curl 'https://xxx.on.aws/memos?q=aaa'
       
-      ### 詳細
+      # 詳細
       curl 'https://xxx.on.aws/memos/<id>'
 
-      ### 更新
+      # 更新
       curl -X PUT 'https://xxx.on.aws/memos/<id>' --json '{"title":"aaa","description":"ccc ccc"}'
 
-      ### 削除
+      # 削除
       curl -X DELETE 'https://xxx.on.aws/memos/<id>'
 
   - cap: ローカル開発
     description: |
-      docker compose でローカル開発できます。
-      ローカルでは DynamoDB の代わりとして DynamoDB Local を立ち上げます。
+      ローカル開発は docker compose で行います。
+      DynamoDB のエミュレータとして DynamoDB Local を立ち上げます。
     terminal: |
       docker compose up
 
   - description: |
-      app コンテナへ乗り込んでテーブルを作成しましょう。
-    terminal: |
-      docker compose exec app bash
+      なお SAM CLI を使っているので SAM Local にて開発する手もあります。
+      が Dynamo DB Local への接続/環境管理にめんどくささを感じたため、あえて docker compose にしました。
 
-  - terminal: |
-      composer run setup:local
+  - title: ローカル開発環境の立ち上げ
+    description: |
+      まずはコンテナを立ち上げましょう。
+      その次に DynamoDB Local のセットアップをします。
+    terminal: |
+      # コンテナ立ち上げ
+      docker compose up
+
+      # DynamoDB Local のセットアップ
+      docker compose exec app composer run setup:local
