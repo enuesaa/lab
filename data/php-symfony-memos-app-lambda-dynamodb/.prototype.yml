@@ -18,8 +18,7 @@ units:
   - description: |
       クライアントは Lambda Function URL を叩きます。
       すると Lambda が起動します。Symfony へリクエストが流れ DynamoDB へ接続します。
-    terminal: |
-      curl 'https://xxx.on.aws/memos'
+    image: size=(min) ./sexample.png
 
   - code:
       open: src/Controller/MemoController.php
@@ -69,7 +68,6 @@ units:
         - templates/memo/show.html.twig
         - templates/base.html.twig
         - .env
-        - .env.dev
         - .gitignore
         - composer.json
         - composer.lock

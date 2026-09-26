@@ -22,7 +22,7 @@ Resources:
     Properties:
       PackageType: Image
       Timeout: 30
-      MemorySize: 512
+      MemorySize: 1024
       Architectures: [arm64]
       Environment:
         Variables:
