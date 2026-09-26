@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use App\Dto\EmptyResponse;
+use App\Dto\MemoRequest;
+use App\Dto\MemoResponse;
 use App\Entity\Memo;
 use App\Repository\MemoRepository;
-use App\Request\MemoRequest;
-use App\Response\MemoResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
@@ -74,6 +75,6 @@ final class MemoController extends AppController
         }
         $this->memoRepository->remove($memo);
 
-        return $this->json(MemoResponse::deleted());
+        return $this->json(EmptyResponse::create());
     }
 }

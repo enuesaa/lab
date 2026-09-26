@@ -23,73 +23,74 @@ units:
   - code:
       open: src/Controller/MemoController.php
       include:
-        - assets/styles/app.css
-        - assets/app.js
         - bin/console
         - bin/dev
-        - config/packages/asset_mapper.yaml
         - config/packages/cache.yaml
-        - config/packages/csrf.yaml
         - config/packages/debug.yaml
         - config/packages/framework.yaml
         - config/packages/monolog.yaml
         - config/packages/property_info.yaml
         - config/packages/routing.yaml
-        - config/packages/security.yaml
-        - config/packages/symfonycasts_tailwind.yaml
-        - config/packages/twig.yaml
         - config/packages/validator.yaml
-        - config/packages/web_profiler.yaml
         - config/routes/framework.yaml
-        - config/routes/security.yaml
-        - config/routes/web_profiler.yaml
         - config/bundles.php
         - config/preload.php
         - config/reference.php
         - config/routes.yaml
-        - config/services.yaml
+        - config/services.php
         - public/index.php
         - src/Command/SetupLocalCommand.php
-        - src/Controller/HomeController.php
+        - src/Controller/AppController.php
         - src/Controller/MemoController.php
         - src/Controller
         - src/Entity/Memo.php
-        - src/Form/MemoType.php
-        - src/Infrastructure/Aws/DynamoDbClientFactory.php
+        - src/EventListener/ApiExceptionListener.php
         - src/Repository/MemoRepository.php
+        - src/Dto/EmptyResponse.php
+        - src/Dto/MemoRequest.php
+        - src/Dto/MemoResponse.php
         - src/Kernel.php
         - src
-        - templates/form/theme.html.twig
-        - templates/home/index.html.twig
-        - templates/memo/_delete_form.html.twig
-        - templates/memo/_form.html.twig
-        - templates/memo/edit.html.twig
-        - templates/memo/new.html.twig
-        - templates/memo/show.html.twig
-        - templates/base.html.twig
+        - .dockerignore
         - .env
         - .gitignore
+        - Caddyfile
         - composer.json
         - composer.lock
         - docker-compose.yml
         - Dockerfile
-        - importmap.php
         - symfony.lock
         - template.yaml
         - samconfig.toml
       units:
         - description: |
-            SAM のテンプレート。
-            DynamoDB テーブルと Lambda 関数を作成します。
+            Controller
+          mark: src/Controller/MemoController.php:16
+        - description: |
+            MapQueryParameter にてクエリパラメータをマッピングします
+          links:
+            - title: https://symfony.com/blog/new-in-symfony-6-3-query-parameters-mapper
+              url: https://symfony.com/blog/new-in-symfony-6-3-query-parameters-mapper
+          mark: src/Controller/MemoController.php:24
+        - description: |
+            DTO。リクエストボディをマッピングします。またレスポンスボディの構築にもDTOを使います
+          links:
+            - title: https://symfony.com/doc/current/object_mapper.html
+              url: https://symfony.com/doc/current/object_mapper.html
+          mark: src/Controller/MemoController.php:45
+        - description: |
+            Repository。DynamoDB へデータを保存するため Doctrine ORM は使いません
+          mark: src/Repository/MemoRepository.php:10
+        - description: |
+            SAM のテンプレート。DynamoDB テーブルと Lambda 関数を作成します
           mark: template.yaml:1
         - description: |
-            ローカル開発用のスクリプト。
-            DynamoDB Local へテーブルを作成します。
-          mark: src/Command/DynamoDbLocalSetupCommand.php:38
+            ローカル開発用のスクリプト。DynamoDB Local へテーブルを作成します
+          mark: src/Command/SetupLocalCommand.php:38
 
   - title: デプロイ
     description: |
-      SAM CLI を使ってデプロイします。
+      SAM CLI にてデプロイします。
       構築されるリソースは Lambda, DynamoDB です。※template.yamlへ記載
     terminal: |
       sam build
