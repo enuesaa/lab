@@ -39,7 +39,7 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "setup:local": "php bin/console app:dynamodb-local:setup"
+        "setup:local": "php bin/console setup:local"
     },
     "config": {
         "allow-plugins": {
