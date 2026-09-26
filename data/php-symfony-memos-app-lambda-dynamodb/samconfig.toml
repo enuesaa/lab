@@ -8,6 +8,3 @@ resolve_s3 = true
 s3_prefix = "symfony-memos-app"
 confirm_changeset = true
 disable_rollback = true
-
-[default.global.parameters]
-region = "ap-northeast-1"

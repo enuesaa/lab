@@ -75,8 +75,8 @@ units:
         - description: |
             DTO。リクエストボディをマッピングします。またレスポンスボディの構築にもDTOを使います
           links:
-            - title: https://symfony.com/doc/current/object_mapper.html
-              url: https://symfony.com/doc/current/object_mapper.html
+            - title: https://symfony.com/doc/current/controller.html#mapping-request-payload
+              url: https://symfony.com/doc/current/controller.html#mapping-request-payload
           mark: src/Controller/MemoController.php:45
         - description: |
             Repository。DynamoDB へデータを保存するため Doctrine ORM は使いません
@@ -140,7 +140,7 @@ units:
 
   - description: |
       なお SAM CLI を使っているので SAM Local にて開発する手もあります。
-      が Dynamo DB Local への接続/環境管理にめんどくささを感じたため、あえて docker compose にしました。
+      が DynamoDB Local への接続/環境管理にめんどくささを感じたため、あえて docker compose にしました。
 
   - title: ローカル開発環境の立ち上げ
     description: |
