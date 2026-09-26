@@ -149,3 +149,8 @@ units:
 
       # DynamoDB Local のセットアップ
       docker compose exec app composer run setup:local
+
+  - cap: 終わり
+    title: 感想
+    description: |
+      コールドスタート何とかならんか..
