@@ -134,24 +134,23 @@ units:
 
   - cap: ローカル開発
     description: |
-      ローカル開発は docker compose で行います。
+      docker compose でローカル開発します。
       DynamoDB のエミュレータとして DynamoDB Local を立ち上げます。
+    terminal: |
+      # コンテナを立ち上げ
+      docker compose up
+
+      # DynamoDB Local のセットアップ
+      docker compose exec app composer run setup:local
+  - description: docker-compose.yml
     inline:
       open: docker-compose.yml
 
   - description: |
-      なお SAM CLI を使っているので SAM Local にて開発する手もあります。
-      が DynamoDB Local への接続にめんどくささを感じたため、あえて使わずに、docker compose にて開発しました。
+      なお SAM CLI を使っているので、SAM Local にてローカル開発する手もあります。
+      が DynamoDB Local への接続にめんどくささを感じたため、あえて使わずに docker compose で開発しました。
 
-  - title: ローカル開発環境の立ち上げ
-    description: |
-      コンテナを立ち上げて、
-      次に DynamoDB Local のセットアップをします。
-    terminal: |
-      docker compose up
-      docker compose exec app composer run setup:local
-
-  - cap: 終わり
+  - cap: おわり
     title: 感想
     description: |
       コールドスタートなんとかならんか..
