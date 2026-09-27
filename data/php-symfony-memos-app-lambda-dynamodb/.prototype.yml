@@ -1,23 +1,25 @@
 title: |
   [PHP]
-  Symfony でメモ帳アプリを作り Lambda でホストする
+  Symfony で作った REST API を Lambda でホストする
 description: ''
 published: '2026-09-26'
 
 units:
   - description: |
-      Symfony でメモ帳アプリを作り AWS Lambda でホストします。
-      データは DynamoDB へ保存します。
+      Symfony でメモ帳アプリを作り AWS Lambda でホストしました。
+      REST API です。データは DynamoDB へ保存します。
 
   - title: 構成
     description: |
-      Lambda (Web Adapter + Function URL)
+      Lambda
       DynamoDB
     image: size=(min) ./sarch.png
 
   - description: |
-      クライアントは Lambda Function URL を叩きます。
-      すると Lambda が起動します。Symfony へリクエストが流れ DynamoDB へ接続します。
+      Lambda は関数URLを有効化します。
+      
+      クライアントから関数URLを呼ぶと、Lambda が起動して、
+      Symfony へリクエストが流れて DynamoDB へ接続する。という具合です。
     image: size=(min) ./sexample.png
 
   - code:
@@ -51,7 +53,6 @@ units:
         - src/Dto/MemoResponse.php
         - src/Kernel.php
         - src
-        - .dockerignore
         - .env
         - .gitignore
         - Caddyfile
@@ -88,10 +89,10 @@ units:
             ローカル開発用のスクリプト。DynamoDB Local へテーブルを作成します
           mark: src/Command/SetupLocalCommand.php:38
 
-  - title: デプロイ
+  - cap: デプロイ
     description: |
-      SAM CLI にてデプロイします。
-      構築されるリソースは Lambda, DynamoDB です。※template.yamlへ記載
+      AWS SAM CLI にてデプロイしました。
+      Lambda 関数や DynamoDB テーブルを構築します。※template.yamlへ記載
     terminal: |
       sam build
       sam deploy --guided
@@ -140,7 +141,7 @@ units:
 
   - description: |
       なお SAM CLI を使っているので SAM Local にて開発する手もあります。
-      が DynamoDB Local への接続/環境管理にめんどくささを感じたため、あえて docker compose にしました。
+      が DynamoDB Local への接続にめんどくささを感じたため、あえて使わずに、docker compose にて開発しました。
 
   - title: ローカル開発環境の立ち上げ
     description: |
@@ -153,7 +154,7 @@ units:
   - cap: 終わり
     title: 感想
     description: |
-      コールドスタート何とかならんか..
+      コールドスタートなんとかならんか..
       
       データ量が少ないという前提で DynamoDB のテーブル設計をした。
       その前提であれば、案外雑にテーブル設計してもいいんじゃないかと思えてきた。

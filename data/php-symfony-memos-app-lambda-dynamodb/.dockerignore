@@ -1,8 +1,0 @@
-.aws-sam
-.env.dev
-.env.local
-.env.*.local
-.prototype.yml
-*.png
-var
-vendor
