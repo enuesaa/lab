@@ -16,6 +16,7 @@ FROM base AS lambda
 
 COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:1.0.1 /lambda-adapter /opt/extensions/lambda-adapter
 ENV AWS_LWA_PORT=8080
+ENV AWS_LWA_READINESS_CHECK_PATH=/health
 
 RUN composer install --no-dev --classmap-authoritative --no-scripts \
     && php bin/console cache:warmup --env=prod
