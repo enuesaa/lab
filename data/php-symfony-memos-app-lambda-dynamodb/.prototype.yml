@@ -1,8 +1,8 @@
 title: |
   [PHP]
-  Symfony で作った REST API を Lambda でホストする
+  Symfony で REST API を作り Lambda へデプロイする
 description: ''
-published: '2026-09-26'
+published: '2026-09-27'
 
 units:
   - description: |
