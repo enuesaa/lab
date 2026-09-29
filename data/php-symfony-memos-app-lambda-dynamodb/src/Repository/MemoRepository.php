@@ -22,7 +22,7 @@ class MemoRepository
     {
         $result = $this->client->getItem([
             'TableName' => $this->tableName,
-            'Key' => $this->key($id),
+            'Key' => $this->marshalKey($id),
         ]);
         $item = $result->get('Item');
         if ($item === null) {
@@ -98,11 +98,11 @@ class MemoRepository
     {
         $this->client->deleteItem([
             'TableName' => $this->tableName,
-            'Key' => $this->key($memo->getId()),
+            'Key' => $this->marshalKey($memo->getId()),
         ]);
     }
 
-    private function key(string $id): array
+    protected function marshalKey(string $id): array
     {
         return $this->marshaler->marshalItem(['pk' => 'MEMO', 'sk' => $id]);
     }
@@ -110,7 +110,7 @@ class MemoRepository
     /**
      * @param array{id: string, title: string, description: string, created_at: string, updated_at: string} $item
      */
-    private function hydrate(array $item): Memo
+    protected function hydrate(array $item): Memo
     {
         return (new Memo())
             ->setId($item['id'])

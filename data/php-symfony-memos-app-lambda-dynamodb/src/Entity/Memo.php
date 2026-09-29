@@ -5,13 +5,9 @@ namespace App\Entity;
 class Memo
 {
     private ?string $id = null;
-
     private ?string $title = null;
-
     private ?string $description = null;
-
     private ?\DateTimeImmutable $createdAt = null;
-
     private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?string
