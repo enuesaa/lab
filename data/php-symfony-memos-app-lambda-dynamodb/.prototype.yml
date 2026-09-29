@@ -46,7 +46,6 @@ units:
         - src/Controller/MemoController.php
         - src/Controller
         - src/Entity/Memo.php
-        - src/EventListener/ApiExceptionListener.php
         - src/Repository/MemoRepository.php
         - src/Dto/EmptyResponse.php
         - src/Dto/MemoRequest.php
