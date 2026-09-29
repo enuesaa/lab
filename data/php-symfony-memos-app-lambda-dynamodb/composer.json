@@ -9,6 +9,7 @@
         "ext-iconv": "*",
         "aws/aws-sdk-php": "^3.0",
         "guzzlehttp/guzzle": "^7.15.5",
+        "symfony/clock": "8.1.*",
         "symfony/console": "8.1.*",
         "symfony/dotenv": "8.1.*",
         "symfony/flex": "^2",

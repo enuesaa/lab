@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Memo;
 use Aws\DynamoDb\DynamoDbClient;
 use Aws\DynamoDb\Marshaler;
+use Symfony\Component\Clock\DatePoint;
 use Symfony\Component\Uid\Uuid;
 
 class MemoRepository
@@ -72,7 +73,7 @@ class MemoRepository
 
     public function save(Memo $memo): void
     {
-        $now = new \DateTimeImmutable();
+        $now = new DatePoint();
 
         if ($memo->getId() === null) {
             $memo->setId(Uuid::v7()->toRfc4122());
@@ -116,7 +117,7 @@ class MemoRepository
             ->setId($item['id'])
             ->setTitle($item['title'])
             ->setDescription($item['description'])
-            ->setCreatedAt(new \DateTimeImmutable($item['created_at']))
-            ->setUpdatedAt(new \DateTimeImmutable($item['updated_at']));
+            ->setCreatedAt(new DatePoint($item['created_at']))
+            ->setUpdatedAt(new DatePoint($item['updated_at']));
     }
 }
