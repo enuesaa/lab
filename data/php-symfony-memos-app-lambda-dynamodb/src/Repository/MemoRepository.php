@@ -24,10 +24,11 @@ class MemoRepository
             'TableName' => $this->tableName,
             'Key' => $this->key($id),
         ]);
-
         $item = $result->get('Item');
-
-        return $item ? $this->hydrate($this->marshaler->unmarshalItem($item)) : null;
+        if ($item === null) {
+            return null;
+        }
+        return $this->hydrate($this->marshaler->unmarshalItem($item));
     }
 
     /**
@@ -35,22 +36,33 @@ class MemoRepository
      */
     public function findLatest(?string $keyword = null): array
     {
-        $params = [
-            'TableName' => $this->tableName,
-            'KeyConditionExpression' => 'pk = :pk',
-            'ScanIndexForward' => false,
-        ];
-        $values = [':pk' => 'MEMO'];
-
         $keyword = trim($keyword ?? '');
-        if ($keyword !== '') {
-            $params['FilterExpression'] = 'contains(title, :keyword) OR contains(description, :keyword)';
-            $values[':keyword'] = $keyword;
+        if ($keyword === '') {
+            $params = [
+                'TableName' => $this->tableName,
+                'KeyConditionExpression' => 'pk = :pk',
+                'ScanIndexForward' => false,
+                'ExpressionAttributeValues' => $this->marshaler->marshalItem([
+                    ':pk' => 'MEMO',
+                ]),
+            ];
+        } else {
+            // キーワード検索
+            $params = [
+                'TableName' => $this->tableName,
+                'KeyConditionExpression' => 'pk = :pk',
+                'ScanIndexForward' => false,
+                'FilterExpression' => 'contains(title, :keyword) OR contains(description, :keyword)',
+                'ExpressionAttributeValues' => $this->marshaler->marshalItem([
+                    ':pk' => 'MEMO',
+                    ':keyword' => $keyword,
+                ]),
+            ];
         }
-        $params['ExpressionAttributeValues'] = $this->marshaler->marshalItem($values);
 
+        $results = $this->client->getPaginator('Query', $params);
         $memos = [];
-        foreach ($this->client->getPaginator('Query', $params) as $result) {
+        foreach ($results as $result) {
             foreach ($result->get('Items') as $item) {
                 $memos[] = $this->hydrate($this->marshaler->unmarshalItem($item));
             }
