@@ -4,25 +4,16 @@ namespace App\Dto;
 
 use App\Entity\Memo;
 
-final readonly class MemoResponse
+final class MemoResponse
 {
-    public function __construct(
-        public string $id,
-        public string $title,
-        public string $description,
-        public \DateTimeImmutable $createdAt,
-        public \DateTimeImmutable $updatedAt,
-    ) {
-    }
-
-    public static function fromEntity(Memo $memo): self
+    public static function fromEntity(Memo $memo): array
     {
-        return new self(
-            $memo->getId(),
-            $memo->getTitle(),
-            $memo->getDescription(),
-            $memo->getCreatedAt(),
-            $memo->getUpdatedAt(),
-        );
+        return [
+            'id' => $memo->getId(),
+            'title' => $memo->getTitle(),
+            'description' => $memo->getDescription(),
+            'createdAt' => $memo->getCreatedAt()?->format(\DATE_ATOM),
+            'updatedAt' => $memo->getUpdatedAt()?->format(\DATE_ATOM),
+        ];
     }
 }
