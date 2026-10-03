@@ -6,8 +6,8 @@ published: '2026-09-27'
 
 units:
   - description: |
-      Symfony でメモ帳アプリを作り AWS Lambda でホストしました。
-      REST API です。データは DynamoDB へ保存します。
+      Symfony で REST API を作り AWS Lambda でホストしました。
+      簡単なメモ帳アプリです。データは DynamoDB へ保存します。
 
   - outline:
       items:
