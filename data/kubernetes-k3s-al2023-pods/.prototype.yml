@@ -8,7 +8,18 @@ units:
   - description: |
       Kubernetes の勉強のために。
       いわゆる軽量ディストリビューションの一つである k3s でクラスターを作ってみる。
-  
+
+  # - outline:
+  #     items:
+  #       - title: ・構成
+  #         as: arch
+  #       - title: ・コード
+  #         as: code
+  #       - title: ・デプロイ
+  #         as: deploy
+  #       - title: ・ローカル開発
+  #         as: local
+
   - title: 環境
     description: |
       AL2023 (ARM)
@@ -37,98 +48,46 @@ units:
       ・Pythonのサンプルアプリ
       の2つを立ち上げます。
 
+  - as: code
+    code:
+      open: nginx.yaml
+      include:
+        - ingress.yaml
+        - nginx.yaml
+        - python3app.yaml
+      units:
+        - description: |
+            Nignx 
+          mark: nginx.yaml:1
+        - description: |
+            Python3 のサンプルアプリ
+          mark: python3app.yaml:1
 
-  # - outline:
-  #     items:
-  #       - title: ・構成
-  #         as: arch
-  #       - title: ・コード
-  #         as: code
-  #       - title: ・デプロイ
-  #         as: deploy
-  #       - title: ・ローカル開発
-  #         as: local
+  - description: |
+      まずは Nginx の pod を立ち上げます
+    terminal: |
+      vim nginx.yaml
+      kubectl apply -f nginx.yaml
+      kubectl get pods
+  - image: size=(min) snginx.png
 
-  # - as: arch
-  #   title: 構成
-  #   description: |
-  #     Lambda
-  #     DynamoDB
-  #   image: size=(min) ./sarch.png
+  - description: |
+      同じようにして Python3 のサンプルアプリの pod を立ち上げます
+    terminal: |
+      vim python3app.yaml
+      kubectl apply -f python3app.yaml
+      kubectl get pods
+  - image: size=(min) spython3app.png
 
-  # - description: |
-  #     Lambda は関数URLを有効化します。
-      
-  #     クライアントから関数URLを呼ぶと、Lambda が起動して、
-  #     Symfony へリクエストが流れて DynamoDB へ接続する。という具合です。
-  #   image: size=(min) ./sexample.png
-
-  # - as: code
-  #   code:
-  #     open: src/Controller/MemoController.php
-  #     include:
-  #       - bin/console
-  #       - bin/dev
-  #       - config/packages/cache.yaml
-  #       - config/packages/debug.yaml
-  #       - config/packages/framework.yaml
-  #       - config/packages/monolog.yaml
-  #       - config/packages/property_info.yaml
-  #       - config/packages/routing.yaml
-  #       - config/packages/validator.yaml
-  #       - config/routes/framework.yaml
-  #       - config/bundles.php
-  #       - config/preload.php
-  #       - config/reference.php
-  #       - config/routes.yaml
-  #       - config/services.php
-  #       - public/index.php
-  #       - src/Command/SetupLocalCommand.php
-  #       - src/Controller/AppController.php
-  #       - src/Controller/MemoController.php
-  #       - src/Controller
-  #       - src/Entity/Memo.php
-  #       - src/Repository/MemoRepository.php
-  #       - src/Dto/EmptyResponse.php
-  #       - src/Dto/MemoRequest.php
-  #       - src/Dto/MemoResponse.php
-  #       - src/Kernel.php
-  #       - src
-  #       - .env
-  #       - .gitignore
-  #       - Caddyfile
-  #       - composer.json
-  #       - composer.lock
-  #       - docker-compose.yml
-  #       - Dockerfile
-  #       - symfony.lock
-  #       - template.yaml
-  #       - samconfig.toml
-  #     units:
-  #       - description: |
-  #           Controller
-  #         mark: src/Controller/MemoController.php:17
-  #       - description: |
-  #           MapQueryParameter にてクエリパラメータをマッピングします
-  #         links:
-  #           - title: https://symfony.com/blog/new-in-symfony-6-3-query-parameters-mapper
-  #             url: https://symfony.com/blog/new-in-symfony-6-3-query-parameters-mapper
-  #         mark: src/Controller/MemoController.php:25
-  #       - description: |
-  #           DTO。リクエストボディをマッピングします。またレスポンスボディの構築にもDTOを使います
-  #         links:
-  #           - title: https://symfony.com/doc/current/controller.html#mapping-request-payload
-  #             url: https://symfony.com/doc/current/controller.html#mapping-request-payload
-  #         mark: src/Controller/MemoController.php:45
-  #       - description: |
-  #           Repository。DynamoDB へデータを保存するため Doctrine ORM は使いません
-  #         mark: src/Repository/MemoRepository.php:11
-  #       - description: |
-  #           SAM のテンプレート。DynamoDB テーブルと Lambda 関数を作成します
-  #         mark: template.yaml:1
-  #       - description: |
-  #           ローカル開発用のスクリプト。DynamoDB Local へテーブルを作成します
-  #         mark: src/Command/SetupLocalCommand.php:38
+  - description: |
+      続いて、
+      クラスターの外からアクセスできるよう Ingress Controller にて Service へルーティングします
+    terminal: |
+      vim ingress.yaml
+      kubectl apply -f ingress.yaml
+      kubectl get ingress
+  
+  - image: size=(min) singress.png
 
   # - as: deploy
   #   cap: デプロイ
