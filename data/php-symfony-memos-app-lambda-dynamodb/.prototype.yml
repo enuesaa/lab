@@ -9,7 +9,19 @@ units:
       Symfony でメモ帳アプリを作り AWS Lambda でホストしました。
       REST API です。データは DynamoDB へ保存します。
 
-  - title: 構成
+  - outline:
+      items:
+        - title: ・構成
+          as: arch
+        - title: ・コード
+          as: code
+        - title: ・デプロイ
+          as: deploy
+        - title: ・ローカル開発
+          as: local
+
+  - as: arch
+    title: 構成
     description: |
       Lambda
       DynamoDB
@@ -22,7 +34,8 @@ units:
       Symfony へリクエストが流れて DynamoDB へ接続する。という具合です。
     image: size=(min) ./sexample.png
 
-  - code:
+  - as: code
+    code:
       open: src/Controller/MemoController.php
       include:
         - bin/console
@@ -65,13 +78,13 @@ units:
       units:
         - description: |
             Controller
-          mark: src/Controller/MemoController.php:16
+          mark: src/Controller/MemoController.php:17
         - description: |
             MapQueryParameter にてクエリパラメータをマッピングします
           links:
             - title: https://symfony.com/blog/new-in-symfony-6-3-query-parameters-mapper
               url: https://symfony.com/blog/new-in-symfony-6-3-query-parameters-mapper
-          mark: src/Controller/MemoController.php:24
+          mark: src/Controller/MemoController.php:25
         - description: |
             DTO。リクエストボディをマッピングします。またレスポンスボディの構築にもDTOを使います
           links:
@@ -80,7 +93,7 @@ units:
           mark: src/Controller/MemoController.php:45
         - description: |
             Repository。DynamoDB へデータを保存するため Doctrine ORM は使いません
-          mark: src/Repository/MemoRepository.php:10
+          mark: src/Repository/MemoRepository.php:11
         - description: |
             SAM のテンプレート。DynamoDB テーブルと Lambda 関数を作成します
           mark: template.yaml:1
@@ -88,7 +101,8 @@ units:
             ローカル開発用のスクリプト。DynamoDB Local へテーブルを作成します
           mark: src/Command/SetupLocalCommand.php:38
 
-  - cap: デプロイ
+  - as: deploy
+    cap: デプロイ
     description: |
       AWS SAM CLI にてデプロイしました。
       Lambda 関数や DynamoDB テーブルを構築します。※template.yamlへ記載
@@ -131,7 +145,8 @@ units:
     
   - image: size=(min) ./sresult.png
 
-  - cap: ローカル開発
+  - as: local
+    cap: ローカル開発
     description: |
       docker compose でローカル開発します。
       DynamoDB のエミュレータとして DynamoDB Local を立ち上げます。
