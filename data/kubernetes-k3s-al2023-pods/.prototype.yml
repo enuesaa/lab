@@ -19,6 +19,14 @@ units:
       次に k3s をセットアップします。
     terminal: |
       ## install
+      # k3s
+      curl -sfL https://get.k3s.io | sh -
+      k3s kubectl get nodes
+
+      # kubeconfig
+      mkdir -p ~/.kube
+      cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+      kubectl get nodes
 
   - description: |
       次に pod を立ち上げます。
