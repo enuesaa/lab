@@ -9,25 +9,28 @@ units:
       Kubernetes の勉強のために。
       いわゆる軽量ディストリビューションの一つである k3s でクラスターを作ってみる。
 
-  # - outline:
-  #     items:
-  #       - title: ・構成
-  #         as: arch
-  #       - title: ・コード
-  #         as: code
-  #       - title: ・デプロイ
-  #         as: deploy
-  #       - title: ・ローカル開発
-  #         as: local
-
-  - title: 環境
+  - title: 前提
     description: |
-      AL2023 (ARM)
+      Kubernetes初心者の雑記です。
 
-  - title: セットアップ
+      EC2 でインスタンス（AL2023）を立ち上げ
+      k3s でクラスターをセットアップして、Service を立ち上げてみます。
+
+  - outline:
+      items:
+        - title: ・クラスターの立ち上げ
+          as: arch
+        - title: ・Service を立ち上げ
+          as: code
+        - title: ・デプロイ
+          as: deploy
+        - title: ・ローカル開発
+          as: local
+
+  - title: クラスターの立ち上げ
     description: |
       k3s をインストールして
-      Kubernetes のクラスターをセットアップします。
+      Kubernetes のクラスターをセットアップします
     terminal: |
       # k3s
       curl -sfL https://get.k3s.io | sh -
@@ -41,14 +44,14 @@ units:
   
   - image: size=(min) ./sk3ssetup.png
 
-  - description: |
-      次に pod を立ち上げます。
-
+  - title: Service を立ち上げ
+    description: |
+      下記の Service を立ち上げます
       ・Nginx
       ・Pythonのサンプルアプリ
-      の2つを立ち上げます。
 
   - as: code
+    title: マニフェスト
     code:
       open: nginx.yaml
       include:
@@ -64,7 +67,7 @@ units:
           mark: python3app.yaml:1
 
   - description: |
-      まずは Nginx の pod を立ち上げます
+      まずは Nginx の Service を立ち上げます
     terminal: |
       vim nginx.yaml
       kubectl apply -f nginx.yaml
@@ -72,14 +75,15 @@ units:
   - image: size=(min) snginx.png
 
   - description: |
-      同じようにして Python3 のサンプルアプリの pod を立ち上げます
+      同じようにして Python3 のサンプルアプリの Service を立ち上げます
     terminal: |
       vim python3app.yaml
       kubectl apply -f python3app.yaml
       kubectl get pods
   - image: size=(min) spython3app.png
 
-  - description: |
+  - title: ルーティング
+    description: |
       続いて、
       クラスターの外からアクセスできるよう Ingress Controller にて Service へルーティングします
     terminal: |
@@ -89,78 +93,9 @@ units:
   
   - image: size=(min) singress.png
 
-  - description: |
+  - title: 疎通確認
+    description: |
       クラスター外から疎通確認します。
       EC2 の Public IP アドレスへ curl でリクエストを投げます。
 
   - image: size=(min) scurl.png
-
-  # - as: deploy
-  #   cap: デプロイ
-  #   description: |
-  #     AWS SAM CLI にてデプロイしました。
-  #     Lambda 関数や DynamoDB テーブルを構築します。※template.yamlへ記載
-  #   terminal: |
-  #     sam build
-  #     sam deploy --guided
-  # - image: size=(min) ./sdeployguide.png
-  
-  # - description: |
-  #     コマンドを実行すると、
-  #     Lambda 関数が作成されました。
-  #   image: size=(min) ./slambda.png
-
-  # - description: |
-  #     関数URLが有効化されてます。
-  #   image: size=(min) ./slambdafunctionurl.png
-  
-  # - title: 動作確認
-  #   description: |
-  #     関数URLを curl で叩きます。
-    
-  #   terminal: |
-  #     # 作成
-  #     curl -X POST 'https://xxx.on.aws/memos' --json '{"title":"aaa","description":"aaa aaa"}'
-
-  #     # 一覧
-  #     curl 'https://xxx.on.aws/memos'
-      
-  #     # 一覧（キーワード検索）
-  #     curl 'https://xxx.on.aws/memos?q=aaa'
-      
-  #     # 詳細
-  #     curl 'https://xxx.on.aws/memos/<id>'
-
-  #     # 更新
-  #     curl -X PUT 'https://xxx.on.aws/memos/<id>' --json '{"title":"aaa","description":"ccc ccc"}'
-
-  #     # 削除
-  #     curl -X DELETE 'https://xxx.on.aws/memos/<id>'
-    
-  # - image: size=(min) ./sresult.png
-
-  # - as: local
-  #   cap: ローカル開発
-  #   description: |
-  #     docker compose でローカル開発します。
-  #     DynamoDB のエミュレータとして DynamoDB Local を立ち上げます。
-  #   terminal: |
-  #     # コンテナを立ち上げ
-  #     docker compose up
-
-  #     # DynamoDB Local のセットアップ
-  #     docker compose exec app composer run setup:local
-  # - description: docker-compose.yml
-  #   inline:
-  #     open: docker-compose.yml
-
-  # - description: |
-  #     なお SAM CLI を使っているので、SAM Local にてローカル開発する手もあります。
-  #     が DynamoDB Local への接続にめんどくささを感じたため、あえて使わずに docker compose で開発しました。
-
-  # - cap: おわり
-  #   description: |
-  #     感想
-  #     ・コールドスタートあるのでなんとかしたいが..
-  #     ・データ量が少ないという前提で DynamoDB のテーブル設計をした。
-  #     　その前提であれば、案外雑にテーブル設計してもいいんじゃないかと思えてきた。
