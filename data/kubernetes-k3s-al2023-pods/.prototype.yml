@@ -15,10 +15,9 @@ units:
 
   - title: セットアップ
     description: |
-      kubectl をインストールします。
-      次に k3s をセットアップします。
+      k3s をインストールして
+      Kubernetes のクラスターをセットアップします。
     terminal: |
-      ## install
       # k3s
       curl -sfL https://get.k3s.io | sh -
       k3s kubectl get nodes
@@ -26,7 +25,10 @@ units:
       # kubeconfig
       mkdir -p ~/.kube
       cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+      chown $USER:$USER ~/.kube/config
       kubectl get nodes
+  
+  - image: size=(min) ./sk3ssetup.png
 
   - description: |
       次に pod を立ち上げます。
