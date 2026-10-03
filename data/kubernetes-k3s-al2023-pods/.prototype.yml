@@ -1,20 +1,20 @@
 title: |
   [雑記]
-  k3s で Kubernetes クラスターを作ってみた
+  K3s で Kubernetes クラスターを作ってみた
 description: ''
-published: '2026-10-04'
+published: '2026-10-03'
 
 units:
   - description: |
       Kubernetes の勉強のために。
-      いわゆる軽量ディストリビューションの一つである k3s でクラスターを作ってみる。
+      いわゆる軽量ディストリビューションの一つである K3s でクラスターを作ってみる。
 
   - title: 前提
     description: |
-      Kubernetes初心者の雑記です。
+      Kubernetes 初心者の雑記です。
 
       EC2 でインスタンス（AL2023）を立ち上げ
-      k3s でクラスターをセットアップして、Service を立ち上げてみます。
+      K3s でクラスターをセットアップして、Service を立ち上げてみます。
 
   - outline:
       items:
@@ -30,7 +30,7 @@ units:
   - as: setup
     title: クラスターの立ち上げ
     description: |
-      k3s をインストールして
+      K3s をインストールして
       Kubernetes のクラスターをセットアップします
     terminal: |
       # k3s
@@ -42,15 +42,21 @@ units:
       cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
       chown $USER:$USER ~/.kube/config
       kubectl get nodes
-  
+
   - image: size=(min) ./sk3ssetup.png
+
+  - description: |
+      公式ガイド
+    links:
+      - title: https://docs.k3s.io/quick-start
+        url: https://docs.k3s.io/quick-start
 
   - as: service
     title: Service を立ち上げ
     description: |
       下記の Service を立ち上げます
       ・Nginx
-      ・Pythonのサンプルアプリ
+      ・Python3 のサンプルアプリ
 
   - as: code
     title: マニフェスト
@@ -65,7 +71,7 @@ units:
             Nginx 
           mark: nginx.yaml:1
         - description: |
-            Python3 のサンプルアプリ
+            Python3 のサンプルアプリ。http.server を立ち上げるだけです
           mark: python3app.yaml:1
 
   - description: |
@@ -104,7 +110,6 @@ units:
 
   - image: size=(min) scurl.png
   - description: |
-      ホストヘッダの値を見て、
-      Ingress Controller (Traefik) でリクエストが振り分けられ、
-      各 Service の Pod へ流れて、
-      レスポンスが帰ってきている、という理解です。
+      Host ヘッダの値を見て、
+      Ingress Controller (Traefik) でリクエストが振り分けられ、各 Service の Pod へ流れて、
+      レスポンスが返ってきている、という理解です。
