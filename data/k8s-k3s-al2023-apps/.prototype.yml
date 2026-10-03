@@ -1,0 +1,191 @@
+title: |
+  [雑記]
+  k3s で Kubernetes クラスターを作ってみた
+description: ''
+published: '2026-10-04'
+
+units:
+  - description: |
+      Kubernetes の勉強のために。
+      いわゆる軽量ディストリビューションの一つである k3s でクラスターを作ってみる。
+  
+  - title: 環境
+    description: |
+      AL2023 (ARM)
+
+  - title: セットアップ
+    description: |
+      kubectl をインストールします。
+      次に k3s をセットアップします。
+    terminal: |
+      ## install
+
+  - description: |
+      次に pod を立ち上げます。
+
+      ・Nginx
+      ・Pythonのサンプルアプリ
+      の2つを立ち上げます。
+
+
+  # - outline:
+  #     items:
+  #       - title: ・構成
+  #         as: arch
+  #       - title: ・コード
+  #         as: code
+  #       - title: ・デプロイ
+  #         as: deploy
+  #       - title: ・ローカル開発
+  #         as: local
+
+  # - as: arch
+  #   title: 構成
+  #   description: |
+  #     Lambda
+  #     DynamoDB
+  #   image: size=(min) ./sarch.png
+
+  # - description: |
+  #     Lambda は関数URLを有効化します。
+      
+  #     クライアントから関数URLを呼ぶと、Lambda が起動して、
+  #     Symfony へリクエストが流れて DynamoDB へ接続する。という具合です。
+  #   image: size=(min) ./sexample.png
+
+  # - as: code
+  #   code:
+  #     open: src/Controller/MemoController.php
+  #     include:
+  #       - bin/console
+  #       - bin/dev
+  #       - config/packages/cache.yaml
+  #       - config/packages/debug.yaml
+  #       - config/packages/framework.yaml
+  #       - config/packages/monolog.yaml
+  #       - config/packages/property_info.yaml
+  #       - config/packages/routing.yaml
+  #       - config/packages/validator.yaml
+  #       - config/routes/framework.yaml
+  #       - config/bundles.php
+  #       - config/preload.php
+  #       - config/reference.php
+  #       - config/routes.yaml
+  #       - config/services.php
+  #       - public/index.php
+  #       - src/Command/SetupLocalCommand.php
+  #       - src/Controller/AppController.php
+  #       - src/Controller/MemoController.php
+  #       - src/Controller
+  #       - src/Entity/Memo.php
+  #       - src/Repository/MemoRepository.php
+  #       - src/Dto/EmptyResponse.php
+  #       - src/Dto/MemoRequest.php
+  #       - src/Dto/MemoResponse.php
+  #       - src/Kernel.php
+  #       - src
+  #       - .env
+  #       - .gitignore
+  #       - Caddyfile
+  #       - composer.json
+  #       - composer.lock
+  #       - docker-compose.yml
+  #       - Dockerfile
+  #       - symfony.lock
+  #       - template.yaml
+  #       - samconfig.toml
+  #     units:
+  #       - description: |
+  #           Controller
+  #         mark: src/Controller/MemoController.php:17
+  #       - description: |
+  #           MapQueryParameter にてクエリパラメータをマッピングします
+  #         links:
+  #           - title: https://symfony.com/blog/new-in-symfony-6-3-query-parameters-mapper
+  #             url: https://symfony.com/blog/new-in-symfony-6-3-query-parameters-mapper
+  #         mark: src/Controller/MemoController.php:25
+  #       - description: |
+  #           DTO。リクエストボディをマッピングします。またレスポンスボディの構築にもDTOを使います
+  #         links:
+  #           - title: https://symfony.com/doc/current/controller.html#mapping-request-payload
+  #             url: https://symfony.com/doc/current/controller.html#mapping-request-payload
+  #         mark: src/Controller/MemoController.php:45
+  #       - description: |
+  #           Repository。DynamoDB へデータを保存するため Doctrine ORM は使いません
+  #         mark: src/Repository/MemoRepository.php:11
+  #       - description: |
+  #           SAM のテンプレート。DynamoDB テーブルと Lambda 関数を作成します
+  #         mark: template.yaml:1
+  #       - description: |
+  #           ローカル開発用のスクリプト。DynamoDB Local へテーブルを作成します
+  #         mark: src/Command/SetupLocalCommand.php:38
+
+  # - as: deploy
+  #   cap: デプロイ
+  #   description: |
+  #     AWS SAM CLI にてデプロイしました。
+  #     Lambda 関数や DynamoDB テーブルを構築します。※template.yamlへ記載
+  #   terminal: |
+  #     sam build
+  #     sam deploy --guided
+  # - image: size=(min) ./sdeployguide.png
+  
+  # - description: |
+  #     コマンドを実行すると、
+  #     Lambda 関数が作成されました。
+  #   image: size=(min) ./slambda.png
+
+  # - description: |
+  #     関数URLが有効化されてます。
+  #   image: size=(min) ./slambdafunctionurl.png
+  
+  # - title: 動作確認
+  #   description: |
+  #     関数URLを curl で叩きます。
+    
+  #   terminal: |
+  #     # 作成
+  #     curl -X POST 'https://xxx.on.aws/memos' --json '{"title":"aaa","description":"aaa aaa"}'
+
+  #     # 一覧
+  #     curl 'https://xxx.on.aws/memos'
+      
+  #     # 一覧（キーワード検索）
+  #     curl 'https://xxx.on.aws/memos?q=aaa'
+      
+  #     # 詳細
+  #     curl 'https://xxx.on.aws/memos/<id>'
+
+  #     # 更新
+  #     curl -X PUT 'https://xxx.on.aws/memos/<id>' --json '{"title":"aaa","description":"ccc ccc"}'
+
+  #     # 削除
+  #     curl -X DELETE 'https://xxx.on.aws/memos/<id>'
+    
+  # - image: size=(min) ./sresult.png
+
+  # - as: local
+  #   cap: ローカル開発
+  #   description: |
+  #     docker compose でローカル開発します。
+  #     DynamoDB のエミュレータとして DynamoDB Local を立ち上げます。
+  #   terminal: |
+  #     # コンテナを立ち上げ
+  #     docker compose up
+
+  #     # DynamoDB Local のセットアップ
+  #     docker compose exec app composer run setup:local
+  # - description: docker-compose.yml
+  #   inline:
+  #     open: docker-compose.yml
+
+  # - description: |
+  #     なお SAM CLI を使っているので、SAM Local にてローカル開発する手もあります。
+  #     が DynamoDB Local への接続にめんどくささを感じたため、あえて使わずに docker compose で開発しました。
+
+  # - cap: おわり
+  #   description: |
+  #     感想
+  #     ・コールドスタートあるのでなんとかしたいが..
+  #     ・データ量が少ないという前提で DynamoDB のテーブル設計をした。
+  #     　その前提であれば、案外雑にテーブル設計してもいいんじゃないかと思えてきた。
