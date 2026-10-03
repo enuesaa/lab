@@ -89,6 +89,12 @@ units:
   
   - image: size=(min) singress.png
 
+  - description: |
+      クラスター外から疎通確認します。
+      EC2 の Public IP アドレスへ curl でリクエストを投げます。
+
+  - image: size=(min) scurl.png
+
   # - as: deploy
   #   cap: デプロイ
   #   description: |
