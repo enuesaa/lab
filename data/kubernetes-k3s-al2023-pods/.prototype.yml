@@ -19,15 +19,16 @@ units:
   - outline:
       items:
         - title: ・クラスターの立ち上げ
-          as: arch
+          as: setup
         - title: ・Service を立ち上げ
-          as: code
-        - title: ・デプロイ
-          as: deploy
-        - title: ・ローカル開発
-          as: local
+          as: service
+        - title: ・ルーティング
+          as: routing
+        - title: ・動作確認
+          as: check
 
-  - title: クラスターの立ち上げ
+  - as: setup
+    title: クラスターの立ち上げ
     description: |
       k3s をインストールして
       Kubernetes のクラスターをセットアップします
@@ -44,7 +45,8 @@ units:
   
   - image: size=(min) ./sk3ssetup.png
 
-  - title: Service を立ち上げ
+  - as: service
+    title: Service を立ち上げ
     description: |
       下記の Service を立ち上げます
       ・Nginx
@@ -60,7 +62,7 @@ units:
         - python3app.yaml
       units:
         - description: |
-            Nignx 
+            Nginx 
           mark: nginx.yaml:1
         - description: |
             Python3 のサンプルアプリ
@@ -82,7 +84,8 @@ units:
       kubectl get pods
   - image: size=(min) spython3app.png
 
-  - title: ルーティング
+  - as: routing
+    title: ルーティング
     description: |
       続いて、
       クラスターの外からアクセスできるよう Ingress Controller にて Service へルーティングします
@@ -93,9 +96,15 @@ units:
   
   - image: size=(min) singress.png
 
-  - title: 疎通確認
+  - as: check
+    title: 動作確認
     description: |
       クラスター外から疎通確認します。
       EC2 の Public IP アドレスへ curl でリクエストを投げます。
 
   - image: size=(min) scurl.png
+  - description: |
+      ホストヘッダの値を見て、
+      Ingress Controller (Traefik) でリクエストが振り分けられ、
+      各 Service の Pod へ流れて、
+      レスポンスが帰ってきている、という理解です。
