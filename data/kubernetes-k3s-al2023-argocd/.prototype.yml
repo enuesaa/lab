@@ -9,26 +9,28 @@ units:
       Kubernetes の勉強のために。
       K3s で Kubernetes クラスターを作り、そこへ ArgoCD でデプロイしてみる。
 
-  # - title: 前提
-  #   description: |
-  #     Kubernetes 初心者の雑記です。
+  - title: 前提
+    description: |
+      Kubernetes 初心者の雑記です。
 
-  #     EC2 でインスタンス（AL2023）を立ち上げ
-  #     K3s でクラスターをセットアップして、Service を立ち上げてみます。
+      EC2 インスタンス (AL2023) にて、K3s で Kubernetes クラスターを立ち上げます。
+      また ArgoCD をセットアップします。
 
-  # - outline:
-  #     items:
-  #       - title: ・クラスターの立ち上げ
-  #         as: setup
-  #       - title: ・Service を立ち上げ
-  #         as: service
-  #       - title: ・ルーティング
-  #         as: routing
-  #       - title: ・動作確認
-  #         as: check
+  - outline:
+      items:
+        - title: ・クラスターの立ち上げ
+          as: setup
+        - title: ・ArgoCD の設定
+          as: argocd
+        - title: ・リポジトリを登録
+          as: argocd-addrepo
+        - title: ・Application を作成
+          as: argocd-addapp
+        - title: ・Pod の数を増やしてみる
+          as: add-replicas
 
   - as: setup
-    title: クラスターの立ち上げ
+    cap: クラスターの立ち上げ
     description: |
       まずは K3s をインストールして
       Kubernetes のクラスターをセットアップします
@@ -44,15 +46,7 @@ units:
       kubectl get nodes
 
   - description: |
-      公式ガイド
-    links:
-      - title: https://docs.k3s.io/quick-start
-        url: https://docs.k3s.io/quick-start
-
-  - as: setup-argocd
-    title: ArgoCD のセットアップ
-    description: |
-      ArgoCD をセットアップします
+      続いて ArgoCD をセットアップします
     terminal: |
       kubectl create namespace argocd
       kubectl apply -n argocd --server-side --force-conflicts -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
@@ -61,13 +55,18 @@ units:
       kubectl get pods -n argocd
 
   - description: |
-      公式ガイド
+      Links
     links:
+      - title: https://docs.k3s.io/quick-start
+        url: https://docs.k3s.io/quick-start
       - title: https://argo-cd.readthedocs.io/en/stable/operator-manual/installation/
         url: https://argo-cd.readthedocs.io/en/stable/operator-manual/installation/
 
-  - title: ArgoCD の UI へログイン
+  - as: argocd
+    cap: ArgoCD の設定
     description: |
+      UI へログインして ArgoCD の設定を進めます。
+
       まずはログインするためのパスワードを取得します。
       またクラスター外からアクセスできるようポートフォワードします。
     terminal: |
@@ -82,7 +81,8 @@ units:
       ・Username へ「admin」を。
       ・Password へ前ステップで取得したパスワードを入力。
 
-  - title: リポジトリを登録
+  - as: argocd-addrepo
+    title: リポジトリを登録
     description: |
       Git リポジトリを登録します。
       Settings ページへ行き Repositories を選択。
@@ -94,7 +94,8 @@ units:
       リポジトリの情報を入力し保存します。
     image: size=(min) ./saddrepo3.png
 
-  - title: Application を作成
+  - as: argocd-addapp
+    title: Application を作成
     description: |
       Applications ページへ行き New App ボタンを押します。
     image: size=(min) ./screateapp1.png
@@ -119,7 +120,9 @@ units:
       Nginx の Pod は2つ立ち上がってます。
     image: size=(min) ./sappsynced.png
 
-  - description: |
+  - as: add-replicas
+    cap: Pod の数を増やしてみる
+    description: |
       Nginx の Pod を増やしてみます。
     image: size=(min) ./saddpod5.png
   - description: |
@@ -133,67 +136,3 @@ units:
       しばらく待ちます。
       Nginx の Pod が5つになりました。
     image: size=(min) ./saddpod5-synced.png
-  
-
-
-  # - as: service
-  #   title: Service を立ち上げ
-  #   description: |
-  #     下記の Service を立ち上げます
-  #     ・Nginx
-  #     ・Python3 のサンプルアプリ
-
-  # - as: code
-  #   code:
-  #     open: nginx.yaml
-  #     include:
-  #       - ingress.yaml
-  #       - nginx.yaml
-  #       - python3app.yaml
-  #     units:
-  #       - description: |
-  #           Nginx 
-  #         mark: nginx.yaml:1
-  #       - description: |
-  #           Python3 のサンプルアプリ。http.server を立ち上げるだけです
-  #         mark: python3app.yaml:1
-
-  # - description: |
-  #     まずは Nginx の Service を立ち上げます
-  #   terminal: |
-  #     vim nginx.yaml
-  #     kubectl apply -f nginx.yaml
-  #     kubectl get pods
-  # - image: size=(min) snginx.png
-
-  # - description: |
-  #     同じようにして Python3 のサンプルアプリの Service を立ち上げます
-  #   terminal: |
-  #     vim python3app.yaml
-  #     kubectl apply -f python3app.yaml
-  #     kubectl get pods
-  # - image: size=(min) spython3app.png
-
-  # - as: routing
-  #   title: ルーティング
-  #   description: |
-  #     続いて、
-  #     クラスターの外からアクセスできるよう Ingress Controller にて Service へルーティングします
-  #   terminal: |
-  #     vim ingress.yaml
-  #     kubectl apply -f ingress.yaml
-  #     kubectl get ingress
-  
-  # - image: size=(min) singress.png
-
-  # - as: check
-  #   title: 動作確認
-  #   description: |
-  #     クラスター外から疎通確認します。
-  #     EC2 の Public IP アドレスへ curl でリクエストを投げます。
-
-  # - image: size=(min) scurl.png
-  # - description: |
-  #     Host ヘッダの値を見て、
-  #     Ingress Controller (Traefik) でリクエストが振り分けられ、各 Service の Pod へ流れて、
-  #     レスポンスが返ってきている、という理解です。
