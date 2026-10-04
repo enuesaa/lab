@@ -103,6 +103,28 @@ units:
       リポジトリの情報を入力し保存します。
     image: size=(min) ./saddrepo3.png
 
+  - description: |
+      接続先のリポジトリは、
+      次のような構造です。
+
+  - code:
+      open: tryapp/nginx.yaml
+      include:
+        - tryapp
+        - tryapp/ingress.yaml
+        - tryapp/nginx.yaml
+        - tryapp/python3app.yaml
+      units:
+        - description: |
+            Nginx 
+          mark: tryapp/nginx.yaml:1
+        - description: |
+            Python3 のサンプルアプリ。http.server を立ち上げるだけです
+          mark: tryapp/python3app.yaml:1
+  
+  - description: |
+      Argo CD の設定を続けます。
+
   - as: argocd-addapp
     title: Application を作成
     description: |
