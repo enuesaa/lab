@@ -122,6 +122,17 @@ units:
   - description: |
       Nginx の Pod を増やしてみます。
     image: size=(min) ./saddpod5.png
+  - description: |
+      しばらくすると ArgoCD にてステータスが変わります。
+      差分も確認できました。
+    image: size=(min) ./saddpod5-outofsync.png
+  - description: |
+      Sync ボタンを押します。
+    image: size=(min) ./saddpod5-sync.png
+  - description: |
+      しばらく待ちます。
+      Nginx の Pod が5つになりました。
+    image: size=(min) ./saddpod5-synced.png
   
 
 
