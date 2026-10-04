@@ -83,11 +83,47 @@ units:
       ・Password へ前ステップで取得したパスワードを入力。
 
   - title: リポジトリを登録
-  - image: size=(min) ./saddrepo1.png
-  - image: size=(min) ./saddrepo2.png
-  - image: size=(min) ./saddrepo3.png
+    description: |
+      Git リポジトリを登録します。
+      Settings ページへ行き Repositories を選択。
+    image: size=(min) ./saddrepo1.png
+  - description: |
+      Connect Repo ボタンを押します。
+    image: size=(min) ./saddrepo2.png
+  - description: |
+      リポジトリの情報を入力し保存します。
+    image: size=(min) ./saddrepo3.png
 
-  - title: Applications へ登録
+  - title: Application を作成
+    description: |
+      Applications ページへ行き New App ボタンを押します。
+    image: size=(min) ./screateapp1.png
+  - description: |
+      アプリケーション名を入力して
+    image: size=(min) ./screateapp2.png
+  - description: |
+      Git リポジトリや Destination も選択。
+      CREATE ボタンを押します。
+    image: size=(min) ./screateapp3.png
+  - description: |
+      するとアプリケーションが作成されました。
+    image: size=(min) ./screateapp-created.png
+  - image: size=(min) ./screateapp-end.png
+  - description: |
+      Kubernetes クラスターへ構成を反映するため、
+      Sync ボタンを押します。
+    image: size=(min) ./sappsync.png
+
+  - description: |
+      Pod が立ち上がりました。
+      Nginx の Pod は2つ立ち上がってます。
+    image: size=(min) ./sappsynced.png
+
+  - description: |
+      Nginx の Pod を増やしてみます。
+    image: size=(min) ./saddpod5.png
+  
+
 
   # - as: service
   #   title: Service を立ち上げ
