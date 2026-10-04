@@ -60,22 +60,34 @@ units:
       # Running になるまで待つ
       kubectl get pods -n argocd
 
+  - description: |
+      公式ガイド
+    links:
+      - title: https://argo-cd.readthedocs.io/en/stable/operator-manual/installation/
+        url: https://argo-cd.readthedocs.io/en/stable/operator-manual/installation/
+
+  - title: ArgoCD の UI へログイン
+    description: |
+      まずはログインするためのパスワードを取得します。
+      またクラスター外からアクセスできるようポートフォワードします。
+    terminal: |
       # ArgoCD の admin ユーザーのパスワードを取得
       kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 
-      # ArgoCD の UIをポートフォワード
+      # ArgoCD の UI をポートフォワード
       kubectl -n argocd port-forward --address 0.0.0.0 svc/argocd-server 8080:443
 
   - description: |
       https://<EC2のPublicIPアドレス>:8080 を開く
       ・Username へ「admin」を。
       ・Password へ前ステップで取得したパスワードを入力。
-      
-  - description: |
-      公式ガイド
-    links:
-      - title: https://argo-cd.readthedocs.io/en/stable/operator-manual/installation/
-        url: https://argo-cd.readthedocs.io/en/stable/operator-manual/installation/
+
+  - title: リポジトリを登録
+  - image: size=(min) ./saddrepo1.png
+  - image: size=(min) ./saddrepo2.png
+  - image: size=(min) ./saddrepo3.png
+
+  - title: Applications へ登録
 
   # - as: service
   #   title: Service を立ち上げ
