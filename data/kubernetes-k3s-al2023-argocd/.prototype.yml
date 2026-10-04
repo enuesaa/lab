@@ -1,0 +1,140 @@
+title: |
+  [雑記]
+  K3s で立ち上げたクラスターへ ArgoCD でデプロイしてみる
+description: ''
+published: '2026-10-10'
+
+units:
+  - description: |
+      Kubernetes の勉強のために。
+      K3s で Kubernetes クラスターを作り、そこへ ArgoCD でデプロイしてみる。
+
+  # - title: 前提
+  #   description: |
+  #     Kubernetes 初心者の雑記です。
+
+  #     EC2 でインスタンス（AL2023）を立ち上げ
+  #     K3s でクラスターをセットアップして、Service を立ち上げてみます。
+
+  # - outline:
+  #     items:
+  #       - title: ・クラスターの立ち上げ
+  #         as: setup
+  #       - title: ・Service を立ち上げ
+  #         as: service
+  #       - title: ・ルーティング
+  #         as: routing
+  #       - title: ・動作確認
+  #         as: check
+
+  - as: setup
+    title: クラスターの立ち上げ
+    description: |
+      まずは K3s をインストールして
+      Kubernetes のクラスターをセットアップします
+    terminal: |
+      # k3s
+      curl -sfL https://get.k3s.io | sh -
+      k3s kubectl get nodes
+
+      # kubeconfig
+      mkdir -p ~/.kube
+      cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+      chown $USER:$USER ~/.kube/config
+      kubectl get nodes
+
+  - description: |
+      公式ガイド
+    links:
+      - title: https://docs.k3s.io/quick-start
+        url: https://docs.k3s.io/quick-start
+
+  - as: setup-argocd
+    title: ArgoCD のセットアップ
+    description: |
+      ArgoCD をセットアップします
+    terminal: |
+      kubectl create namespace argocd
+      kubectl apply -n argocd --server-side --force-conflicts -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+      
+      # Running になるまで待つ
+      kubectl get pods -n argocd
+
+      # ArgoCD の admin ユーザーのパスワードを取得
+      kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+
+      # ArgoCD の UIをポートフォワード
+      kubectl -n argocd port-forward --address 0.0.0.0 svc/argocd-server 8080:443
+
+  - description: |
+      https://<EC2のPublicIPアドレス>:8080 を開く
+      ・Username へ「admin」を。
+      ・Password へ前ステップで取得したパスワードを入力。
+      
+  - description: |
+      公式ガイド
+    links:
+      - title: https://argo-cd.readthedocs.io/en/stable/operator-manual/installation/
+        url: https://argo-cd.readthedocs.io/en/stable/operator-manual/installation/
+
+  # - as: service
+  #   title: Service を立ち上げ
+  #   description: |
+  #     下記の Service を立ち上げます
+  #     ・Nginx
+  #     ・Python3 のサンプルアプリ
+
+  # - as: code
+  #   code:
+  #     open: nginx.yaml
+  #     include:
+  #       - ingress.yaml
+  #       - nginx.yaml
+  #       - python3app.yaml
+  #     units:
+  #       - description: |
+  #           Nginx 
+  #         mark: nginx.yaml:1
+  #       - description: |
+  #           Python3 のサンプルアプリ。http.server を立ち上げるだけです
+  #         mark: python3app.yaml:1
+
+  # - description: |
+  #     まずは Nginx の Service を立ち上げます
+  #   terminal: |
+  #     vim nginx.yaml
+  #     kubectl apply -f nginx.yaml
+  #     kubectl get pods
+  # - image: size=(min) snginx.png
+
+  # - description: |
+  #     同じようにして Python3 のサンプルアプリの Service を立ち上げます
+  #   terminal: |
+  #     vim python3app.yaml
+  #     kubectl apply -f python3app.yaml
+  #     kubectl get pods
+  # - image: size=(min) spython3app.png
+
+  # - as: routing
+  #   title: ルーティング
+  #   description: |
+  #     続いて、
+  #     クラスターの外からアクセスできるよう Ingress Controller にて Service へルーティングします
+  #   terminal: |
+  #     vim ingress.yaml
+  #     kubectl apply -f ingress.yaml
+  #     kubectl get ingress
+  
+  # - image: size=(min) singress.png
+
+  # - as: check
+  #   title: 動作確認
+  #   description: |
+  #     クラスター外から疎通確認します。
+  #     EC2 の Public IP アドレスへ curl でリクエストを投げます。
+
+  # - image: size=(min) scurl.png
+  # - description: |
+  #     Host ヘッダの値を見て、
+  #     Ingress Controller (Traefik) でリクエストが振り分けられ、各 Service の Pod へ流れて、
+  #     レスポンスが返ってきている、という理解です。
