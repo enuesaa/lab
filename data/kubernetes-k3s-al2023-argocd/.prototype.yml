@@ -1,26 +1,26 @@
 title: |
   [雑記]
-  K3s で立ち上げたクラスターへ ArgoCD でデプロイしてみる
+  K3s で立ち上げたクラスターへ Argo CD でデプロイしてみる
 description: ''
 published: '2026-10-10'
 
 units:
   - description: |
       Kubernetes の勉強のために。
-      K3s で Kubernetes クラスターを作り、そこへ ArgoCD でデプロイしてみる。
+      K3s で Kubernetes クラスターを作り、そこへ Argo CD でデプロイしてみる。
 
   - title: 前提
     description: |
       Kubernetes 初心者の雑記です。
 
       EC2 インスタンス (AL2023) にて、K3s で Kubernetes クラスターを立ち上げます。
-      また ArgoCD をセットアップします。
+      また Argo CD をセットアップします。
 
   - outline:
       items:
         - title: ・クラスターの立ち上げ
           as: setup
-        - title: ・ArgoCD の設定
+        - title: ・Argo CD の設定
           as: argocd
         - title: ・リポジトリを登録
           as: argocd-addrepo
@@ -46,7 +46,7 @@ units:
       kubectl get nodes
 
   - description: |
-      続いて ArgoCD をセットアップします
+      続いて Argo CD をセットアップします
     terminal: |
       kubectl create namespace argocd
       kubectl apply -n argocd --server-side --force-conflicts -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
@@ -63,23 +63,32 @@ units:
         url: https://argo-cd.readthedocs.io/en/stable/operator-manual/installation/
 
   - as: argocd
-    cap: ArgoCD の設定
+    cap: Argo CD の設定
     description: |
-      UI へログインして ArgoCD の設定を進めます。
-
-      まずはログインするためのパスワードを取得します。
-      またクラスター外からアクセスできるようポートフォワードします。
+      Argo CD へログインして設定を進めます。
+      まずは admin ユーザーのパスワードを取得します。
     terminal: |
-      # ArgoCD の admin ユーザーのパスワードを取得
       kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+  
+      # see https://github.com/argoproj/argo-cd/blob/master/docs/try_argo_cd_locally.md#log-in-to-argocd
 
-      # ArgoCD の UI をポートフォワード
+  - description: |
+      続いてポートフォワードします。
+    terminal: |
       kubectl -n argocd port-forward --address 0.0.0.0 svc/argocd-server 8080:443
 
   - description: |
-      https://<EC2のPublicIPアドレス>:8080 を開く
-      ・Username へ「admin」を。
-      ・Password へ前ステップで取得したパスワードを入力。
+      ブラウザで https://<EC2のPublicIPアドレス>:8080 を開いて、
+      ・Username へ admin を、
+      ・Password へ上記で取得したパスワードを入力します。
+    image: size=(min) sargoui.png
+  - description: |
+      Links
+    links:
+      - url: https://github.com/argoproj/argo-cd/blob/master/docs/try_argo_cd_locally.md#log-in-to-argocd
+        title: https://github.com/argoproj/argo-cd/blob/master/docs/try_argo_cd_locally.md#log-in-to-argocd
+      - url: https://argo-cd.readthedocs.io/en/stable/faq/#i-forgot-the-admin-password-how-do-i-reset-it
+        title: https://argo-cd.readthedocs.io/en/stable/faq/#i-forgot-the-admin-password-how-do-i-reset-it
 
   - as: argocd-addrepo
     title: リポジトリを登録
@@ -126,7 +135,7 @@ units:
       Nginx の Pod を増やしてみます。
     image: size=(min) ./saddpod5.png
   - description: |
-      しばらくすると ArgoCD にてステータスが変わります。
+      しばらくすると Argo CD にてステータスが変わります。
       差分も確認できました。
     image: size=(min) ./saddpod5-outofsync.png
   - description: |
