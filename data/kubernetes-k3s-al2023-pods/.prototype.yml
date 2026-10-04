@@ -59,7 +59,6 @@ units:
       ・Python3 のサンプルアプリ
 
   - as: code
-    title: マニフェスト
     code:
       open: nginx.yaml
       include:
