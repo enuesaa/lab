@@ -24,7 +24,7 @@ units:
           as: argocd
         - title: ・リポジトリを登録
           as: argocd-addrepo
-        - title: ・Application を作成
+        - title: ・アプリケーションを作成
           as: argocd-addapp
         - title: ・Pod の数を増やしてみる
           as: add-replicas
@@ -104,8 +104,8 @@ units:
     image: size=(min) ./saddrepo3.png
 
   - description: |
-      接続先のリポジトリは、
-      次のような構造です。
+      接続先のリポジトリには、
+      次のようなファイルを置いてます。
 
   - code:
       open: tryapp/nginx.yaml
@@ -126,7 +126,7 @@ units:
       Argo CD の設定を続けます。
 
   - as: argocd-addapp
-    title: Application を作成
+    title: アプリケーションを作成
     description: |
       Applications ページへ行き New App ボタンを押します。
     image: size=(min) ./screateapp1.png
