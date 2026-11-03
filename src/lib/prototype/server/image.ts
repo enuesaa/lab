@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import type { ProjectV2 } from '../types'
+import type { ProjectV2 } from '../types.ts'
 import { parseAttrs } from '../attrs.ts'
 
 export const copyUnitImage = async (project: ProjectV2) => {
