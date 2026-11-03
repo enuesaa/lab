@@ -1,0 +1,52 @@
+title: |
+  [雑記]
+  Crystal で HTTP リクエストしてみる
+description: ''
+published: '2026-11-10'
+
+units:
+  - description: |
+      勉強がてら Crystal Lang に触れてます。
+      試しに HTTP リクエストしてみます。
+    links:
+      - title: https://crystal-lang.org/
+        url: https://crystal-lang.org/
+  
+  - title: インストール
+    description: |
+      HomeBrew で Crystal Lang をインストールしました。
+    terminal: |
+      brew install crystal
+    image: size=(min) version.png
+    links:
+      - title: https://crystal-lang.org/install/#macos
+        url: https://crystal-lang.org/install/#macos
+
+  - code:
+      open: mycurl.cr
+      units:
+        - description: |
+            OptionParser でコマンドライン引数をパースします
+          mark: mycurl.cr:2
+          links:
+            - title: https://crystal-lang.org/api/1.22.2/OptionParser.html
+              url: https://crystal-lang.org/api/1.22.2/OptionParser.html
+
+  - description: |
+      実行してみます
+    terminal: |
+      crystal run mycurl.cr -- 'https://example.com' -i
+    image: size=(min) dev.png
+
+  - title: ビルド
+    description: |
+      ビルドします。
+      コマンドを実行すると `./mycurl` にバイナリが作られます。
+    terminal: |
+      crystal build mycurl.cr --release --no-debug
+
+  - description: |
+      バイナリを実行してみましょう。
+    terminal: |
+      ./mycurl
+    image: size=(min) run.png
