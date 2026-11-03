@@ -1,4 +1,5 @@
-/// <reference types="vitest" />
+/// <reference types="vitest/config" />
+
 import { defineConfig } from 'vite'
 import { sveltekit } from '@sveltejs/kit/vite'
 import path from 'node:path'
