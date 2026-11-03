@@ -14,5 +14,5 @@
 		"outDir": "./dist"
 	},
 	"include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte", "vite.config.ts", ".svelte-kit/ambient.d.ts"],
-	"extends": "./.svelte-kit/tsconfig.json"
+	"extends": "$app/tsconfig"
 }
