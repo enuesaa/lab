@@ -6,19 +6,21 @@ published: '2026-11-10'
 
 units:
   - description: |
-      勉強がてら Crystal Lang に触れてます。
+      勉強がてら Crystal Lang に触れました。
       試しに HTTP リクエストしてみます。
+
+  - title: インストール
+    description: |
+      Crystal Lang のインストールは HomeBrew で行いました。
+    terminal: |
+      brew install crystal
+  - description: バージョン情報
+    image: size=(min) version.png
+
+  - title: Links
     links:
       - title: https://crystal-lang.org/
         url: https://crystal-lang.org/
-  
-  - title: インストール
-    description: |
-      HomeBrew で Crystal Lang をインストールしました。
-    terminal: |
-      brew install crystal
-    image: size=(min) version.png
-    links:
       - title: https://crystal-lang.org/install/#macos
         url: https://crystal-lang.org/install/#macos
 
@@ -33,20 +35,17 @@ units:
               url: https://crystal-lang.org/api/1.22.2/OptionParser.html
 
   - description: |
-      実行してみます
+      下記のコマンドで実行できます
     terminal: |
       crystal run mycurl.cr -- 'https://example.com' -i
-    image: size=(min) dev.png
 
   - title: ビルド
     description: |
       ビルドします。
       コマンドを実行すると `./mycurl` にバイナリが作られます。
-    terminal: |
+  - terminal: |
       crystal build mycurl.cr --release --no-debug
 
   - description: |
       バイナリを実行してみましょう。
-    terminal: |
-      ./mycurl
     image: size=(min) run.png
