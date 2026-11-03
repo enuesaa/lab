@@ -4,10 +4,22 @@ import { sveltekit } from '@sveltejs/kit/vite'
 import path from 'node:path'
 import { listProjectsV2 } from './src/lib/prototype/server/project'
 import { copyUnitImage } from './src/lib/prototype/server/image'
+import adapter from '@sveltejs/adapter-static'
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
+import { sequence, preprocessMeltUI } from '@melt-ui/pp'
 
 export default defineConfig({
 	plugins: [
-		sveltekit(),
+		sveltekit({
+			preprocess: sequence([vitePreprocess(), preprocessMeltUI()]),
+			adapter: adapter({
+				pages: 'dist',
+				fallback: '404.html',
+			}),
+			prerender: {
+				handleHttpError: 'ignore',
+			},
+		}),
 		{
 			name: 'file-copy',
 			async buildStart() {
