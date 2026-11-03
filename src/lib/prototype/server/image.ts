@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import type { ProjectV2 } from '$lib/prototype/types'
-import { parseAttrs } from '../attrs'
+import type { ProjectV2 } from '../types'
+import { parseAttrs } from '../attrs.ts'
 
 export const copyUnitImage = async (project: ProjectV2) => {
 	const publishdir = path.join('./static/prototype', project.name)

@@ -2,8 +2,8 @@
 import { defineConfig } from 'vite'
 import { sveltekit } from '@sveltejs/kit/vite'
 import path from 'node:path'
-import { listProjectsV2 } from './src/lib/prototype/server/project'
-import { copyUnitImage } from './src/lib/prototype/server/image'
+import { listProjectsV2 } from './src/lib/prototype/server/project.ts'
+import { copyUnitImage } from './src/lib/prototype/server/image.ts'
 import adapter from '@sveltejs/adapter-static'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 import { sequence, preprocessMeltUI } from '@melt-ui/pp'
@@ -33,7 +33,7 @@ export default defineConfig({
 	],
 	resolve: {
 		alias: {
-			$lib: path.join(__dirname, './src/lib'),
+			$lib: path.join(import.meta.dirname, './src/lib'),
 		},
 	},
 	test: {
