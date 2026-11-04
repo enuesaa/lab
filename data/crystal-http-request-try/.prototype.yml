@@ -2,19 +2,19 @@ title: |
   [雑記]
   Crystal で HTTP リクエストしてみる
 description: ''
-published: '2026-11-10'
+published: '2026-11-07'
 
 units:
   - description: |
-      勉強がてら Crystal Lang に触れました。
+      勉強がてら Crystal lang に触れました。
       試しに HTTP リクエストしてみます。
 
   - title: インストール
     description: |
-      Crystal Lang のインストールは HomeBrew で行いました。
+      Crystal のインストールは HomeBrew で行えます。
     terminal: |
       brew install crystal
-  - description: バージョン情報
+  - title: バージョン
     image: size=(min) version.png
 
   - title: Links
@@ -47,5 +47,8 @@ units:
       crystal build mycurl.cr --release --no-debug
 
   - description: |
-      バイナリを実行してみましょう。
+      バイナリを実行してみます。
     image: size=(min) run.png
+
+  - description: |
+      HTTP リクエストできました。
