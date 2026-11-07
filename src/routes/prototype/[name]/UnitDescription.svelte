@@ -7,6 +7,8 @@
 </section>
 
 <style lang="postcss">
+	@reference "#app.css";
+
 	section pre {
 		letter-spacing: 0.2px;
 		line-height: 1.8;

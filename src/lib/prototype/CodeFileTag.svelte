@@ -22,6 +22,8 @@
 </div>
 
 <style lang="postcss">
+	@reference "#app.css";
+
 	div {
 		@apply absolute top-[-25px] left-6 text-[15px] font-murecho;
 		@apply bg-editorbg text-editortext px-[10px] pt-[1px] rounded-t-lg;

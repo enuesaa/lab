@@ -7,6 +7,8 @@
 </div>
 
 <style lang="postcss">
+	@reference "#app.css";
+
 	/** TODO 確認 */
 	h2 {
 		white-space: pre-wrap;

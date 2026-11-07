@@ -19,6 +19,8 @@
 </ul>
 
 <style lang="postcss">
+	@reference "#app.css";
+
 	ul {
 		list-style-type: square;
 	}

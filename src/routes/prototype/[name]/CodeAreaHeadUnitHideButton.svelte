@@ -19,6 +19,8 @@
 {/if}
 
 <style lang="postcss">
+	@reference "#app.css";
+
 	button {
 		@apply inline-block font-semibold text-lg my-2 font-zenmaru;
 		@apply absolute right-9 top-[12px] rounded-xl px-[10px] pt-[1px] pb-[3.5px] bg-gray shadow-2xl;

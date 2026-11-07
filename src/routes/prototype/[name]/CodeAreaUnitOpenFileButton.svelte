@@ -39,6 +39,8 @@
 </button>
 
 <style lang="postcss">
+	@reference "#app.css";
+
 	button {
 		@apply block rounded-2xl px-2 pb-1 mt-2 mb-2 ml-2 border;
 		@apply font-zenmaru font-medium bg-gray shadow-2xl;

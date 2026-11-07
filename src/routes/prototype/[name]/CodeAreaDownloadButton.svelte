@@ -50,6 +50,8 @@
 </button>
 
 <style lang="postcss">
+	@reference "#app.css";
+
 	button {
 		@apply inline-block text-lg pl-3 pr-1 -ml-2 rounded-2xl;
 		@apply bg-gray-600 text-gray-900 hover:bg-gray-700/20 max-md:hidden;

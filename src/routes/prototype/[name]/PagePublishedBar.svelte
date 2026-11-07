@@ -7,6 +7,8 @@
 </div>
 
 <style lang="postcss">
+	@reference "#app.css";
+
 	div {
 		letter-spacing: 1px;
 	}

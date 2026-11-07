@@ -1,5 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=IBM+Plex+Sans+JP&family=Murecho:wght@400;500;700;900&display=swap');
+@import 'tailwindcss';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--color-black: #1a1a1a;
+	--color-blackgray: #2a2a2a;
+	--color-gray: #cccccc;
+	--color-graywhite: #dadada;
+	--color-grayblacker: #bfbfbf;
+	--color-gray-500: #bfbfbf;
+	--color-gray-600: #b5b5b5;
+	--color-gray-700: #6f6f6f;
+	--color-gray-800: #4b4b4b;
+	--color-gray-900: #3a3a3a;
+	--color-gray-1000: #2a2a2a;
+	--color-white: #fafafa;
+	--color-editorbg: #22272e;
+	--color-editortext: #adbac7;
+	--color-editorsep: #4a5666;
+
+	--font-zenmaru: 'Zen Maru Gothic', serif;
+	--font-ibmplex: 'IBM Plex Sans JP', sans-serif;
+	--font-murecho: 'Murecho', serif;
+
+	/* 2xl upper */
+	--shadow-2xlu: 0 25px 50px -25px rgb(0 0 0 / 0.25);
+}

@@ -7,6 +7,8 @@
 </div>
 
 <style lang="postcss">
+	@reference "#app.css";
+
 	div {
 		@apply w-full font-zenmaru text-3xl text-center font-medium;
 		@apply mt-16 mb-1;

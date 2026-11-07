@@ -34,6 +34,8 @@
 </section>
 
 <style lang="postcss">
+	@reference "#app.css";
+
 	section {
 		background-image: radial-gradient(#a5a5a5 2px, transparent 2px);
 		background-size: 20px 20px;

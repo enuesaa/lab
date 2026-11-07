@@ -31,6 +31,8 @@
 {/if}
 
 <style lang="postcss">
+	@reference "#app.css";
+
 	table {
 		@apply w-full;
 	}

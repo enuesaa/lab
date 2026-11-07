@@ -58,6 +58,8 @@
 {/if}
 
 <style lang="postcss">
+	@reference "#app.css";
+
 	img {
 		animation: fade 0.3s ease forwards;
 	}
