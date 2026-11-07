@@ -8,9 +8,11 @@ import { copyUnitImage } from './src/lib/prototype/server/image.ts'
 import adapter from '@sveltejs/adapter-static'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 import { sequence, preprocessMeltUI } from '@melt-ui/pp'
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
 	plugins: [
+		tailwindcss(),
 		sveltekit({
 			preprocess: sequence([vitePreprocess(), preprocessMeltUI()]),
 			adapter: adapter({
