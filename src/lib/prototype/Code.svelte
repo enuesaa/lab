@@ -52,19 +52,17 @@
 		&.mark::after {
 			content: '\00a0';
 			animation: markAnimation 5s forwards;
-			@apply absolute top-0 left-0 w-full;
+			@apply absolute top-0 left-0 w-full bg-orange-500/30;
 		}
 	}
 
 	@keyframes markAnimation {
-		0% {
-			@apply bg-orange-500/30;
-		}
+		0%,
 		90% {
-			@apply bg-orange-500/30;
+			opacity: 1;
 		}
 		100% {
-			@apply bg-transparent;
+			opacity: 0;
 		}
 	}
 </style>
