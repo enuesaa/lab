@@ -7,13 +7,13 @@ url = ""
 
 # parse
 OptionParser.parse do |p|
-  p.banner = "Usage: mycurl [options] URL"
+  p.banner = "Usage: mycurl <URL>"
 
   p.on("-H HEADER", "Add a request header") do |h|
     name, _, value = h.partition(':')
     headers[name.strip] = value.strip
   end
-  p.on("-i", "Include response headers in the output") do
+  p.on("-i", "Print response headers") do
     include_headers = true
   end
   p.on("-h", "Print help message") do

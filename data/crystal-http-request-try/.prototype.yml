@@ -35,7 +35,7 @@ units:
               url: https://crystal-lang.org/api/1.22.2/OptionParser.html
 
   - description: |
-      下記のコマンドで実行できます
+      下記のコマンドで実行できます。
     terminal: |
       crystal run mycurl.cr -- 'https://example.com' -i
 
