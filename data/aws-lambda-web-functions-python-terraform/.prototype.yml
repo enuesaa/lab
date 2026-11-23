@@ -1,24 +1,30 @@
 title: |
-  [Terraform]
-  Lambda Web Functions Python 3.15 を構築する
+  [Terraform] 
+  Lambda Web Functions (Python) を構築する
 description: ''
-published: '2026-11-30'
+published: '2026-11-28'
 
 units:
   - description: |
       Lambda Web Functions を Terraform で構築します。
 
-  - title: ランタイム
-    description: |
-      Python 3.15
+      ランタイムは Python 3.15 にしました。
+      こちらは現在プレビュー中です。使用の際はご注意ください。
 
-      ※2026年11月23日現在プレビュー中です。ご注意ください。
-  
+  - title: Links
+    links:
+      - title: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambdaweb_function
+        url: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambdaweb_function
+
   - code:
       open: lambdaweb.tf
       include:
         - lambdaweb
-        - lambdaweb/index.js
+        - lambdaweb/app
+        - lambdaweb/app/__init__.py
+        - lambdaweb/app/main.py
+        - lambdaweb/pyproject.toml
+        - lambdaweb/uv.lock
         - .gitignore
         - .terraform-version
         - lambdaweb_code_s3_bucket.tf
@@ -28,14 +34,41 @@ units:
         - main.tf
         - variables.tf
       units:
-        - title: aws_lambdaweb_function
+        - description: aws_lambdaweb_function
           links:
             - url: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambdaweb_function
               title: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambdaweb_function
           mark: lambdaweb.tf:1
+        - description: aws_lambdaweb_function_endpoint
+          links:
+            - url: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambdaweb_function_endpoint
+              title: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambdaweb_function_endpoint
+          mark: lambdaweb.tf:5
+        - description: |
+            auth_type は ApplicationManaged にしてます
+          mark: lambdaweb.tf:9
+        - description: |
+            ウェブフレームワークとして FastAPI を使います。
+            
+            なお Event Fucntions と同様に、ビルドパッケージ (zip) には FastAPI のソースコードを含める必要があります。
+          links:
+            - url: https://docs.aws.amazon.com/lambda/latest/dg/web-functions-python.html#web-functions-python-frameworks
+              title: https://docs.aws.amazon.com/lambda/latest/dg/web-functions-python.html#web-functions-python-frameworks
+          mark: ambdaweb/app/main.py:3
 
-  - terminal: |
-      # ビルドパッケージ作成
+  - title: ビルド
+    description: |
+      Lambda 関数のビルドパッケージ (zipファイル) を作成します。
+      コマンドを実行すると lambdaweb.zip が出来上がります。
+    terminal: |
       cd lambdaweb
       uv pip install . --target package --python-platform aarch64-manylinux2014 --python-version 3.15 --only-binary=:all: --no-binary app
       cd package && zip -r ../../lambdaweb.zip . && cd ..
+
+  - title: Apply
+    description: |
+      Terraform でリソースを作成します。
+    terminal: |
+      terraform init
+      terraform plan
+      terraform apply
