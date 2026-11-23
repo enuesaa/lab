@@ -10,7 +10,7 @@ resource "aws_lambdaweb_function_revision" "main" {
       }
     }
     runtime_config {
-      runtime = "nodejs26.x"
+      runtime = "python3.15"
     }
   }
 
@@ -26,12 +26,12 @@ resource "aws_lambdaweb_function_revision" "main" {
 resource "archive_file" "code" {
   type        = "zip"
   source_dir  = "lambdaweb"
-  output_path = "code.zip"
+  output_path = "lambdaweb.zip"
 }
 
 resource "aws_s3_object" "code" {
   bucket = aws_s3_bucket_versioning.lambdaweb_code.bucket
-  key    = "code.zip"
+  key    = "lambdaweb.zip"
   source = archive_file.code.output_path
   etag   = archive_file.code.output_md5
 }
