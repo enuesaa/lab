@@ -1,0 +1,35 @@
+title: |
+  [Terraform]
+  Lambda Web Functions Python 3.15 を構築する
+description: ''
+published: '2026-11-30'
+
+units:
+  - description: |
+      Lambda Web Functions を Terraform で構築します。
+
+  - title: ランタイム
+    description: |
+      Python 3.15
+
+      ※2026年11月23日現在プレビュー中です。ご注意ください。
+  
+  - code:
+      open: lambdaweb.tf
+      include:
+        - lambdaweb
+        - lambdaweb/index.js
+        - .gitignore
+        - .terraform-version
+        - lambdaweb_code_s3_bucket.tf
+        - lambdaweb_revision.tf
+        - lambdaweb_role.tf
+        - lambdaweb.tf
+        - main.tf
+        - variables.tf
+      units:
+        - title: aws_lambdaweb_function
+          links:
+            - url: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambdaweb_function
+              title: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambdaweb_function
+          mark: lambdaweb.tf:1
