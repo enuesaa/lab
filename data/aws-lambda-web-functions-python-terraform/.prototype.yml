@@ -33,3 +33,9 @@ units:
             - url: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambdaweb_function
               title: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambdaweb_function
           mark: lambdaweb.tf:1
+
+  - terminal: |
+      # ビルドパッケージ作成
+      cd lambdaweb
+      uv pip install . --target package --python-platform aarch64-manylinux2014 --python-version 3.15 --only-binary=:all: --no-binary app
+      cd package && zip -r ../../lambdaweb.zip . && cd ..

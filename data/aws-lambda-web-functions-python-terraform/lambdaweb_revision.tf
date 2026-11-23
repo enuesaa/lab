@@ -16,6 +16,9 @@ resource "aws_lambdaweb_function_revision" "main" {
 
   service_config {
     execution_role_arn = aws_iam_role.lambdaweb_execution.arn
+    environment_variables = {
+      AWS_LAMBDA_PYTHON_ENTRYPOINT = "app.main:app"
+    }
   }
 
   lifecycle {

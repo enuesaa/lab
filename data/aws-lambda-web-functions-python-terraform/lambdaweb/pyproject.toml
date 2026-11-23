@@ -1,7 +1,16 @@
 [project]
-name = "lambdaweb"
+name = "app"
 version = "0.1.0"
 requires-python = ">=3.15"
 dependencies = [
     "fastapi>=0.165.0",
 ]
+
+[build-system]
+requires = ["uv_build>=0.12.1,<0.13.0"]
+build-backend = "uv_build"
+
+### see https://docs.astral.sh/uv/concepts/build-backend/#bundled-build-backend
+[tool.uv.build-backend]
+module-name = "app"
+module-root = ""
