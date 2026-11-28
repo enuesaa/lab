@@ -2,7 +2,7 @@ title: |
   [Terraform] 
   Lambda Web Functions (Python) を構築する
 description: ''
-published: '2026-11-28'
+published: '2026-11-29'
 
 units:
   - description: |
@@ -63,12 +63,32 @@ units:
     terminal: |
       cd lambdaweb
       uv pip install . --target package --python-platform aarch64-manylinux2014 --python-version 3.15 --only-binary=:all: --no-binary app
-      cd package && zip -r ../../lambdaweb.zip . && cd ..
+      cd package && zip -r ../../lambdaweb.zip .
 
-  - title: Apply
+  - title: 構築
     description: |
       Terraform でリソースを作成します。
     terminal: |
-      terraform init
-      terraform plan
-      terraform apply
+      $ echo 'identifier = "test20261129"' > terraform.tfvars
+      $ terraform init
+
+  - description: |
+      plan します
+    terminal: |
+      $ terraform plan | grep will
+      Terraform will perform the following actions:
+        # archive_file.code will be created
+        # aws_iam_role.lambdaweb_execution will be created
+        # aws_iam_role_policy_attachment.lambdaweb_execution_logs will be created
+        # aws_lambdaweb_function.main will be created
+        # aws_lambdaweb_function_endpoint.main will be created
+        # aws_lambdaweb_function_revision.main will be created
+        # aws_s3_bucket.lambdaweb_code will be created
+        # aws_s3_bucket_policy.lambdaweb_code will be created
+        # aws_s3_bucket_versioning.lambdaweb_code will be created
+        # aws_s3_object.code will be created
+
+  - description: |
+      apply します
+    terminal: |
+      $ terraform apply

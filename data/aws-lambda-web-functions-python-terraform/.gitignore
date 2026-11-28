@@ -1,5 +1,6 @@
 *.zip
 .terraform
+terraform.tfvars
 
 lambdaweb/.venv
 lambdaweb/package
