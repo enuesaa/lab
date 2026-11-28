@@ -51,12 +51,14 @@
 				{/if}
 			{/key}
 		</PaneResizer>
-		<Pane class="w-full" style="overflow: scroll">
-			{#key $viewing}
-				{#if $viewing !== undefined}
-					<Code language={$viewing.language} code={$viewing.code} showLineNumber={true} markLine={$viewing.markLine} />
-				{/if}
-			{/key}
+		<Pane class="w-full min-w-0">
+			<div class="overflow-x-auto h-full">
+				{#key $viewing}
+					{#if $viewing !== undefined}
+						<Code language={$viewing.language} code={$viewing.code} showLineNumber={true} markLine={$viewing.markLine} />
+					{/if}
+				{/key}
+			</div>
 		</Pane>
 	</PaneGroup>
 
