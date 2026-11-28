@@ -36,7 +36,7 @@
 <div {...dialog.overlay} class="fixed inset-0 w-full h-full bg-gray-900/90 z-10"></div>
 
 <dialog {...dialog.content} class="fixed inset-0 m-auto w-10/12 max-w-[1500px] h-fit p-0 bg-transparent overflow-visible outline-none z-20">
-	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+	<!-- svelte-ignore a11y_no_noninteractive_element_interactions a11y_click_events_have_key_events -->
 	<img
 		src={`/prototype/${projectName}/${image}`}
 		alt={image}
