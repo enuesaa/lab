@@ -1,4 +1,4 @@
 variable "identifier" {
   type        = string
-  description = "Prefix for resource names"
+  description = "Identifier used in resource names"
 }

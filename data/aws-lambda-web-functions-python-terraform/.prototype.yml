@@ -58,12 +58,12 @@ units:
 
   - title: ビルド
     description: |
-      Lambda 関数のビルドパッケージ (zipファイル) を作成します。
-      コマンドを実行すると lambdaweb.zip が出来上がります。
+      Lambda 関数のビルドパッケージを作成します。
+      コマンドを実行すると zip ファイルが出来上がります。
     terminal: |
       cd lambdaweb
       uv pip install . --target package --python-platform aarch64-manylinux2014 --python-version 3.15 --only-binary=:all: --no-binary app
-      cd package && zip -r ../package.zip .
+      cd package && zip -r ../package.zip . && cd ../../
 
   - title: 構築
     description: |
@@ -96,3 +96,8 @@ units:
   - description: |
       構築できました。
     image: size=(min) screated.png
+
+  - title: 動作確認
+    description: |
+      GET /hello を叩きます
+    image: size=(min) sgethello.png
