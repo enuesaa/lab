@@ -1,15 +1,12 @@
 <script lang="ts">
-	import { createDialog, melt } from '@melt-ui/svelte'
+	import { Dialog } from 'melt/builders'
 	import { MoveDiagonal, X as CloseIcon } from 'lucide-svelte'
 	import type { MouseEventHandler } from 'svelte/elements'
 
 	export let projectName: string
 	export let image: string
 
-	const {
-		elements: { trigger, overlay, portalled, close, content },
-		states: { open },
-	} = createDialog()
+	const dialog = new Dialog()
 
 	let imgRef: HTMLImageElement
 	let scale = 1
@@ -32,30 +29,26 @@
 	}
 </script>
 
-<button use:melt={$trigger} class="absolute top-1 right-1 text-gray-700">
+<button {...dialog.trigger} class="absolute top-1 right-1 text-gray-700">
 	<MoveDiagonal />
 </button>
 
-{#if $open}
-	<div use:melt={$portalled}>
-		<div use:melt={$overlay} class="fixed inset-0 bg-gray-900/90 fade z-10"></div>
+<div {...dialog.overlay} class="fixed inset-0 w-full h-full bg-gray-900/90 z-10"></div>
 
-		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-		<img
-			use:melt={$content}
-			src={`/prototype/${projectName}/${image}`}
-			alt={image}
-			class="fixed z-20 block w-10/12 inset-0 m-auto max-w-[1500px] outline-none"
-			bind:this={imgRef}
-			on:mousemove={handleMouseMove}
-			on:click={handleZoom}
-		/>
-
-		<button use:melt={$close} class="fixed text-gray top-1 right-1 z-20">
-			<CloseIcon class="w-8 h-8" />
-		</button>
-	</div>
-{/if}
+<dialog {...dialog.content} class="fixed inset-0 m-auto w-10/12 max-w-[1500px] h-fit p-0 bg-transparent overflow-visible outline-none z-20">
+	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+	<img
+		src={`/prototype/${projectName}/${image}`}
+		alt={image}
+		class="block w-full"
+		bind:this={imgRef}
+		on:mousemove={handleMouseMove}
+		on:click={handleZoom}
+	/>
+	<button on:click={() => (dialog.open = false)} class="fixed text-gray top-1 right-1">
+		<CloseIcon class="w-8 h-8" />
+	</button>
+</dialog>
 
 <style lang="postcss">
 	@reference "#app.css";
@@ -70,5 +63,8 @@
 		100% {
 			opacity: 1;
 		}
+	}
+	dialog::backdrop {
+		background: transparent;
 	}
 </style>
