@@ -12,8 +12,6 @@
 		"format": "oxfmt --write src"
 	},
 	"devDependencies": {
-		"@melt-ui/pp": "^0.3.2",
-		"@melt-ui/svelte": "^0.86.6",
 		"@sveltejs/adapter-static": "^4.0.1",
 		"@sveltejs/kit": "^3.1.1",
 		"@sveltejs/vite-plugin-svelte": "7.3.1",
@@ -31,6 +29,7 @@
 		"highlight.js": "^11.12.0",
 		"jszip": "^3.10.2",
 		"lucide-svelte": "^1.0.1",
+		"melt": "^0.44.0",
 		"paneforge": "^1.0.2",
 		"yaml": "^2.9.1"
 	},
